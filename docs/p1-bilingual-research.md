@@ -149,24 +149,35 @@ Notes:
 - DE→EN still requires clean DE source + gold basename (`german-leak.md`).
 - `uk→ru` left unsupervised (both Cyrillic; shared planted Russian forms would need separate gold policy).
 
-### Other corpora (still EN↔de/ru gold only)
+### Other corpora
 
-Public corpora lack `es/pl/sv/uk` trees today — matrix there stays EN→de/ru scored; reverse unsupervised. Expanding live harvest to ES/PL/SV/UK is a follow-up.
+| corpus | scored pairs | notes |
+|---|---|---|
+| real_public | en→de/ru P/R 1.0 | FastAPI + k8s; no es/pl/sv/uk trees |
+| community | en→de/ru P/R 1.0 | reconstructed leftovers |
+| live_weblate | en→de/ru P/R 1.0 | hosted.weblate EN/DE/RU sample |
+| live_crowdin | en→de/ru P/R 1.0 | Jellyfin/Immich GitHub mirrors |
+| **live_v1_others** (2026-10-30 harvest) | **en→es/pl/sv/uk P/R 1.0 · ship_all** | Weblate es/pl/sv/uk leftovers |
 
-| corpus | en→de | en→ru | de→* alarms | ru→* alarms |
-|---|---|---|---:|---:|
-| real_public | P/R 1.0 | P/R 1.0 | ~15 | 0 |
-| community | P/R 1.0 | P/R 1.0 | ~40 | 0 |
-| live_weblate | P/R 1.0 | P/R 1.0 | ~32 | 0 |
-| live_crowdin | P/R 1.0 | P/R 1.0 | ~5 | 0 |
+### Live V1 others harvest (es/pl/sv/uk · 2026-10-30)
+
+| pair | P | R | F1 | ship |
+|---|---:|---:|---:|---|
+| en→es | 1.00 | 1.00 | 1.00 | yes |
+| en→pl | 1.00 | 1.00 | 1.00 | yes |
+| en→sv | 1.00 | 1.00 | 1.00 | yes |
+| en→uk | 1.00 | 1.00 | 1.00 | yes |
+
+Sources: soapbox / dicio / taiga / muos / godot units via Weblate API (200-row time-boxed pull).  
+Jellyfin/Immich GitHub `es/pl/sv/uk` mirrors mostly translate `Dashboard`/`Download` (e.g. ES `Panel de control`), so they were weak leftover sources this pass — Weblate UI loans worked better.
 
 Research takeaways:
 
-1. EN→{de,pl,ru,es,sv,uk} latin-overlap holds on held-out with shared English UI leftovers.
-2. DE→{pl,ru,es,sv,uk} same; DE→EN only with dedicated clean-DE gold pages.
-3. RU/UK→Latin targets need cyrillic-overlap; held-out proves it; live corpora need Cyrillic-leak harvest.
-4. Cross-other pairs (es↔pl, …) without gold are noisy latin-overlap mirrors — do not ship-bar them until gold exists.
-5. Public FastAPI/Weblate/Crowdin samples remain EN-centric; extend trees before claiming live ES/PL/SV/UK P/R.
+1. EN→{de,pl,ru,es,sv,uk} latin-overlap holds on held-out and on live_v1_others harvest.
+2. DE→{pl,ru,es,sv,uk} same on held-out; DE→EN only with dedicated clean-DE gold pages.
+3. RU/UK→Latin targets need cyrillic-overlap; held-out proves it; live Cyrillic→Latin harvest still thin (follow-up).
+4. Cross-other pairs (es↔pl, …) without gold stay unsupervised.
+5. Prefer Weblate leftover queries over fully localized product mirrors when hunting EN loans in ES/PL/SV/UK.
 
 Caveats:
 
@@ -245,6 +256,12 @@ uv run python scripts/bilingual_matrix_metrics.py \
   --extra-loans-locales de \
   --extra-loans-basenames jellyfin-dashboard.md,jellyfin-download.md,immich-transfer.md \
   --label live_crowdin --out tmp/bilingual-matrix/live_crowdin.json
+
+uv run python scripts/bilingual_matrix_metrics.py \
+  --fixtures tests/fixtures/bilingual/live_v1_others \
+  --gold tests/fixtures/bilingual/live_v1_others/gold-leftovers.csv \
+  --mode all --label live_v1_others \
+  --out tmp/bilingual-matrix/live_v1_others.json
 
 uv run pytest -q tests/test_bilingual.py
 ```

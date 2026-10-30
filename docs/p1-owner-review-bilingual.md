@@ -13,6 +13,7 @@ in shipped defaults until this page is signed off.
 | Community reconstructions | `tests/fixtures/bilingual/community/` | pass (EN→*) |
 | Live Weblate | `tests/fixtures/bilingual/live_weblate/` | pass (EN→*) |
 | Crowdin-via-GitHub | `tests/fixtures/bilingual/live_crowdin/` | pass (EN→*) |
+| Live V1 others (es/pl/sv/uk Weblate) | `tests/fixtures/bilingual/live_v1_others/` | pass (en→es/pl/sv/uk) |
 | DE loan policy | `docs/p1-de-loan-policy.md` | recorded |
 
 Reproduce:

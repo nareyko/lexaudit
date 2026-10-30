@@ -162,6 +162,22 @@ def test_live_crowdin_fixtures() -> None:
     assert "libraries" in hits
 
 
+def test_live_v1_others_fixtures() -> None:
+    root = FIXTURES / "live_v1_others"
+    assert (root / "SOURCES.md").is_file()
+    assert (root / "gold-leftovers.csv").is_file()
+    for loc in ("en", "es", "pl", "sv", "uk"):
+        assert (root / loc / "dicio-toast.md").is_file()
+    src = (root / "en" / "soapbox-onboarding.md").read_text(encoding="utf-8")
+    tgt = (root / "es" / "soapbox-onboarding.md").read_text(encoding="utf-8")
+    hits = {
+        w.normalized
+        for w in untranslated_latin_in_target(src, tgt, path="es/onboarding.md")
+    }
+    assert "onboarding" in hits
+    assert "complete" in hits
+
+
 def test_matrix_pairs_v1_directions() -> None:
     assert len(matrix_pairs(mode="anchors")) == 6
     assert len(matrix_pairs(mode="anchors_x_others")) == 30

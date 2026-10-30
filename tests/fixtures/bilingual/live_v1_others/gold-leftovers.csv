@@ -1,0 +1,26 @@
+pair_id,source_locale,target_locale,rel_path,token,label,note
+soapbox-onboarding,en,es,soapbox-onboarding.md,onboarding,leftover,Weblate soapbox ES identical
+soapbox-onboarding,en,es,soapbox-onboarding.md,complete,leftover,Weblate soapbox ES identical
+dicio-toast,en,es,dicio-toast.md,toast,leftover,Weblate dicio ES
+taiga-dashboard,en,es,taiga-dashboard.md,dashboard,leftover,Weblate taiga ES
+godot-toast,en,es,godot-toast.md,toast,leftover,Weblate godot ES
+dicio-toast,en,pl,dicio-toast.md,toast,leftover,PL toast loan
+taiga-dashboard,en,pl,taiga-dashboard.md,dashboard,leftover,Weblate taiga PL identical Dashboard
+godot-toast,en,pl,godot-toast.md,toast,leftover,Weblate godot PL
+dicio-toast,en,sv,dicio-toast.md,toast,leftover,Weblate dicio SV
+soapbox-dashboard,en,sv,soapbox-dashboard.md,dashboard,leftover,Weblate soapbox SV
+godot-toast,en,sv,godot-toast.md,toast,leftover,Weblate godot SV
+dicio-toast,en,uk,dicio-toast.md,toast,leftover,Weblate dicio UK
+soapbox-dashboard,en,uk,soapbox-dashboard.md,dashboard,leftover,Weblate soapbox UK
+muos-toast-animation,en,uk,muos-toast-animation.md,toast,leftover,Weblate muos UK identical EN clause
+muos-toast-animation,en,uk,muos-toast-animation.md,dialogues,leftover,identical EN clause
+muos-toast-animation,en,uk,muos-toast-animation.md,messages,leftover,identical EN clause
+muos-toast-animation,en,uk,muos-toast-animation.md,help,leftover,identical EN clause
+muos-toast-animation,en,uk,muos-toast-animation.md,boxes,leftover,identical EN clause
+muos-toast-animation,en,uk,muos-toast-animation.md,appear,leftover,identical EN clause
+muos-toast-animation,en,uk,muos-toast-animation.md,select,leftover,identical EN clause
+muos-toast-animation,en,uk,muos-toast-animation.md,animation,leftover,identical EN clause
+muos-toast-animation,en,uk,muos-toast-animation.md,used,leftover,identical EN clause
+dicio-toast,en,es,dicio-toast.md,popup,leftover,EN popup kept in ES
+dicio-toast,en,pl,dicio-toast.md,popup,leftover,EN popup kept in PL
+dicio-toast,en,sv,dicio-toast.md,popup,leftover,EN popup kept in SV

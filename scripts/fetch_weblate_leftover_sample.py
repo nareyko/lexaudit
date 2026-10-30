@@ -26,6 +26,17 @@ DEFAULT_QUERIES: list[tuple[str, str]] = [
     ("de", "target:Dashboard source:Dashboard state:translated"),
     ("ru", 'target:"Sign in" state:translated'),
     ("de", 'target:"Sign in" state:translated'),
+    # V1 others (es/pl/sv/uk) — 2026-10-30 harvest
+    ("es", 'target:"Onboarding complete"'),
+    ("es", "target:Toast source:Toast"),
+    ("es", "target:Dashboard source:Dashboard state:translated"),
+    ("pl", "target:Toast source:Toast"),
+    ("pl", "target:Dashboard source:Dashboard state:translated"),
+    ("sv", "target:Toast source:Toast"),
+    ("sv", "target:Dashboard source:Dashboard state:translated"),
+    ("uk", "target:Toast source:Toast"),
+    ("uk", "target:Dashboard source:Dashboard state:translated"),
+    ("uk", 'target:"toast messages"'),
 ]
 
 

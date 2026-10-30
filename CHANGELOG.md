@@ -10,12 +10,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
   `scripts/run_pack_field_metrics.py`, report + recall chart)
 - Pack wild Wikipedia corpus + fetch/metrics scripts (`packs_wild/`,
   `fetch_wiki_pack_samples.py`, `run_pack_wild_metrics.py`)
+- Field `02-clean-domain.md` fixtures (10 packs × en/de/ru)
 - Bilingual `DEFAULT_TEMPLATE_CHROME` stop, identical-segment leftovers,
-  optional `bilingual_chrome_path`
+  length-ratio soft signal, URL/email/code strip, `bilingual_chrome_path`
 - Crosslocale `ref_present` mode (default) + slug path pairing helpers
 - Crosslocale A/B dogfood script + verdict report
-- Phrase calque seeds (en/de/ru); hapax wild sanity + MCP import smoke
-- Cyrillic→Latin bilingual onboarding fixture
+- CX research notes + harvest script; trimmed `cx_samples/` fixtures
+- Phrase calque seeds (en/de/ru); hapax wild sanity + MCP tool smoke
+- VS Code `icon.png` (128×128); Cyrillic→Latin onboarding fixture
 
 ### Changed
 - LocalAI live smoke quarantined behind `LEXAUDIT_LOCALAI_SMOKE=1`

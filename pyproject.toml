@@ -52,7 +52,8 @@ dev = [
   "libcst>=1.4",
 ]
 mcp = [
-  "mcp>=1.0",
+  # 2.x renames FastMCP → MCPServer; keep 1.x until shell migrates.
+  "mcp>=1.0,<2",
 ]
 
 [project.urls]

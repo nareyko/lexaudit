@@ -156,9 +156,12 @@ is the plan; checklist file is the executable owner list).
 ```text
 1. A1 fetch script + expand packs_wild (A2)          ✅ 2026-10-30
 2. B segment-identical + chrome path; cyrillic grow  ✅ 2026-10-30
+2b. B length-ratio + URL/code strip                  ✅ 2026-10-30
 3. C1 slug pairing + C2 ref_present; re-dogfood      ✅ 2026-10-30
-4. E phrase rules + hapax/wiki regression            ✅ 2026-10-30
-5. D checklist items that need accounts              ⏳ owner
+4. E phrase rules + hapax + 02-clean-domain          ✅ 2026-10-30
+4b. A3 CX dump harvest (ids + tiny fixtures)         ✅ 2026-10-30
+5. D agent shell (icon/docs/MCP smoke)               ✅ 2026-10-30
+5b. D checklist items that need accounts             ⏳ owner
 6. Publish go (PyPI → MCP → Marketplace → tag/push)  ⏳ owner
 ```
 

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -13,6 +14,10 @@ from lexaudit.core.types import ClassifiedWord, VocabSample
 
 _LATIN_WORD = regex.compile(r"\b[\p{Latin}][\p{Latin}'-]{2,}\b", regex.VERSION1)
 _CYRILLIC_WORD = regex.compile(r"\b[\p{Cyrillic}][\p{Cyrillic}'-]{2,}\b", regex.VERSION1)
+_URL_EMAIL_RE = re.compile(
+    r"https?://\S+|www\.\S+|\b\S+@\S+\.\S+\b|`[^`]+`",
+    re.IGNORECASE,
+)
 
 # Cyrillic tokens often kept intentionally (thin; expand carefully).
 DEFAULT_CYRILLIC_LOANS: frozenset[str] = frozenset()
@@ -266,6 +271,8 @@ def untranslated_latin_in_target(
     allow = intentional_loans if intentional_loans is not None else DEFAULT_INTENTIONAL_LOANS
     stop = function_stop if function_stop is not None else DEFAULT_FUNCTION_STOP
     chrome = DEFAULT_TEMPLATE_CHROME | (extra_chrome or frozenset())
+    source_text = strip_urls_emails_code(source_text)
+    target_text = strip_urls_emails_code(target_text)
     src = {m.group(0).casefold() for m in _LATIN_WORD.finditer(source_text)}
     out: list[ClassifiedWord] = []
     seen: set[str] = set()
@@ -305,6 +312,8 @@ def untranslated_cyrillic_in_target(
 ) -> list[ClassifiedWord]:
     """Flag Cyrillic tokens that appear in both source and target (RU→EN/DE leak)."""
     allow = intentional_loans if intentional_loans is not None else DEFAULT_CYRILLIC_LOANS
+    source_text = strip_urls_emails_code(source_text)
+    target_text = strip_urls_emails_code(target_text)
     src = {m.group(0).casefold() for m in _CYRILLIC_WORD.finditer(source_text)}
     out: list[ClassifiedWord] = []
     seen: set[str] = set()
@@ -411,13 +420,20 @@ def detect_pair_leftovers(
             intentional_loans=intentional_loans,
             extra_chrome=extra_chrome,
         )
-    hits.extend(
+        hits.extend(
         identical_segment_leftovers(
             source_text,
             target_text,
             path=path,
             intentional_loans=intentional_loans,
             chrome=extra_chrome,
+        )
+    )
+    hits.extend(
+        length_ratio_leftovers(
+            source_text,
+            target_text,
+            path=path,
         )
     )
     return hits
@@ -461,6 +477,47 @@ def length_ratio_signal(source_text: str, target_text: str) -> float:
     a = max(1, len(source_text.strip()))
     b = len(target_text.strip())
     return b / a
+
+
+def strip_urls_emails_code(text: str) -> str:
+    """Drop URLs, emails, and inline code spans before leftover scans."""
+    return _URL_EMAIL_RE.sub(" ", text)
+
+
+def length_ratio_leftovers(
+    source_text: str,
+    target_text: str,
+    *,
+    path: str,
+    low: float = 0.55,
+    high: float = 1.85,
+) -> list[ClassifiedWord]:
+    """Soft page signal when target length diverges sharply from source."""
+    ratio = length_ratio_signal(source_text, target_text)
+    if low <= ratio <= high:
+        return []
+    # Prefer a Latin token from the longer side as a ranking anchor.
+    longer = target_text if ratio > 1.0 else source_text
+    pick = next(
+        (
+            m.group(0)
+            for m in _LATIN_WORD.finditer(strip_urls_emails_code(longer))
+            if len(m.group(0)) >= 4
+        ),
+        "length",
+    )
+    return [
+        ClassifiedWord(
+            normalized=pick.casefold(),
+            surface=pick,
+            count=1,
+            status="foreign",
+            samples=[VocabSample(path=path, scope="body")],
+            reason=f"bilingual-length-ratio:{ratio:.2f}",
+            detectors=["bilingual"],
+            tier="weak",
+        )
+    ]
 
 
 def load_extra_loans(path: Path | None) -> frozenset[str]:

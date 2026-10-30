@@ -1,11 +1,26 @@
 from __future__ import annotations
 
+import pytest
+
 
 def test_mcp_server_module_imports() -> None:
     import lexaudit.mcp_server as ms
 
     assert callable(ms.main)
     assert callable(ms._run_audit)
+    assert callable(ms.build_mcp)
+    assert callable(ms.list_tool_names)
+
+
+def test_mcp_tools_registered_without_network() -> None:
+    pytest.importorskip("mcp")
+    from lexaudit.mcp_server import build_mcp, list_tool_names
+
+    names = list_tool_names(build_mcp())
+    assert "audit" in names
+    assert "explain" in names
+    assert "expand_needle" in names
+    assert "fetch_dicts" in names
 
 
 def test_identical_segment_and_chrome_extras() -> None:

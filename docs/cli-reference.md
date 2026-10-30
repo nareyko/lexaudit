@@ -7,7 +7,8 @@ All audit and ranking commands are **read-only** on corpus sources. They only wr
 `--config` is optional on all commands: if omitted, `lexaudit` auto-discovers `./lexaudit.config.yaml` in the working directory or falls back to zero-config Markdown documentation mode (`sources: [files]`).
 
 ```bash
-uv sync
+uv sync --extra dev          # pytest / ruff / mypy tooling
+uv run python -m pytest      # prefer -m so host pytest cannot shadow
 uv run lexaudit --help
 ```
 

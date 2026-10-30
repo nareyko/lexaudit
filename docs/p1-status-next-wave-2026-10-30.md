@@ -5,46 +5,33 @@
 | Area | State |
 |---|---|
 | Package version | 0.3.0 local (not on PyPI) |
-| Lab / RC packs | 10 promoted; lab metrics failed=0 |
-| Pack field (seeded held-out) | mean recall 0.975 |
-| Pack wild (Wikipedia) | 33 CC BY-SA slug summaries in `tests/fixtures/packs_wild/` (~288K) |
-| Bilingual | opt-in; identical-segment + `bilingual_chrome_path`; default false |
-| Crosslocale | opt-in; `ref_present` mode + slug pairing helpers; default false |
-| Product shell | `.vsix` + `server.json` ready; Marketplace/MCP not published |
+| Lab / RC packs | 10 promoted; DE/RU density ≥12 (spot-check OK) |
+| Pack field | recall gold + `01-clean` + `02-clean-domain` × 10 packs × en/de/ru |
+| Pack wild | 33 CC BY-SA Wikipedia summaries; calque hits ≈0 (expected encyclopedic) |
+| Bilingual | identical-segment + length-ratio soft + URL/code strip + chrome path |
+| Crosslocale | `ref_present`; dogfood +23 likely; default false |
+| CX research | dump in `dumps/` (gitignored); ids + trimmed `cx_samples/` fixtures |
+| Product shell | icon.png, server.json OK, MCP tool smoke, privacy README |
 | Plan | `docs/p1-next-wave-plan-2026-10-30.md` |
 
-## What we researched (local, no accounts)
+## Local thin spots closed this session
 
-- Wikimedia Content Translation: keep dumps out of git (`.gitignore` `dumps/`, `*.tmx`, `cx-corpora.*`)
-- Wikipedia REST summaries as legal short extracts (fetch script + prune stale title-named files)
-- Industry untranslated QA: narrow allowlists + reasons; FP budget ~10%
-- Loanword literature: prefer ok-in-EN / suspect-in-target (`ref_present`)
-- MCP registry + VS Marketplace publish requirements (owner-only later)
-
-## Thin spots → done locally this wave
-
-| Thin spot | Fix landed |
+| Item | Landing |
 |---|---|
-| Pack proof on wild text | `fetch_wiki_pack_samples.py` + 33 pages + `run_pack_wild_metrics.py` + `p1-pack-wild-eval` |
-| Bilingual noise | `identical_segment_leftovers` + chrome path + cyrillic onboarding fixtures |
-| Crosslocale inert | `ref_present` default mode; slug pairing; dogfood tracks `crosslocale_hits` / `delta_likely` |
-| Phrase / hapax | phrase seeds in en/de/ru calques; hapax wild sanity test |
-| LocalAI smoke flake | gated by `LEXAUDIT_LOCALAI_SMOKE=1` + health |
-| Repo bloat | prune title-named wiki dupes; ignore dumps / tmp metrics / vsix / whl |
+| B length-ratio → ranking signal | `length_ratio_leftovers` (weak foreign) |
+| B URL/email/code noise | `strip_urls_emails_code` before leftover scans |
+| E clean-domain fixtures | 30× `02-clean-domain.md` via writer script |
+| A3 CX without repo bloat | notes + harvest script; dump gitignored |
+| D shell checklist (agent) | icon, docs, MCP tool list smoke, privacy |
+| Hygiene | parent ignores `lexaudit.config.local.yaml`; dumps stay out |
 
-## Still owner-only (external accounts)
+## Still owner-only
 
 1. PyPI publish 0.3.0  
-2. MCP registry + VS Marketplace  
-3. Git remote push after publish go  
+2. MCP registry + VS Marketplace (`vsce publish`)  
+3. Git remote push / tag after publish go  
 
-## Reproduce local artifacts
+## Do not commit
 
-```bash
-uv run python scripts/fetch_wiki_pack_samples.py   # network; writes short extracts only
-uv run python scripts/run_pack_wild_metrics.py      # tmp/ + docs report
-uv run python scripts/run_crosslocale_dogfood.py
-uv run python scripts/run_pack_field_metrics.py
-```
-
-Do **not** commit: `dumps/`, CX dumps, `tmp/**`, `*.vsix`, `*.whl`, `gold/`, `eval/`.
+`dumps/`, `cx-corpora.*`, `*.tmx*`, `tmp/**`, `*.vsix`, `*.whl`, `gold/`, `eval/`,
+`lexaudit.config.local.yaml`.

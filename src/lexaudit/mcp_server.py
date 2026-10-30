@@ -27,11 +27,14 @@ def _run_audit(path: str, locale: str = "en") -> dict[str, Any]:
     }
 
 
-def main() -> None:
+def build_mcp() -> Any:
+    """Construct FastMCP app with tools registered (no network)."""
     try:
         from mcp.server.fastmcp import FastMCP
     except ImportError as exc:  # pragma: no cover
-        raise SystemExit("mcp package missing; install with: pip install 'lexaudit[mcp]'") from exc
+        raise SystemExit(
+            "mcp package missing; install with: pip install 'lexaudit[mcp]'"
+        ) from exc
 
     mcp = FastMCP("lexaudit")
 
@@ -71,6 +74,32 @@ def main() -> None:
         stem = fetch_dictionary(locale, cache_dir())
         return str(stem)
 
+    return mcp
+
+
+def list_tool_names(mcp: Any | None = None) -> list[str]:
+    """Return registered tool names for unit smoke (no LLM / no network)."""
+    app = mcp if mcp is not None else build_mcp()
+    tools = getattr(app, "_tool_manager", None)
+    if tools is not None and hasattr(tools, "list_tools"):
+        listed = tools.list_tools()
+        names = []
+        for t in listed:
+            name = getattr(t, "name", None) or (t.get("name") if isinstance(t, dict) else None)
+            if name:
+                names.append(str(name))
+        if names:
+            return sorted(names)
+    # FastMCP variants expose tools differently across versions.
+    for attr in ("_tools", "tools"):
+        bag = getattr(app, attr, None)
+        if isinstance(bag, dict):
+            return sorted(str(k) for k in bag)
+    return []
+
+
+def main() -> None:
+    mcp = build_mcp()
     mcp.run()
 
 

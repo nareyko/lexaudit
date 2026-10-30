@@ -8,10 +8,12 @@ from lexaudit.detectors.bilingual import (
     DEFAULT_INTENTIONAL_LOANS,
     DEFAULT_TEMPLATE_CHROME,
     detect_pair_leftovers,
+    length_ratio_leftovers,
     length_ratio_signal,
     matrix_pairs,
     pair_paths,
     pairs_from_config,
+    strip_urls_emails_code,
     untranslated_cyrillic_in_target,
     untranslated_latin_in_target,
 )
@@ -75,6 +77,24 @@ def test_pairs_from_config_heldout() -> None:
 def test_length_ratio_soft_signal() -> None:
     ratio = length_ratio_signal("abcd", "abcdefgh")
     assert 1.9 < ratio < 2.1
+    hits = length_ratio_leftovers("short", "x" * 80, path="ru/x.md")
+    assert hits and hits[0].reason.startswith("bilingual-length-ratio:")
+    assert hits[0].tier == "weak"
+
+
+def test_urls_and_code_not_counted_as_leftovers() -> None:
+    cleaned = strip_urls_emails_code(
+        "See https://example.com/path and `schemaize` plus a@b.co denseness here."
+    )
+    assert "https" not in cleaned
+    assert "schemaize" not in cleaned
+    assert "denseness" in cleaned
+    src = "Visit https://example.com/dashboard denseness docs."
+    tgt = "См. https://example.com/dashboard denseness в документации."
+    hits = untranslated_latin_in_target(src, tgt, path="ru/x.md")
+    norms = {w.normalized for w in hits}
+    assert "denseness" in norms
+    assert "example" not in norms
 
 
 def test_heldout_metrics_script_importable() -> None:

@@ -37,3 +37,24 @@ def test_packs_wild_seed_exists() -> None:
     assert len(md) >= 20
     # Slug filenames only — no title-named Cyrillic/long duplicates in git.
     assert all("wiki-" in p.name and p.name.isascii() for p in md)
+
+
+def test_packs_field_clean_domain_fixtures() -> None:
+    root = Path(__file__).resolve().parents[1] / "tests" / "fixtures" / "packs_field"
+    clean = list(root.rglob("02-clean-domain.md"))
+    assert len(clean) >= 30
+
+
+def test_mcp_server_json_registry_shape() -> None:
+    import json
+
+    path = (
+        Path(__file__).resolve().parents[1]
+        / "packages"
+        / "mcp-lexaudit"
+        / "server.json"
+    )
+    data = json.loads(path.read_text(encoding="utf-8"))
+    assert data["name"] == "io.github.nareyko/lexaudit"
+    assert len(data["description"]) <= 100
+    assert data["version"] == "0.3.0"

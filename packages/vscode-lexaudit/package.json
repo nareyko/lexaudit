@@ -1,7 +1,7 @@
 {
   "name": "vscode-lexaudit",
   "displayName": "lexaudit",
-  "description": "Locale vocabulary audit: calques, inventeds, foreign slips. Shells out to the local lexaudit CLI — no cloud.",
+  "description": "Locale vocabulary audit: calques, inventeds, foreign slips. Shells out to the local lexaudit CLI \u2014 no cloud.",
   "version": "0.3.0",
   "publisher": "nareyko",
   "license": "MIT",
@@ -63,5 +63,6 @@
   "scripts": {
     "smoke": "node ./extension.js --smoke",
     "package": "npx --yes @vscode/vsce package --no-dependencies --allow-missing-repository"
-  }
+  },
+  "icon": "icon.png"
 }

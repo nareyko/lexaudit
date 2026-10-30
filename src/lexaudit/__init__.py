@@ -8,6 +8,6 @@ try:
     try:
         __version__ = version("lexaudit")
     except PackageNotFoundError:  # pragma: no cover - editable / src tree
-        __version__ = "0.3.0"
+        __version__ = "0.3.1"
 except ImportError:  # pragma: no cover
-    __version__ = "0.3.0"
+    __version__ = "0.3.1"

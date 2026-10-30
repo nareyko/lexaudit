@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       confirm:
-        description: "Type publish-0.3.0 to confirm"
+        description: "Type publish-<version> to confirm (e.g. publish-0.3.1)"
         required: true
         type: string
 
@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   publish:
-    if: inputs.confirm == 'publish-0.3.0'
+    if: startsWith(inputs.confirm, 'publish-')
     runs-on: ubuntu-latest
     environment: pypi
     steps:

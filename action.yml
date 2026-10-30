@@ -48,7 +48,7 @@ runs:
       working-directory: ${{ inputs.working-directory }}
       run: |
         set -euo pipefail
-        uv pip install --system "lexaudit>=0.3.0" || uv pip install --system .
+        uv pip install --system "lexaudit>=0.3.1" || uv pip install --system .
 
     - name: Fetch dictionaries
       if: inputs.fetch-dicts == 'true'

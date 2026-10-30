@@ -31,10 +31,10 @@ Refs: [Publishing Extensions](https://code.visualstudio.com/api/working-with-ext
 
 | # | Step | Owner | Status |
 |---|---|---|---|
-| 1 | PyPI upload `lexaudit==0.3.0` with `mcp` extra installable | owner | □ Trusted Publisher missing |
+| 1 | PyPI upload `lexaudit==0.3.0` with `mcp` extra installable | agent | ☑ 0.3.0 live; 0.3.1 for mcp-name |
 | 2 | Verify `server.json` name `io.github.nareyko/lexaudit`, description ≤100 chars | agent | ☑ |
 | 3 | Install `mcp-publisher`; GitHub auth for `io.github.nareyko/*` namespace | agent | ☑ login OK 2026-10-30 |
-| 4 | `mcp-publisher publish` from `packages/mcp-lexaudit/` | blocked | □ needs PyPI 0.3.0 first |
+| 4 | `mcp-publisher publish` from `packages/mcp-lexaudit/` | agent | □ after PyPI 0.3.1 |
 | 5 | Add CI smoke: import FastMCP tools without network LLM | agent | ☑ `test_mcp_smoke` |
 
 Refs: [Registry auth](https://modelcontextprotocol.io/registry/authentication) ·

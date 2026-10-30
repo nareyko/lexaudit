@@ -2,7 +2,7 @@
 """Optional MCP server: audit / explain / expand-needle / fetch-dicts.
 
 Install with ``pip install 'lexaudit[mcp]'`` then run ``lexaudit-mcp``.
-Registry metadata: ``packages/mcp-lexaudit/server.json`` (publish with 0.3.0).
+Registry metadata: ``packages/mcp-lexaudit/server.json`` (publish with package version).
 """
 
 from __future__ import annotations

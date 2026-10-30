@@ -2,6 +2,8 @@
 
 **Finds odd, wrong or copied-from-another-language words in your texts, and tells you which pages to fix first.**
 
+<!-- mcp-name: io.github.nareyko/lexaudit -->
+
 ## In plain words
 
 You write or translate articles, courses or documentation. A normal spellchecker shouts about every brand name, abbreviation and long German word, and still misses the words that really hurt: a word copied from another language ("calque"), a real word used with the wrong meaning ("false friend"), or a word someone invented.

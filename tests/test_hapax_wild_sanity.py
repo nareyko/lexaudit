@@ -48,8 +48,13 @@ def test_packs_field_clean_domain_fixtures() -> None:
 def test_mcp_server_json_registry_shape() -> None:
     import json
 
+    import lexaudit
+
     path = Path(__file__).resolve().parents[1] / "packages" / "mcp-lexaudit" / "server.json"
     data = json.loads(path.read_text(encoding="utf-8"))
     assert data["name"] == "io.github.nareyko/lexaudit"
     assert len(data["description"]) <= 100
-    assert data["version"] == "0.3.0"
+    assert data["version"] == lexaudit.__version__
+    assert data["packages"][0]["version"] == lexaudit.__version__
+    readme = Path(__file__).resolve().parents[1] / "README.md"
+    assert "mcp-name: io.github.nareyko/lexaudit" in readme.read_text(encoding="utf-8")

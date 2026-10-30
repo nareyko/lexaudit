@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -436,6 +437,66 @@ def apply_bilingual_pass(
     return [*words, *extra]
 
 
+def _academy_body(translations: dict[str, Any], locale: str) -> str:
+    block = translations.get(locale)
+    if not isinstance(block, dict):
+        return ""
+    body = block.get("bodyMarkdown")
+    return body if isinstance(body, str) else ""
+
+
+def pairs_from_academy(
+    academy_root: Path,
+    source_locale: str,
+    target_locale: str,
+    *,
+    materialize_dir: Path,
+) -> list[BilingualPair]:
+    """Pair academy JSON articles by slug; write bodyMarkdown to materialize_dir.
+
+    ``apply_bilingual_pass`` reads plain-text paths, so each locale body is
+    materialized as ``{materialize_dir}/{locale}/{rel}.md`` (rel mirrors the
+    JSON path under academy_root without the ``.json`` suffix).
+    """
+    pairs: list[BilingualPair] = []
+    if not academy_root.is_dir():
+        return pairs
+
+    for src_json in sorted(academy_root.rglob("*.json")):
+        try:
+            data = json.loads(src_json.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if not isinstance(data, dict):
+            continue
+        translations = data.get("translations")
+        if not isinstance(translations, dict):
+            continue
+        src_body = _academy_body(translations, source_locale)
+        tgt_body = _academy_body(translations, target_locale)
+        if not src_body.strip() or not tgt_body.strip():
+            continue
+        rel = src_json.relative_to(academy_root).with_suffix("").as_posix()
+        src_md = materialize_dir / source_locale / f"{rel}.md"
+        tgt_md = materialize_dir / target_locale / f"{rel}.md"
+        try:
+            src_md.parent.mkdir(parents=True, exist_ok=True)
+            tgt_md.parent.mkdir(parents=True, exist_ok=True)
+            src_md.write_text(src_body, encoding="utf-8")
+            tgt_md.write_text(tgt_body, encoding="utf-8")
+        except OSError:
+            continue
+        pairs.append(
+            BilingualPair(
+                source_locale=source_locale,
+                target_locale=target_locale,
+                source_path=str(src_md),
+                target_path=str(tgt_md),
+            )
+        )
+    return pairs
+
+
 def pairs_from_config(raw: list[dict[str, Any]] | None, repo_root: Path) -> list[BilingualPair]:
     if not raw:
         return []
@@ -443,14 +504,32 @@ def pairs_from_config(raw: list[dict[str, Any]] | None, repo_root: Path) -> list
     for row in raw:
         if not isinstance(row, dict):
             continue
+        source_locale = str(row.get("source_locale") or "en")
+        target_locale = str(row.get("target_locale") or "ru")
+        if str(row.get("source") or "").casefold() == "academy":
+            academy_root = repo_root / str(
+                row.get("academy_root") or "infra/corpus-ci/pending-academy-articles"
+            )
+            materialize_dir = repo_root / str(
+                row.get("materialize_dir") or "frontend/tmp/lexaudit-bilingual-pairs"
+            )
+            out.extend(
+                pairs_from_academy(
+                    academy_root,
+                    source_locale,
+                    target_locale,
+                    materialize_dir=materialize_dir,
+                )
+            )
+            continue
         src_root = repo_root / str(row.get("source_root") or "")
         tgt_root = repo_root / str(row.get("target_root") or "")
         out.extend(
             pair_paths(
                 src_root,
                 tgt_root,
-                source_locale=str(row.get("source_locale") or "en"),
-                target_locale=str(row.get("target_locale") or "ru"),
+                source_locale=source_locale,
+                target_locale=target_locale,
             )
         )
     return out

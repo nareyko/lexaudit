@@ -1,3 +1,3 @@
 # Uszkodzony tekst
 
-Unikaj cartness i checkoutness. Nie skuize. Sprawdź refundize.
+Unikaj tych form: cartness, checkoutness, wishlistability, skuize, refundize, shipability, basketize, voucherize, promoability, stockness, fulfillness, returnability.

@@ -1,3 +1,3 @@
 # Uszkodzony tekst
 
-Unikaj onboardize i offerize. Nie pipelineness. Sprawdź atsness.
+Unikaj tych form: shortlistability, onboardize, pipelineness, offerize, atsness, screenability, requisitionize, sourcability, interviewize, scorecardness, rejectability, hireability.

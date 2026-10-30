@@ -1,3 +1,3 @@
 # Uszkodzony tekst
 
-Unikaj exploitness i sandboxize. Nie zerodayness. Sprawdź payloadize.
+Unikaj tych form: exploitness, sandboxize, phishability, hardenability, zerodayness, payloadize, severityness, threatmodelize, vulnscanability, penability, redteamize, blueteamness.

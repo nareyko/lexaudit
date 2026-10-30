@@ -7,7 +7,8 @@ from lexaudit.core.types import ClassifiedWord
 ENGLISH_LEAK_STOPWORDS = frozenset({"of", "the", "and", "to", "for", "with"})
 
 # Locales where short English function words in body are ranked as low-weight leaks.
-ENGLISH_LEAK_LOCALES = frozenset({"de"})
+# Cyrillic locales (ru/uk) rely on foreign-script detection instead.
+ENGLISH_LEAK_LOCALES = frozenset({"de", "es", "pl", "sv"})
 
 
 def _has_body_sample(word: ClassifiedWord) -> bool:

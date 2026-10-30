@@ -255,13 +255,12 @@ def main() -> int:
         "lab_ship_bar_all_scored": ship_ok,
         "failed_pairs": [r["pair"] for r in failed],
         "by_anchor": {
-            "with_en": [r["pair"] for r in pairs if "en" in (r["source_locale"], r["target_locale"])],
-            "with_de": [r["pair"] for r in pairs if "de" in (r["source_locale"], r["target_locale"])],
-            "with_ru": [r["pair"] for r in pairs if "ru" in (r["source_locale"], r["target_locale"])],
-            "with_es": [r["pair"] for r in pairs if "es" in (r["source_locale"], r["target_locale"])],
-            "with_pl": [r["pair"] for r in pairs if "pl" in (r["source_locale"], r["target_locale"])],
-            "with_sv": [r["pair"] for r in pairs if "sv" in (r["source_locale"], r["target_locale"])],
-            "with_uk": [r["pair"] for r in pairs if "uk" in (r["source_locale"], r["target_locale"])],
+            loc: [
+                r["pair"]
+                for r in pairs
+                if loc in (r["source_locale"], r["target_locale"])
+            ]
+            for loc in ("en", "de", "ru", "es", "pl", "sv", "uk")
         },
     }
 

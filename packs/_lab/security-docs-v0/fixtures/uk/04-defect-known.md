@@ -1,3 +1,3 @@
 # Зламаний текст
 
-Уникайте exploitness і sandboxize. Не zerodayness. Перевірте payloadize.
+Уникайте цих форм: exploitness, sandboxize, phishability, hardenability, zerodayness, payloadize, severityness, threatmodelize, vulnscanability, penability, redteamize, blueteamness.

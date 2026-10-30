@@ -1,3 +1,3 @@
 # Trasig text
 
-Undvik scormness och coursewarize. Inte lmsize. Kontrollera quizability.
+Undvik dessa former: scormness, quizability, coursewarize, enrollability, lmsize, xapiness, completionize, modulize, lessonize, gradability, rubricize, badgeability.

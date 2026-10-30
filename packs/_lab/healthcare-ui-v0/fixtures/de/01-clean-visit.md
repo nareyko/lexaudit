@@ -1,3 +1,3 @@
-# Termin
+# Besuch
 
-Vereinbaren Sie einen Termin und besprechen Sie Laborergebnisse mit der Praxis.
+Buchen Sie einen Termin und besprechen Sie Laborwerte mit Ihrer Klinik.

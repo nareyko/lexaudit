@@ -18,6 +18,7 @@ ALLOWED_WRITE_FILES = {
     "llm/emit.py",  # llm-labels.json under output_dir
     "cli/main.py",  # may create output dirs via report
     "detectors/crosslocale.py",  # embedding cache under output dir
+    "detectors/bilingual.py",  # academy bodyMarkdown materialize_dir only
     "detectors/dictfetch.py",  # user dictionary cache
     "packs.py",  # rule pack install into user cache
 }

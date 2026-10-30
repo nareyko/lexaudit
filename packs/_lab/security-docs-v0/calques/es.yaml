@@ -2,25 +2,77 @@ version: 1
 rules:
 - pattern: exploitness
   locale: es
-  reason: lab-security-exploitness-cross
-  hint: exploitness — invented English leftover
+  reason: lab-security-exploitness
+  hint: English leftover coinage
   severity: confirmed
   source: lab-security
 - pattern: sandboxize
   locale: es
-  reason: lab-security-sandboxize-cross
-  hint: sandboxize — invented English leftover
+  reason: lab-security-sandboxize
+  hint: English leftover coinage
   severity: confirmed
   source: lab-security
+- pattern: phishability
+  locale: es
+  reason: lab-security-phishability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+  override_ok: true
+- pattern: hardenability
+  locale: es
+  reason: lab-security-hardenability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+  override_ok: true
 - pattern: zerodayness
   locale: es
-  reason: lab-security-zerodayness-cross
-  hint: zerodayness — invented English leftover
+  reason: lab-security-zerodayness
+  hint: English leftover coinage
   severity: confirmed
   source: lab-security
 - pattern: payloadize
   locale: es
-  reason: lab-security-payloadize-cross
-  hint: payloadize — invented English leftover
+  reason: lab-security-payloadize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+- pattern: severityness
+  locale: es
+  reason: lab-security-severityness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+- pattern: threatmodelize
+  locale: es
+  reason: lab-security-threatmodelize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+- pattern: vulnscanability
+  locale: es
+  reason: lab-security-vulnscanability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+  override_ok: true
+- pattern: penability
+  locale: es
+  reason: lab-security-penability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+  override_ok: true
+- pattern: redteamize
+  locale: es
+  reason: lab-security-redteamize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+- pattern: blueteamness
+  locale: es
+  reason: lab-security-blueteamness
+  hint: English leftover coinage
   severity: confirmed
   source: lab-security

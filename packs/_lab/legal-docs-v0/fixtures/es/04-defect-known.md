@@ -1,3 +1,3 @@
 # Texto defectuoso
 
-Evite hereinness y warrantize. No covenantize. Revise noticeness.
+Evite estas formas: hereinness, thereofness, indemnifyability, assignabilityness, warrantize, covenantize, noticeness, jurisdictionability, whereasness, hereinafterize, forcemajeureability, liableness.

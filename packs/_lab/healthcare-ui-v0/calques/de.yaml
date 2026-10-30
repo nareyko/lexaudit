@@ -1,26 +1,146 @@
 version: 1
 rules:
-  - pattern: "appointmentheit"
-    locale: de
-    reason: "health-de-appointmentheit"
-    hint: "Termin"
-    severity: confirmed
-    source: "lab-healthcare"
-  - pattern: "refillbarkeit"
-    locale: de
-    reason: "health-de-refillbarkeit"
-    hint: "erneuerbar / Folgerezept möglich"
-    severity: likely
-    source: "lab-healthcare"
-  - pattern: "triageheit"
-    locale: de
-    reason: "health-de-triageheit"
-    hint: "Triage-Status"
-    severity: confirmed
-    source: "lab-healthcare"
-  - pattern: "symptomizen"
-    locale: de
-    reason: "health-de-symptomizen"
-    hint: "Symptome melden"
-    severity: confirmed
-    source: "lab-healthcare"
+- pattern: patientheit
+  locale: de
+  reason: lab-healthcare-patientheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: symptomizen
+  locale: de
+  reason: lab-healthcare-symptomizen
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: diagnosbarkeit
+  locale: de
+  reason: lab-healthcare-diagnosbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-healthcare
+- pattern: appointbarkeit
+  locale: de
+  reason: lab-healthcare-appointbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-healthcare
+- pattern: prescriptionieren
+  locale: de
+  reason: lab-healthcare-prescriptionieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: labresultheit
+  locale: de
+  reason: lab-healthcare-labresultheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: triageheit
+  locale: de
+  reason: lab-healthcare-triageheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: refillbarkeit
+  locale: de
+  reason: lab-healthcare-refillbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-healthcare
+- pattern: clinicianieren
+  locale: de
+  reason: lab-healthcare-clinicianieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: vitalsheit
+  locale: de
+  reason: lab-healthcare-vitalsheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: chartbarkeit
+  locale: de
+  reason: lab-healthcare-chartbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-healthcare
+- pattern: dischargeieren
+  locale: de
+  reason: lab-healthcare-dischargeieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: admitbarkeit
+  locale: de
+  reason: lab-healthcare-admitbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-healthcare
+- pattern: referralieren
+  locale: de
+  reason: lab-healthcare-referralieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: encounterheit
+  locale: de
+  reason: lab-healthcare-encounterheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: careplanheit
+  locale: de
+  reason: lab-healthcare-careplanheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: medicationieren
+  locale: de
+  reason: lab-healthcare-medicationieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: allergyscreenbarkeit
+  locale: de
+  reason: lab-healthcare-allergyscreenbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-healthcare
+- pattern: imagingheit
+  locale: de
+  reason: lab-healthcare-imagingheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: labdrawieren
+  locale: de
+  reason: lab-healthcare-labdrawieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: followupheit
+  locale: de
+  reason: lab-healthcare-followupheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: telehealthbarkeit
+  locale: de
+  reason: lab-healthcare-telehealthbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-healthcare
+- pattern: consentieren
+  locale: de
+  reason: lab-healthcare-consentieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-healthcare
+- pattern: privacybarkeit
+  locale: de
+  reason: lab-healthcare-privacybarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-healthcare

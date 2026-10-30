@@ -182,7 +182,7 @@ def test_matrix_pairs_v1_directions() -> None:
     assert len(matrix_pairs(mode="anchors")) == 6
     assert len(matrix_pairs(mode="anchors_x_others")) == 30
     pairs = matrix_pairs(mode="all")
-    assert len(pairs) == 42  # 7 locales × 6
+    assert len(pairs) == 42  # 7 locales x 6
     assert ("en", "es") in pairs and ("es", "ru") in pairs
     assert ("uk", "pl") in pairs and ("sv", "de") in pairs
 

@@ -1,3 +1,3 @@
 # Зламаний текст
 
-Уникайте hereinness і warrantize. Не covenantize. Перевірте noticeness.
+Уникайте цих форм: hereinness, thereofness, indemnifyability, assignabilityness, warrantize, covenantize, noticeness, jurisdictionability, whereasness, hereinafterize, forcemajeureability, liableness.

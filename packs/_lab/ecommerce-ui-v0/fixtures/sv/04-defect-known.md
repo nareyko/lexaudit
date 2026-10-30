@@ -1,3 +1,3 @@
 # Trasig text
 
-Undvik cartness och checkoutness. Inte skuize. Kontrollera refundize.
+Undvik dessa former: cartness, checkoutness, wishlistability, skuize, refundize, shipability, basketize, voucherize, promoability, stockness, fulfillness, returnability.

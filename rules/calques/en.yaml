@@ -124,3 +124,17 @@ rules:
     hint: "rig-related"
     severity: weak
     source: "synthetic-test"
+  - pattern: "into your own hands"
+    locale: en
+    match: phrase
+    reason: "phrase-calque-own-hands"
+    hint: "take charge / take control — literal calque of взять в свои руки"
+    severity: confirmed
+    source: "phrase-calque-bank"
+  - pattern: "make a decision about"
+    locale: en
+    match: phrase
+    reason: "phrase-calque-make-decision"
+    hint: "decide — avoid padded calque phrasing in tight UI/docs"
+    severity: likely
+    source: "phrase-calque-bank"

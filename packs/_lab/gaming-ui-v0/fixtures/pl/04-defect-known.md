@@ -1,3 +1,3 @@
 # Uszkodzony tekst
 
-Unikaj lootability i matchmakeize. Nie respawnness. Sprawdź inventoryize.
+Unikaj tych form: lootability, matchmakeize, respawnness, inventoryize, questability, guildness, loadoutness, partyfindize, seasonpassness, craftingability, dropability, pvpize.

@@ -1,3 +1,3 @@
-# Kaputte Kurs-Texte
+# Kaputte Texte
 
-Vermeiden Sie scormheit und quizbarkeit. Kein coursewarisieren und kein lmsieren.
+Vermeiden Sie diese Formen: scormheit, quizbarkeit, coursewarisieren, enrollbarkeit, lmsieren, xapiheit, completionieren, modulisieren, lessonisieren, gradbarkeit, rubricisieren, badgebarkeit, certificateieren, cohortheit, syllabusieren, assignmentieren, submissionheit, peerreviewbarkeit, proctorieren, attendbarkeit, playlistieren, microlearningheit, branchbarkeit, remediateieren.

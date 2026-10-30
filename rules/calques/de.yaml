@@ -124,3 +124,10 @@ rules:
     hint: "was den Kiel betrifft"
     severity: weak
     source: "editorial-watch"
+  - pattern: "in die eigene hand nehmen"
+    locale: de
+    match: phrase
+    reason: "phrase-calque-own-hand"
+    hint: "übernehmen / selbst steuern — literal calque"
+    severity: confirmed
+    source: "phrase-calque-bank"

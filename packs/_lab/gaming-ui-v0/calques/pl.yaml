@@ -2,25 +2,77 @@ version: 1
 rules:
 - pattern: lootability
   locale: pl
-  reason: lab-gaming-lootability-cross
-  hint: lootability — invented English leftover
+  reason: lab-gaming-lootability
+  hint: English leftover coinage
   severity: confirmed
   source: lab-gaming
+  override_ok: true
 - pattern: matchmakeize
   locale: pl
-  reason: lab-gaming-matchmakeize-cross
-  hint: matchmakeize — invented English leftover
+  reason: lab-gaming-matchmakeize
+  hint: English leftover coinage
   severity: confirmed
   source: lab-gaming
 - pattern: respawnness
   locale: pl
-  reason: lab-gaming-respawnness-cross
-  hint: respawnness — invented English leftover
+  reason: lab-gaming-respawnness
+  hint: English leftover coinage
   severity: confirmed
   source: lab-gaming
 - pattern: inventoryize
   locale: pl
-  reason: lab-gaming-inventoryize-cross
-  hint: inventoryize — invented English leftover
+  reason: lab-gaming-inventoryize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-gaming
+- pattern: questability
+  locale: pl
+  reason: lab-gaming-questability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-gaming
+  override_ok: true
+- pattern: guildness
+  locale: pl
+  reason: lab-gaming-guildness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-gaming
+- pattern: loadoutness
+  locale: pl
+  reason: lab-gaming-loadoutness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-gaming
+- pattern: partyfindize
+  locale: pl
+  reason: lab-gaming-partyfindize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-gaming
+- pattern: seasonpassness
+  locale: pl
+  reason: lab-gaming-seasonpassness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-gaming
+- pattern: craftingability
+  locale: pl
+  reason: lab-gaming-craftingability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-gaming
+  override_ok: true
+- pattern: dropability
+  locale: pl
+  reason: lab-gaming-dropability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-gaming
+  override_ok: true
+- pattern: pvpize
+  locale: pl
+  reason: lab-gaming-pvpize
+  hint: English leftover coinage
   severity: confirmed
   source: lab-gaming

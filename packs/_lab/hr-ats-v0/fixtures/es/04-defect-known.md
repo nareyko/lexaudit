@@ -1,3 +1,3 @@
 # Texto defectuoso
 
-Evite onboardize y offerize. No pipelineness. Revise atsness.
+Evite estas formas: shortlistability, onboardize, pipelineness, offerize, atsness, screenability, requisitionize, sourcability, interviewize, scorecardness, rejectability, hireability.

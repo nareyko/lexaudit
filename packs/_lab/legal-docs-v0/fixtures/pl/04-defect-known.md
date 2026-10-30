@@ -1,3 +1,3 @@
 # Uszkodzony tekst
 
-Unikaj hereinness i warrantize. Nie covenantize. Sprawdź noticeness.
+Unikaj tych form: hereinness, thereofness, indemnifyability, assignabilityness, warrantize, covenantize, noticeness, jurisdictionability, whereasness, hereinafterize, forcemajeureability, liableness.

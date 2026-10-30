@@ -1,3 +1,3 @@
-# Kaputte ATS-Texte
+# Kaputte Texte
 
-Vermeiden Sie shortlistbarkeit und pipelineheit. Kein onboardisieren und kein offerisieren.
+Vermeiden Sie diese Formen: shortlistbarkeit, onboardisieren, pipelineheit, offerisieren, atsheit, screenbarkeit, requisitionieren, sourcebarkeit, interviewieren, scorecardheit, rejectbarkeit, hirebarkeit, talentpoolieren, headcountheit, compbandbarkeit, offerletterieren, backgroundcheckheit, referenceieren, calendarheit, schedulebarkeit, stagebarkeit, candidatisieren, pipelineieren, rejectreasonieren.

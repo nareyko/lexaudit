@@ -1,3 +1,3 @@
 # Trasig text
 
-Undvik onboardize och offerize. Inte pipelineness. Kontrollera atsness.
+Undvik dessa former: shortlistability, onboardize, pipelineness, offerize, atsness, screenability, requisitionize, sourcability, interviewize, scorecardness, rejectability, hireability.

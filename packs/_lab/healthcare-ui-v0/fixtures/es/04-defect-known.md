@@ -1,3 +1,3 @@
 # Texto defectuoso
 
-Evite patientness y symptomize. No triageness. Revise prescriptionize.
+Evite estas formas: patientness, symptomize, diagnosability, appointability, prescriptionize, labresultness, triageness, refillability, clinicianize, vitalsness, chartability, dischargeize.

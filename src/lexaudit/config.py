@@ -50,6 +50,8 @@ class LexauditConfig:
     enable_foreign: bool = True
     enable_calque: bool = True
     enable_crosslocale: bool = False
+    # When enable_crosslocale: compare suspects against this locale's vocab norms.
+    crosslocale_reference_locale: str = "en"
     enable_bilingual: bool = False
     bilingual_pairs: tuple[dict[str, object], ...] = ()
     # Corpus-local intentional loans (e.g. DE UI nouns). Never merge into DEFAULT.
@@ -72,6 +74,7 @@ class LexauditConfig:
             "enable_foreign": self.enable_foreign,
             "enable_calque": self.enable_calque,
             "enable_crosslocale": self.enable_crosslocale,
+            "crosslocale_reference_locale": self.crosslocale_reference_locale,
             "enable_bilingual": self.enable_bilingual,
             "rank_mode": self.rank_mode,
             "rank_weights": {
@@ -183,6 +186,10 @@ def load_config(path: Path) -> LexauditConfig:
         enable_foreign=bool(data.get("enable_foreign", True)),
         enable_calque=bool(data.get("enable_calque", True)),
         enable_crosslocale=bool(data.get("enable_crosslocale") or False),
+        crosslocale_reference_locale=str(
+            data.get("crosslocale_reference_locale") or "en"
+        ).strip()
+        or "en",
         enable_bilingual=bool(data.get("enable_bilingual") or False),
         bilingual_pairs=tuple(
             x for x in (data.get("bilingual_pairs") or []) if isinstance(x, dict)

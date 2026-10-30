@@ -2,25 +2,77 @@ version: 1
 rules:
 - pattern: scormness
   locale: sv
-  reason: lab-edtech-scormness-cross
-  hint: scormness — invented English leftover
-  severity: confirmed
-  source: lab-edtech
-- pattern: coursewarize
-  locale: sv
-  reason: lab-edtech-coursewarize-cross
-  hint: coursewarize — invented English leftover
-  severity: confirmed
-  source: lab-edtech
-- pattern: lmsize
-  locale: sv
-  reason: lab-edtech-lmsize-cross
-  hint: lmsize — invented English leftover
+  reason: lab-edtech-scormness
+  hint: English leftover coinage
   severity: confirmed
   source: lab-edtech
 - pattern: quizability
   locale: sv
-  reason: lab-edtech-quizability-cross
-  hint: quizability — invented English leftover
+  reason: lab-edtech-quizability
+  hint: English leftover coinage
   severity: confirmed
   source: lab-edtech
+  override_ok: true
+- pattern: coursewarize
+  locale: sv
+  reason: lab-edtech-coursewarize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-edtech
+- pattern: enrollability
+  locale: sv
+  reason: lab-edtech-enrollability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-edtech
+  override_ok: true
+- pattern: lmsize
+  locale: sv
+  reason: lab-edtech-lmsize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-edtech
+- pattern: xapiness
+  locale: sv
+  reason: lab-edtech-xapiness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-edtech
+- pattern: completionize
+  locale: sv
+  reason: lab-edtech-completionize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-edtech
+- pattern: modulize
+  locale: sv
+  reason: lab-edtech-modulize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-edtech
+- pattern: lessonize
+  locale: sv
+  reason: lab-edtech-lessonize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-edtech
+- pattern: gradability
+  locale: sv
+  reason: lab-edtech-gradability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-edtech
+  override_ok: true
+- pattern: rubricize
+  locale: sv
+  reason: lab-edtech-rubricize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-edtech
+- pattern: badgeability
+  locale: sv
+  reason: lab-edtech-badgeability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-edtech
+  override_ok: true

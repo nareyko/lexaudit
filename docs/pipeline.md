@@ -75,12 +75,38 @@ A Markdown file is split into `title` (first H1) and `body`. JSON sources use th
 ## Optional bilingual leftover pass
 
 When `enable_bilingual: true`, after the monolingual gates the pipeline compares
-paired EN↔target Markdown files and flags shared Latin (or Cyrillic) tokens as
-`foreign` with reason `bilingual-untranslated`. Brand/protocol tokens stay in
-`DEFAULT_INTENTIONAL_LOANS`. Short **German UI loans** (`dashboard`, `toast`,
-`store`, `download`, `upload`, `inbox`) are **not** in that DEFAULT — merge them
-only via `bilingual_extra_loans_path` + `bilingual_extra_loans_locales: [de]`.
-See [p1-de-loan-policy.md](p1-de-loan-policy.md).
+paired EN↔target texts and flags shared Latin (or Cyrillic) tokens as
+`foreign` with reason `bilingual-untranslated`. Only pairs whose
+`target_locale` matches the audit locale are applied.
+
+Pair sources in `bilingual_pairs`:
+
+- **Markdown roots** — `source_root` / `target_root` with same relative `.md` paths
+- **Academy JSON** — `source: academy` + `academy_root`; bodies from
+  `translations.{locale}.bodyMarkdown` are materialized under `materialize_dir`
+  then compared by slug
+
+Brand/protocol tokens stay in `DEFAULT_INTENTIONAL_LOANS`. Short **German UI
+loans** (`dashboard`, `toast`, `store`, `download`, `upload`, `inbox`) are
+**not** in that DEFAULT — merge them only via `bilingual_extra_loans_path` +
+`bilingual_extra_loans_locales: [de]`. See [p1-de-loan-policy.md](p1-de-loan-policy.md).
+
+FairHelm dogfood: root `lexaudit.config.bilingual.yaml` +
+`scripts/fairhelm_bilingual_dogfood.sh` (main `lexaudit.config.yaml` keeps
+`enable_bilingual: false`).
+
+## Optional cross-locale norm boost
+
+When `enable_crosslocale: true`, the pipeline aggregates word norms from
+`crosslocale_reference_locale` (default `en`) and boosts no-pair tiers for the
+audited locale. Embeddings are not used on the audit path. Package / FairHelm
+main configs keep this flag **false** until opted in.
+
+## Phrase calques
+
+Calque rules whose `pattern` contains whitespace use `match: phrase` (or are
+auto-treated as phrases). After word classification, a body scan emits or
+augments calque hits for those multi-word surfaces.
 
 ## Compound known parts (German, Swedish)
 

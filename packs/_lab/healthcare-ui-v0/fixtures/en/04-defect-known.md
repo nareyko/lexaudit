@@ -1,3 +1,3 @@
-# Broken health UI
+# Broken copy
 
-Avoid patientness and triageness. Do not symptomize or prescriptionize. Check appointability and refillability before labresultness.
+Avoid these invented forms in copy: patientness, symptomize, diagnosability, appointability, prescriptionize, labresultness, triageness, refillability, clinicianize, vitalsness, chartability, dischargeize, admitability, referralize, encounterness, careplanness, medicationize, allergyscreenability, imagingness, labdrawize, followupness, telehealthability, consentize, privacyability, waitlistness, slotability, providerize, episodecodeize.

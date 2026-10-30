@@ -1,6 +1,6 @@
 """Calque rule detector - YAML rules, never replaces text.
 
-Supports exact patterns and simple glob (`*`) wildcards.
+Supports exact patterns, simple glob (`*`) wildcards, and multi-word phrases.
 Rules with ``override_ok: true`` can flip hunspell-``ok`` words to ``calque``
 (e.g. denseness as a template-calque even when the English dictionary accepts it).
 """
@@ -16,7 +16,7 @@ from typing import Any
 import yaml
 
 from lexaudit.core.tokenize import casefold
-from lexaudit.core.types import ClassifiedWord
+from lexaudit.core.types import ClassifiedWord, TextChunk, VocabSample
 
 
 @dataclass(frozen=True)
@@ -28,7 +28,7 @@ class CalqueRule:
     severity: str
     source: str
     override_ok: bool = False
-    match: str = "exact"  # exact | glob | prefix
+    match: str = "exact"  # exact | glob | prefix | phrase
 
 
 def default_calque_rules_dir() -> Path | None:
@@ -56,10 +56,17 @@ def load_calque_rules(path: Path) -> list[CalqueRule]:
             if not isinstance(item, dict):
                 continue
             pattern = str(item["pattern"])
-            match_mode = str(item.get("match") or ("glob" if "*" in pattern else "exact"))
+            default_mode = (
+                "phrase"
+                if any(ch.isspace() for ch in pattern)
+                else ("glob" if "*" in pattern else "exact")
+            )
+            match_mode = str(item.get("match") or default_mode)
             if match_mode == "prefix" and not pattern.endswith("*"):
                 pattern = pattern + "*"
                 match_mode = "glob"
+            if any(ch.isspace() for ch in pattern) and match_mode != "phrase":
+                match_mode = "phrase"
             rules.append(
                 CalqueRule(
                     pattern=pattern,
@@ -87,15 +94,75 @@ def _rule_matches(norm: str, rule: CalqueRule, locale: str) -> bool:
 def find_matching_rule(
     word: ClassifiedWord, rules: list[CalqueRule], locale: str
 ) -> CalqueRule | None:
-    """Return the first matching rule for ``word.normalized`` (stable rule order)."""
+    """Return the first matching token rule for ``word.normalized`` (stable order)."""
     for rule in rules:
+        if rule.match == "phrase":
+            continue
         if _rule_matches(word.normalized, rule, locale):
             return rule
     return None
 
 
+def phrase_rules_for_locale(rules: list[CalqueRule], locale: str) -> list[CalqueRule]:
+    return [r for r in rules if r.locale == locale and r.match == "phrase"]
+
+
+def apply_phrase_calque_pass(
+    words: list[ClassifiedWord],
+    chunks: list[TextChunk],
+    rules: list[CalqueRule],
+    *,
+    locale: str,
+) -> list[ClassifiedWord]:
+    """Scan body text for multi-word calque phrases; append/augment calque hits."""
+    phrases = phrase_rules_for_locale(rules, locale)
+    if not phrases:
+        return words
+    by_norm = {w.normalized: w for w in words}
+    extra: list[ClassifiedWord] = []
+    seen: set[str] = set()
+    for chunk in chunks:
+        scope = chunk.scope.casefold()
+        if scope not in {"body", "bodymarkdown"} and not scope.startswith("body"):
+            continue
+        folded = casefold(chunk.text, locale)
+        for rule in phrases:
+            pat = casefold(rule.pattern, locale)
+            if not pat or pat not in folded:
+                continue
+            key = pat.replace(" ", "_")
+            if key in seen:
+                continue
+            seen.add(key)
+            existing = by_norm.get(key)
+            if existing is not None:
+                existing.status = "calque"
+                existing.reason = rule.reason
+                existing.detectors = sorted({*existing.detectors, "calque", "phrase"})
+                if rule.severity in {"confirmed", "likely", "weak"}:
+                    existing.tier = rule.severity  # type: ignore[assignment]
+                continue
+            hit = ClassifiedWord(
+                normalized=key,
+                surface=rule.pattern,
+                count=folded.count(pat),
+                status="calque",
+                samples=[VocabSample(path=chunk.path, scope=chunk.scope)],
+                reason=rule.reason,
+                detectors=["calque", "phrase"],
+                tier=rule.severity  # type: ignore[arg-type]
+                if rule.severity in {"confirmed", "likely", "weak"}
+                else "likely",
+            )
+            extra.append(hit)
+            by_norm[key] = hit
+    if not extra:
+        return words
+    return [*words, *extra]
+
+
 def make_calque_detector(locale: str, rules: list[CalqueRule]) -> Any:
-    locale_rules = [r for r in rules if r.locale == locale]
+    locale_rules = [r for r in rules if r.locale == locale and r.match != "phrase"]
     # Longer / more specific globs first among equals - keep load sort, but
     # prefer exact over glob when both could match by checking exact first.
     exact = [r for r in locale_rules if r.match == "exact" or "*" not in r.pattern]

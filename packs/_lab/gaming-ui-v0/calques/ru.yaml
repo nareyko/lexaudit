@@ -1,26 +1,146 @@
 version: 1
 rules:
-  - pattern: "лутабельность"
-    locale: ru
-    reason: "game-ru-lootability"
-    hint: "можно ли подобрать лут"
-    severity: likely
-    source: "lab-gaming"
-  - pattern: "матчмейкить"
-    locale: ru
-    reason: "game-ru-matchmake"
-    hint: "запустить матчмейкинг"
-    severity: confirmed
-    source: "lab-gaming"
-  - pattern: "респаунность"
-    locale: ru
-    reason: "game-ru-respawnness"
-    hint: "состояние респауна"
-    severity: confirmed
-    source: "lab-gaming"
-  - pattern: "инвенторизировать"
-    locale: ru
-    reason: "game-ru-inventoryize"
-    hint: "положить в инвентарь"
-    severity: confirmed
-    source: "lab-gaming"
+- pattern: лутабельность
+  locale: ru
+  reason: lab-gaming-лутабельность
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: матчмейкить
+  locale: ru
+  reason: lab-gaming-матчмейкить
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: респаунность
+  locale: ru
+  reason: lab-gaming-респаунность
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: инвенторизировать
+  locale: ru
+  reason: lab-gaming-инвенторизировать
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: квестабельность
+  locale: ru
+  reason: lab-gaming-квестабельность
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: гильднесс
+  locale: ru
+  reason: lab-gaming-гильднесс
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: лоадаутнесс
+  locale: ru
+  reason: lab-gaming-лоадаутнесс
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: патифайндайз
+  locale: ru
+  reason: lab-gaming-патифайндайз
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: сизонпасснесс
+  locale: ru
+  reason: lab-gaming-сизонпасснесс
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: крафтингабилити
+  locale: ru
+  reason: lab-gaming-крафтингабилити
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: дропабилити
+  locale: ru
+  reason: lab-gaming-дропабилити
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: пвпайз
+  locale: ru
+  reason: lab-gaming-пвпайз
+  hint: RU loan/coinage — rewrite
+  severity: likely
+  source: lab-gaming
+- pattern: рейдабилити
+  locale: ru
+  reason: lab-gaming-рейдабилити
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: скиннабилити
+  locale: ru
+  reason: lab-gaming-скиннабилити
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: эмоутайз
+  locale: ru
+  reason: lab-gaming-эмоутайз
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: лидерборднесс
+  locale: ru
+  reason: lab-gaming-лидерборднесс
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: ммрнесс
+  locale: ru
+  reason: lab-gaming-ммрнесс
+  hint: RU loan/coinage — rewrite
+  severity: likely
+  source: lab-gaming
+- pattern: элоайз
+  locale: ru
+  reason: lab-gaming-элоайз
+  hint: RU loan/coinage — rewrite
+  severity: likely
+  source: lab-gaming
+- pattern: пингабилити
+  locale: ru
+  reason: lab-gaming-пингабилити
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: лагкомпенсетайз
+  locale: ru
+  reason: lab-gaming-лагкомпенсетайз
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: хитрегнесс
+  locale: ru
+  reason: lab-gaming-хитрегнесс
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: ноклипабилити
+  locale: ru
+  reason: lab-gaming-ноклипабилити
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: спидхакнесс
+  locale: ru
+  reason: lab-gaming-спидхакнесс
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming
+- pattern: банаппилайз
+  locale: ru
+  reason: lab-gaming-банаппилайз
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-gaming

@@ -1,44 +1,170 @@
 version: 1
 rules:
-  - pattern: "lootability"
-    locale: en
-    reason: "game-lootability"
-    hint: "whether lootable — invented noun"
-    severity: likely
-    source: "lab-gaming"
-  - pattern: "matchmakeize"
-    locale: en
-    reason: "game-matchmakeize"
-    hint: "run matchmaking — invented verb"
-    severity: confirmed
-    source: "lab-gaming"
-  - pattern: "respawnness"
-    locale: en
-    reason: "game-respawnness"
-    hint: "respawn state — invented noun"
-    severity: confirmed
-    source: "lab-gaming"
-  - pattern: "inventoryize"
-    locale: en
-    reason: "game-inventoryize"
-    hint: "add to inventory — invented verb"
-    severity: confirmed
-    source: "lab-gaming"
-  - pattern: "questability"
-    locale: en
-    reason: "game-questability"
-    hint: "whether a quest can start"
-    severity: likely
-    source: "lab-gaming"
-  - pattern: "guildness"
-    locale: en
-    reason: "game-guildness"
-    hint: "guild status — invented noun"
-    severity: confirmed
-    source: "lab-gaming"
-  - pattern: "loadoutness"
-    locale: en
-    reason: "game-loadoutness"
-    hint: "loadout state — invented noun"
-    severity: confirmed
-    source: "lab-gaming"
+- pattern: lootability
+  locale: en
+  reason: lab-gaming-lootability
+  hint: 'gaming-ui-v0: invented -ability'
+  severity: likely
+  source: lab-gaming
+- pattern: matchmakeize
+  locale: en
+  reason: lab-gaming-matchmakeize
+  hint: 'gaming-ui-v0: invented verb'
+  severity: confirmed
+  source: lab-gaming
+- pattern: respawnness
+  locale: en
+  reason: lab-gaming-respawnness
+  hint: 'gaming-ui-v0: invented noun'
+  severity: confirmed
+  source: lab-gaming
+- pattern: inventoryize
+  locale: en
+  reason: lab-gaming-inventoryize
+  hint: 'gaming-ui-v0: invented verb'
+  severity: confirmed
+  source: lab-gaming
+- pattern: questability
+  locale: en
+  reason: lab-gaming-questability
+  hint: 'gaming-ui-v0: invented -ability'
+  severity: likely
+  source: lab-gaming
+- pattern: guildness
+  locale: en
+  reason: lab-gaming-guildness
+  hint: 'gaming-ui-v0: invented noun'
+  severity: confirmed
+  source: lab-gaming
+- pattern: loadoutness
+  locale: en
+  reason: lab-gaming-loadoutness
+  hint: 'gaming-ui-v0: invented noun'
+  severity: confirmed
+  source: lab-gaming
+- pattern: partyfindize
+  locale: en
+  reason: lab-gaming-partyfindize
+  hint: 'gaming-ui-v0: invented verb'
+  severity: confirmed
+  source: lab-gaming
+- pattern: seasonpassness
+  locale: en
+  reason: lab-gaming-seasonpassness
+  hint: 'gaming-ui-v0: invented noun'
+  severity: confirmed
+  source: lab-gaming
+- pattern: craftingability
+  locale: en
+  reason: lab-gaming-craftingability
+  hint: 'gaming-ui-v0: invented -ability'
+  severity: likely
+  source: lab-gaming
+- pattern: dropability
+  locale: en
+  reason: lab-gaming-dropability
+  hint: 'gaming-ui-v0: invented -ability'
+  severity: likely
+  source: lab-gaming
+- pattern: pvpize
+  locale: en
+  reason: lab-gaming-pvpize
+  hint: 'gaming-ui-v0: invented verb'
+  severity: confirmed
+  source: lab-gaming
+- pattern: raidability
+  locale: en
+  reason: lab-gaming-raidability
+  hint: 'gaming-ui-v0: invented -ability'
+  severity: likely
+  source: lab-gaming
+- pattern: skinnability
+  locale: en
+  reason: lab-gaming-skinnability
+  hint: 'gaming-ui-v0: invented -ability'
+  severity: likely
+  source: lab-gaming
+- pattern: emoteize
+  locale: en
+  reason: lab-gaming-emoteize
+  hint: 'gaming-ui-v0: invented verb'
+  severity: confirmed
+  source: lab-gaming
+- pattern: leaderboardness
+  locale: en
+  reason: lab-gaming-leaderboardness
+  hint: 'gaming-ui-v0: invented noun'
+  severity: confirmed
+  source: lab-gaming
+- pattern: mmrness
+  locale: en
+  reason: lab-gaming-mmrness
+  hint: 'gaming-ui-v0: invented noun'
+  severity: confirmed
+  source: lab-gaming
+- pattern: eloize
+  locale: en
+  reason: lab-gaming-eloize
+  hint: 'gaming-ui-v0: invented verb'
+  severity: confirmed
+  source: lab-gaming
+- pattern: pingability
+  locale: en
+  reason: lab-gaming-pingability
+  hint: 'gaming-ui-v0: invented -ability'
+  severity: likely
+  source: lab-gaming
+- pattern: lagcompensateize
+  locale: en
+  reason: lab-gaming-lagcompensateize
+  hint: 'gaming-ui-v0: invented verb'
+  severity: confirmed
+  source: lab-gaming
+- pattern: hitregness
+  locale: en
+  reason: lab-gaming-hitregness
+  hint: 'gaming-ui-v0: invented noun'
+  severity: confirmed
+  source: lab-gaming
+- pattern: noclipability
+  locale: en
+  reason: lab-gaming-noclipability
+  hint: 'gaming-ui-v0: invented -ability'
+  severity: likely
+  source: lab-gaming
+- pattern: speedhackness
+  locale: en
+  reason: lab-gaming-speedhackness
+  hint: 'gaming-ui-v0: invented noun'
+  severity: confirmed
+  source: lab-gaming
+- pattern: banappealize
+  locale: en
+  reason: lab-gaming-banappealize
+  hint: 'gaming-ui-v0: invented verb'
+  severity: confirmed
+  source: lab-gaming
+- pattern: reportability
+  locale: en
+  reason: lab-gaming-reportability
+  hint: 'gaming-ui-v0: invented -ability'
+  severity: likely
+  source: lab-gaming
+- pattern: spectateize
+  locale: en
+  reason: lab-gaming-spectateize
+  hint: 'gaming-ui-v0: invented verb'
+  severity: confirmed
+  source: lab-gaming
+- pattern: clutchness
+  locale: en
+  reason: lab-gaming-clutchness
+  hint: 'gaming-ui-v0: invented noun'
+  severity: confirmed
+  source: lab-gaming
+- pattern: tiltability
+  locale: en
+  reason: lab-gaming-tiltability
+  hint: 'gaming-ui-v0: invented -ability'
+  severity: likely
+  source: lab-gaming

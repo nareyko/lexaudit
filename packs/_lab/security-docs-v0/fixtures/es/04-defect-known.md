@@ -1,3 +1,3 @@
 # Texto defectuoso
 
-Evite exploitness y sandboxize. No zerodayness. Revise payloadize.
+Evite estas formas: exploitness, sandboxize, phishability, hardenability, zerodayness, payloadize, severityness, threatmodelize, vulnscanability, penability, redteamize, blueteamness.

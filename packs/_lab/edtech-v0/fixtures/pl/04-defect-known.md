@@ -1,3 +1,3 @@
 # Uszkodzony tekst
 
-Unikaj scormness i coursewarize. Nie lmsize. Sprawdź quizability.
+Unikaj tych form: scormness, quizability, coursewarize, enrollability, lmsize, xapiness, completionize, modulize, lessonize, gradability, rubricize, badgeability.

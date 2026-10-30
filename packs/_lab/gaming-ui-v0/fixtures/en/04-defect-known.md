@@ -1,3 +1,3 @@
-# Broken game UI copy
+# Broken copy
 
-Avoid lootability and questability. Do not matchmakeize or inventoryize. Check respawnness, guildness, and loadoutness.
+Avoid these invented forms in copy: lootability, matchmakeize, respawnness, inventoryize, questability, guildness, loadoutness, partyfindize, seasonpassness, craftingability, dropability, pvpize, raidability, skinnability, emoteize, leaderboardness, mmrness, eloize, pingability, lagcompensateize, hitregness, noclipability, speedhackness, banappealize, reportability, spectateize, clutchness, tiltability.

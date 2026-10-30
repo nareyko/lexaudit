@@ -20,6 +20,44 @@ from lexaudit.report.write import write_reports
 from lexaudit.sources.collect import collect_all
 
 
+def apply_crosslocale_pass(
+    words: list[ClassifiedWord],
+    cfg: LexauditConfig,
+    locale: str,
+    *,
+    academy_root: Path,
+    packs_root: Path,
+    stats: dict[str, int],
+) -> list[ClassifiedWord]:
+    """Boost suspect tiers when a token has no counterpart in the reference locale."""
+    ref = (cfg.crosslocale_reference_locale or "en").casefold()
+    if locale.casefold() == ref:
+        stats.setdefault("crosslocale", 0)
+        return words
+    from lexaudit.detectors.crosslocale import (
+        aggregate_norms_from_chunks,
+        make_crosslocale_detector,
+    )
+
+    ref_chunks = collect_all(
+        cfg.repo_root,
+        ref,
+        set(cfg.sources),
+        academy_root=academy_root,
+        packs_root=packs_root,
+        files_paths=cfg.files_paths,
+    )
+    norms = aggregate_norms_from_chunks(ref_chunks, ref)
+    detect = make_crosslocale_detector(norms)
+    hits = 0
+    for w in words:
+        updated = detect(w)  # type: ignore[operator]
+        if updated is not None:
+            hits += 1
+    stats["crosslocale"] = hits
+    return words
+
+
 def apply_compound_second_pass(
     words: list[ClassifiedWord],
     locale: str,
@@ -91,8 +129,29 @@ def run_locale_audit(
         checker=checker,
         post_detectors=post_detectors,
     )
+    if cfg.enable_calque:
+        from lexaudit.detectors.calque import (
+            apply_phrase_calque_pass,
+            default_calque_rules_dir,
+            load_calque_rules,
+        )
+
+        rules_dir = cfg.calque_rules_dir or default_calque_rules_dir()
+        if rules_dir is not None:
+            words = apply_phrase_calque_pass(
+                words, chunks, load_calque_rules(rules_dir), locale=locale
+            )
     if cfg.enable_compound and locale in COMPOUND_LOCALES:
         apply_compound_second_pass(words, locale, compound_seed)
+    if cfg.enable_crosslocale:
+        words = apply_crosslocale_pass(
+            words,
+            cfg,
+            locale,
+            academy_root=academy_root,
+            packs_root=packs_root,
+            stats=stats,
+        )
     if cfg.enable_bilingual:
         from lexaudit.detectors.bilingual import (
             apply_bilingual_pass,
@@ -100,7 +159,11 @@ def run_locale_audit(
             pairs_from_config,
         )
 
-        pairs = pairs_from_config(list(cfg.bilingual_pairs), cfg.repo_root)
+        pairs = [
+            p
+            for p in pairs_from_config(list(cfg.bilingual_pairs), cfg.repo_root)
+            if p.target_locale.casefold() == locale.casefold()
+        ]
         words = apply_bilingual_pass(
             words,
             pairs,

@@ -1,3 +1,3 @@
 # Trasig text
 
-Undvik hereinness och warrantize. Inte covenantize. Kontrollera noticeness.
+Undvik dessa former: hereinness, thereofness, indemnifyability, assignabilityness, warrantize, covenantize, noticeness, jurisdictionability, whereasness, hereinafterize, forcemajeureability, liableness.

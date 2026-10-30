@@ -1,26 +1,79 @@
 version: 1
 rules:
-- pattern: onboardize
+- pattern: shortlistability
   locale: sv
-  reason: lab-hr-onboardize-cross
-  hint: onboardize — invented English leftover
+  reason: lab-hr-shortlistability
+  hint: English leftover coinage
   severity: confirmed
   source: lab-hr
-- pattern: offerize
+  override_ok: true
+- pattern: onboardize
   locale: sv
-  reason: lab-hr-offerize-cross
-  hint: offerize — invented English leftover
+  reason: lab-hr-onboardize
+  hint: English leftover coinage
   severity: confirmed
   source: lab-hr
 - pattern: pipelineness
   locale: sv
-  reason: lab-hr-pipelineness-cross
-  hint: pipelineness — invented English leftover
+  reason: lab-hr-pipelineness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+- pattern: offerize
+  locale: sv
+  reason: lab-hr-offerize
+  hint: English leftover coinage
   severity: confirmed
   source: lab-hr
 - pattern: atsness
   locale: sv
-  reason: lab-hr-atsness-cross
-  hint: atsness — invented English leftover
+  reason: lab-hr-atsness
+  hint: English leftover coinage
   severity: confirmed
   source: lab-hr
+- pattern: screenability
+  locale: sv
+  reason: lab-hr-screenability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true
+- pattern: requisitionize
+  locale: sv
+  reason: lab-hr-requisitionize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+- pattern: sourcability
+  locale: sv
+  reason: lab-hr-sourcability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true
+- pattern: interviewize
+  locale: sv
+  reason: lab-hr-interviewize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+- pattern: scorecardness
+  locale: sv
+  reason: lab-hr-scorecardness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+- pattern: rejectability
+  locale: sv
+  reason: lab-hr-rejectability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true
+- pattern: hireability
+  locale: sv
+  reason: lab-hr-hireability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true

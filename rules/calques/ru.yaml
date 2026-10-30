@@ -213,3 +213,10 @@ rules:
     hint: "предпродажный"
     severity: confirmed
     source: "curated-calque-pack-v1"
+  - pattern: "взять в свои руки"
+    locale: ru
+    match: phrase
+    reason: "phrase-calque-own-hands"
+    hint: "возглавить / взять управление — check if calque from EN take into own hands"
+    severity: confirmed
+    source: "phrase-calque-bank"

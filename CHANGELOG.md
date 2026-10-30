@@ -8,8 +8,19 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 ### Changed
 - Docs: dual-license wording (MIT package · AGPL-3.0-or-later for hosted SaaS) in
   README, CONTRIBUTING, `docs/licensing.md`, architecture, docs index
+- Densified lab packs `ecommerce-ui-v0`, `healthcare-ui-v0`, `legal-docs-v0`,
+  `gaming-ui-v0`, `edtech-v0`, `security-docs-v0`, `hr-ats-v0` (en ≥24 domain
+  rules; de/ru ≥20; es/pl/sv/uk ≥12) with UK `override_ok` for Latin leftovers
+- Open-set hapax ranking: long coinage / morphology miss get likely floor weight
+- `english_leak` locales expanded to `{de, es, pl, sv}`
 
 ### Added (P1 lab only — not on PyPI yet)
+- Wire `enable_crosslocale` (reference-locale norm no-pair boost; default false)
+- Phrase calque match + body pass; seed rules in `rules/calques/{en,de,ru}.yaml`
+- Academy bilingual pairs (`source: academy` → bodyMarkdown materialize by slug)
+- FairHelm root `lexaudit.config.bilingual.yaml` + `scripts/fairhelm_bilingual_dogfood.sh`
+  (package / main config stay `enable_bilingual: false`)
+
 - Lab domain packs `saas-ui-v0`, `fintech-v0`, `developer-docs-v0` under `packs/_lab/` + `scripts/lab_pack_metrics.py`
 - Bilingual held-out protocol, gold CSV, allowlist, `scripts/bilingual_metrics.py`
 - VS Code shell-out extension stub + MCP/VS Code dogfood doc

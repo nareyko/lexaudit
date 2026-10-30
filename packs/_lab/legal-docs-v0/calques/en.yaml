@@ -1,50 +1,170 @@
 version: 1
 rules:
-  - pattern: "hereinness"
-    locale: en
-    reason: "legal-hereinness"
-    hint: "in this agreement — invented noun"
-    severity: confirmed
-    source: "lab-legal"
-  - pattern: "thereofness"
-    locale: en
-    reason: "legal-thereofness"
-    hint: "of that — invented noun"
-    severity: confirmed
-    source: "lab-legal"
-  - pattern: "indemnifyability"
-    locale: en
-    reason: "legal-indemnifyability"
-    hint: "whether indemnified"
-    severity: likely
-    source: "lab-legal"
-  - pattern: "assignabilityness"
-    locale: en
-    reason: "legal-assignabilityness"
-    hint: "assignment — avoid stacked -ness"
-    severity: likely
-    source: "lab-legal"
-  - pattern: "warrantize"
-    locale: en
-    reason: "legal-warrantize"
-    hint: "warrant — invented verb"
-    severity: confirmed
-    source: "lab-legal"
-  - pattern: "covenantize"
-    locale: en
-    reason: "legal-covenantize"
-    hint: "covenant — invented verb"
-    severity: confirmed
-    source: "lab-legal"
-  - pattern: "noticeness"
-    locale: en
-    reason: "legal-noticeness"
-    hint: "notice — invented noun"
-    severity: confirmed
-    source: "lab-legal"
-  - pattern: "jurisdictionability"
-    locale: en
-    reason: "legal-jurisdictionability"
-    hint: "whether a court has jurisdiction"
-    severity: likely
-    source: "lab-legal"
+- pattern: hereinness
+  locale: en
+  reason: lab-legal-hereinness
+  hint: 'legal-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-legal
+- pattern: thereofness
+  locale: en
+  reason: lab-legal-thereofness
+  hint: 'legal-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-legal
+- pattern: indemnifyability
+  locale: en
+  reason: lab-legal-indemnifyability
+  hint: 'legal-docs-v0: invented -ability'
+  severity: likely
+  source: lab-legal
+- pattern: assignabilityness
+  locale: en
+  reason: lab-legal-assignabilityness
+  hint: 'legal-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-legal
+- pattern: warrantize
+  locale: en
+  reason: lab-legal-warrantize
+  hint: 'legal-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-legal
+- pattern: covenantize
+  locale: en
+  reason: lab-legal-covenantize
+  hint: 'legal-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-legal
+- pattern: noticeness
+  locale: en
+  reason: lab-legal-noticeness
+  hint: 'legal-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-legal
+- pattern: jurisdictionability
+  locale: en
+  reason: lab-legal-jurisdictionability
+  hint: 'legal-docs-v0: invented -ability'
+  severity: likely
+  source: lab-legal
+- pattern: whereasness
+  locale: en
+  reason: lab-legal-whereasness
+  hint: 'legal-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-legal
+- pattern: hereinafterize
+  locale: en
+  reason: lab-legal-hereinafterize
+  hint: 'legal-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-legal
+- pattern: forcemajeureability
+  locale: en
+  reason: lab-legal-forcemajeureability
+  hint: 'legal-docs-v0: invented -ability'
+  severity: likely
+  source: lab-legal
+- pattern: liableness
+  locale: en
+  reason: lab-legal-liableness
+  hint: 'legal-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-legal
+- pattern: breachability
+  locale: en
+  reason: lab-legal-breachability
+  hint: 'legal-docs-v0: invented -ability'
+  severity: likely
+  source: lab-legal
+- pattern: terminability
+  locale: en
+  reason: lab-legal-terminability
+  hint: 'legal-docs-v0: invented -ability'
+  severity: likely
+  source: lab-legal
+- pattern: novateize
+  locale: en
+  reason: lab-legal-novateize
+  hint: 'legal-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-legal
+- pattern: estoppelness
+  locale: en
+  reason: lab-legal-estoppelness
+  hint: 'legal-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-legal
+- pattern: waiveability
+  locale: en
+  reason: lab-legal-waiveability
+  hint: 'legal-docs-v0: invented -ability'
+  severity: likely
+  source: lab-legal
+- pattern: severabilityness
+  locale: en
+  reason: lab-legal-severabilityness
+  hint: 'legal-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-legal
+- pattern: counterpartize
+  locale: en
+  reason: lab-legal-counterpartize
+  hint: 'legal-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-legal
+- pattern: recitalness
+  locale: en
+  reason: lab-legal-recitalness
+  hint: 'legal-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-legal
+- pattern: scheduleability
+  locale: en
+  reason: lab-legal-scheduleability
+  hint: 'legal-docs-v0: invented -ability'
+  severity: likely
+  source: lab-legal
+- pattern: exhibitize
+  locale: en
+  reason: lab-legal-exhibitize
+  hint: 'legal-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-legal
+- pattern: annexureize
+  locale: en
+  reason: lab-legal-annexureize
+  hint: 'legal-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-legal
+- pattern: governinglawness
+  locale: en
+  reason: lab-legal-governinglawness
+  hint: 'legal-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-legal
+- pattern: disputeability
+  locale: en
+  reason: lab-legal-disputeability
+  hint: 'legal-docs-v0: invented -ability'
+  severity: likely
+  source: lab-legal
+- pattern: arbitrateize
+  locale: en
+  reason: lab-legal-arbitrateize
+  hint: 'legal-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-legal
+- pattern: injunctability
+  locale: en
+  reason: lab-legal-injunctability
+  hint: 'legal-docs-v0: invented -ability'
+  severity: likely
+  source: lab-legal
+- pattern: remediness
+  locale: en
+  reason: lab-legal-remediness
+  hint: 'legal-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-legal

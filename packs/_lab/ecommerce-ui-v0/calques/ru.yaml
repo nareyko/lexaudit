@@ -1,20 +1,146 @@
 version: 1
 rules:
-  - pattern: "чекаут"
-    locale: ru
-    reason: "ecom-checkout-loan"
-    hint: "оформление заказа"
-    severity: likely
-    source: "lab-ecommerce"
-  - pattern: "вишлист"
-    locale: ru
-    reason: "ecom-wishlist-loan"
-    hint: "список желаний"
-    severity: likely
-    source: "lab-ecommerce"
-  - pattern: "картнесс"
-    locale: ru
-    reason: "ecom-cartness-calque"
-    hint: "состояние корзины"
-    severity: confirmed
-    source: "lab-ecommerce"
+- pattern: чекаут
+  locale: ru
+  reason: lab-ecommerce-чекаут
+  hint: RU loan/coinage — rewrite
+  severity: likely
+  source: lab-ecommerce
+- pattern: вишлист
+  locale: ru
+  reason: lab-ecommerce-вишлист
+  hint: RU loan/coinage — rewrite
+  severity: likely
+  source: lab-ecommerce
+- pattern: картнесс
+  locale: ru
+  reason: lab-ecommerce-картнесс
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: скуайзить
+  locale: ru
+  reason: lab-ecommerce-скуайзить
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: рефандить
+  locale: ru
+  reason: lab-ecommerce-рефандить
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: шиппабельность
+  locale: ru
+  reason: lab-ecommerce-шиппабельность
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: баскетайзить
+  locale: ru
+  reason: lab-ecommerce-баскетайзить
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: ваучеризировать
+  locale: ru
+  reason: lab-ecommerce-ваучеризировать
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: промоабилити
+  locale: ru
+  reason: lab-ecommerce-промоабилити
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: стокнесс
+  locale: ru
+  reason: lab-ecommerce-стокнесс
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: фулфилментность
+  locale: ru
+  reason: lab-ecommerce-фулфилментность
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: ретернабельность
+  locale: ru
+  reason: lab-ecommerce-ретернабельность
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: картифай
+  locale: ru
+  reason: lab-ecommerce-картифай
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: чекаутифай
+  locale: ru
+  reason: lab-ecommerce-чекаутифай
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: купонизировать
+  locale: ru
+  reason: lab-ecommerce-купонизировать
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: инвенторинесс
+  locale: ru
+  reason: lab-ecommerce-инвенторинесс
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: прайснесс
+  locale: ru
+  reason: lab-ecommerce-прайснесс
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: дискаунтабельность
+  locale: ru
+  reason: lab-ecommerce-дискаунтабельность
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: шипифай
+  locale: ru
+  reason: lab-ecommerce-шипифай
+  hint: RU loan/coinage — rewrite
+  severity: likely
+  source: lab-ecommerce
+- pattern: аншиппабельность
+  locale: ru
+  reason: lab-ecommerce-аншиппабельность
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: вишлистифай
+  locale: ru
+  reason: lab-ecommerce-вишлистифай
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: аутстоковость
+  locale: ru
+  reason: lab-ecommerce-аутстоковость
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: бандлайзить
+  locale: ru
+  reason: lab-ecommerce-бандлайзить
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: гифтврапабельность
+  locale: ru
+  reason: lab-ecommerce-гифтврапабельность
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-ecommerce

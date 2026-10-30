@@ -1,3 +1,3 @@
 # Trasig text
 
-Undvik patientness och symptomize. Inte triageness. Kontrollera prescriptionize.
+Undvik dessa former: patientness, symptomize, diagnosability, appointability, prescriptionize, labresultness, triageness, refillability, clinicianize, vitalsness, chartability, dischargeize.

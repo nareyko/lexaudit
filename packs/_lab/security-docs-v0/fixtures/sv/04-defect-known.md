@@ -1,3 +1,3 @@
 # Trasig text
 
-Undvik exploitness och sandboxize. Inte zerodayness. Kontrollera payloadize.
+Undvik dessa former: exploitness, sandboxize, phishability, hardenability, zerodayness, payloadize, severityness, threatmodelize, vulnscanability, penability, redteamize, blueteamness.

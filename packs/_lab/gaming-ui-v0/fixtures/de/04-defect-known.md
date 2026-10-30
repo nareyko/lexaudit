@@ -1,3 +1,3 @@
-# Kaputte Spiele-UI
+# Kaputte Texte
 
-Vermeiden Sie lootbarkeit und matchmakeheit. Kein inventoryieren. Prüfen Sie respawnheit.
+Vermeiden Sie diese Formen: lootbarkeit, matchmakeheit, respawnheit, inventoryieren, questbarkeit, guildheit, loadoutheit, partyfindieren, seasonpassheit, craftingbarkeit, dropbarkeit, pvpisieren, raidbarkeit, skinnbarkeit, emoteisieren, leaderboardheit, mmrheit, eloisieren, pingbarkeit, lagcompensateieren, hitregheit, noclipbarkeit, speedhackheit, banappealieren.

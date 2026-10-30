@@ -1,3 +1,3 @@
 # Зламаний текст
 
-Уникайте onboardize і offerize. Не pipelineness. Перевірте atsness.
+Уникайте цих форм: shortlistability, onboardize, pipelineness, offerize, atsness, screenability, requisitionize, sourcability, interviewize, scorecardness, rejectability, hireability.

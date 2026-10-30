@@ -1,3 +1,3 @@
-# Broken legal prose
+# Broken copy
 
-Avoid hereinness and thereofness. Do not warrantize or covenantize. Check indemnifyability and jurisdictionability before noticeness.
+Avoid these invented forms in copy: hereinness, thereofness, indemnifyability, assignabilityness, warrantize, covenantize, noticeness, jurisdictionability, whereasness, hereinafterize, forcemajeureability, liableness, breachability, terminability, novateize, estoppelness, waiveability, severabilityness, counterpartize, recitalness, scheduleability, exhibitize, annexureize, governinglawness, disputeability, arbitrateize, injunctability, remediness.

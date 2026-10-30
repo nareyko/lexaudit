@@ -247,10 +247,36 @@ def word_rank_weight(
             return weights.suspect_confirmed
         if tier == "likely":
             return weights.suspect_likely
+        if _is_coinage_hapax(word.normalized):
+            # Long invented morphology should outrank catalogue-code noise.
+            return weights.suspect_likely
         if len(word.normalized) <= 3 or word.count == 1:
             return weights.suspect_weak_hapax
         return weights.suspect_likely
     return weights.suspect_weak_hapax
+
+
+_COINAGE_SUFFIXES = (
+    "ish",
+    "ness",
+    "heit",
+    "keit",
+    "mäßig",
+    "ig",
+    "ность",
+    "ость",
+    "ение",
+)
+
+
+def _is_coinage_hapax(normalized: str) -> bool:
+    """True for long hapax-looking coinages (not short SKU/catalogue codes)."""
+    n = normalized.casefold()
+    if len(n) < 8:
+        return False
+    if re.fullmatch(r"[a-z]*\d+[a-z]*|\d+[a-z]+|[a-z]+\d+", n):
+        return False
+    return any(n.endswith(suf) for suf in _COINAGE_SUFFIXES) or len(n) >= 12
 
 
 def rank_pages_by_suspects(

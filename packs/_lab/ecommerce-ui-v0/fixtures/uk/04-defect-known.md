@@ -1,3 +1,3 @@
 # Зламаний текст
 
-Уникайте cartness і checkoutness. Не skuize. Перевірте refundize.
+Уникайте цих форм: cartness, checkoutness, wishlistability, skuize, refundize, shipability, basketize, voucherize, promoability, stockness, fulfillness, returnability.

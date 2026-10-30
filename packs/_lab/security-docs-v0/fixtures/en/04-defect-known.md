@@ -1,3 +1,3 @@
-# Broken security prose
+# Broken copy
 
-Avoid exploitness, zerodayness, and severityness. Do not sandboxize or payloadize. Check phishability and hardenability.
+Avoid these invented forms in copy: exploitness, sandboxize, phishability, hardenability, zerodayness, payloadize, severityness, threatmodelize, vulnscanability, penability, redteamize, blueteamness, iocize, ttpsness, cveability, cweize, cvssness, mitigability, remediateize, patchability, lateralize, privilegeescability, credentialstuffness, bruteforceability, ransomwareize, exfiltrateize, beaconness, c2ability.

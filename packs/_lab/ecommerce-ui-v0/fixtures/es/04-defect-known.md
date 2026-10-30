@@ -1,3 +1,3 @@
 # Texto defectuoso
 
-Evite cartness y checkoutness. No skuize. Revise refundize.
+Evite estas formas: cartness, checkoutness, wishlistability, skuize, refundize, shipability, basketize, voucherize, promoability, stockness, fulfillness, returnability.

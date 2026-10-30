@@ -1,3 +1,3 @@
 # Notice
 
-Send written notice to the other party. Courts in this jurisdiction hear disputes.
+Read the notice, warranties, and applicable jurisdiction before you sign.

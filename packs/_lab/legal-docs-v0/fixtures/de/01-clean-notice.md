@@ -1,3 +1,3 @@
-# Mitteilung
+# Hinweis
 
-Senden Sie der anderen Partei eine schriftliche Mitteilung. Gerichte dieses Gerichtsstands entscheiden Streitigkeiten.
+Lesen Sie Hinweis, Garantien und Gerichtsstand vor der Unterschrift.

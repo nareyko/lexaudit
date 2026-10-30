@@ -1,3 +1,3 @@
 # Uszkodzony tekst
 
-Unikaj patientness i symptomize. Nie triageness. Sprawdź prescriptionize.
+Unikaj tych form: patientness, symptomize, diagnosability, appointability, prescriptionize, labresultness, triageness, refillability, clinicianize, vitalsness, chartability, dischargeize.

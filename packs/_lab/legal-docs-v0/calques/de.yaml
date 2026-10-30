@@ -1,26 +1,146 @@
 version: 1
 rules:
-  - pattern: "hereinheit"
-    locale: de
-    reason: "legal-de-hereinheit"
-    hint: "in diesem Vertrag"
-    severity: confirmed
-    source: "lab-legal"
-  - pattern: "warrantizen"
-    locale: de
-    reason: "legal-de-warrantizen"
-    hint: "zusichern / gewährleisten"
-    severity: confirmed
-    source: "lab-legal"
-  - pattern: "covenantizen"
-    locale: de
-    reason: "legal-de-covenantizen"
-    hint: "verpflichten"
-    severity: confirmed
-    source: "lab-legal"
-  - pattern: "indemnifybarkeit"
-    locale: de
-    reason: "legal-de-indemnifybarkeit"
-    hint: "freistellbar"
-    severity: likely
-    source: "lab-legal"
+- pattern: hereinheit
+  locale: de
+  reason: lab-legal-hereinheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal
+- pattern: thereofheit
+  locale: de
+  reason: lab-legal-thereofheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal
+- pattern: indemnifybarkeit
+  locale: de
+  reason: lab-legal-indemnifybarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-legal
+- pattern: assignbarkeit
+  locale: de
+  reason: lab-legal-assignbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-legal
+- pattern: warrantisieren
+  locale: de
+  reason: lab-legal-warrantisieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal
+- pattern: covenantisieren
+  locale: de
+  reason: lab-legal-covenantisieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal
+- pattern: noticeheit
+  locale: de
+  reason: lab-legal-noticeheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal
+- pattern: jurisdictionbarkeit
+  locale: de
+  reason: lab-legal-jurisdictionbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-legal
+- pattern: whereasheit
+  locale: de
+  reason: lab-legal-whereasheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal
+- pattern: hereinafterisieren
+  locale: de
+  reason: lab-legal-hereinafterisieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal
+- pattern: forcemajeurebarkeit
+  locale: de
+  reason: lab-legal-forcemajeurebarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-legal
+- pattern: liableheit
+  locale: de
+  reason: lab-legal-liableheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal
+- pattern: breachbarkeit
+  locale: de
+  reason: lab-legal-breachbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-legal
+- pattern: terminbarkeit
+  locale: de
+  reason: lab-legal-terminbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-legal
+- pattern: novatisieren
+  locale: de
+  reason: lab-legal-novatisieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal
+- pattern: estoppelheit
+  locale: de
+  reason: lab-legal-estoppelheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal
+- pattern: waivebarkeit
+  locale: de
+  reason: lab-legal-waivebarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-legal
+- pattern: severabilityheit
+  locale: de
+  reason: lab-legal-severabilityheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal
+- pattern: counterpartisieren
+  locale: de
+  reason: lab-legal-counterpartisieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal
+- pattern: recitalheit
+  locale: de
+  reason: lab-legal-recitalheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal
+- pattern: schedulebarkeit
+  locale: de
+  reason: lab-legal-schedulebarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-legal
+- pattern: exhibitisieren
+  locale: de
+  reason: lab-legal-exhibitisieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal
+- pattern: annexureisieren
+  locale: de
+  reason: lab-legal-annexureisieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal
+- pattern: governinglawheit
+  locale: de
+  reason: lab-legal-governinglawheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-legal

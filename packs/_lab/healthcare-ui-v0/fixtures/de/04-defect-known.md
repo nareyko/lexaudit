@@ -1,3 +1,3 @@
-# Kaputte Gesundheitstexte
+# Kaputte Texte
 
-Vermeiden Sie appointmentheit und triageheit. Kein symptomizen. Prüfen Sie refillbarkeit.
+Vermeiden Sie diese Formen: patientheit, symptomizen, diagnosbarkeit, appointbarkeit, prescriptionieren, labresultheit, triageheit, refillbarkeit, clinicianieren, vitalsheit, chartbarkeit, dischargeieren, admitbarkeit, referralieren, encounterheit, careplanheit, medicationieren, allergyscreenbarkeit, imagingheit, labdrawieren, followupheit, telehealthbarkeit, consentieren, privacybarkeit.

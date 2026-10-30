@@ -1,3 +1,3 @@
 # Warenkorb
 
-Prüfen Sie die Artikel und schließen Sie den Kauf ab. Setzen Sie Produkte auf die Wunschliste.
+Prüfen Sie den Warenkorb, wählen Sie den Versand und schließen Sie die Bestellung ab.

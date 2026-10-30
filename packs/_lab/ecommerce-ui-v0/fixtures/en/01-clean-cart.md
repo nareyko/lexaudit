@@ -1,3 +1,3 @@
 # Cart
 
-Review items and complete checkout. Add products to the wish list before you pay.
+Review the cart, choose shipping, and complete the order.

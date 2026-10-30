@@ -31,49 +31,81 @@ def bundled_packs_root() -> Path | None:
     return None
 
 
-def list_packs() -> list[dict[str, object]]:
+def _pack_row(pack_dir: Path, *, status: str | None = None) -> dict[str, object] | None:
+    meta_path = pack_dir / "pack.yaml"
+    if not meta_path.is_file():
+        return None
+    data = yaml.safe_load(meta_path.read_text(encoding="utf-8")) or {}
+    if not isinstance(data, dict):
+        return None
+    row: dict[str, object] = {
+        "id": data.get("id") or pack_dir.name,
+        "version": data.get("version"),
+        "path": str(pack_dir),
+        "license": data.get("license"),
+        "locales": data.get("locales") or [],
+        "status": status or data.get("status") or "release",
+    }
+    return row
+
+
+def list_packs(*, include_lab: bool = False) -> list[dict[str, object]]:
     rows: list[dict[str, object]] = []
     root = bundled_packs_root()
     if root is None:
         return rows
     for pack_dir in sorted(p for p in root.iterdir() if p.is_dir() and not p.name.startswith("_")):
-        meta_path = pack_dir / "pack.yaml"
-        if not meta_path.is_file():
-            continue
-        data = yaml.safe_load(meta_path.read_text(encoding="utf-8")) or {}
-        if not isinstance(data, dict):
-            continue
-        rows.append(
-            {
-                "id": data.get("id") or pack_dir.name,
-                "version": data.get("version"),
-                "path": str(pack_dir),
-                "license": data.get("license"),
-                "locales": data.get("locales") or [],
-            }
-        )
+        row = _pack_row(pack_dir, status="release")
+        if row is not None:
+            rows.append(row)
+    if include_lab:
+        rows.extend(list_lab_packs())
     return rows
 
 
-def install_pack(pack_id: str, *, dest: Path | None = None, force: bool = False) -> Path:
+def list_lab_packs() -> list[dict[str, object]]:
+    """Experimental packs under packs/_lab/ (not Release assets)."""
+    rows: list[dict[str, object]] = []
+    root = bundled_packs_root()
+    if root is None:
+        return rows
+    lab = root / "_lab"
+    if not lab.is_dir():
+        return rows
+    for pack_dir in sorted(p for p in lab.iterdir() if p.is_dir()):
+        row = _pack_row(pack_dir, status="lab")
+        if row is not None:
+            rows.append(row)
+    return rows
+
+
+def install_pack(
+    pack_id: str,
+    *,
+    dest: Path | None = None,
+    force: bool = False,
+    lab: bool = False,
+) -> Path:
     """Copy a bundled pack into the user/project pack cache; return rules dir."""
     root = bundled_packs_root()
     if root is None:
         msg = "no bundled packs/ directory found"
         raise FileNotFoundError(msg)
-    src = root / pack_id
+    src = (root / "_lab" / pack_id) if lab else (root / pack_id)
     if not src.is_dir():
-        # accept zip from dist/packs
-        zip_path = root.parent / "dist" / "packs" / f"{pack_id}.zip"
-        if zip_path.is_file():
-            target = (dest or packs_cache_dir()) / pack_id
-            if target.exists() and force:
-                shutil.rmtree(target)
-            target.mkdir(parents=True, exist_ok=True)
-            with zipfile.ZipFile(zip_path) as zf:
-                zf.extractall(target)
-            return _rules_dir(target)
-        msg = f"unknown pack {pack_id!r}; known: {[p['id'] for p in list_packs()]}"
+        if not lab:
+            # accept zip from dist/packs
+            zip_path = root.parent / "dist" / "packs" / f"{pack_id}.zip"
+            if zip_path.is_file():
+                target = (dest or packs_cache_dir()) / pack_id
+                if target.exists() and force:
+                    shutil.rmtree(target)
+                target.mkdir(parents=True, exist_ok=True)
+                with zipfile.ZipFile(zip_path) as zf:
+                    zf.extractall(target)
+                return _rules_dir(target)
+        known = [p["id"] for p in list_packs(include_lab=lab)]
+        msg = f"unknown pack {pack_id!r}; known: {known}"
         raise FileNotFoundError(msg)
     target = (dest or packs_cache_dir()) / pack_id
     if target.exists():

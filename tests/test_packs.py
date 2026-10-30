@@ -5,16 +5,29 @@ from pathlib import Path
 from click.testing import CliRunner
 
 from lexaudit.cli.main import main
-from lexaudit.packs import install_pack, list_packs, verify_pack
+from lexaudit.packs import install_pack, list_lab_packs, list_packs, verify_pack
 
 
 def test_list_and_install_pack(tmp_path: Path, monkeypatch: object) -> None:
     rows = list_packs()
     assert any(r["id"] == "core-calques-v1" for r in rows)
+    assert all(r.get("status") != "lab" for r in rows)
     rules = install_pack("core-calques-v1", dest=tmp_path, force=True)
     assert rules.is_dir()
     assert (rules / "en.yaml").is_file()
     assert verify_pack("core-calques-v1", dest=tmp_path) == rules
+
+
+def test_list_and_install_lab_pack(tmp_path: Path) -> None:
+    lab = list_lab_packs()
+    assert any(r["id"] == "saas-ui-v0" for r in lab)
+    assert all(r.get("status") == "lab" for r in lab)
+    combined = list_packs(include_lab=True)
+    assert any(r["id"] == "saas-ui-v0" for r in combined)
+    rules = install_pack("saas-ui-v0", dest=tmp_path, force=True, lab=True)
+    assert rules.is_dir()
+    assert (rules / "en.yaml").is_file()
+    assert verify_pack("saas-ui-v0", dest=tmp_path) == rules
 
 
 def test_pack_cli(tmp_path: Path) -> None:
@@ -22,7 +35,30 @@ def test_pack_cli(tmp_path: Path) -> None:
     listed = runner.invoke(main, ["pack", "list"])
     assert listed.exit_code == 0
     assert "core-calques-v1" in listed.output
+    assert "saas-ui-v0" not in listed.output
+
+    lab_listed = runner.invoke(main, ["pack", "list", "--lab"])
+    assert lab_listed.exit_code == 0
+    assert "saas-ui-v0" in lab_listed.output
+    assert "status=lab" in lab_listed.output
+
     installed = runner.invoke(
         main, ["pack", "install", "core-calques-v1", "--dest", str(tmp_path), "--force"]
     )
     assert installed.exit_code == 0, installed.output
+
+    lab_installed = runner.invoke(
+        main,
+        [
+            "pack",
+            "install",
+            "saas-ui-v0",
+            "--lab",
+            "--dest",
+            str(tmp_path),
+            "--force",
+        ],
+    )
+    assert lab_installed.exit_code == 0, lab_installed.output
+    verified = runner.invoke(main, ["pack", "verify", "saas-ui-v0", "--dest", str(tmp_path)])
+    assert verified.exit_code == 0, verified.output

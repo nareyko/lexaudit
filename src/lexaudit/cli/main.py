@@ -435,46 +435,67 @@ def pack_group() -> None:
 
 
 @pack_group.command("list")
-def pack_list_cmd() -> None:
+@click.option(
+    "--lab",
+    is_flag=True,
+    help="Include experimental packs/_lab (not Release assets)",
+)
+def pack_list_cmd(lab: bool) -> None:
     from lexaudit.packs import list_packs
 
-    rows = list_packs()
+    rows = list_packs(include_lab=lab)
     if not rows:
         click.echo("No packs found.")
         return
     for row in rows:
         loc_raw = row.get("locales") or []
         loc_list = [str(x) for x in loc_raw] if isinstance(loc_raw, list) else []
-        click.echo(f"{row['id']}  v{row.get('version')}  locales={','.join(loc_list)}")
+        status = row.get("status") or "release"
+        click.echo(
+            f"{row['id']}  v{row.get('version')}  status={status}  "
+            f"locales={','.join(loc_list)}"
+        )
 
 
 @pack_group.command("install")
 @click.argument("pack_id")
 @click.option("--force", is_flag=True, help="Reinstall over existing cache copy")
 @click.option(
+    "--lab",
+    is_flag=True,
+    help="Install from packs/_lab (experimental; dogfood only)",
+)
+@click.option(
     "--dest",
     type=click.Path(path_type=Path),
     default=None,
     help="Install directory (default: user pack cache)",
 )
-def pack_install_cmd(pack_id: str, force: bool, dest: Path | None) -> None:
+def pack_install_cmd(pack_id: str, force: bool, lab: bool, dest: Path | None) -> None:
     from lexaudit.packs import install_pack
 
     try:
-        rules = install_pack(pack_id, dest=dest, force=force)
+        rules = install_pack(pack_id, dest=dest, force=force, lab=lab)
     except FileNotFoundError as exc:
         raise click.ClickException(str(exc)) from exc
-    click.echo(f"installed {pack_id} -> rules at {rules}")
+    prefix = "lab " if lab else ""
+    click.echo(f"installed {prefix}{pack_id} -> rules at {rules}")
     click.echo(f"Set calque_rules_dir: {rules} in lexaudit.config.yaml")
 
 
 @pack_group.command("verify")
 @click.argument("pack_id")
-def pack_verify_cmd(pack_id: str) -> None:
+@click.option(
+    "--dest",
+    type=click.Path(path_type=Path),
+    default=None,
+    help="Install directory (default: user pack cache)",
+)
+def pack_verify_cmd(pack_id: str, dest: Path | None) -> None:
     from lexaudit.packs import verify_pack
 
     try:
-        rules = verify_pack(pack_id)
+        rules = verify_pack(pack_id, dest=dest)
     except FileNotFoundError as exc:
         raise click.ClickException(str(exc)) from exc
     click.echo(f"ok: {pack_id} rules at {rules}")

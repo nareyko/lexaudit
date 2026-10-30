@@ -168,6 +168,23 @@ uv run lexaudit explain предпокупочный --locale ru --json
 
 ---
 
+## `pack list` / `pack install` / `pack verify`
+
+Installable MIT YAML rule packs. Release packs live under `packs/`; experimental
+ones under `packs/_lab/` (use `--lab`).
+
+```bash
+uv run lexaudit pack list
+uv run lexaudit pack list --lab
+uv run lexaudit pack install core-calques-v1 --force
+uv run lexaudit pack install saas-ui-v0 --lab --dest /tmp/lexaudit-packs --force
+uv run lexaudit pack verify saas-ui-v0 --dest /tmp/lexaudit-packs
+```
+
+Lab packs are for dogfood only until owner promote (`docs/p1-0.3.0-prep.md`).
+
+---
+
 ## `ping`
 
 ```bash

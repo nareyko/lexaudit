@@ -129,12 +129,68 @@ function activate(context) {
 function deactivate() {}
 
 if (require.main === module && process.argv.includes("--smoke")) {
-  const help = runLexaudit(process.env.LEXAUDIT_CLI || "lexaudit", ["--help"], process.cwd());
-  if (help.status !== 0 && help.error) {
-    console.error("smoke: lexaudit CLI not on PATH; install with pipx/uv first");
-    process.exit(0); // soft: lab smoke should not fail CI without CLI
+  function resolveCli() {
+    if (process.env.LEXAUDIT_CLI) return { cli: process.env.LEXAUDIT_CLI, argsPrefix: [] };
+    const which = runLexaudit("lexaudit", ["--help"], process.cwd());
+    if (which.status === 0) return { cli: "lexaudit", argsPrefix: [] };
+    const uv = runLexaudit("uv", ["run", "lexaudit", "--help"], path.join(__dirname, "../.."));
+    if (uv.status === 0) return { cli: "uv", argsPrefix: ["run", "lexaudit"] };
+    return null;
   }
-  console.log("smoke: extension module loads; CLI status=", help.status);
+  const resolved = resolveCli();
+  let helpStatus = "missing";
+  if (resolved) {
+    const help = runLexaudit(resolved.cli, [...resolved.argsPrefix, "--help"], path.join(__dirname, "../.."));
+    helpStatus = String(help.status);
+  } else {
+    console.error("smoke: lexaudit CLI not on PATH and uv run failed; continuing diagnostics-only");
+  }
+  // Offline diagnostics parser smoke (no vscode runtime required)
+  const fakeVscode = {
+    Range: class {
+      constructor(a, b, c, d) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
+      }
+    },
+    Uri: { file: (p) => ({ fsPath: p }) },
+    DiagnosticSeverity: { Error: 0, Warning: 1 },
+    Diagnostic: class {
+      constructor(range, msg, sev) {
+        this.range = range;
+        this.msg = msg;
+        this.sev = sev;
+      }
+    },
+  };
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "lexaudit-vsc-smoke-"));
+  const findingsPath = path.join(tmp, "findings.json");
+  fs.writeFileSync(
+    findingsPath,
+    JSON.stringify([
+      {
+        path: path.join(tmp, "a.md"),
+        line: 1,
+        word: "denseness",
+        status: "calque",
+        reason: "template-calque-denseness",
+        hint: "notes",
+      },
+    ]),
+    "utf8",
+  );
+  const collection = {
+    clear() {},
+    set() {},
+  };
+  const n = collectDiagnosticsFromFindings(findingsPath, fakeVscode, collection);
+  if (n !== 1) {
+    console.error("smoke: expected 1 diagnostic, got", n);
+    process.exit(1);
+  }
+  console.log("smoke: extension module loads; CLI status=", helpStatus, "; diagnostics=", n);
   process.exit(0);
 }
 

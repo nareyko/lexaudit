@@ -108,5 +108,19 @@ reg_rc=$?
 set -e
 echo "regression_exit=$reg_rc (soft always 0 expected)"
 
+echo "== docs deslop =="
+set +e
+bash scripts/docs_deslop_scan.sh
+deslop_rc=$?
+set -e
+echo "docs_deslop_exit=$deslop_rc"
+
+echo "== vscode extension smoke =="
+set +e
+(cd packages/vscode-lexaudit && LEXAUDIT_CLI="$(command -v lexaudit || true)" node extension.js --smoke)
+vsc_rc=$?
+set -e
+echo "vscode_smoke_exit=$vsc_rc"
+
 echo "dogfood done"
 exit 0

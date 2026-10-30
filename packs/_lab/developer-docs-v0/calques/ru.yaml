@@ -134,3 +134,35 @@ rules:
     hint: "логика обработчика"
     severity: confirmed
     source: "lab-developer-docs"
+
+  - pattern: "пейлоад"
+    locale: ru
+    reason: "devdocs-payload-loan"
+    hint: "тело запроса / полезная нагрузка"
+    severity: weak
+    source: "lab-developer-docs"
+  - pattern: "вебхук"
+    locale: ru
+    reason: "devdocs-webhook-loan"
+    hint: "обратный вызов по HTTP / webhook (допустимо с пояснением)"
+    severity: weak
+    source: "lab-developer-docs"
+    override_ok: true
+  - pattern: "рейтлимит"
+    locale: ru
+    reason: "devdocs-ratelimit-loan"
+    hint: "ограничение частоты запросов"
+    severity: likely
+    source: "lab-developer-docs"
+  - pattern: "пагинировать"
+    locale: ru
+    reason: "devdocs-paginate-anglicism"
+    hint: "разбивать на страницы"
+    severity: likely
+    source: "lab-developer-docs"
+  - pattern: "ретраить"
+    locale: ru
+    reason: "devdocs-retry-anglicism"
+    hint: "повторить запрос"
+    severity: likely
+    source: "lab-developer-docs"

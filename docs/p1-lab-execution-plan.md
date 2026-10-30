@@ -1,6 +1,7 @@
 # P1 lab execution plan (local only · no PyPI / no marketplace)
 
-Status: executing. Not part of the 0.2.0 Release assets.
+Status: **complete locally** (2026-10-30). Not part of the 0.2.0 Release assets.
+Follow-up iterate: real_public corpus + expanded lab packs (this session).
 
 ## Goal
 

@@ -134,3 +134,40 @@ rules:
     hint: "диалоговое окно"
     severity: likely
     source: "lab-saas-ui"
+
+  - pattern: "логиниться"
+    locale: ru
+    reason: "saas-ui-login-anglicism"
+    hint: "войти / выполнить вход"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "залогиниться"
+    locale: ru
+    reason: "saas-ui-login-anglicism"
+    hint: "войти"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "логаут"
+    locale: ru
+    reason: "saas-ui-logout-loan"
+    hint: "выход"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "фильтруемость"
+    locale: ru
+    reason: "saas-ui-filterability-calque"
+    hint: "можно ли отфильтровать"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "драгбл"
+    locale: ru
+    reason: "saas-ui-draggable-loan"
+    hint: "перетаскиваемый"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "пинить"
+    locale: ru
+    reason: "saas-ui-pin-anglicism"
+    hint: "закрепить"
+    severity: likely
+    source: "lab-saas-ui"

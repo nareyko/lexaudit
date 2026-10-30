@@ -134,3 +134,52 @@ rules:
     hint: "button style / affordance — invented noun"
     severity: confirmed
     source: "lab-saas-ui"
+
+  - pattern: "logoutness"
+    locale: en
+    reason: "saas-ui-logoutness"
+    hint: "sign-out state — invented noun"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "loginability"
+    locale: en
+    reason: "saas-ui-loginability"
+    hint: "whether sign-in is possible"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "filterability"
+    locale: en
+    reason: "saas-ui-filterability"
+    hint: "whether filters apply"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "sortability"
+    locale: en
+    reason: "saas-ui-sortability"
+    hint: "whether sortable"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "draggability"
+    locale: en
+    reason: "saas-ui-draggability"
+    hint: "whether draggable"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "pinability"
+    locale: en
+    reason: "saas-ui-pinability"
+    hint: "whether pinnable"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "archivize"
+    locale: en
+    reason: "saas-ui-archivize"
+    hint: "archive — invented verb"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "favoritize"
+    locale: en
+    reason: "saas-ui-favoritize"
+    hint: "add to favorites — invented verb"
+    severity: confirmed
+    source: "lab-saas-ui"

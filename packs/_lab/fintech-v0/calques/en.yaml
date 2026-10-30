@@ -132,3 +132,40 @@ rules:
     hint: "shares / stocks — Spanish leftover"
     severity: likely
     source: "lab-fintech-native-localization"
+
+  - pattern: "settlementness"
+    locale: en
+    reason: "fintech-settlementness"
+    hint: "settlement status — invented noun"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "ledgerability"
+    locale: en
+    reason: "fintech-ledgerability"
+    hint: "whether posting is possible"
+    severity: likely
+    source: "lab-fintech"
+  - pattern: "refundability"
+    locale: en
+    reason: "fintech-refundability"
+    hint: "whether refundable"
+    severity: likely
+    source: "lab-fintech"
+  - pattern: "chargebackness"
+    locale: en
+    reason: "fintech-chargebackness"
+    hint: "chargeback state"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "payoutize"
+    locale: en
+    reason: "fintech-payoutize"
+    hint: "send payout — invented verb"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "reconcileability"
+    locale: en
+    reason: "fintech-reconcileability"
+    hint: "whether reconcilable"
+    severity: likely
+    source: "lab-fintech"

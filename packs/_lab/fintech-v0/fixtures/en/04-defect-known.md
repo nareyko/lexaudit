@@ -1,3 +1,3 @@
-# Broken payments copy
+# Broken ledger copy
 
-Watch chargebackness and settleness carefully. Do not ibanize fields by hand or sepaize without a review. KYC kycess must stay clear.
+Avoid walletness and fxness in product strings. Do not invent cardness. Check wireability before payoutize. Settlementness and chargebackness confuse operators.

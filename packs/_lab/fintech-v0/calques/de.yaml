@@ -120,3 +120,28 @@ rules:
     hint: "Aktien"
     severity: likely
     source: "lab-fintech"
+
+  - pattern: "payouten"
+    locale: de
+    reason: "fintech-de-payouten"
+    hint: "Auszahlung auslösen"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "refundbarkeit"
+    locale: de
+    reason: "fintech-de-refundbarkeit"
+    hint: "erstattungsfähig"
+    severity: likely
+    source: "lab-fintech"
+  - pattern: "settlementheit"
+    locale: de
+    reason: "fintech-de-settlementheit"
+    hint: "Settlement-Status"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "chargebacken"
+    locale: de
+    reason: "fintech-de-chargebacken"
+    hint: "Chargeback einleiten"
+    severity: likely
+    source: "lab-fintech"

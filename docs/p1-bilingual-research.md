@@ -1,6 +1,6 @@
 # P1 bilingual research protocol
 
-Status: lab. `enable_bilingual` remains **false** by default.
+Status: lab. `enable_bilingual` remains false by default.
 
 ## Question
 
@@ -10,14 +10,24 @@ intentional loans (`API`, `JSON`, `SEPA`, HTTP verbs)?
 
 ## Method
 
-1. **Train** fixtures under `tests/fixtures/bilingual/train/` — used only to
+1. Train fixtures under `tests/fixtures/bilingual/train/` — used only to
    shape allowlists; not scored.
-2. **Held-out** fixtures under `tests/fixtures/bilingual/heldout/` for `ru` and
-   `de` targets against English sources.
-3. Gold CSV `heldout/gold-leftovers.csv` labels each token as `leftover` or
-   `intentional`.
-4. Detector: `untranslated_latin_in_target` + `DEFAULT_INTENTIONAL_LOANS`.
-5. Length ratio is logged only (soft signal, not a fail gate).
+
+2. Synthetic held-out under `tests/fixtures/bilingual/heldout/` for `ru` and
+   `de` (protocol ceiling).
+
+3. Real-public under `tests/fixtures/bilingual/real_public/`:
+   - FastAPI MIT docs EN↔RU/DE (6 tutorial/feature slugs)
+   - Kubernetes website CC BY pods (+ overview EN/RU)
+   - `seeded-leak.md` overlay for leftover recall (documented synthetic)
+   - Prose-only excerpts via `scripts/build_real_public_corpus.py`
+   - Extra loans file (official pages only; not merged into DEFAULT)
+
+4. Gold CSVs label each token as `leftover` or `intentional`.
+
+5. Detector: `untranslated_latin_in_target` + `DEFAULT_INTENTIONAL_LOANS`
+   (+ skip kebab slugs with ≥2 hyphens).
+
 6. Metrics: `uv run python scripts/bilingual_metrics.py --json`.
 
 ## Ship bar (lab)
@@ -30,7 +40,9 @@ intentional loans (`API`, `JSON`, `SEPA`, HTTP verbs)?
 
 Fail → iterate allowlist / min_len / pairing rules. Do not flip default config.
 
-## Local held-out results (2026-10-30)
+## Local results (2026-10-30)
+
+### Synthetic held-out
 
 | Metric | Value |
 |---|---:|
@@ -38,16 +50,39 @@ Fail → iterate allowlist / min_len / pairing rules. Do not flip default config
 | Recall | 1.00 |
 | F1 | 1.00 |
 | Intentional FP | 0 |
-| Length-ratio mean | ~1.16 |
-| Lab ship bar | pass on this fixture |
+| Lab ship bar | pass (protocol ceiling) |
 
-Caveat: held-out texts were authored to exercise the detector. Treat the perfect
-score as a **protocol ceiling**, not a production claim. Next iterate: scrape
-10–20 real public EN↔RU doc pairs and re-score before enabling the flag.
+### Real-public (FastAPI + k8s + seeded overlay)
+
+| Metric | Value |
+|---|---:|
+| Precision | 1.00 |
+| Recall | 1.00 |
+| F1 | 1.00 |
+| Intentional FP | 0 |
+| Official-page alarms (after extra loans) | 0 |
+| Lab ship bar | pass on this corpus |
+
+Caveats:
+
+- Perfect synthetic score remains a protocol ceiling.
+- Real-public leftover recall is driven by the seeded overlay; official
+  FastAPI/k8s translations are mostly clean after brand allowlist + prose
+  scrub (anchors/URLs/fences).
+- German tech docs keep many English loans (`parameter`, `request`, …) — those
+  live in `intentional-extra.txt`, not in DEFAULT (so held-out leftovers
+  like `query` / `parameters` still fire).
+- Next iterate before default-on: more imperfect community translations (not
+  only polished official trees) and a human pass on DE loan policy.
 
 ## Reproduce
 
 ```bash
 uv run python scripts/bilingual_metrics.py
+uv run python scripts/bilingual_metrics.py \
+  --fixtures tests/fixtures/bilingual/real_public \
+  --gold tests/fixtures/bilingual/real_public/gold-leftovers.csv \
+  --extra-loans tests/fixtures/bilingual/real_public/intentional-extra.txt \
+  --label real_public
 uv run pytest -q tests/test_bilingual.py
 ```

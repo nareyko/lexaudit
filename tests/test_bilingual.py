@@ -79,3 +79,25 @@ def test_heldout_metrics_script_importable() -> None:
     hits = {w.normalized for w in untranslated_latin_in_target(src, tgt, path="ru/settings.md")}
     assert "sidebar" in hits
     assert "toast" in hits
+
+
+def test_kebab_anchor_slugs_skipped() -> None:
+    src = "See why-you-need-kubernetes-and-what-can-it-do in the overview.\n"
+    tgt = "См. why-you-need-kubernetes-and-what-can-it-do в обзоре.\n"
+    hits = untranslated_latin_in_target(src, tgt, path="ru/x.md")
+    assert hits == []
+
+
+def test_real_public_fixtures_and_seeded_leak() -> None:
+    root = FIXTURES / "real_public"
+    assert (root / "SOURCES.md").is_file()
+    assert (root / "gold-leftovers.csv").is_file()
+    assert (root / "en" / "seeded-leak.md").is_file()
+    assert (root / "ru" / "fastapi-first-steps.md").is_file()
+    assert (root / "de" / "k8s-pods.md").is_file()
+    src = (root / "en" / "seeded-leak.md").read_text(encoding="utf-8")
+    tgt = (root / "ru" / "seeded-leak.md").read_text(encoding="utf-8")
+    hits = {w.normalized for w in untranslated_latin_in_target(src, tgt, path="ru/seeded-leak.md")}
+    assert "pending" in hits
+    assert "sidebar" in hits
+    assert "api" not in hits

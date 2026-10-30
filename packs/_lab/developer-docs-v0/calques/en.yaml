@@ -132,3 +132,40 @@ rules:
     hint: "status codes"
     severity: confirmed
     source: "lab-developer-docs"
+
+  - pattern: "webhookness"
+    locale: en
+    reason: "devdocs-webhookness"
+    hint: "webhook delivery — invented noun"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "payloadability"
+    locale: en
+    reason: "devdocs-payloadability"
+    hint: "whether payload is valid"
+    severity: likely
+    source: "lab-developer-docs"
+  - pattern: "ratelimitness"
+    locale: en
+    reason: "devdocs-ratelimitness"
+    hint: "rate-limit state"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "retryability"
+    locale: en
+    reason: "devdocs-retryability"
+    hint: "whether retryable"
+    severity: likely
+    source: "lab-developer-docs"
+  - pattern: "idempotenceability"
+    locale: en
+    reason: "devdocs-idempotenceability"
+    hint: "idempotency — avoid -ability coinage"
+    severity: likely
+    source: "lab-developer-docs"
+  - pattern: "paginateize"
+    locale: en
+    reason: "devdocs-paginateize"
+    hint: "paginate — invented verb"
+    severity: confirmed
+    source: "lab-developer-docs"

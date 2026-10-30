@@ -61,9 +61,24 @@ locale_loans:
   - bilingual
   - packyaml
   - workspaces
-  - workspaces
   - sideload
   - marketplace
   - glama
   - smithery
   - openvsx
+  - realpublic
+  - fastapi
+  - kubernetes
+  - uvicorn
+  - pydantic
+  - starlette
+  - redoc
+  - redocly
+  - cgroups
+  - kebab
+  - overlays
+  - overlay
+  - calques
+  - calque
+  - labrank
+  - shipbar

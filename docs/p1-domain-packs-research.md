@@ -24,15 +24,22 @@ Healthcare / legal / e-commerce remain candidates for a later hunt.
 3. Mini fixtures: `01-clean*`, `04-defect-known`, `06-defect-open`.
 4. Measure with `scripts/lab_pack_metrics.py`.
 
-## Local metrics (2026-10-30)
+## Local metrics (2026-10-30 · expanded)
 
 | Pack | locale | calque_words | defect score | clean max | lab_rank_ok |
 |---|---|---:|---:|---:|---|
-| saas-ui-v0 | en | 5 | 40.0 | 0.0 | yes |
-| fintech-v0 | en | 5 | 40.1 | 0.0 | yes |
-| developer-docs-v0 | en | 6 | 48.0 | 0.0 | yes |
+| saas-ui-v0 | en | 8 | 64.0 | 0.0 | yes |
+| saas-ui-v0 | ru | 8 | 64.1 | 0.0 | yes |
+| saas-ui-v0 | de | 7 | 56.1 | 0.0 | yes |
+| fintech-v0 | en | 7 | 56.0 | 0.0 | yes |
+| fintech-v0 | ru | 4 | 32.0 | 0.0 | yes |
+| fintech-v0 | de | 4 | 32.1 | 0.0 | yes |
+| developer-docs-v0 | en | 8 | 64.0 | 0.0 | yes |
+| developer-docs-v0 | ru | 3 | 24.0 | 2.1 | yes |
+| developer-docs-v0 | de | 4 | 32.2 | 0.2 | yes |
 
-Verdict: **iterate** (expand real bilingual corpora beyond synthetic seeds) before any Release attach. Lab rank bar passes on fixtures.
+Verdict: **iterate** (still fixture-backed; attach to Release only after owner go).
+Lab rank bar passes on EN/RU/DE fixtures after rule expansion.
 
 ## Hard rules
 

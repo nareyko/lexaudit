@@ -11,10 +11,13 @@ from lexaudit.core.types import ClassifiedWord, VocabSample
 
 _LATIN_WORD = re.compile(r"\b[A-Za-z][A-Za-z'-]{2,}\b")
 
-# Intentional English tokens often kept in RU/DE technical prose (held-out research).
+# Intentional English tokens often kept in RU/DE technical prose.
+# Keep this set brand/protocol-shaped — do not add generic prose leftovers
+# (pending, sidebar, query, parameters, …) or held-out recall collapses.
 DEFAULT_INTENTIONAL_LOANS: frozenset[str] = frozenset(
     {
         "api",
+        "apis",
         "http",
         "https",
         "json",
@@ -25,6 +28,7 @@ DEFAULT_INTENTIONAL_LOANS: frozenset[str] = frozenset(
         "css",
         "sql",
         "oauth",
+        "oauth2",
         "jwt",
         "uuid",
         "id",
@@ -43,6 +47,9 @@ DEFAULT_INTENTIONAL_LOANS: frozenset[str] = frozenset(
         "put",
         "patch",
         "delete",
+        "head",
+        "options",
+        "trace",
         "github",
         "gitlab",
         "docker",
@@ -74,6 +81,30 @@ DEFAULT_INTENTIONAL_LOANS: frozenset[str] = frozenset(
         "aws",
         "gcp",
         "azure",
+        # Brands / runtimes kept in FastAPI & Kubernetes i18n
+        "async",
+        "await",
+        "pydantic",
+        "starlette",
+        "uvicorn",
+        "swagger",
+        "redoc",
+        "redocly",
+        "graphql",
+        "orm",
+        "orms",
+        "iot",
+        "cors",
+        "websocket",
+        "websockets",
+        "vscode",
+        "codelens",
+        "jetbrains",
+        "pycharm",
+        "basemodel",
+        "cgroups",
+        "dict",
+        "list",
     }
 )
 
@@ -130,6 +161,9 @@ def untranslated_latin_in_target(
         if len(surface) < min_len:
             continue
         key = surface.casefold()
+        # Kebab heading/anchor leftovers (why-you-need-…, path-parameters-with-types)
+        if key.count("-") >= 2:
+            continue
         if key not in src or key in seen or key in allow:
             continue
         seen.add(key)

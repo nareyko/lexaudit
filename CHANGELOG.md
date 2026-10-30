@@ -9,6 +9,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Lab domain packs `saas-ui-v0`, `fintech-v0`, `developer-docs-v0` under `packs/_lab/` + `scripts/lab_pack_metrics.py`
 - Bilingual held-out protocol, gold CSV, allowlist, `scripts/bilingual_metrics.py`
 - VS Code shell-out extension stub + MCP/VS Code dogfood doc
+- Real-public bilingual corpus (FastAPI + Kubernetes excerpts + seeded overlay),
+  `scripts/build_real_public_corpus.py`, extra-loans file for official pages
+- Expanded lab pack rules + RU/DE fixtures; kebab-slug skip in bilingual detector
 
 ## [0.2.0] - 2026-10-30
 

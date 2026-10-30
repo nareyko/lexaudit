@@ -1,3 +1,3 @@
 # Broken API prose
 
-Avoid requestness and endpointness in the guide. Do not schemaize every example or openapiize the tutorial voice. Watch webhookness and corsness too.
+Avoid requestness and authness. Do not invent queryness or pathness. Webhookness and ratelimitness confuse readers. Prefer retryability over paginateize.

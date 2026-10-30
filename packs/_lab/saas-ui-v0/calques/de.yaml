@@ -120,3 +120,34 @@ rules:
     hint: "Speicherpunkt / Entwurf speichern"
     severity: likely
     source: "lab-saas-ui"
+
+  - pattern: "loginnbarkeit"
+    locale: de
+    reason: "saas-ui-de-loginability"
+    hint: "Anmeldung möglich — Anglizismus"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "filterbarkeit"
+    locale: de
+    reason: "saas-ui-de-filterbarkeit"
+    hint: "filterbar"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "archivizen"
+    locale: de
+    reason: "saas-ui-de-archivizen"
+    hint: "archivieren"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "favoritizen"
+    locale: de
+    reason: "saas-ui-de-favoritizen"
+    hint: "zu Favoriten hinzufügen"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "pinnen"
+    locale: de
+    reason: "saas-ui-de-pinnen"
+    hint: "anheften / fixieren"
+    severity: weak
+    source: "lab-saas-ui"

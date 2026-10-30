@@ -120,3 +120,34 @@ rules:
     hint: "возможность перевода"
     severity: likely
     source: "lab-fintech"
+
+  - pattern: "пейаут"
+    locale: ru
+    reason: "fintech-payout-loan"
+    hint: "выплата"
+    severity: likely
+    source: "lab-fintech"
+  - pattern: "чарджбек"
+    locale: ru
+    reason: "fintech-chargeback-loan"
+    hint: "оспаривание платежа / возврат по претензии"
+    severity: likely
+    source: "lab-fintech"
+  - pattern: "рефанд"
+    locale: ru
+    reason: "fintech-refund-loan"
+    hint: "возврат средств"
+    severity: likely
+    source: "lab-fintech"
+  - pattern: "леджер"
+    locale: ru
+    reason: "fintech-ledger-loan"
+    hint: "книга учёта / регистр"
+    severity: weak
+    source: "lab-fintech"
+  - pattern: "сеттлмент"
+    locale: ru
+    reason: "fintech-settlement-loan"
+    hint: "расчёты / урегулирование"
+    severity: likely
+    source: "lab-fintech"

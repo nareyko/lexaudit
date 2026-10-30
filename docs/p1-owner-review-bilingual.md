@@ -8,7 +8,7 @@ in shipped defaults until this page is signed off.
 | Corpus | Path | Ship bar (lab) |
 |---|---|---|
 | Synthetic held-out | `tests/fixtures/bilingual/heldout/` | pass |
-| Held-out **6-pair matrix** (en/de/ru) | same + `german-leak.md` | pass (all scored pairs) |
+| Held-out **V1 matrix** (42 pairs · en/de/pl/ru/es/sv/uk) | same + `es/pl/sv/uk` + `german-leak.md` | pass (26 scored; ship_all) |
 | Official docs + seeded | `tests/fixtures/bilingual/real_public/` | pass (EN→*) |
 | Community reconstructions | `tests/fixtures/bilingual/community/` | pass (EN→*) |
 | Live Weblate | `tests/fixtures/bilingual/live_weblate/` | pass (EN→*) |

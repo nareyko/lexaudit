@@ -162,11 +162,13 @@ def test_live_crowdin_fixtures() -> None:
     assert "libraries" in hits
 
 
-def test_matrix_pairs_six_directions() -> None:
-    pairs = matrix_pairs()
-    assert len(pairs) == 6
-    assert ("en", "ru") in pairs and ("ru", "en") in pairs
-    assert ("de", "en") in pairs and ("en", "de") in pairs
+def test_matrix_pairs_v1_directions() -> None:
+    assert len(matrix_pairs(mode="anchors")) == 6
+    assert len(matrix_pairs(mode="anchors_x_others")) == 30
+    pairs = matrix_pairs(mode="all")
+    assert len(pairs) == 42  # 7 locales × 6
+    assert ("en", "es") in pairs and ("es", "ru") in pairs
+    assert ("uk", "pl") in pairs and ("sv", "de") in pairs
 
 
 def test_cyrillic_overlap_ru_to_en() -> None:

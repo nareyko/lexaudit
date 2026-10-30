@@ -63,3 +63,215 @@ payments,ru,de,payments.md,перед,leftover,RU→DE Cyrillic leftover
 payments,ru,de,payments.md,выплатой,leftover,RU→DE Cyrillic leftover
 settings,ru,de,settings.md,откройте,leftover,RU→DE Cyrillic leftover
 settings,ru,de,settings.md,закройте,leftover,RU→DE Cyrillic leftover
+payments,en,es,payments.md,pending,leftover,EN→ES Latin leftover
+payments,en,es,payments.md,available,leftover,EN→ES Latin leftover
+payments,en,es,payments.md,balance,leftover,EN→ES Latin leftover
+payments,en,es,payments.md,webhook,leftover,EN→ES Latin leftover
+payments,en,es,payments.md,setup,leftover,EN→ES Latin leftover
+payments,en,es,payments.md,sepa,intentional,keep SEPA
+payments,en,es,payments.md,api,intentional,keep API
+settings,en,es,settings.md,sidebar,leftover,EN→ES
+settings,en,es,settings.md,toast,leftover,EN→ES
+settings,en,es,settings.md,authentication,leftover,EN→ES
+settings,en,es,settings.md,method,leftover,EN→ES
+settings,en,es,settings.md,onboarding,leftover,EN→ES
+api-guide,en,es,api-guide.md,path,leftover,EN→ES
+api-guide,en,es,api-guide.md,parameters,leftover,EN→ES
+api-guide,en,es,api-guide.md,query,leftover,EN→ES
+api-guide,en,es,api-guide.md,status,leftover,EN→ES
+api-guide,en,es,api-guide.md,codes,leftover,EN→ES
+api-guide,en,es,api-guide.md,get,intentional,keep
+api-guide,en,es,api-guide.md,json,intentional,keep
+api-guide,en,es,api-guide.md,openapi,intentional,keep
+api-guide,en,es,api-guide.md,api,intentional,keep
+payments,en,pl,payments.md,pending,leftover,EN→PL Latin leftover
+payments,en,pl,payments.md,available,leftover,EN→PL Latin leftover
+payments,en,pl,payments.md,balance,leftover,EN→PL Latin leftover
+payments,en,pl,payments.md,webhook,leftover,EN→PL Latin leftover
+payments,en,pl,payments.md,setup,leftover,EN→PL Latin leftover
+payments,en,pl,payments.md,sepa,intentional,keep SEPA
+payments,en,pl,payments.md,api,intentional,keep API
+settings,en,pl,settings.md,sidebar,leftover,EN→PL
+settings,en,pl,settings.md,toast,leftover,EN→PL
+settings,en,pl,settings.md,authentication,leftover,EN→PL
+settings,en,pl,settings.md,method,leftover,EN→PL
+settings,en,pl,settings.md,onboarding,leftover,EN→PL
+api-guide,en,pl,api-guide.md,path,leftover,EN→PL
+api-guide,en,pl,api-guide.md,parameters,leftover,EN→PL
+api-guide,en,pl,api-guide.md,query,leftover,EN→PL
+api-guide,en,pl,api-guide.md,status,leftover,EN→PL
+api-guide,en,pl,api-guide.md,codes,leftover,EN→PL
+api-guide,en,pl,api-guide.md,get,intentional,keep
+api-guide,en,pl,api-guide.md,json,intentional,keep
+api-guide,en,pl,api-guide.md,openapi,intentional,keep
+api-guide,en,pl,api-guide.md,api,intentional,keep
+payments,en,sv,payments.md,pending,leftover,EN→SV Latin leftover
+payments,en,sv,payments.md,available,leftover,EN→SV Latin leftover
+payments,en,sv,payments.md,balance,leftover,EN→SV Latin leftover
+payments,en,sv,payments.md,webhook,leftover,EN→SV Latin leftover
+payments,en,sv,payments.md,setup,leftover,EN→SV Latin leftover
+payments,en,sv,payments.md,sepa,intentional,keep SEPA
+payments,en,sv,payments.md,api,intentional,keep API
+settings,en,sv,settings.md,sidebar,leftover,EN→SV
+settings,en,sv,settings.md,toast,leftover,EN→SV
+settings,en,sv,settings.md,authentication,leftover,EN→SV
+settings,en,sv,settings.md,method,leftover,EN→SV
+settings,en,sv,settings.md,onboarding,leftover,EN→SV
+api-guide,en,sv,api-guide.md,path,leftover,EN→SV
+api-guide,en,sv,api-guide.md,parameters,leftover,EN→SV
+api-guide,en,sv,api-guide.md,query,leftover,EN→SV
+api-guide,en,sv,api-guide.md,status,leftover,EN→SV
+api-guide,en,sv,api-guide.md,codes,leftover,EN→SV
+api-guide,en,sv,api-guide.md,get,intentional,keep
+api-guide,en,sv,api-guide.md,json,intentional,keep
+api-guide,en,sv,api-guide.md,openapi,intentional,keep
+api-guide,en,sv,api-guide.md,api,intentional,keep
+payments,en,uk,payments.md,pending,leftover,EN→UK Latin leftover
+payments,en,uk,payments.md,available,leftover,EN→UK Latin leftover
+payments,en,uk,payments.md,balance,leftover,EN→UK Latin leftover
+payments,en,uk,payments.md,webhook,leftover,EN→UK Latin leftover
+payments,en,uk,payments.md,setup,leftover,EN→UK Latin leftover
+payments,en,uk,payments.md,sepa,intentional,keep SEPA
+payments,en,uk,payments.md,api,intentional,keep API
+settings,en,uk,settings.md,sidebar,leftover,EN→UK
+settings,en,uk,settings.md,toast,leftover,EN→UK
+settings,en,uk,settings.md,authentication,leftover,EN→UK
+settings,en,uk,settings.md,method,leftover,EN→UK
+settings,en,uk,settings.md,onboarding,leftover,EN→UK
+api-guide,en,uk,api-guide.md,path,leftover,EN→UK
+api-guide,en,uk,api-guide.md,parameters,leftover,EN→UK
+api-guide,en,uk,api-guide.md,query,leftover,EN→UK
+api-guide,en,uk,api-guide.md,status,leftover,EN→UK
+api-guide,en,uk,api-guide.md,codes,leftover,EN→UK
+api-guide,en,uk,api-guide.md,get,intentional,keep
+api-guide,en,uk,api-guide.md,json,intentional,keep
+api-guide,en,uk,api-guide.md,openapi,intentional,keep
+api-guide,en,uk,api-guide.md,api,intentional,keep
+payments,de,es,payments.md,pending,leftover,DE→ES
+payments,de,es,payments.md,available,leftover,DE→ES
+payments,de,es,payments.md,balance,leftover,DE→ES
+payments,de,es,payments.md,webhook,leftover,DE→ES
+payments,de,es,payments.md,sepa,intentional,keep SEPA
+payments,de,es,payments.md,api,intentional,keep API
+settings,de,es,settings.md,sidebar,leftover,DE→ES
+settings,de,es,settings.md,toast,leftover,DE→ES
+settings,de,es,settings.md,authentication,leftover,DE→ES
+settings,de,es,settings.md,method,leftover,DE→ES
+settings,de,es,settings.md,onboarding,leftover,DE→ES
+payments,de,pl,payments.md,pending,leftover,DE→PL
+payments,de,pl,payments.md,available,leftover,DE→PL
+payments,de,pl,payments.md,balance,leftover,DE→PL
+payments,de,pl,payments.md,webhook,leftover,DE→PL
+payments,de,pl,payments.md,sepa,intentional,keep SEPA
+payments,de,pl,payments.md,api,intentional,keep API
+settings,de,pl,settings.md,sidebar,leftover,DE→PL
+settings,de,pl,settings.md,toast,leftover,DE→PL
+settings,de,pl,settings.md,authentication,leftover,DE→PL
+settings,de,pl,settings.md,method,leftover,DE→PL
+settings,de,pl,settings.md,onboarding,leftover,DE→PL
+payments,de,sv,payments.md,pending,leftover,DE→SV
+payments,de,sv,payments.md,available,leftover,DE→SV
+payments,de,sv,payments.md,balance,leftover,DE→SV
+payments,de,sv,payments.md,webhook,leftover,DE→SV
+payments,de,sv,payments.md,sepa,intentional,keep SEPA
+payments,de,sv,payments.md,api,intentional,keep API
+settings,de,sv,settings.md,sidebar,leftover,DE→SV
+settings,de,sv,settings.md,toast,leftover,DE→SV
+settings,de,sv,settings.md,authentication,leftover,DE→SV
+settings,de,sv,settings.md,method,leftover,DE→SV
+settings,de,sv,settings.md,onboarding,leftover,DE→SV
+payments,de,uk,payments.md,pending,leftover,DE→UK
+payments,de,uk,payments.md,available,leftover,DE→UK
+payments,de,uk,payments.md,balance,leftover,DE→UK
+payments,de,uk,payments.md,webhook,leftover,DE→UK
+payments,de,uk,payments.md,sepa,intentional,keep SEPA
+payments,de,uk,payments.md,api,intentional,keep API
+settings,de,uk,settings.md,sidebar,leftover,DE→UK
+settings,de,uk,settings.md,toast,leftover,DE→UK
+settings,de,uk,settings.md,authentication,leftover,DE→UK
+settings,de,uk,settings.md,method,leftover,DE→UK
+settings,de,uk,settings.md,onboarding,leftover,DE→UK
+payments,ru,es,payments.md,баланс,leftover,RU→ES Cyrillic
+payments,ru,es,payments.md,перед,leftover,RU→ES Cyrillic
+payments,ru,es,payments.md,выплатой,leftover,RU→ES Cyrillic
+settings,ru,es,settings.md,откройте,leftover,RU→ES Cyrillic
+settings,ru,es,settings.md,закройте,leftover,RU→ES Cyrillic
+payments,ru,pl,payments.md,баланс,leftover,RU→PL Cyrillic
+payments,ru,pl,payments.md,перед,leftover,RU→PL Cyrillic
+payments,ru,pl,payments.md,выплатой,leftover,RU→PL Cyrillic
+settings,ru,pl,settings.md,откройте,leftover,RU→PL Cyrillic
+settings,ru,pl,settings.md,закройте,leftover,RU→PL Cyrillic
+payments,ru,sv,payments.md,баланс,leftover,RU→SV Cyrillic
+payments,ru,sv,payments.md,перед,leftover,RU→SV Cyrillic
+payments,ru,sv,payments.md,выплатой,leftover,RU→SV Cyrillic
+settings,ru,sv,settings.md,откройте,leftover,RU→SV Cyrillic
+settings,ru,sv,settings.md,закройте,leftover,RU→SV Cyrillic
+payments,ru,uk,payments.md,баланс,leftover,RU→UK Cyrillic
+payments,ru,uk,payments.md,перед,leftover,RU→UK Cyrillic
+payments,ru,uk,payments.md,выплатой,leftover,RU→UK Cyrillic
+settings,ru,uk,settings.md,откройте,leftover,RU→UK Cyrillic
+settings,ru,uk,settings.md,закройте,leftover,RU→UK Cyrillic
+payments,uk,en,payments.md,баланс,leftover,UK→EN Cyrillic
+payments,uk,en,payments.md,перед,leftover,UK→EN Cyrillic
+payments,uk,en,payments.md,выплатой,leftover,UK→EN Cyrillic
+settings,uk,en,settings.md,откройте,leftover,UK→EN Cyrillic
+settings,uk,en,settings.md,закройте,leftover,UK→EN Cyrillic
+payments,uk,de,payments.md,баланс,leftover,UK→DE Cyrillic
+payments,uk,de,payments.md,перед,leftover,UK→DE Cyrillic
+payments,uk,de,payments.md,выплатой,leftover,UK→DE Cyrillic
+settings,uk,de,settings.md,откройте,leftover,UK→DE Cyrillic
+settings,uk,de,settings.md,закройте,leftover,UK→DE Cyrillic
+payments,uk,es,payments.md,баланс,leftover,UK→ES Cyrillic
+payments,uk,es,payments.md,перед,leftover,UK→ES Cyrillic
+payments,uk,es,payments.md,выплатой,leftover,UK→ES Cyrillic
+settings,uk,es,settings.md,откройте,leftover,UK→ES Cyrillic
+settings,uk,es,settings.md,закройте,leftover,UK→ES Cyrillic
+payments,uk,pl,payments.md,баланс,leftover,UK→PL Cyrillic
+payments,uk,pl,payments.md,перед,leftover,UK→PL Cyrillic
+payments,uk,pl,payments.md,выплатой,leftover,UK→PL Cyrillic
+settings,uk,pl,settings.md,откройте,leftover,UK→PL Cyrillic
+settings,uk,pl,settings.md,закройте,leftover,UK→PL Cyrillic
+payments,uk,sv,payments.md,баланс,leftover,UK→SV Cyrillic
+payments,uk,sv,payments.md,перед,leftover,UK→SV Cyrillic
+payments,uk,sv,payments.md,выплатой,leftover,UK→SV Cyrillic
+settings,uk,sv,settings.md,откройте,leftover,UK→SV Cyrillic
+settings,uk,sv,settings.md,закройте,leftover,UK→SV Cyrillic
+payments,es,ru,payments.md,pending,leftover,ES→RU
+payments,es,ru,payments.md,available,leftover,ES→RU
+payments,es,ru,payments.md,balance,leftover,ES→RU
+payments,es,ru,payments.md,webhook,leftover,ES→RU
+payments,es,ru,payments.md,sepa,intentional,keep SEPA
+payments,es,ru,payments.md,api,intentional,keep API
+settings,es,ru,settings.md,sidebar,leftover,ES→RU
+settings,es,ru,settings.md,toast,leftover,ES→RU
+settings,es,ru,settings.md,authentication,leftover,ES→RU
+settings,es,ru,settings.md,method,leftover,ES→RU
+settings,es,ru,settings.md,onboarding,leftover,ES→RU
+payments,pl,ru,payments.md,pending,leftover,PL→RU
+payments,pl,ru,payments.md,available,leftover,PL→RU
+payments,pl,ru,payments.md,balance,leftover,PL→RU
+payments,pl,ru,payments.md,webhook,leftover,PL→RU
+payments,pl,ru,payments.md,sepa,intentional,keep SEPA
+payments,pl,ru,payments.md,api,intentional,keep API
+settings,pl,ru,settings.md,sidebar,leftover,PL→RU
+settings,pl,ru,settings.md,toast,leftover,PL→RU
+settings,pl,ru,settings.md,authentication,leftover,PL→RU
+settings,pl,ru,settings.md,method,leftover,PL→RU
+settings,pl,ru,settings.md,onboarding,leftover,PL→RU
+payments,sv,ru,payments.md,pending,leftover,SV→RU
+payments,sv,ru,payments.md,available,leftover,SV→RU
+payments,sv,ru,payments.md,balance,leftover,SV→RU
+payments,sv,ru,payments.md,webhook,leftover,SV→RU
+payments,sv,ru,payments.md,sepa,intentional,keep SEPA
+payments,sv,ru,payments.md,api,intentional,keep API
+settings,sv,ru,settings.md,sidebar,leftover,SV→RU
+settings,sv,ru,settings.md,toast,leftover,SV→RU
+settings,sv,ru,settings.md,authentication,leftover,SV→RU
+settings,sv,ru,settings.md,method,leftover,SV→RU
+settings,sv,ru,settings.md,onboarding,leftover,SV→RU
+payments,en,uk,payments.md,überweisungen,leftover,EN→UK DE token
+payments,de,es,payments.md,setup,leftover,DE→ES webhook setup
+payments,de,pl,payments.md,setup,leftover,DE→PL webhook setup
+payments,de,sv,payments.md,setup,leftover,DE→SV webhook setup
+payments,de,uk,payments.md,setup,leftover,DE→UK webhook setup
+payments,de,uk,payments.md,überweisungen,leftover,DE→UK

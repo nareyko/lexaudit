@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Run bilingual leftover metrics for all directed en/de/ru pairs (lab research)."""
+"""Run bilingual leftover metrics for directed locale pairs (lab research).
+
+Default ``--mode all`` = all pairs among V1 locales en/de/pl/ru/es/sv/uk (42).
+"""
 
 from __future__ import annotations
 
@@ -156,7 +159,7 @@ def _score_pair(
         "lab_ship_bar": ship,
         "detector": (
             "cyrillic-overlap"
-            if source_locale in {"ru", "uk"} and target_locale not in {"ru", "uk"}
+            if source_locale in {"ru", "uk"}
             else "latin-overlap"
         ),
         "false_positives": sorted(
@@ -196,6 +199,12 @@ def main() -> int:
     p.add_argument("--min-precision", type=float, default=0.75)
     p.add_argument("--min-recall", type=float, default=0.60)
     p.add_argument("--label", default="heldout-matrix")
+    p.add_argument(
+        "--mode",
+        choices=("all", "anchors", "anchors_x_others"),
+        default="all",
+        help="all=42 V1 pairs; anchors=en/de/ru; anchors_x_others=anchors+es/pl/sv/uk",
+    )
     p.add_argument("--json", action="store_true")
     p.add_argument(
         "--out",
@@ -217,7 +226,7 @@ def main() -> int:
     }
 
     pairs = []
-    for src, tgt in matrix_pairs():
+    for src, tgt in matrix_pairs(mode=args.mode):
         pairs.append(
             _score_pair(
                 fixtures=args.fixtures,
@@ -235,17 +244,24 @@ def main() -> int:
 
     scored = [r for r in pairs if r["has_gold"]]
     ship_ok = all(r["lab_ship_bar"] is True for r in scored) if scored else False
+    failed = [r for r in scored if r["lab_ship_bar"] is not True]
     report = {
         "label": args.label,
+        "mode": args.mode,
         "fixtures": str(args.fixtures),
         "pairs": pairs,
         "scored_pairs": len(scored),
         "unsupervised_pairs": sum(1 for r in pairs if not r["has_gold"]),
         "lab_ship_bar_all_scored": ship_ok,
+        "failed_pairs": [r["pair"] for r in failed],
         "by_anchor": {
             "with_en": [r["pair"] for r in pairs if "en" in (r["source_locale"], r["target_locale"])],
             "with_de": [r["pair"] for r in pairs if "de" in (r["source_locale"], r["target_locale"])],
             "with_ru": [r["pair"] for r in pairs if "ru" in (r["source_locale"], r["target_locale"])],
+            "with_es": [r["pair"] for r in pairs if "es" in (r["source_locale"], r["target_locale"])],
+            "with_pl": [r["pair"] for r in pairs if "pl" in (r["source_locale"], r["target_locale"])],
+            "with_sv": [r["pair"] for r in pairs if "sv" in (r["source_locale"], r["target_locale"])],
+            "with_uk": [r["pair"] for r in pairs if "uk" in (r["source_locale"], r["target_locale"])],
         },
     }
 
@@ -259,7 +275,11 @@ def main() -> int:
     if args.json:
         print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
     else:
-        print(f"bilingual matrix {args.label}: scored={len(scored)} unsupervised={report['unsupervised_pairs']} ship_all={ship_ok}")
+        print(
+            f"bilingual matrix {args.label} mode={args.mode}: "
+            f"pairs={len(pairs)} scored={len(scored)} unsupervised={report['unsupervised_pairs']} "
+            f"ship_all={ship_ok} failed={report['failed_pairs']}"
+        )
         for r in pairs:
             if r["has_gold"]:
                 print(

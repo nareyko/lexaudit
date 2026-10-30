@@ -109,54 +109,64 @@ Fail → iterate allowlist / min_len / pairing rules. Do not flip default config
 
 ## Language-pair matrix (2026-10-30)
 
-All **6 directed pairs** among `{en, de, ru}`:
+V1 locales: `{en, de, pl, ru, es, sv, uk}` → **42 directed pairs** (`--mode all`).
 
-| Anchor | Pairs |
+| Focus | Coverage |
 |---|---|
-| with English | en→de, en→ru, de→en, ru→en |
-| with German | de→en, de→ru, en→de, ru→de |
-| with Russian | ru→en, ru→de, en→ru, de→ru |
+| with English | en↔ each of de/pl/ru/es/sv/uk |
+| with German | de↔ each of en/pl/ru/es/sv/uk |
+| with Russian | ru↔ each of en/de/pl/es/sv/uk |
+| others among themselves | es/pl/sv/uk mutual (unsupervised on held-out unless gold added) |
+
+Modes: `all` (42) · `anchors` (en/de/ru = 6) · `anchors_x_others` (30).
 
 Detectors:
 
-- **latin-overlap** — shared Latin tokens in source∩target (EN/DE → *, and DE→EN on dedicated pages)
-- **cyrillic-overlap** — shared Cyrillic tokens (RU → EN/DE)
+- **latin-overlap** — shared Latin tokens (EN/DE/ES/PL/SV → *)
+- **cyrillic-overlap** — when source is `ru` or `uk` (into Latin or other Cyrillic)
 
-Latin matching uses `\p{Latin}` (umlauts: `Überweisungen`).  
-`scripts/bilingual_matrix_metrics.py` scores P/R only when gold rows exist for that `(source, target)`; otherwise reports unsupervised alarm counts.
+Latin matching uses `\p{Latin}` (umlauts).  
+P/R scored only when gold exists for `(source, target)`; else unsupervised alarms.
 
-### Held-out matrix (gold for all 6 pairs · ship_all=True)
+### Held-out V1 matrix (26 scored / 16 unsupervised · ship_all=True)
 
-| pair | detector | P | R | F1 | alarms | ship |
-|---|---|---:|---:|---:|---:|---|
-| en→de | latin-overlap | 1.00 | 1.00 | 1.00 | 18 | yes |
-| en→ru | latin-overlap | 1.00 | 1.00 | 1.00 | 12 | yes |
-| de→en | latin-overlap | 1.00 | 1.00 | 1.00 | 18 | yes |
-| de→ru | latin-overlap | 1.00 | 1.00 | 1.00 | 12 | yes |
-| ru→en | cyrillic-overlap | 1.00 | 1.00 | 1.00 | 5 | yes |
-| ru→de | cyrillic-overlap | 1.00 | 1.00 | 1.00 | 5 | yes |
+Scored anchors × others (all P=R=F1=1.00 unless noted):
 
-Notes on held-out construction:
+| source→ | de | pl | ru | es | sv | uk |
+|---|---|---|---|---|---|---|
+| **en** | 1.0 | 1.0 | 1.0 | 1.0 | 1.0 | 1.0 |
+| **de** | — | 1.0 | 1.0 | 1.0 | 1.0 | 1.0 |
+| **ru** | 1.0 | 1.0 | — | 1.0 | 1.0 | 1.0 |
+| **uk** | 1.0 | 1.0 | unsup | 1.0 | 1.0 | — |
+| **es/pl/sv→ru** | — | — | 1.0 | — | — | — |
 
-- EN/DE/RU `payments.md` / `settings.md` carry planted Latin + Cyrillic leftovers for cross directions.
-- DE→EN gold is scoped to `german-leak.md` (clean DE source ↔ EN with `Überweisungen` / `Auszahlungen`). Raw latin-overlap on fluent EN pages would FP every shared English word present in leaky DE — do **not** score DE→EN on those paths without a dedicated gold basename.
-- de→en `alarms=18` includes unscored pages; P/R uses gold paths only.
+Also scored: `de→en` (gold on `german-leak.md` only), `ru→en`, `uk→en`.  
+Unsupervised (alarms only): most `es/pl/sv ↔ {en,de,es,pl,sv,uk}` without gold — typically 11–15 latin alarms from shared English UI leftovers.
 
-### Other corpora (EN→* gold only; reverse unsupervised)
+Notes:
 
-| corpus | en→de | en→ru | de→en alarms | de→ru alarms | ru→en | ru→de |
-|---|---|---|---:|---:|---:|---:|
-| real_public | P/R 1.0 | P/R 1.0 | 15 | 15 | 0 | 0 |
-| community | P/R 1.0 | P/R 1.0 | 43 | 40 | 0 | 0 |
-| live_weblate | P/R 1.0 | P/R 1.0 | 34 | 32 | 0 | 0 |
-| live_crowdin | P/R 1.0 | P/R 1.0 | 5 | 5 | 0 | 0 |
+- Held-out adds `es/`, `pl/`, `sv/`, `uk/` with planted EN leftovers + Cyrillic RU leaks.
+- DE→EN still requires clean DE source + gold basename (`german-leak.md`).
+- `uk→ru` left unsupervised (both Cyrillic; shared planted Russian forms would need separate gold policy).
+
+### Other corpora (still EN↔de/ru gold only)
+
+Public corpora lack `es/pl/sv/uk` trees today — matrix there stays EN→de/ru scored; reverse unsupervised. Expanding live harvest to ES/PL/SV/UK is a follow-up.
+
+| corpus | en→de | en→ru | de→* alarms | ru→* alarms |
+|---|---|---|---:|---:|
+| real_public | P/R 1.0 | P/R 1.0 | ~15 | 0 |
+| community | P/R 1.0 | P/R 1.0 | ~40 | 0 |
+| live_weblate | P/R 1.0 | P/R 1.0 | ~32 | 0 |
+| live_crowdin | P/R 1.0 | P/R 1.0 | ~5 | 0 |
 
 Research takeaways:
 
-1. EN→RU / EN→DE / DE→RU — latin-overlap is the working production shape; DE→RU reuses the same leftover vocabulary as EN→RU when DE still contains English UI loans.
-2. RU→EN / RU→DE — need cyrillic-overlap; public corpora here have 0 Cyrillic leftovers in EN/DE targets (expected for these samples). Held-out proves the detector; live validation needs a Cyrillic-leak harvest next.
-3. DE→EN — latin-overlap is only safe with a clean DE source + gold-scoped EN leaks (`german-leak.md`). Do not enable broadly on mixed DE UI dumps without basename gold or a German-lexicon gate.
-4. Unsupervised de→* alarm counts on community/Weblate mirror EN leftover density (same Latin tokens), not new defects.
+1. EN→{de,pl,ru,es,sv,uk} latin-overlap holds on held-out with shared English UI leftovers.
+2. DE→{pl,ru,es,sv,uk} same; DE→EN only with dedicated clean-DE gold pages.
+3. RU/UK→Latin targets need cyrillic-overlap; held-out proves it; live corpora need Cyrillic-leak harvest.
+4. Cross-other pairs (es↔pl, …) without gold are noisy latin-overlap mirrors — do not ship-bar them until gold exists.
+5. Public FastAPI/Weblate/Crowdin samples remain EN-centric; extend trees before claiming live ES/PL/SV/UK P/R.
 
 Caveats:
 
@@ -180,9 +190,11 @@ Caveats:
 # Legacy EN→* held-out
 uv run python scripts/bilingual_metrics.py
 
-# Full en/de/ru directed matrix (6 pairs)
+# Full V1 directed matrix (42 pairs among en/de/pl/ru/es/sv/uk)
 uv run python scripts/bilingual_matrix_metrics.py \
-  --label heldout --out tmp/bilingual-matrix/heldout.json
+  --mode all --label heldout-v1 --out tmp/bilingual-matrix/heldout-v1.json
+# Anchors only (en/de/ru = 6) or anchors×others (30):
+#   --mode anchors | --mode anchors_x_others
 
 uv run python scripts/bilingual_metrics.py \
   --fixtures tests/fixtures/bilingual/real_public \

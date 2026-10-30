@@ -16,7 +16,10 @@ _CYRILLIC_WORD = regex.compile(r"\b[\p{Cyrillic}][\p{Cyrillic}'-]{2,}\b", regex.
 # Cyrillic tokens often kept intentionally (thin; expand carefully).
 DEFAULT_CYRILLIC_LOANS: frozenset[str] = frozenset()
 
-MATRIX_LOCALES: tuple[str, ...] = ("en", "de", "ru")
+# Full V1 locale set (calque packs + hunspell). Matrix = all directed pairs.
+MATRIX_LOCALES: tuple[str, ...] = ("en", "de", "pl", "ru", "es", "sv", "uk")
+ANCHOR_LOCALES: tuple[str, ...] = ("en", "de", "ru")
+OTHER_LOCALES: tuple[str, ...] = ("es", "pl", "sv", "uk")
 CYRILLIC_LOCALES: frozenset[str] = frozenset({"ru", "uk"})
 
 # Function / glue words — weak leftover signal when a whole English clause is pasted.
@@ -307,15 +310,15 @@ def detect_pair_leftovers(
 ) -> list[ClassifiedWord]:
     """Choose Latin vs Cyrillic leftover detector from locale pair."""
     src_l = source_locale.casefold()
-    tgt_l = target_locale.casefold()
-    if src_l in CYRILLIC_LOCALES and tgt_l not in CYRILLIC_LOCALES:
+    # RU/UK source → Cyrillic overlap (into Latin or other Cyrillic targets)
+    if src_l in CYRILLIC_LOCALES:
         return untranslated_cyrillic_in_target(
             source_text,
             target_text,
             path=path,
             intentional_loans=intentional_loans,
         )
-    # Default: Latin overlap (EN/DE → RU, EN → DE, DE → EN, DE → RU)
+    # Default: Latin overlap (EN/DE/ES/PL/SV → *)
     return untranslated_latin_in_target(
         source_text,
         target_text,
@@ -324,9 +327,32 @@ def detect_pair_leftovers(
     )
 
 
-def matrix_pairs() -> list[tuple[str, str]]:
-    """All directed pairs among en/de/ru (6)."""
+def matrix_pairs(*, mode: str = "all") -> list[tuple[str, str]]:
+    """Directed locale pairs.
+
+    mode:
+      - ``all`` — every directed pair among MATRIX_LOCALES (7×6=42)
+      - ``anchors`` — only among en/de/ru (6)
+      - ``anchors_x_others`` — en/de/ru ↔ es/pl/sv/uk both ways (24) + anchors (6) = 30
+    """
     out: list[tuple[str, str]] = []
+    if mode == "anchors":
+        locales = ANCHOR_LOCALES
+        for src in locales:
+            for tgt in locales:
+                if src != tgt:
+                    out.append((src, tgt))
+        return out
+    if mode == "anchors_x_others":
+        for src in ANCHOR_LOCALES:
+            for tgt in ANCHOR_LOCALES:
+                if src != tgt:
+                    out.append((src, tgt))
+        for a in ANCHOR_LOCALES:
+            for o in OTHER_LOCALES:
+                out.append((a, o))
+                out.append((o, a))
+        return out
     for src in MATRIX_LOCALES:
         for tgt in MATRIX_LOCALES:
             if src != tgt:

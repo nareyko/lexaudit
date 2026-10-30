@@ -28,7 +28,8 @@ def test_list_and_install_lab_pack(tmp_path: Path) -> None:
     assert any(r["id"] == "saas-ui-v0" for r in lab)
     assert all(r.get("status") == "lab" for r in lab)
     combined = list_packs(include_lab=True)
-    assert any(r["id"] == "saas-ui-v0" for r in combined)
+    # Promoted ids appear once (RC row), not again as a lab stub.
+    assert sum(1 for r in combined if r["id"] == "saas-ui-v0") == 1
     rules = install_pack("saas-ui-v0", dest=tmp_path, force=True, lab=True)
     assert rules.is_dir()
     assert (rules / "en.yaml").is_file()

@@ -23,16 +23,16 @@
 | RU phrase bank | +1 → 5 (parity with en/de) |
 | P1 docs navigation | `p1-INDEX.md` |
 | Stale lab plan wording | points at 0.3.0 RC + index |
+| Twin `packs/_lab` trees | thin stubs only; `pack_content_dir` + hygiene gate |
 
 ## Still owner-only
 
 1. Push + PyPI Trusted Publishing  
 2. MCP registry + VS Marketplace  
-3. Tag `v0.3.0` + FairHelm submodule bump  
+3. Tag `v0.3.0` + FairHelm submodule bump on remotes  
 
 Local agent prep for 0.3.0 is otherwise **complete** — remaining thin spots need
-accounts (see runbook). Doc drift / pairing polish may still appear; re-scan with
-`scripts/check_repo_hygiene.py` before publish.
+accounts (see runbook). Re-scan with `scripts/check_repo_hygiene.py` before publish.
 
 ## Do not commit
 

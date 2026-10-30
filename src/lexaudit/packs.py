@@ -60,7 +60,11 @@ def list_packs(*, include_lab: bool = False) -> list[dict[str, object]]:
         if row is not None:
             rows.append(row)
     if include_lab:
-        rows.extend(list_lab_packs())
+        # Skip stubs whose id already has a release/RC row (no twin listing).
+        seen = {str(r["id"]) for r in rows}
+        for lab_row in list_lab_packs():
+            if str(lab_row["id"]) not in seen:
+                rows.append(lab_row)
     return rows
 
 

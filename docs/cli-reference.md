@@ -210,7 +210,7 @@ uv run lexaudit pack list
 uv run lexaudit pack install core-calques-v1 --force
 uv run lexaudit pack install saas-ui-v0 --dest /tmp/lexaudit-packs --force
 uv run lexaudit pack verify saas-ui-v0 --dest /tmp/lexaudit-packs
-uv run lexaudit pack list --lab   # registry stubs; install still resolves packs/<id>
+uv run lexaudit pack list --lab   # stubs only (status=lab); install --lab → packs/<id>
 ```
 
 Promote / publish status: `docs/p1-INDEX.md` · `docs/p1-0.3.0-prep.md`.

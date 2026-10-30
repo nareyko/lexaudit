@@ -56,4 +56,5 @@ uv run python scripts/run_lab_pack_metrics.py
 
 - No yacht / marine / survey-boat pack in the public repo (hard rule).
 - MIT license for packs.
-- Keep under `packs/_lab/` until owner go for promote.
+- Content SSOT is `packs/<id>/` after promote; `packs/_lab/<id>/` stays a thin
+  `pack.yaml` stub only (no twin calques/fixtures).

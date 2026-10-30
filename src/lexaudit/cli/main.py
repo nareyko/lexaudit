@@ -437,12 +437,13 @@ def pack_group() -> None:
 @click.option(
     "--lab",
     is_flag=True,
-    help="Include experimental packs/_lab (not Release assets)",
+    help="List packs/_lab stubs only (registry; content may live in packs/)",
 )
 def pack_list_cmd(lab: bool) -> None:
-    from lexaudit.packs import list_packs
+    from lexaudit.packs import list_lab_packs, list_packs
 
-    rows = list_packs(include_lab=lab)
+    rows = list_lab_packs() if lab else list_packs()
+
     if not rows:
         click.echo("No packs found.")
         return

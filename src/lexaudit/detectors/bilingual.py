@@ -11,6 +11,74 @@ from lexaudit.core.types import ClassifiedWord, VocabSample
 
 _LATIN_WORD = re.compile(r"\b[A-Za-z][A-Za-z'-]{2,}\b")
 
+# Function / glue words — weak leftover signal when a whole English clause is pasted.
+DEFAULT_FUNCTION_STOP: frozenset[str] = frozenset(
+    {
+        "this",
+        "that",
+        "these",
+        "those",
+        "with",
+        "from",
+        "into",
+        "onto",
+        "over",
+        "under",
+        "about",
+        "after",
+        "before",
+        "between",
+        "through",
+        "during",
+        "without",
+        "within",
+        "than",
+        "then",
+        "when",
+        "where",
+        "while",
+        "whom",
+        "which",
+        "what",
+        "only",
+        "even",
+        "still",
+        "already",
+        "very",
+        "more",
+        "most",
+        "less",
+        "least",
+        "such",
+        "same",
+        "other",
+        "another",
+        "each",
+        "every",
+        "both",
+        "many",
+        "much",
+        "some",
+        "your",
+        "our",
+        "their",
+        "also",
+        "just",
+        "been",
+        "being",
+        "have",
+        "will",
+        "would",
+        "could",
+        "should",
+        "might",
+        "must",
+        "shall",
+        "does",
+        "were",
+    }
+)
+
 # Intentional English tokens often kept in RU/DE technical prose.
 # Keep this set brand/protocol-shaped — do not add generic prose leftovers
 # (pending, sidebar, query, parameters, …) or held-out recall collapses.
@@ -150,9 +218,11 @@ def untranslated_latin_in_target(
     path: str,
     min_len: int = 4,
     intentional_loans: frozenset[str] | None = None,
+    function_stop: frozenset[str] | None = None,
 ) -> list[ClassifiedWord]:
     """Flag Latin tokens that appear in both source and target (likely leftover)."""
     allow = intentional_loans if intentional_loans is not None else DEFAULT_INTENTIONAL_LOANS
+    stop = function_stop if function_stop is not None else DEFAULT_FUNCTION_STOP
     src = {m.group(0).casefold() for m in _LATIN_WORD.finditer(source_text)}
     out: list[ClassifiedWord] = []
     seen: set[str] = set()
@@ -164,7 +234,7 @@ def untranslated_latin_in_target(
         # Kebab heading/anchor leftovers (why-you-need-…, path-parameters-with-types)
         if key.count("-") >= 2:
             continue
-        if key not in src or key in seen or key in allow:
+        if key not in src or key in seen or key in allow or key in stop:
             continue
         seen.add(key)
         out.append(

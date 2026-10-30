@@ -12,6 +12,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Real-public bilingual corpus (FastAPI + Kubernetes excerpts + seeded overlay),
   `scripts/build_real_public_corpus.py`, extra-loans file for official pages
 - Expanded lab pack rules + RU/DE fixtures; kebab-slug skip in bilingual detector
+- Community imperfect bilingual corpus (Excalidraw / Ever-teams / Zulip / Homebox
+  reconstructions) + English function-word stop list
+- Thin lab pack `ecommerce-ui-v0`
 
 ## [0.2.0] - 2026-10-30
 

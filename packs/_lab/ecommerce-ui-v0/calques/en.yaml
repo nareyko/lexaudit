@@ -1,0 +1,38 @@
+version: 1
+rules:
+  - pattern: "cartness"
+    locale: en
+    reason: "ecom-cartness"
+    hint: "cart state — invented noun"
+    severity: confirmed
+    source: "lab-ecommerce"
+  - pattern: "checkoutness"
+    locale: en
+    reason: "ecom-checkoutness"
+    hint: "checkout step — invented noun"
+    severity: confirmed
+    source: "lab-ecommerce"
+  - pattern: "wishlistability"
+    locale: en
+    reason: "ecom-wishlistability"
+    hint: "whether wishlistable"
+    severity: likely
+    source: "lab-ecommerce"
+  - pattern: "skuize"
+    locale: en
+    reason: "ecom-skuize"
+    hint: "assign SKU — invented verb"
+    severity: confirmed
+    source: "lab-ecommerce"
+  - pattern: "refundize"
+    locale: en
+    reason: "ecom-refundize"
+    hint: "refund — invented verb"
+    severity: confirmed
+    source: "lab-ecommerce"
+  - pattern: "shipability"
+    locale: en
+    reason: "ecom-shipability"
+    hint: "whether shippable"
+    severity: likely
+    source: "lab-ecommerce"

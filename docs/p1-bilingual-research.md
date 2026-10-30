@@ -23,12 +23,17 @@ intentional loans (`API`, `JSON`, `SEPA`, HTTP verbs)?
    - Prose-only excerpts via `scripts/build_real_public_corpus.py`
    - Extra loans file (official pages only; not merged into DEFAULT)
 
-4. Gold CSVs label each token as `leftover` or `intentional`.
+4. Community imperfect under `tests/fixtures/bilingual/community/`:
+   - Reconstructed leftovers from public i18n issues/PRs (Excalidraw,
+     Ever-teams, Zulip guide, Homebox)
+   - See `community/SOURCES.md`
 
-5. Detector: `untranslated_latin_in_target` + `DEFAULT_INTENTIONAL_LOANS`
-   (+ skip kebab slugs with ≥2 hyphens).
+5. Gold CSVs label each token as `leftover` or `intentional`.
 
-6. Metrics: `uv run python scripts/bilingual_metrics.py --json`.
+6. Detector: `untranslated_latin_in_target` + `DEFAULT_INTENTIONAL_LOANS`
+   + function-word stop + skip kebab slugs with ≥2 hyphens.
+
+7. Metrics: `uv run python scripts/bilingual_metrics.py --json`.
 
 ## Ship bar (lab)
 
@@ -63,17 +68,28 @@ Fail → iterate allowlist / min_len / pairing rules. Do not flip default config
 | Official-page alarms (after extra loans) | 0 |
 | Lab ship bar | pass on this corpus |
 
+### Community imperfect (cited public leftover patterns)
+
+| Metric | Value |
+|---|---:|
+| Precision | 1.00 |
+| Recall | 1.00 |
+| F1 | 1.00 |
+| Intentional FP | 0 |
+| Lab ship bar | pass (regression lock on planted leftovers) |
+
 Caveats:
 
 - Perfect synthetic score remains a protocol ceiling.
 - Real-public leftover recall is driven by the seeded overlay; official
   FastAPI/k8s translations are mostly clean after brand allowlist + prose
   scrub (anchors/URLs/fences).
+- Community fixtures reconstruct documented defects; they are not live scrapes
+  of production apps. Treat P/R as a pattern lock, then validate on fresh PRs.
 - German tech docs keep many English loans (`parameter`, `request`, …) — those
-  live in `intentional-extra.txt`, not in DEFAULT (so held-out leftovers
-  like `query` / `parameters` still fire).
-- Next iterate before default-on: more imperfect community translations (not
-  only polished official trees) and a human pass on DE loan policy.
+  live in `intentional-extra.txt`, not in DEFAULT.
+- Next before default-on: sample live Weblate/Crowdin diffs (time-boxed) and a
+  human pass on DE loan policy; keep the flag off until then.
 
 ## Reproduce
 
@@ -84,5 +100,9 @@ uv run python scripts/bilingual_metrics.py \
   --gold tests/fixtures/bilingual/real_public/gold-leftovers.csv \
   --extra-loans tests/fixtures/bilingual/real_public/intentional-extra.txt \
   --label real_public
+uv run python scripts/bilingual_metrics.py \
+  --fixtures tests/fixtures/bilingual/community \
+  --gold tests/fixtures/bilingual/community/gold-leftovers.csv \
+  --label community
 uv run pytest -q tests/test_bilingual.py
 ```

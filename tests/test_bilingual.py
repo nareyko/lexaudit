@@ -4,6 +4,7 @@ import csv
 from pathlib import Path
 
 from lexaudit.detectors.bilingual import (
+    DEFAULT_FUNCTION_STOP,
     DEFAULT_INTENTIONAL_LOANS,
     length_ratio_signal,
     pair_paths,
@@ -101,3 +102,29 @@ def test_real_public_fixtures_and_seeded_leak() -> None:
     assert "pending" in hits
     assert "sidebar" in hits
     assert "api" not in hits
+
+
+def test_function_stop_skips_glue_words() -> None:
+    assert "this" in DEFAULT_FUNCTION_STOP
+    src = "In this scene Available fonts are listed.\n"
+    tgt = "В разделе In this scene показаны Available fonts.\n"  # noqa: RUF001
+    hits = {w.normalized for w in untranslated_latin_in_target(src, tgt, path="ru/x.md")}
+    assert "this" not in hits
+    assert "scene" in hits
+    assert "available" in hits
+    assert "fonts" in hits
+
+
+def test_community_imperfect_fixtures() -> None:
+    root = FIXTURES / "community"
+    assert (root / "SOURCES.md").is_file()
+    gold = root / "gold-leftovers.csv"
+    assert gold.is_file()
+    rows = list(csv.DictReader(gold.open(encoding="utf-8")))
+    assert len(rows) >= 40
+    src = (root / "en" / "ever-sidebar.md").read_text(encoding="utf-8")
+    tgt = (root / "ru" / "ever-sidebar.md").read_text(encoding="utf-8")
+    hits = {w.normalized for w in untranslated_latin_in_target(src, tgt, path="ru/ever-sidebar.md")}
+    assert "inbox" in hits
+    assert "platform" in hits
+    assert "home" in hits

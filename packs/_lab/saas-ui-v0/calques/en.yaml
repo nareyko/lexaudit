@@ -183,3 +183,22 @@ rules:
     hint: "add to favorites — invented verb"
     severity: confirmed
     source: "lab-saas-ui"
+
+  - pattern: "subscribingness"
+    locale: en
+    reason: "saas-ui-subscribingness"
+    hint: "subscribe state — invented noun"
+    severity: confirmed
+    source: "lab-saas-ui-ever-teams"
+  - pattern: "inboxness"
+    locale: en
+    reason: "saas-ui-inboxness"
+    hint: "inbox view — invented noun"
+    severity: confirmed
+    source: "lab-saas-ui-ever-teams"
+  - pattern: "quickcreateness"
+    locale: en
+    reason: "saas-ui-quickcreateness"
+    hint: "quick create — invented noun"
+    severity: confirmed
+    source: "lab-saas-ui-ever-teams"

@@ -37,9 +37,14 @@ Healthcare / legal / e-commerce remain candidates for a later hunt.
 | developer-docs-v0 | en | 8 | 64.0 | 0.0 | yes |
 | developer-docs-v0 | ru | 3 | 24.0 | 2.1 | yes |
 | developer-docs-v0 | de | 4 | 32.2 | 0.2 | yes |
+| ecommerce-ui-v0 | en | 6 | 48.0 | 0.0 | yes |
+| ecommerce-ui-v0 | ru | 3 | 24.0 | 0.0 | yes |
+| ecommerce-ui-v0 | de | 3 | 24.0 | 0.0 | yes |
 
 Verdict: **iterate** (still fixture-backed; attach to Release only after owner go).
-Lab rank bar passes on EN/RU/DE fixtures after rule expansion.
+Lab rank bar passes on EN/RU/DE fixtures after rule expansion + thin ecommerce pack.
+Community bilingual leftovers (Excalidraw / Ever-teams / Zulip / Homebox) feed
+saas-ui rule seeds; they do not change Release attach policy.
 
 ## Hard rules
 

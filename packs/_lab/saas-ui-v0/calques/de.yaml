@@ -151,3 +151,16 @@ rules:
     hint: "anheften / fixieren"
     severity: weak
     source: "lab-saas-ui"
+
+  - pattern: "inboxheit"
+    locale: de
+    reason: "saas-ui-de-inboxheit"
+    hint: "Posteingang"
+    severity: confirmed
+    source: "lab-saas-ui-ever-teams"
+  - pattern: "subscriben"
+    locale: de
+    reason: "saas-ui-de-subscriben"
+    hint: "abonnieren"
+    severity: likely
+    source: "lab-saas-ui-ever-teams"

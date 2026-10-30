@@ -171,3 +171,16 @@ rules:
     hint: "закрепить"
     severity: likely
     source: "lab-saas-ui"
+
+  - pattern: "приватный стрим"
+    locale: ru
+    reason: "saas-ui-zulip-private-stream"
+    hint: "закрытый канал (Zulip RU guide)"
+    severity: likely
+    source: "lab-saas-ui-zulip"
+  - pattern: "фидбек по email"
+    locale: ru
+    reason: "saas-ui-zulip-feedback-email"
+    hint: "обратная связь по электронной почте"
+    severity: likely
+    source: "lab-saas-ui-zulip"

@@ -38,19 +38,24 @@ Everything runs on an ordinary computer processor. No graphics card, no internet
 ```text
 lexaudit/
   src/lexaudit/
-    cli/main.py          # init | doctor | audit | explain | rank | expand-needle | label | eval | diff
-    config.py            # YAML to LexauditConfig
+    cli/main.py          # init | doctor | audit | pack | explain | rank | …
+    config.py            # YAML to LexauditConfig (enable_bilingual default false)
     core/                # tokenize, classify, rank, pipeline
-    detectors/           # allowlist, hunspell, morph, compound, foreign, english_leak, calque
+    detectors/           # allowlist, hunspell, morph, compound, foreign,
+                         # english_leak, calque, bilingual (opt-in)
+    packs.py             # pack list/install/verify (packs/ + packs/_lab --lab)
     dictpacks/loader.py  # names, abbreviations, known compound parts
-    sources/collect.py   # Markdown, academy JSON, packs, JSONL export
-    report/              # write, diff, expand_needle
+    sources/collect.py   # Markdown, academy JSON, packs, HTML/PO/XLIFF, …
+    report/              # write, diff, expand_needle, CI/SARIF
     curated/queue.py     # rewrite-queue.md or JSON
     llm/                 # optional label step, cached on disk
     eval/                # quality metrics
-  rules/calques/{en,de,es,pl,ru,sv,uk}.yaml
+  packs/core-calques-v1/ # release pack
+  packs/_lab/            # experimental domain packs (0.3.0 owner go)
+  rules/calques/         # FairHelm bridge copy of core calques
   schema/report-v1.schema.json
-  scripts/render_diagrams.py   # rebuilds the pictures in docs/images
+  scripts/render_diagrams.py
+  scripts/fairhelm_soft_dogfood.sh
   docs/
 ```
 

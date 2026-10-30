@@ -23,6 +23,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Lab packs `healthcare-ui-v0`, `legal-docs-v0`; known-rule recall in
   `lab_pack_metrics.py`; `run_lab_pack_metrics.py`; `docs/p1-0.3.0-prep.md`
 - `lexaudit pack list|install --lab`; `scripts/promote_lab_pack.py` dry-run
+- `scripts/fairhelm_soft_dogfood.sh` host soft audit helper
 
 ## [0.2.0] - 2026-10-30
 

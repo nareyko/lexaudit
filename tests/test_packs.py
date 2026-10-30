@@ -30,6 +30,13 @@ def test_list_and_install_lab_pack(tmp_path: Path) -> None:
     assert verify_pack("saas-ui-v0", dest=tmp_path) == rules
 
 
+def test_install_unknown_lab_pack_raises(tmp_path: Path) -> None:
+    import pytest
+
+    with pytest.raises(FileNotFoundError, match="unknown pack"):
+        install_pack("no-such-lab-pack", dest=tmp_path, lab=True)
+
+
 def test_pack_cli(tmp_path: Path) -> None:
     runner = CliRunner()
     listed = runner.invoke(main, ["pack", "list"])

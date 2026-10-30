@@ -24,6 +24,9 @@
 | [Licensing](licensing.md) | Dual license: MIT package · AGPL for hosted SaaS |
 | [DE UI loans](p1-de-loan-policy.md) | German keeps Dashboard/Toast/… on purpose — extras only, not DEFAULT |
 | [0.3.0 prep](p1-0.3.0-prep.md) | Which `_lab` packs promote; bilingual stays opt-in |
+| [Next-wave plan](p1-next-wave-plan-2026-10-30.md) | Wild wiki corpus, bilingual/crosslocale fixes, product shell |
+| [Next-wave status](p1-status-next-wave-2026-10-30.md) | What is thin now and how to fix it |
+| [Product shell checklist](p1-product-shell-checklist-2026-10-30.md) | VS Marketplace + MCP registry owner steps |
 | [Agent workflow](agent-workflow.md) | From report to fixed page and back |
 | [Scores and metrics](weights-and-metrics.md) | How pages are scored, how quality is measured |
 

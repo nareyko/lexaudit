@@ -1,0 +1,45 @@
+version: 1
+rules:
+  - pattern: "shortlistability"
+    locale: en
+    reason: "hr-shortlistability"
+    hint: "whether shortlistable"
+    severity: likely
+    source: "lab-hr"
+  - pattern: "onboardize"
+    locale: en
+    reason: "hr-onboardize"
+    hint: "run onboarding — invented verb"
+    severity: confirmed
+    source: "lab-hr"
+  - pattern: "pipelineness"
+    locale: en
+    reason: "hr-pipelineness"
+    hint: "pipeline stage — invented noun"
+    severity: confirmed
+    source: "lab-hr"
+  - pattern: "offerize"
+    locale: en
+    reason: "hr-offerize"
+    hint: "send an offer — invented verb"
+    severity: confirmed
+    source: "lab-hr"
+  - pattern: "atsness"
+    locale: en
+    reason: "hr-atsness"
+    hint: "ATS state — invented noun"
+    severity: confirmed
+    source: "lab-hr"
+  - pattern: "screenability"
+    locale: en
+    reason: "hr-screenability"
+    hint: "whether screenable — false-friend -ability stack"
+    severity: likely
+    source: "lab-hr"
+    override_ok: true
+  - pattern: "requisitionize"
+    locale: en
+    reason: "hr-requisitionize"
+    hint: "open a requisition — invented verb"
+    severity: confirmed
+    source: "lab-hr"

@@ -1,0 +1,26 @@
+version: 1
+rules:
+  - pattern: "exploitheit"
+    locale: de
+    reason: "sec-de-exploitheit"
+    hint: "Exploit-Artefakt"
+    severity: confirmed
+    source: "lab-security"
+  - pattern: "sandboxieren"
+    locale: de
+    reason: "sec-de-sandboxieren"
+    hint: "in Sandbox isolieren"
+    severity: confirmed
+    source: "lab-security"
+  - pattern: "phishbarkeit"
+    locale: de
+    reason: "sec-de-phishbarkeit"
+    hint: "Anfälligkeit für Phishing"
+    severity: likely
+    source: "lab-security"
+  - pattern: "hardenbarkeit"
+    locale: de
+    reason: "sec-de-hardenbarkeit"
+    hint: "härtbar"
+    severity: likely
+    source: "lab-security"

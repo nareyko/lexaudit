@@ -1,0 +1,45 @@
+version: 1
+rules:
+  - pattern: "exploitness"
+    locale: en
+    reason: "sec-exploitness"
+    hint: "exploit artifact state — invented noun"
+    severity: confirmed
+    source: "lab-security"
+  - pattern: "sandboxize"
+    locale: en
+    reason: "sec-sandboxize"
+    hint: "isolate in a sandbox — invented verb"
+    severity: confirmed
+    source: "lab-security"
+  - pattern: "phishability"
+    locale: en
+    reason: "sec-phishability"
+    hint: "susceptibility to phishing"
+    severity: likely
+    source: "lab-security"
+  - pattern: "hardenability"
+    locale: en
+    reason: "sec-hardenability"
+    hint: "whether a host can be hardened — false-friend -ability stack"
+    severity: likely
+    source: "lab-security"
+    override_ok: true
+  - pattern: "zerodayness"
+    locale: en
+    reason: "sec-zerodayness"
+    hint: "zero-day status — invented noun"
+    severity: confirmed
+    source: "lab-security"
+  - pattern: "payloadize"
+    locale: en
+    reason: "sec-payloadize"
+    hint: "attach a payload — invented verb"
+    severity: confirmed
+    source: "lab-security"
+  - pattern: "severityness"
+    locale: en
+    reason: "sec-severityness"
+    hint: "CVSS band — invented noun"
+    severity: confirmed
+    source: "lab-security"

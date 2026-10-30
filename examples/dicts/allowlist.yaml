@@ -101,3 +101,23 @@ locale_loans:
   - basenames
   - defaulton
   - optin
+  # Harvest pack demo needles (gaming / edtech / security / hr) cited in docs.
+  - lootability
+  - matchmakeize
+  - respawnness
+  - inventoryize
+  - scormness
+  - quizability
+  - coursewarize
+  - lmsize
+  - exploitness
+  - sandboxize
+  - phishability
+  - hardenability
+  - shortlistability
+  - onboardize
+  - pipelineness
+  - offerize
+  - atsness
+  - requisitionize
+  - screenability

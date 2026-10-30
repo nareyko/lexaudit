@@ -1,16 +1,20 @@
 # Lab packs (not released)
 
 Experimental industry packs. Do **not** attach to GitHub Releases with 0.2.x.
-See `docs/p1-0.3.0-prep.md` for promote checklist.
+See `docs/p1-0.3.0-prep.md` for promote checklist. Inventory: **10** packs.
 
 | Pack | Focus | 0.3.0 proposal |
 |---|---|---|
 | `saas-ui-v0` | Product UI calques / anglicisms | promote |
 | `fintech-v0` | Payments / ledger leftovers | promote |
 | `developer-docs-v0` | API prose coinages | promote |
-| `ecommerce-ui-v0` | Checkout / cart coinages (thin) | keep lab |
-| `healthcare-ui-v0` | Patient UI coinages (thin) | keep lab |
-| `legal-docs-v0` | Contract prose coinages (thin) | keep lab |
+| `ecommerce-ui-v0` | Checkout / cart coinages | promote |
+| `healthcare-ui-v0` | Patient UI coinages | promote |
+| `legal-docs-v0` | Contract prose coinages | promote |
+| `gaming-ui-v0` | Game HUD / loot coinages | keep lab (harvest) |
+| `edtech-v0` | LMS / SCORM coinages | keep lab (harvest) |
+| `security-docs-v0` | Security / pen-test prose | keep lab (harvest) |
+| `hr-ats-v0` | ATS / recruiting coinages | keep lab (harvest) |
 
 Measure / dogfood:
 

@@ -1,0 +1,13 @@
+id: security-docs-v0
+version: 0.0.1-lab
+license: MIT
+locales: [en, de, es, pl, ru, sv, uk]
+status: lab
+rules_dir: calques
+notes: >-
+  Thin security / pen-test prose coinages (sandbox, exploit, phishing, harden).
+  Lab harvest 2026-10-30. Not security advice; identifiers CVE/CWE stay untouched.
+sources:
+  - https://www.smartling.com/questions/security-terminology-translation-consistency
+  - https://www.ciol.org.uk/net-security
+  - https://doi.org/10.30525/978-9934-26-548-8-26

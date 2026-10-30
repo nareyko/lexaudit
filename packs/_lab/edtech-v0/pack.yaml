@@ -1,0 +1,14 @@
+id: edtech-v0
+version: 0.0.1-lab
+license: MIT
+locales: [en, de, es, pl, ru, sv, uk]
+status: lab
+rules_dir: calques
+notes: >-
+  Thin LMS / SCORM / courseware coinages from public e-learning localization
+  guides. Lab harvest 2026-10-30. No pedagogical advice.
+sources:
+  - https://scormbuilder.ai/blog/translate-scorm-course/
+  - https://translated.com/resources/e-learning-translation-interactivity-localization-guide
+  - https://anantranslations.com/scorm-xapi-translation-guide/
+  - https://www.vozo.ai/blogs/e-learning-translation/elearning-courseware-translation-guide

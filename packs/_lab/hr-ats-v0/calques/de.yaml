@@ -1,0 +1,26 @@
+version: 1
+rules:
+  - pattern: "shortlistbarkeit"
+    locale: de
+    reason: "hr-de-shortlistbarkeit"
+    hint: "auf Shortlist setzbar"
+    severity: likely
+    source: "lab-hr"
+  - pattern: "onboardisieren"
+    locale: de
+    reason: "hr-de-onboardisieren"
+    hint: "Onboarding starten"
+    severity: confirmed
+    source: "lab-hr"
+  - pattern: "pipelineheit"
+    locale: de
+    reason: "hr-de-pipelineheit"
+    hint: "Pipeline-Stufe"
+    severity: confirmed
+    source: "lab-hr"
+  - pattern: "offerisieren"
+    locale: de
+    reason: "hr-de-offerisieren"
+    hint: "Angebot senden"
+    severity: confirmed
+    source: "lab-hr"

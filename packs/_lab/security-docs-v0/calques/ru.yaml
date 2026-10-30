@@ -1,0 +1,26 @@
+version: 1
+rules:
+  - pattern: "эксплойтность"
+    locale: ru
+    reason: "sec-ru-exploitness"
+    hint: "состояние эксплойта"
+    severity: confirmed
+    source: "lab-security"
+  - pattern: "сэндбоксить"
+    locale: ru
+    reason: "sec-ru-sandboxize"
+    hint: "изолировать в песочнице"
+    severity: confirmed
+    source: "lab-security"
+  - pattern: "фишабельность"
+    locale: ru
+    reason: "sec-ru-phishability"
+    hint: "уязвимость к фишингу"
+    severity: likely
+    source: "lab-security"
+  - pattern: "хардненость"
+    locale: ru
+    reason: "sec-ru-harden"
+    hint: "закалённость хоста (лучше: hardening / усиление)"
+    severity: confirmed
+    source: "lab-security"

@@ -1,0 +1,26 @@
+version: 1
+rules:
+  - pattern: "lootbarkeit"
+    locale: de
+    reason: "game-de-lootbarkeit"
+    hint: "plünderbar / lootbar"
+    severity: likely
+    source: "lab-gaming"
+  - pattern: "matchmakeheit"
+    locale: de
+    reason: "game-de-matchmakeheit"
+    hint: "Matchmaking starten"
+    severity: confirmed
+    source: "lab-gaming"
+  - pattern: "respawnheit"
+    locale: de
+    reason: "game-de-respawnheit"
+    hint: "Respawn-Status"
+    severity: confirmed
+    source: "lab-gaming"
+  - pattern: "inventoryieren"
+    locale: de
+    reason: "game-de-inventoryieren"
+    hint: "ins Inventar legen"
+    severity: confirmed
+    source: "lab-gaming"

@@ -1,0 +1,44 @@
+version: 1
+rules:
+  - pattern: "lootability"
+    locale: en
+    reason: "game-lootability"
+    hint: "whether lootable — invented noun"
+    severity: likely
+    source: "lab-gaming"
+  - pattern: "matchmakeize"
+    locale: en
+    reason: "game-matchmakeize"
+    hint: "run matchmaking — invented verb"
+    severity: confirmed
+    source: "lab-gaming"
+  - pattern: "respawnness"
+    locale: en
+    reason: "game-respawnness"
+    hint: "respawn state — invented noun"
+    severity: confirmed
+    source: "lab-gaming"
+  - pattern: "inventoryize"
+    locale: en
+    reason: "game-inventoryize"
+    hint: "add to inventory — invented verb"
+    severity: confirmed
+    source: "lab-gaming"
+  - pattern: "questability"
+    locale: en
+    reason: "game-questability"
+    hint: "whether a quest can start"
+    severity: likely
+    source: "lab-gaming"
+  - pattern: "guildness"
+    locale: en
+    reason: "game-guildness"
+    hint: "guild status — invented noun"
+    severity: confirmed
+    source: "lab-gaming"
+  - pattern: "loadoutness"
+    locale: en
+    reason: "game-loadoutness"
+    hint: "loadout state — invented noun"
+    severity: confirmed
+    source: "lab-gaming"

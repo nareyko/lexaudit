@@ -1,0 +1,44 @@
+version: 1
+rules:
+  - pattern: "scormness"
+    locale: en
+    reason: "edtech-scormness"
+    hint: "SCORM package state — invented noun"
+    severity: confirmed
+    source: "lab-edtech"
+  - pattern: "quizability"
+    locale: en
+    reason: "edtech-quizability"
+    hint: "whether quizable"
+    severity: likely
+    source: "lab-edtech"
+  - pattern: "coursewarize"
+    locale: en
+    reason: "edtech-coursewarize"
+    hint: "turn into courseware — invented verb"
+    severity: confirmed
+    source: "lab-edtech"
+  - pattern: "enrollability"
+    locale: en
+    reason: "edtech-enrollability"
+    hint: "whether learners can enroll"
+    severity: likely
+    source: "lab-edtech"
+  - pattern: "lmsize"
+    locale: en
+    reason: "edtech-lmsize"
+    hint: "publish to LMS — invented verb"
+    severity: confirmed
+    source: "lab-edtech"
+  - pattern: "xapiness"
+    locale: en
+    reason: "edtech-xapiness"
+    hint: "xAPI tracking state — invented noun"
+    severity: confirmed
+    source: "lab-edtech"
+  - pattern: "completionize"
+    locale: en
+    reason: "edtech-completionize"
+    hint: "mark complete — invented verb"
+    severity: confirmed
+    source: "lab-edtech"

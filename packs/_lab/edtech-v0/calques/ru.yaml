@@ -1,0 +1,26 @@
+version: 1
+rules:
+  - pattern: "скуормность"
+    locale: ru
+    reason: "edtech-ru-scormness"
+    hint: "состояние SCORM-пакета"
+    severity: confirmed
+    source: "lab-edtech"
+  - pattern: "квизабельность"
+    locale: ru
+    reason: "edtech-ru-quizability"
+    hint: "можно ли проверить тестом"
+    severity: likely
+    source: "lab-edtech"
+  - pattern: "курсваризировать"
+    locale: ru
+    reason: "edtech-ru-coursewarize"
+    hint: "оформить как курс"
+    severity: confirmed
+    source: "lab-edtech"
+  - pattern: "элэмэсайзить"
+    locale: ru
+    reason: "edtech-ru-lmsize"
+    hint: "опубликовать в LMS"
+    severity: confirmed
+    source: "lab-edtech"

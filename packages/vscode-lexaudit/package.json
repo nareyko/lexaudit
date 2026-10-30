@@ -2,7 +2,7 @@
   "name": "vscode-lexaudit",
   "displayName": "lexaudit",
   "description": "Locale vocabulary audit: calques, inventeds, foreign slips. Shells out to the local lexaudit CLI \u2014 no cloud.",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "publisher": "nareyko",
   "license": "MIT",
   "engines": {

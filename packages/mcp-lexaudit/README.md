@@ -1,5 +1,9 @@
 # lexaudit MCP (stdio)
 
+Grew out of auditing multilingual courses and encyclopedias at
+[FairHelm](https://fairhelm.com). CLI package:
+[github.com/nareyko/lexaudit](https://github.com/nareyko/lexaudit).
+
 Publish-ready metadata for the official MCP registry. The server entry point is
 the Python package extra:
 
@@ -24,8 +28,8 @@ Tools: `audit`, `explain`, `expand_needle`, `fetch_dicts`. Detection only.
 
 ## Registry artifact
 
-`server.json` describes the PyPI package + stdio transport. Publish to the MCP
-registry only after PyPI `lexaudit==0.3.0` is live (owner publish go).
+`server.json` describes the PyPI package + stdio transport. Current registry
+entry: `io.github.nareyko/lexaudit` (PyPI `lexaudit`).
 
 ## License
 

@@ -23,7 +23,7 @@ Owner-executable. Local packaging already done; publish needs accounts.
 | 3 | Confirm README images are HTTPS only (no local SVG embeds in Marketplace README) | agent | ☑ no images in README |
 | 4 | `vsce login nareyko` (or Trusted Publishing / OIDC) | owner | ☑ |
 | 5 | After PyPI 0.3.0 live: `vsce publish` | owner | ☑ [Marketplace](https://marketplace.visualstudio.com/items?itemName=nareyko.vscode-lexaudit) |
-| 6 | Optional: publish same `.vsix` to Open VSX | owner | □ |
+| 6 | Open VSX (Cursor / VSCodium) — see publish-status | owner | □ `OVSX_PAT` |
 
 Refs: [Publishing Extensions](https://code.visualstudio.com/api/working-with-extensions/publishing-extension).
 

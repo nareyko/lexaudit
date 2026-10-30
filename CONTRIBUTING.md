@@ -1,7 +1,8 @@
 # Contributing
 
 `lexaudit` is created and maintained by **Vadim Nareyko**
-([github.com/nareyko](https://github.com/nareyko)).
+([github.com/nareyko](https://github.com/nareyko)). It grew out of auditing
+multilingual courses and encyclopedias at [FairHelm](https://fairhelm.com).
 
 ## Dual license
 

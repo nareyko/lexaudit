@@ -2,6 +2,10 @@
 
 Shells out to the local `lexaudit` CLI. Detection only: no rewrite, no cloud.
 
+Grew out of auditing multilingual courses and encyclopedias at
+[FairHelm](https://fairhelm.com). Package and CLI:
+[github.com/nareyko/lexaudit](https://github.com/nareyko/lexaudit).
+
 ## Requirements
 
 Install the CLI first:
@@ -10,6 +14,16 @@ Install the CLI first:
 pipx install lexaudit
 # or: uv tool install lexaudit
 ```
+
+## Install the extension
+
+| Editor | Store |
+|---|---|
+| VS Code | [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=nareyko.vscode-lexaudit) |
+| Cursor / VSCodium / other Open VSX clients | [Open VSX](https://open-vsx.org/extension/nareyko/vscode-lexaudit) (after publish) |
+
+Or install a release `.vsix` from
+[GitHub Releases](https://github.com/nareyko/lexaudit/releases).
 
 ## Commands
 

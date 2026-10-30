@@ -1,6 +1,6 @@
 # How a word gets judged
 
-![Word classification ladder](images/lexaudit-classify-pipeline.jpg)
+![Word classification ladder](images/classify-pipeline.svg)
 
 ## In plain words
 

@@ -18,7 +18,7 @@ Unknown terms? See the [glossary](docs/glossary.md).
 - Author: Vadim Nareyko ([github.com/nareyko](https://github.com/nareyko))
 - License: **dual** — [MIT](LICENSE) package · [AGPL-3.0-or-later](LICENSE-AGPL-HOSTED.md) hosted SaaS ([details](docs/licensing.md))
 
-![How lexaudit works](docs/images/lexaudit-overview.jpg)
+![How lexaudit works](docs/images/overview.svg)
 
 ---
 
@@ -85,7 +85,7 @@ Then open `tmp/synthetic-demo-out/<language>/queue.md`.
 
 We built a 42-page test set in all 7 languages: 21 clean technical pages and 21 pages with planted problems. Some problems are known to the rules, some are brand new words the rules have never seen. Details: [docs/synthetic-benchmark.md](docs/synthetic-benchmark.md).
 
-![Benchmark results](docs/images/lexaudit-synthetic-benchmark.jpg)
+![Benchmark results](docs/images/synthetic-benchmark.svg)
 
 | Setup | Bad page in top 2 | Bad page in top 3 | MAP (0 to 1, higher is better) | Known problems found | Brand new problems found | Time |
 |---|---:|---:|---:|---:|---:|---:|
@@ -115,7 +115,7 @@ Start with [`docs/README.md`](docs/README.md).
 | [Agent workflow](docs/agent-workflow.md) | From report to fixed page |
 | [Scores and metrics](docs/weights-and-metrics.md) | How pages are scored |
 
-![Word classification ladder](docs/images/lexaudit-classify-pipeline.jpg)
+![Word classification ladder](docs/images/classify-pipeline.svg)
 
 ---
 

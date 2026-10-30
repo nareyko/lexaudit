@@ -1,6 +1,6 @@
 # How lexaudit is built
 
-![How lexaudit connects to your project](images/lexaudit-host-bridge.jpg)
+![How lexaudit connects to your project](images/host-bridge.svg)
 
 ## In plain words
 

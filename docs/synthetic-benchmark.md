@@ -1,8 +1,6 @@
 # Stratified 42-Page Benchmark & Ablation Study (7 European Languages)
 
-![Synthetic Benchmark](images/lexaudit-synthetic-benchmark.jpg)
-
-Also available as a compact vector graphic: [synthetic-benchmark.svg](images/synthetic-benchmark.svg)
+![Synthetic Benchmark](images/synthetic-benchmark.svg)
 
 ## In plain words
 

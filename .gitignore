@@ -43,6 +43,10 @@ packages/vscode-lexaudit/*.vsix
 frontend/
 lexaudit.config.local.yaml
 
+# Raster diagram exports (SVG is git SSOT; regenerate with --jpg)
+docs/images/*.jpg
+docs/images/*.tmp.png
+
 # Large external corpora / dumps — never commit
 dumps/
 *.tmx

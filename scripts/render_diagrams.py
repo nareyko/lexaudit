@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
-"""Deterministically generate SVG diagrams and high-DPI JPGs for lexaudit docs."""
+"""Deterministically generate SVG diagrams for lexaudit docs.
+
+SVGs are the git SSOT. Optional high-DPI JPGs (``--jpg``) stay local —
+``docs/images/*.jpg`` is gitignored (~1 MiB of raster duplicates).
+"""
 
 from __future__ import annotations
 
+import argparse
 import subprocess
 from pathlib import Path
-
-from PIL import Image  # type: ignore[import-untyped]
 
 ROOT = Path(__file__).resolve().parents[1]
 IMG_DIR = ROOT / "docs" / "images"
@@ -320,6 +323,8 @@ BENCHMARK_SVG = """<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="
 
 
 def _svg_to_jpg(svg_path: Path, jpg_path: Path, width: int) -> None:
+    from PIL import Image  # type: ignore[import-untyped]
+
     png_tmp = jpg_path.with_suffix(".tmp.png")
     subprocess.run(
         [
@@ -338,19 +343,34 @@ def _svg_to_jpg(svg_path: Path, jpg_path: Path, width: int) -> None:
 
 
 def main() -> None:
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument(
+        "--jpg",
+        action="store_true",
+        help="Also rasterize JPGs under docs/images/ (gitignored; needs inkscape+Pillow)",
+    )
+    args = p.parse_args()
+
     IMG_DIR.mkdir(parents=True, exist_ok=True)
+    # overview.svg is canonical; pipeline-flow.svg kept as alias for old links.
     specs = [
-        ("pipeline-flow.svg", "lexaudit-overview.jpg", OVERVIEW_SVG, 1600),
+        ("overview.svg", "lexaudit-overview.jpg", OVERVIEW_SVG, 1600),
         ("classify-pipeline.svg", "lexaudit-classify-pipeline.jpg", CLASSIFY_SVG, 1200),
         ("host-bridge.svg", "lexaudit-host-bridge.jpg", HOST_BRIDGE_SVG, 1600),
         ("synthetic-benchmark.svg", "lexaudit-synthetic-benchmark.jpg", BENCHMARK_SVG, 1600),
     ]
     for svg_name, jpg_name, svg_content, width in specs:
         svg_path = IMG_DIR / svg_name
-        jpg_path = IMG_DIR / jpg_name
         svg_path.write_text(svg_content, encoding="utf-8")
-        _svg_to_jpg(svg_path, jpg_path, width=width)
-        print(f"Rendered {svg_path.name} -> {jpg_path.name} ({jpg_path.stat().st_size // 1024} KB)")
+        print(f"Wrote {svg_path.name}")
+        if svg_name == "overview.svg":
+            alias = IMG_DIR / "pipeline-flow.svg"
+            alias.write_text(svg_content, encoding="utf-8")
+            print(f"Wrote {alias.name} (alias of overview)")
+        if args.jpg:
+            jpg_path = IMG_DIR / jpg_name
+            _svg_to_jpg(svg_path, jpg_path, width=width)
+            print(f"  -> {jpg_path.name} ({jpg_path.stat().st_size // 1024} KB, local only)")
 
 
 if __name__ == "__main__":

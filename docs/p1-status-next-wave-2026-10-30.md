@@ -24,6 +24,7 @@
 | P1 docs navigation | `p1-INDEX.md` |
 | Stale lab plan wording | points at 0.3.0 RC + index |
 | Twin `packs/_lab` trees | thin stubs only; `pack_content_dir` + hygiene gate |
+| Docs raster JPGs (~1.1 MiB) | SVG SSOT; `docs/images/*.jpg` gitignored + hygiene |
 
 ## Still owner-only
 
@@ -37,4 +38,4 @@ accounts (see runbook). Re-scan with `scripts/check_repo_hygiene.py` before publ
 ## Do not commit
 
 `dumps/`, `cx-corpora.*`, `*.tmx*`, `tmp/**`, `dist/**`, `*.vsix`, `*.whl`,
-`gold/`, `eval/`, `lexaudit.config.local.yaml`.
+`docs/images/*.jpg`, `gold/`, `eval/`, `lexaudit.config.local.yaml`.

@@ -25,4 +25,5 @@ uv run python scripts/check_repo_hygiene.py
 ```
 
 0.3.0 prep / publish docs: [docs/p1-INDEX.md](docs/p1-INDEX.md).
-Do not commit `dumps/`, `tmp/`, `dist/`, `*.vsix`, or `lexaudit.config.local.yaml`.
+Do not commit `dumps/`, `tmp/`, `dist/`, `*.vsix`, `*.whl`, `docs/images/*.jpg`,
+or `lexaudit.config.local.yaml`. Diagrams in git are SVG only.

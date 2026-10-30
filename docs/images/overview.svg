@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="lexaudit overview">
+  <rect width="1280" height="720" fill="#f7f5f0"/>
+  <rect x="40" y="32" width="1200" height="84" rx="12" fill="#1b2a4a"/>
+  <text x="72" y="72" font-family="DejaVu Sans,sans-serif" font-size="28" font-weight="700" fill="#ffffff">lexaudit - Multilingual Vocabulary Audit &amp; Page Queue</text>
+  <text x="72" y="100" font-family="DejaVu Sans,sans-serif" font-size="16" fill="#cfe8e8">7 European Languages: EN, DE, ES, PL, RU, SV, UK  |  CPU-Only (No GPU Required)  |  Read-Only on Your Files</text>
+
+  <!-- Step 1: Inputs -->
+  <rect x="40" y="148" width="340" height="430" rx="14" fill="#ffffff" stroke="#1b2a4a" stroke-width="2.5"/>
+  <rect x="40" y="148" width="340" height="54" rx="14" fill="#1b2a4a"/>
+  <text x="210" y="182" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#ffffff">1. Your Text &amp; Dictionaries</text>
+
+  <rect x="68" y="226" width="284" height="76" rx="8" fill="#f0f4f8" stroke="#c5cdd8"/>
+  <text x="86" y="254" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#1b2a4a">Markdown &amp; Docs (files)</text>
+  <text x="86" y="280" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#4a5568">README.md, docs/**/*.md, courses</text>
+
+  <rect x="68" y="320" width="284" height="76" rx="8" fill="#f0f4f8" stroke="#c5cdd8"/>
+  <text x="86" y="348" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#1b2a4a">Structured JSON / JSONL</text>
+  <text x="86" y="374" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#4a5568">Articles, encyclopedias, model packs</text>
+
+  <rect x="68" y="414" width="284" height="136" rx="8" fill="#eaf6f6" stroke="#0d7377"/>
+  <text x="86" y="442" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#0d7377">Project Allowlists &amp; Rules</text>
+  <text x="86" y="468" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- proper-names.yaml (brands)</text>
+  <text x="86" y="492" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- acronyms.yaml (abbreviations)</text>
+  <text x="86" y="516" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- rules/calques/*.yaml (7 locales)</text>
+
+  <!-- Arrow 1 -> 2 -->
+  <path d="M388 360 H436" stroke="#0d7377" stroke-width="4" fill="none"/>
+  <polygon points="436,352 452,360 436,368" fill="#0d7377"/>
+
+  <!-- Step 2: Pipeline -->
+  <rect x="458" y="148" width="384" height="430" rx="14" fill="#ffffff" stroke="#0d7377" stroke-width="2.5"/>
+  <rect x="458" y="148" width="384" height="54" rx="14" fill="#0d7377"/>
+  <text x="650" y="182" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#ffffff">2. 6-Stage CPU Analysis (~1 sec)</text>
+
+  <g font-family="DejaVu Sans,sans-serif" font-size="14" fill="#1b2a4a">
+    <rect x="484" y="220" width="332" height="48" rx="6" fill="#f7f9fb" stroke="#c5cdd8"/>
+    <text x="500" y="249"><tspan font-weight="700">1. Tokenize (NFC):</tspan> strip URLs, code, links</text>
+
+    <rect x="484" y="278" width="332" height="48" rx="6" fill="#f7f9fb" stroke="#c5cdd8"/>
+    <text x="500" y="307"><tspan font-weight="700">2. Allowlists:</tspan> clear brands &amp; acronyms</text>
+
+    <rect x="484" y="336" width="332" height="48" rx="6" fill="#f7f9fb" stroke="#c5cdd8"/>
+    <text x="500" y="365"><tspan font-weight="700">3. Hunspell:</tspan> check 7 European dictionaries</text>
+
+    <rect x="484" y="394" width="332" height="48" rx="6" fill="#f7f9fb" stroke="#c5cdd8"/>
+    <text x="500" y="423"><tspan font-weight="700">4. Morph &amp; Compounds:</tspan> RU/UK + DE/SV</text>
+
+    <rect x="484" y="452" width="332" height="48" rx="6" fill="#fdf2f2" stroke="#d9a3a3"/>
+    <text x="500" y="481"><tspan font-weight="700" fill="#8b3a4a">5. Foreign &amp; Calques:</tspan> catch false friends</text>
+
+    <rect x="484" y="510" width="332" height="48" rx="6" fill="#eaf6f6" stroke="#0d7377"/>
+    <text x="500" y="539"><tspan font-weight="700" fill="#0d7377">6. Weighted Rank:</tspan> score pages by priority</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <path d="M848 360 H896" stroke="#0d7377" stroke-width="4" fill="none"/>
+  <polygon points="896,352 912,360 896,368" fill="#0d7377"/>
+
+  <!-- Step 3: Outputs -->
+  <rect x="918" y="148" width="322" height="430" rx="14" fill="#ffffff" stroke="#1b2a4a" stroke-width="2.5"/>
+  <rect x="918" y="148" width="322" height="54" rx="14" fill="#1b2a4a"/>
+  <text x="1079" y="182" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#ffffff">3. Editor-Ready Reports</text>
+
+  <rect x="944" y="226" width="270" height="84" rx="8" fill="#eaf6f6" stroke="#0d7377"/>
+  <text x="962" y="256" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#0d7377">queue.md &amp; rewrite-queue</text>
+  <text x="962" y="280" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">Pages sorted by defect severity</text>
+  <text x="962" y="298" font-family="DejaVu Sans,sans-serif" font-size="12" fill="#4a5568">(fix top pages first)</text>
+
+  <rect x="944" y="328" width="270" height="84" rx="8" fill="#f0f4f8" stroke="#c5cdd8"/>
+  <text x="962" y="358" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#1b2a4a">summary.md &amp; suspect.csv</text>
+  <text x="962" y="382" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#4a5568">Spreadsheet-ready word table</text>
+  <text x="962" y="400" font-family="DejaVu Sans,sans-serif" font-size="12" fill="#4a5568">with counts and file locations</text>
+
+  <rect x="944" y="430" width="270" height="120" rx="8" fill="#f0f4f8" stroke="#c5cdd8"/>
+  <text x="962" y="460" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#1b2a4a">lexaudit explain &lt;word&gt;</text>
+  <text x="962" y="486" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#4a5568">Shows why a word was flagged</text>
+  <text x="962" y="508" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#0d7377">and suggests natural phrasing</text>
+  <text x="962" y="530" font-family="DejaVu Sans,sans-serif" font-size="12" fill="#4a5568">+ report.json (Schema v1)</text>
+
+  <!-- Bottom Safety Banner -->
+  <rect x="40" y="608" width="1200" height="68" rx="10" fill="#ffffff" stroke="#0d7377" stroke-width="2"/>
+  <text x="640" y="649" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#1b2a4a">Safe by Design (Detection Only): lexaudit never overwrites or auto-replaces your source articles.</text>
+</svg>

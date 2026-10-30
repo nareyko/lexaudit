@@ -26,6 +26,9 @@ FORBIDDEN_SUFFIXES = (
     ".vsix",
     ".whl",
     ".tar.gz",
+    # Docs diagrams: SVG SSOT; raster exports stay local.
+    ".jpg",
+    ".jpeg",
 )
 FORBIDDEN_NAMES = (
     "lexaudit.config.local.yaml",
@@ -70,12 +73,18 @@ def main() -> int:
                 print(f"  {t}")
             return 1
 
-    print("hygiene OK — no dumps/tmp/wheels/vsix/local-config tracked")
+    print("hygiene OK — no dumps/tmp/wheels/vsix/jpg/local-config tracked")
     # Reminder for untracked local bulk (informational).
     for rel in ("dumps", "tmp", "dist"):
         p = ROOT / rel
         if p.is_dir():
             print(f"note: local `{rel}/` present (gitignored) — keep out of commits")
+    img = ROOT / "docs" / "images"
+    if img.is_dir():
+        jpg_local = list(img.glob("*.jpg"))
+        if jpg_local:
+            n = len(jpg_local)
+            print(f"note: {n} local docs/images/*.jpg (gitignored) — SVG is SSOT")
     return 0
 
 

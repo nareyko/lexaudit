@@ -17,8 +17,8 @@ Finish three lab tracks with **measurable** outcomes, then run project gates
 ### A. Domain packs (non-yacht)
 
 1. Corpus hunt notes + cited public sources (SaaS UI, fintech, developer docs).
-2. Seed packs under `packs/_lab/{saas-ui-v0,fintech-v0,developer-docs-v0}/` with
-   20–40 rules for `en`; `de`/`ru` often ≥24; `es`/`pl`/`sv`/`uk` ≥12.
+2. Seed packs under `packs/{saas-ui-v0,…}/` (RC) with thin `packs/_lab/<id>/pack.yaml`
+   stubs; 20–40 rules for `en`; `de`/`ru` often ≥24; `es`/`pl`/`sv`/`uk` ≥12.
 3. Mini stratified fixtures (clean / known defect / open-set) per pack.
 4. `scripts/lab_pack_metrics.py` → known-rule recall + clean FP count.
 5. Report in `docs/p1-domain-packs-research.md` (ship / iterate / drop).

@@ -10,7 +10,7 @@
 - Origin: Extracted from multilingual courses and engineering encyclopedias at [FairHelm](https://fairhelm.com)
 - License: **dual** — [MIT](../LICENSE) · [AGPL-3.0-or-later](../LICENSE-AGPL-HOSTED.md) for hosted SaaS · [licensing.md](licensing.md)
 
-![Overview](images/lexaudit-overview.jpg)
+![Overview](images/overview.svg)
 
 ## Contents
 
@@ -23,7 +23,7 @@
 | [CLI reference](cli-reference.md) | `init`, `doctor`, `audit`, `explain`, `rank`, `expand-needle`, `label`, `eval`, `diff` |
 | [Licensing](licensing.md) | Dual license: MIT package · AGPL for hosted SaaS |
 | [DE UI loans](p1-de-loan-policy.md) | German keeps Dashboard/Toast/… on purpose — extras only, not DEFAULT |
-| [0.3.0 prep](p1-0.3.0-prep.md) | Which `_lab` packs promote; bilingual stays opt-in |
+| [0.3.0 prep](p1-0.3.0-prep.md) | Ten RC packs in `packs/`; bilingual stays opt-in |
 | [Next-wave plan](p1-next-wave-plan-2026-10-30.md) | Wild wiki corpus, bilingual/crosslocale fixes, product shell |
 | [Next-wave status](p1-status-next-wave-2026-10-30.md) | What is thin now and how to fix it |
 | [Product shell checklist](p1-product-shell-checklist-2026-10-30.md) | VS Marketplace + MCP registry owner steps |
@@ -34,7 +34,7 @@ Also see root [`README.md`](../README.md), [`examples/lexaudit.config.example.ya
 
 ## 7-Language European Ablation Summary
 
-![Synthetic Benchmark](images/lexaudit-synthetic-benchmark.jpg)
+![Synthetic Benchmark](images/synthetic-benchmark.svg)
 
 On the stratified 42-page benchmark (`en`, `de`, `es`, `pl`, `ru`, `sv`, `uk`), a naive spellchecker ranks clean technical pages ahead of defective ones (`MAP = 0.389`, `Precision@2 = 0.0%`), whereas `lexaudit` raises `MAP` to **`0.838`** (`Precision@2 = 100.0%`, `Precision@3 = 66.7%`, `Known-Rule Recall = 100.0%`, `Open-Set Recall = 77.9%` in ~0.66 seconds on CPU). See [7-Locale Benchmark](synthetic-benchmark.md) for the full error analysis.
 
@@ -50,14 +50,16 @@ uv run lexaudit explain orientir --locale en
 
 ## Pictures
 
+SVG only in git (~1 MiB of raster JPG duplicates removed). Optional local JPGs via
+`uv run python scripts/render_diagrams.py --jpg` (gitignored).
+
 | Image | Description |
 |---|---|
-| ![overview thumb](images/lexaudit-overview.jpg) | Corpus -> pipeline -> reports |
-| ![benchmark thumb](images/lexaudit-synthetic-benchmark.jpg) | 3-stage ablation across 7 European languages |
-| ![classify thumb](images/lexaudit-classify-pipeline.jpg) | Word classification ladder |
-| ![bridge thumb](images/lexaudit-host-bridge.jpg) | Host dictionaries + submodule + editorial rewrite loop |
-| [pipeline-flow.svg](images/pipeline-flow.svg) | Compact SVG of the pipeline |
-| [synthetic-benchmark.svg](images/synthetic-benchmark.svg) | Compact SVG of the 7-locale ablation study |
+| [overview.svg](images/overview.svg) | Corpus → pipeline → reports |
+| [synthetic-benchmark.svg](images/synthetic-benchmark.svg) | 7-locale ablation study |
+| [classify-pipeline.svg](images/classify-pipeline.svg) | Word classification ladder |
+| [host-bridge.svg](images/host-bridge.svg) | Host dictionaries + editorial rewrite loop |
+| [pipeline-flow.svg](images/pipeline-flow.svg) | Alias of overview (kept for old links) |
 
 ## One-screen mental model
 

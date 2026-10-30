@@ -49,4 +49,5 @@ Navigation for the 2026-10-30 prep wave. Prefer these over older notes when they
 
 ## Keep out of git
 
-`dumps/`, `tmp/**`, `dist/**`, `*.vsix`, `*.whl`, CX corpora, `lexaudit.config.local.yaml`.
+`dumps/`, `tmp/**`, `dist/**`, `*.vsix`, `*.whl`, `docs/images/*.jpg`,
+CX corpora, `lexaudit.config.local.yaml`. Diagrams: SVG SSOT.

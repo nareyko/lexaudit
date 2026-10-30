@@ -21,3 +21,75 @@ rules:
   severity: confirmed
   source: lab-saas-ui
   override_ok: true
+- pattern: informations
+  match: exact
+  severity: likely
+  hint: uk leftover / coinage
+  override_ok: true
+  locale: uk
+  reason: saas-ui-v0-informations-cross
+  source: lab-saas-ui-v0
+- pattern: connexion
+  match: exact
+  severity: likely
+  hint: uk leftover / coinage
+  override_ok: true
+  locale: uk
+  reason: saas-ui-v0-connexion-cross
+  source: lab-saas-ui-v0
+- pattern: actualize
+  match: exact
+  severity: likely
+  hint: uk leftover / coinage
+  override_ok: true
+  locale: uk
+  reason: saas-ui-v0-actualize-cross
+  source: lab-saas-ui-v0
+- pattern: actualise
+  match: exact
+  severity: likely
+  hint: uk leftover / coinage
+  override_ok: true
+  locale: uk
+  reason: saas-ui-v0-actualise-cross
+  source: lab-saas-ui-v0
+- pattern: authentification
+  match: exact
+  severity: likely
+  hint: uk leftover / coinage
+  override_ok: true
+  locale: uk
+  reason: saas-ui-v0-authentification-cross
+  source: lab-saas-ui-v0
+- pattern: savepoint
+  match: exact
+  severity: likely
+  hint: uk leftover / coinage
+  override_ok: true
+  locale: uk
+  reason: saas-ui-v0-savepoint-cross
+  source: lab-saas-ui-v0
+- pattern: pop-over
+  match: exact
+  severity: likely
+  hint: uk leftover / coinage
+  override_ok: true
+  locale: uk
+  reason: saas-ui-v0-pop-over-cross
+  source: lab-saas-ui-v0
+- pattern: dropdowns
+  match: exact
+  severity: likely
+  hint: uk leftover / coinage
+  override_ok: true
+  locale: uk
+  reason: saas-ui-v0-dropdowns-cross
+  source: lab-saas-ui-v0
+- pattern: unfocus
+  match: exact
+  severity: likely
+  hint: uk leftover / coinage
+  override_ok: true
+  locale: uk
+  reason: saas-ui-v0-unfocus-cross
+  source: lab-saas-ui-v0

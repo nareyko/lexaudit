@@ -11,6 +11,72 @@ from lexaudit.core.types import ClassifiedWord, VocabSample
 
 _LATIN_WORD = re.compile(r"\b[A-Za-z][A-Za-z'-]{2,}\b")
 
+# Intentional English tokens often kept in RU/DE technical prose (held-out research).
+DEFAULT_INTENTIONAL_LOANS: frozenset[str] = frozenset(
+    {
+        "api",
+        "http",
+        "https",
+        "json",
+        "yaml",
+        "url",
+        "uri",
+        "html",
+        "css",
+        "sql",
+        "oauth",
+        "jwt",
+        "uuid",
+        "id",
+        "ids",
+        "sdk",
+        "cli",
+        "cpu",
+        "gpu",
+        "ok",
+        "okey",
+        "null",
+        "true",
+        "false",
+        "get",
+        "post",
+        "put",
+        "patch",
+        "delete",
+        "github",
+        "gitlab",
+        "docker",
+        "kubernetes",
+        "linux",
+        "macos",
+        "windows",
+        "python",
+        "fastapi",
+        "openapi",
+        "markdown",
+        "mermaid",
+        "todo",
+        "fix",
+        "wip",
+        "mvp",
+        "saas",
+        "b2b",
+        "b2c",
+        "sepa",
+        "iban",
+        "kyc",
+        "aml",
+        "pci",
+        "ssl",
+        "tls",
+        "dns",
+        "cdn",
+        "aws",
+        "gcp",
+        "azure",
+    }
+)
+
 
 @dataclass(frozen=True)
 class BilingualPair:
@@ -52,8 +118,10 @@ def untranslated_latin_in_target(
     *,
     path: str,
     min_len: int = 4,
+    intentional_loans: frozenset[str] | None = None,
 ) -> list[ClassifiedWord]:
     """Flag Latin tokens that appear in both source and target (likely leftover)."""
+    allow = intentional_loans if intentional_loans is not None else DEFAULT_INTENTIONAL_LOANS
     src = {m.group(0).casefold() for m in _LATIN_WORD.finditer(source_text)}
     out: list[ClassifiedWord] = []
     seen: set[str] = set()
@@ -62,7 +130,7 @@ def untranslated_latin_in_target(
         if len(surface) < min_len:
             continue
         key = surface.casefold()
-        if key not in src or key in seen:
+        if key not in src or key in seen or key in allow:
             continue
         seen.add(key)
         out.append(

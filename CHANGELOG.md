@@ -3,6 +3,13 @@
 All notable changes to this project are listed here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added (P1 lab only — not on PyPI yet)
+- Lab domain packs `saas-ui-v0`, `fintech-v0`, `developer-docs-v0` under `packs/_lab/` + `scripts/lab_pack_metrics.py`
+- Bilingual held-out protocol, gold CSV, allowlist, `scripts/bilingual_metrics.py`
+- VS Code shell-out extension stub + MCP/VS Code dogfood doc
+
 ## [0.2.0] - 2026-10-30
 
 ### Added

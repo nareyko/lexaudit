@@ -29,3 +29,41 @@ locale_loans:
   - surveyness
   - checklista
   - bluewaterig
+  # P1 lab pack / bilingual research tokens cited in docs (not production defects).
+  - modalness
+  - toastness
+  - actionize
+  - chargebackness
+  - settleness
+  - ibanize
+  - sepaize
+  - requestness
+  - endpointness
+  - schemaize
+  - openapiize
+  - webhookness
+  - corsness
+  - clickability
+  - hoverability
+  - kycess
+  - popover
+  - onboarding
+  - sidebar
+  - fintech
+  - saas
+  - mcp
+  - stdio
+  - dogfood
+  - heldout
+  - leftovers
+  - leftover
+  - bilinguals
+  - bilingual
+  - packyaml
+  - workspaces
+  - workspaces
+  - sideload
+  - marketplace
+  - glama
+  - smithery
+  - openvsx

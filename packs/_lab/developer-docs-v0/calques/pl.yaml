@@ -1,0 +1,20 @@
+version: 1
+rules:
+  - pattern: "requestness"
+    locale: pl
+    reason: "devdocs-requestness-cross"
+    hint: "request handling — invented English leftover"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "schemaize"
+    locale: pl
+    reason: "devdocs-schemaize-cross"
+    hint: "define schema — invented English leftover"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "openapiize"
+    locale: pl
+    reason: "devdocs-openapiize-cross"
+    hint: "generate OpenAPI — invented English leftover"
+    severity: confirmed
+    source: "lab-developer-docs"

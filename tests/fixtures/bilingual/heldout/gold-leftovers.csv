@@ -1,0 +1,39 @@
+pair_id,source_locale,target_locale,rel_path,token,label,note
+payments,en,ru,payments.md,pending,leftover,should flag
+payments,en,ru,payments.md,available,leftover,part of available balance
+payments,en,ru,payments.md,balance,leftover,part of available balance
+payments,en,ru,payments.md,webhook,leftover,prose leftover not code
+payments,en,ru,payments.md,sepa,intentional,keep SEPA
+payments,en,ru,payments.md,api,intentional,keep API
+settings,en,ru,settings.md,sidebar,leftover,UI calque leftover
+settings,en,ru,settings.md,toast,leftover,UI calque leftover
+settings,en,ru,settings.md,authentication,leftover,untranslated phrase piece
+settings,en,ru,settings.md,method,leftover,untranslated phrase piece
+settings,en,ru,settings.md,onboarding,leftover,loan in RU prose
+api-guide,en,ru,api-guide.md,query,leftover,query parameters leftover
+api-guide,en,ru,api-guide.md,parameters,leftover,query parameters leftover
+api-guide,en,ru,api-guide.md,get,intentional,HTTP method
+api-guide,en,ru,api-guide.md,json,intentional,format name
+api-guide,en,ru,api-guide.md,openapi,intentional,spec name
+api-guide,en,ru,api-guide.md,api,intentional,keep API
+payments,en,de,payments.md,pending,leftover,should flag
+payments,en,de,payments.md,available,leftover,should flag
+payments,en,de,payments.md,balance,leftover,should flag
+payments,en,de,payments.md,webhook,leftover,should flag
+payments,en,de,payments.md,setup,leftover,webhook setup
+payments,en,de,payments.md,sepa,intentional,keep SEPA
+payments,en,de,payments.md,api,intentional,keep API
+settings,en,de,settings.md,sidebar,leftover,should flag
+settings,en,de,settings.md,toast,leftover,should flag
+settings,en,de,settings.md,authentication,leftover,should flag
+settings,en,de,settings.md,method,leftover,should flag
+settings,en,de,settings.md,onboarding,leftover,should flag
+api-guide,en,de,api-guide.md,path,leftover,path parameters
+api-guide,en,de,api-guide.md,parameters,leftover,shared
+api-guide,en,de,api-guide.md,query,leftover,query parameters
+api-guide,en,de,api-guide.md,status,leftover,status codes
+api-guide,en,de,api-guide.md,codes,leftover,status codes
+api-guide,en,de,api-guide.md,get,intentional,HTTP method
+api-guide,en,de,api-guide.md,json,intentional,format
+api-guide,en,de,api-guide.md,openapi,intentional,spec
+api-guide,en,de,api-guide.md,api,intentional,keep

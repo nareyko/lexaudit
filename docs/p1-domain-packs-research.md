@@ -1,37 +1,41 @@
 # P1 lab: domain rule packs (not for yachting)
 
-Status: research only. Not attached to the 0.2.0 release.
+Status: lab packs seeded and measured locally. **Not** attached to the 0.2.0 release.
 
 ## Goal
 
-Publish industry calque / false-friend packs that teams can install with
-`lexaudit pack install …`, without shipping FairHelm marine content.
+Industry calque / false-friend packs installable later via `lexaudit pack install …`,
+without shipping FairHelm marine content.
 
-## Candidate industries (pick top 3 after corpus hunt)
+## Top-3 after corpus hunt
 
-| Industry | Why demand exists | Seed sources to mine |
+| Pack | Why | Cited public seeds |
 |---|---|---|
-| SaaS / product UI | AI translation of settings strings | Apple HIG glossaries, Material, Crowdin public style guides |
-| Fintech / payments | Strict term lists, many EN loans | PSD2 glossaries, Stripe docs i18n issues |
-| Healthcare / FHIR | Safety-critical wording | HL7 terminology, WHO style |
-| Legal / compliance | False friends across EN-DE-FR | EU IATE excerpts (public), DGT style |
-| E-commerce checkout | High-volume MT leftovers | Shopify Polaris translations, OpenCart locale bugs |
-| Developer docs / API | Markdown docs-as-code | Microsoft Writing Style, Google developer docs |
+| `saas-ui-v0` | AI/MT UI strings | [Zulip RU guide](https://zulip.readthedocs.io/en/stable/translating/russian.html), [Hermes RU review](https://github.com/NousResearch/hermes-agent/pull/41677), [localize-ru](https://www.skills.sh/i18n-agent/i18nstack/localize-ru) |
+| `fintech-v0` | Payment / ledger terms | [Native Localization fintech](https://www.nativelocalization.com/industries/fintech-localization/), [Translated Right](https://www.translatedright.com/blog/fintech-app-translation-security-terminology-pitfalls-to-avoid/), [GB Translation](https://www.gb-translation.com/es/traduccion-fintech/) |
+| `developer-docs-v0` | API prose coinages | [FastAPI RU prompt audit](https://github.com/fastapi/fastapi/pull/15920), [API7 translation notes](https://api7.ai/learning-center/api-101/translating-api-documentation-for-global-audiences) |
 
-## Method
+Healthcare / legal / e-commerce remain candidates for a later hunt.
 
-1. Collect 50–100 public bilingual examples per industry (issues, changelogs, style guides).
-2. Extract recurring wrong tokens (not full phrases unless rule-safe).
-3. Cap at 20–40 rules per locale; severity mostly `likely`.
-4. Build a mini stratified fixture like `examples/synthetic-demo` (clean vs defective).
-5. Measure known-rule recall and open-set gap before any release.
+## Method used
+
+1. Mine public style guides and i18n reviews for recurring wrong tokens.
+2. Cap ~20–40 rules on `en` (and dense `de`/`ru` where useful); thin stubs elsewhere.
+3. Mini fixtures: `01-clean*`, `04-defect-known`, `06-defect-open`.
+4. Measure with `scripts/lab_pack_metrics.py`.
+
+## Local metrics (2026-10-30)
+
+| Pack | locale | calque_words | defect score | clean max | lab_rank_ok |
+|---|---|---:|---:|---:|---|
+| saas-ui-v0 | en | 5 | 40.0 | 0.0 | yes |
+| fintech-v0 | en | 5 | 40.1 | 0.0 | yes |
+| developer-docs-v0 | en | 6 | 48.0 | 0.0 | yes |
+
+Verdict: **iterate** (expand real bilingual corpora beyond synthetic seeds) before any Release attach. Lab rank bar passes on fixtures.
 
 ## Hard rules
 
 - No yacht / marine / survey-boat pack in the public repo.
 - MIT license for packs.
-- Keep packs under `packs/_lab/` until precision is measured; do not attach to GitHub Releases with 0.2.0.
-
-## Next experiment
-
-Draft empty pack shells for `saas-ui-v0` and `fintech-v0` under `packs/_lab/` once seed lists exist.
+- Keep under `packs/_lab/` until owner go for 0.3.0.

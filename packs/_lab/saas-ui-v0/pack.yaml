@@ -1,7 +1,14 @@
-# Experimental - not part of v0.2.0 release artifacts.
 id: saas-ui-v0
-version: 0.0.0
+version: 0.0.1-lab
 license: MIT
 locales: [en, de, es, pl, ru, sv, uk]
 status: lab
-notes: Seed shell for SaaS/product UI calques. Fill calques/*.yaml after corpus hunt.
+rules_dir: calques
+notes: >-
+  Experimental SaaS/product UI calques from public style guides
+  (Zulip RU guide, Hermes desktop review, localize-ru skill notes).
+  Not for GitHub Release until metrics pass.
+sources:
+  - https://zulip.readthedocs.io/en/stable/translating/russian.html
+  - https://github.com/NousResearch/hermes-agent/pull/41677
+  - https://www.skills.sh/i18n-agent/i18nstack/localize-ru

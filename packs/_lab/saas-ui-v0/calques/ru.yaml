@@ -1,0 +1,136 @@
+version: 1
+rules:
+  - pattern: "поповер"
+    locale: ru
+    reason: "saas-ui-popover-calque"
+    hint: "всплывающая панель / всплывающее окно"
+    severity: likely
+    source: "lab-saas-ui-hermes-review"
+  - pattern: "поповере"
+    locale: ru
+    reason: "saas-ui-popover-calque"
+    hint: "во всплывающей панели"
+    severity: likely
+    source: "lab-saas-ui-hermes-review"
+  - pattern: "апдейтить"
+    locale: ru
+    reason: "saas-ui-update-anglicism"
+    hint: "обновить / обновлять"
+    severity: likely
+    source: "lab-saas-ui-localize-ru"
+  - pattern: "апдейтнуть"
+    locale: ru
+    reason: "saas-ui-update-anglicism"
+    hint: "обновить"
+    severity: likely
+    source: "lab-saas-ui-localize-ru"
+  - pattern: "чекать"
+    locale: ru
+    reason: "saas-ui-check-anglicism"
+    hint: "проверять / отметить"
+    severity: likely
+    source: "lab-saas-ui-localize-ru"
+  - pattern: "чекнуть"
+    locale: ru
+    reason: "saas-ui-check-anglicism"
+    hint: "проверить"
+    severity: likely
+    source: "lab-saas-ui-localize-ru"
+  - pattern: "компоновщик"
+    locale: ru
+    reason: "saas-ui-composer-calque"
+    hint: "редактор сообщения / поле ввода (composer)"
+    severity: likely
+    source: "lab-saas-ui-hermes-review"
+  - pattern: "компоновщике"
+    locale: ru
+    reason: "saas-ui-composer-calque"
+    hint: "в редакторе сообщения"
+    severity: likely
+    source: "lab-saas-ui-hermes-review"
+  - pattern: "приватный"
+    locale: ru
+    reason: "saas-ui-private-calque"
+    hint: "личный (чат/канал) — см. Zulip RU style guide"
+    severity: weak
+    source: "lab-saas-ui-zulip"
+    override_ok: true
+  - pattern: "приватного"
+    locale: ru
+    reason: "saas-ui-private-calque"
+    hint: "личного"
+    severity: weak
+    source: "lab-saas-ui-zulip"
+    override_ok: true
+  - pattern: "фидбек"
+    locale: ru
+    reason: "saas-ui-feedback-loan"
+    hint: "обратная связь"
+    severity: likely
+    source: "lab-saas-ui-zulip"
+  - pattern: "фидбека"
+    locale: ru
+    reason: "saas-ui-feedback-loan"
+    hint: "обратной связи"
+    severity: likely
+    source: "lab-saas-ui-zulip"
+  - pattern: "сабмит"
+    locale: ru
+    reason: "saas-ui-submit-loan"
+    hint: "отправка / отправить"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "рефреш"
+    locale: ru
+    reason: "saas-ui-refresh-loan"
+    hint: "обновление / обновить"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "дропдаун"
+    locale: ru
+    reason: "saas-ui-dropdown-loan"
+    hint: "выпадающий список"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "тогл"
+    locale: ru
+    reason: "saas-ui-toggle-loan"
+    hint: "переключатель"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "тоаст"
+    locale: ru
+    reason: "saas-ui-toast-loan"
+    hint: "всплывающее уведомление"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "онбординг"
+    locale: ru
+    reason: "saas-ui-onboarding-loan"
+    hint: "первичная настройка / знакомство с продуктом"
+    severity: weak
+    source: "lab-saas-ui"
+  - pattern: "сайдбар"
+    locale: ru
+    reason: "saas-ui-sidebar-loan"
+    hint: "боковая панель"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "модалке"
+    locale: ru
+    reason: "saas-ui-modal-loan"
+    hint: "в диалоговом окне"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "модалку"
+    locale: ru
+    reason: "saas-ui-modal-loan"
+    hint: "диалоговое окно"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "модалка"
+    locale: ru
+    reason: "saas-ui-modal-loan"
+    hint: "диалоговое окно"
+    severity: likely
+    source: "lab-saas-ui"

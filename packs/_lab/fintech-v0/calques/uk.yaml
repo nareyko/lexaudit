@@ -1,0 +1,20 @@
+version: 1
+rules:
+  - pattern: "chargebackness"
+    locale: uk
+    reason: "fintech-chargebackness-cross"
+    hint: "chargeback risk — invented English leftover"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "ibanize"
+    locale: uk
+    reason: "fintech-ibanize-cross"
+    hint: "validate IBAN — invented English leftover"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "sepaize"
+    locale: uk
+    reason: "fintech-sepaize-cross"
+    hint: "send via SEPA — invented English leftover"
+    severity: confirmed
+    source: "lab-fintech"

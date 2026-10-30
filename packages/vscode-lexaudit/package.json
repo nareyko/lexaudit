@@ -1,0 +1,41 @@
+{
+  "name": "vscode-lexaudit",
+  "displayName": "lexaudit (lab)",
+  "description": "Shells out to the lexaudit CLI. Local dogfood only — not on Marketplace.",
+  "version": "0.0.1",
+  "publisher": "nareyko-lab",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Linters"],
+  "activationEvents": ["onCommand:lexaudit.auditWorkspace", "onCommand:lexaudit.explainSelection"],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "lexaudit.auditWorkspace",
+        "title": "lexaudit: Audit workspace"
+      },
+      {
+        "command": "lexaudit.explainSelection",
+        "title": "lexaudit: Explain selection"
+      }
+    ],
+    "configuration": {
+      "title": "lexaudit",
+      "properties": {
+        "lexaudit.locale": {
+          "type": "string",
+          "default": "en",
+          "description": "Locale passed to lexaudit CLI"
+        },
+        "lexaudit.cli": {
+          "type": "string",
+          "default": "lexaudit",
+          "description": "CLI binary name or absolute path"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "smoke": "node ./extension.js --smoke"
+  }
+}

@@ -1,0 +1,136 @@
+version: 1
+rules:
+  - pattern: "кастомный"
+    locale: ru
+    reason: "devdocs-ru-custom-calque"
+    hint: "пользовательский / свой (если не устоявшийся термин проекта)"
+    severity: weak
+    source: "lab-developer-docs-fastapi"
+    override_ok: true
+  - pattern: "кастомного"
+    locale: ru
+    reason: "devdocs-ru-custom-calque"
+    hint: "пользовательского"
+    severity: weak
+    source: "lab-developer-docs-fastapi"
+    override_ok: true
+  - pattern: "парсинг"
+    locale: ru
+    reason: "devdocs-ru-parsing-loan"
+    hint: "разбор / анализ (когда можно сказать по-русски)"
+    severity: weak
+    source: "lab-developer-docs-fastapi"
+  - pattern: "эндпоинтность"
+    locale: ru
+    reason: "devdocs-ru-endpointness"
+    hint: "поведение эндпоинта"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "пейлоадность"
+    locale: ru
+    reason: "devdocs-ru-payloadness"
+    hint: "форма тела запроса"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "мидлварность"
+    locale: ru
+    reason: "devdocs-ru-middlewareiness"
+    hint: "поведение промежуточного слоя"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "requestness"
+    locale: ru
+    reason: "devdocs-en-requestness-in-ru"
+    hint: "обработка запроса"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "schemaize"
+    locale: ru
+    reason: "devdocs-en-schemaize-in-ru"
+    hint: "описать схему"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "openapiize"
+    locale: ru
+    reason: "devdocs-en-openapiize-in-ru"
+    hint: "сформировать OpenAPI"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "webhookness"
+    locale: ru
+    reason: "devdocs-en-webhookness-in-ru"
+    hint: "доставка вебхуков"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "corsness"
+    locale: ru
+    reason: "devdocs-en-corsness-in-ru"
+    hint: "настройка CORS"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "paginationness"
+    locale: ru
+    reason: "devdocs-en-paginationness-in-ru"
+    hint: "постраничный вывод"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "ratelimitness"
+    locale: ru
+    reason: "devdocs-en-ratelimitness-in-ru"
+    hint: "ограничение частоты запросов"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "authness"
+    locale: ru
+    reason: "devdocs-en-authness-in-ru"
+    hint: "настройка аутентификации"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "tokenness"
+    locale: ru
+    reason: "devdocs-en-tokenness-in-ru"
+    hint: "работа с токеном"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "headerness"
+    locale: ru
+    reason: "devdocs-en-headerness-in-ru"
+    hint: "требования к заголовкам"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "queryness"
+    locale: ru
+    reason: "devdocs-en-queryness-in-ru"
+    hint: "параметры запроса"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "pathness"
+    locale: ru
+    reason: "devdocs-en-pathness-in-ru"
+    hint: "параметры пути"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "statusness"
+    locale: ru
+    reason: "devdocs-en-statusness-in-ru"
+    hint: "коды состояния"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "dependencyness"
+    locale: ru
+    reason: "devdocs-en-dependencyness-in-ru"
+    hint: "внедрение зависимостей"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "routerness"
+    locale: ru
+    reason: "devdocs-en-routerness-in-ru"
+    hint: "настройка маршрутизатора"
+    severity: confirmed
+    source: "lab-developer-docs"
+  - pattern: "handlerness"
+    locale: ru
+    reason: "devdocs-en-handlerness-in-ru"
+    hint: "логика обработчика"
+    severity: confirmed
+    source: "lab-developer-docs"

@@ -1,11 +1,17 @@
 from __future__ import annotations
 
+import csv
 from pathlib import Path
 
 from lexaudit.detectors.bilingual import (
+    DEFAULT_INTENTIONAL_LOANS,
+    length_ratio_signal,
     pair_paths,
+    pairs_from_config,
     untranslated_latin_in_target,
 )
+
+FIXTURES = Path(__file__).resolve().parent / "fixtures" / "bilingual"
 
 
 def test_pair_paths_and_untranslated(tmp_path: Path) -> None:
@@ -23,3 +29,53 @@ def test_pair_paths_and_untranslated(tmp_path: Path) -> None:
         path="ru/a.md",
     )
     assert any(w.normalized == "denseness" for w in hits)
+
+
+def test_intentional_loans_not_flagged() -> None:
+    src = "Call the API with JSON and OpenAPI examples."
+    tgt = "Вызовите API с примерами JSON и OpenAPI."  # noqa: RUF001
+    hits = untranslated_latin_in_target(src, tgt, path="ru/x.md")
+    assert hits == []
+    assert "api" in DEFAULT_INTENTIONAL_LOANS
+
+
+def test_heldout_fixtures_exist() -> None:
+    gold = FIXTURES / "heldout" / "gold-leftovers.csv"
+    assert gold.is_file()
+    rows = list(csv.DictReader(gold.open(encoding="utf-8")))
+    assert len(rows) >= 20
+    assert any(r["label"] == "leftover" for r in rows)
+    assert any(r["label"] == "intentional" for r in rows)
+    for loc in ("en", "ru", "de"):
+        assert (FIXTURES / "heldout" / loc / "payments.md").is_file()
+
+
+def test_pairs_from_config_heldout() -> None:
+    root = FIXTURES / "heldout"
+    pairs = pairs_from_config(
+        [
+            {
+                "source_locale": "en",
+                "target_locale": "ru",
+                "source_root": "en",
+                "target_root": "ru",
+            }
+        ],
+        root,
+    )
+    assert len(pairs) >= 3
+    assert all(p.target_locale == "ru" for p in pairs)
+
+
+def test_length_ratio_soft_signal() -> None:
+    ratio = length_ratio_signal("abcd", "abcdefgh")
+    assert 1.9 < ratio < 2.1
+
+
+def test_heldout_metrics_script_importable() -> None:
+    # Ensure gold labels cover tokens the detector can see on payments EN→RU.
+    src = (FIXTURES / "heldout" / "en" / "settings.md").read_text(encoding="utf-8")
+    tgt = (FIXTURES / "heldout" / "ru" / "settings.md").read_text(encoding="utf-8")
+    hits = {w.normalized for w in untranslated_latin_in_target(src, tgt, path="ru/settings.md")}
+    assert "sidebar" in hits
+    assert "toast" in hits

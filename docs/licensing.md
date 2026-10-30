@@ -10,11 +10,14 @@ lexaudit uses a **dual license**, depending on *how* you use the software.
 
 ## Plain words
 
-- **You run lexaudit on your laptop or in your own CI** → MIT. Fork, ship, sell, keep private — fine under MIT.
-- **You offer lexaudit as a hosted service that other people’s browsers/API clients talk to** → that hosted service code is intended under AGPL-3.0-or-later (network copyleft: users of the service get source rights).
-- This repository **does not currently ship** a hosted service. The AGPL file is the license text for that intended use, not a second license on the MIT package itself.
-- Packs (`packs/*`, `packs/_lab/*`) stay **MIT**, same as the library.
-- Embedding the MIT package inside another product does not change that product’s license.
+- Laptop or own CI: MIT. Fork, ship, sell, keep private — fine under MIT.
+- Hosted multi-tenant service that other people’s clients talk to: that hosted
+  service code is intended under AGPL-3.0-or-later (network copyleft).
+- This repository does not currently ship a hosted service. The AGPL file is the
+  license text for that intended use, not a second license on the MIT package.
+- Packs (`packs/*`, `packs/_lab/*`) stay MIT, same as the library.
+- Embedding the MIT package inside another product does not change that product’s
+  license.
 
 ## What is *not* dual-licensed here
 

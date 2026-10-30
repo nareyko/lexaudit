@@ -11,11 +11,16 @@ from lexaudit.packs import install_pack, list_lab_packs, list_packs, verify_pack
 def test_list_and_install_pack(tmp_path: Path, monkeypatch: object) -> None:
     rows = list_packs()
     assert any(r["id"] == "core-calques-v1" for r in rows)
+    assert any(r["id"] == "saas-ui-v0" for r in rows)
     assert all(r.get("status") != "lab" for r in rows)
+    assert any(r.get("status") == "release-candidate" for r in rows if r["id"] == "saas-ui-v0")
     rules = install_pack("core-calques-v1", dest=tmp_path, force=True)
     assert rules.is_dir()
     assert (rules / "en.yaml").is_file()
     assert verify_pack("core-calques-v1", dest=tmp_path) == rules
+    # Promoted packs install without --lab
+    saas = install_pack("saas-ui-v0", dest=tmp_path, force=True)
+    assert (saas / "en.yaml").is_file()
 
 
 def test_list_and_install_lab_pack(tmp_path: Path) -> None:
@@ -42,7 +47,8 @@ def test_pack_cli(tmp_path: Path) -> None:
     listed = runner.invoke(main, ["pack", "list"])
     assert listed.exit_code == 0
     assert "core-calques-v1" in listed.output
-    assert "saas-ui-v0" not in listed.output
+    assert "saas-ui-v0" in listed.output
+    assert "release-candidate" in listed.output
 
     lab_listed = runner.invoke(main, ["pack", "list", "--lab"])
     assert lab_listed.exit_code == 0

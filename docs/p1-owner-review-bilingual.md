@@ -43,15 +43,19 @@ the target locale is `de` (audit: `bilingual_extra_loans_*`; metrics:
 
 ### Agent review rationale (2026-10-30)
 
-1. **All six = yes as DE loans**, matching `docs/p1-de-loan-policy.md`: intentional on
+1. All six = yes as DE loans, matching `docs/p1-de-loan-policy.md`: intentional on
    polished German UI, never global DEFAULT.
-2. **Why not DEFAULT:** the same Latin surfaces are leftovers in RU/UK/community
+
+2. Why not DEFAULT: the same Latin surfaces are leftovers in RU/UK/community
    samples (`toast`, `dashboard`, `inbox`). Global allow would hide RU defects.
-3. **Mechanics already proven:** `intentional-extra-de.txt` +
+
+3. Mechanics already proven: `intentional-extra-de.txt` +
    `--extra-loans-locales de` + basename scope on live_weblate / live_crowdin.
-4. **`inbox` caveat:** loan = folder label; identical EN confirmation paragraphs
+
+4. `inbox` caveat: loan = folder label; identical EN confirmation paragraphs
    (Soapbox) remain leftover — gold/`leftover` handles that, not this allowlist.
-5. **ES/PL/SV/UK:** do **not** copy this DE list into DEFAULT either; live_v1_others
+
+5. ES/PL/SV/UK: do not copy this DE list into DEFAULT either; live_v1_others
    scores EN leftovers as leftover unless a future per-locale extras file exists.
 
 ## Default-on gate

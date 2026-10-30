@@ -1,0 +1,17 @@
+id: legal-docs-v0
+version: 0.0.1-lab
+license: MIT
+locales:
+- en
+- de
+- es
+- pl
+- ru
+- sv
+- uk
+status: release-candidate
+rules_dir: calques
+notes: Thin legal / contract prose calques (lab). Not legal advice.
+sources:
+- https://www.plainlanguage.gov/guidelines/
+- https://www.gov.uk/guidance/content-design/writing-for-gov-uk

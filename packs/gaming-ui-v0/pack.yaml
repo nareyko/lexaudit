@@ -1,0 +1,20 @@
+id: gaming-ui-v0
+version: 0.0.1-lab
+license: MIT
+locales:
+- en
+- de
+- es
+- pl
+- ru
+- sv
+- uk
+status: release-candidate
+rules_dir: calques
+notes: Thin game/UI coinages from public game-loc guides (inventory, loot, matchmake,
+  respawn). Lab harvest 2026-10-30. Not for Release until metrics + owner go.
+sources:
+- https://allcorrectgames.com/wp-content/uploads/2023/10/Localization_guide_2_allcorrect.pdf
+- https://www.gamedeveloper.com/business/localising-your-game-how-to-make-it-not-suck
+- https://igda.org/news-archive/high-quality-localization-help-loc-help-you/
+- https://locdandloaded.net/2021/05/31/style-guide/

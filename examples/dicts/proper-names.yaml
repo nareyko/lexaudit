@@ -30,3 +30,35 @@ software_and_libraries:
   - Ubuntu
   - Qwen
   - Alibaba
+  - Weblate
+  - Crowdin
+  - Zulip
+  - Jellyfin
+  - Immich
+  - FastAPI
+  - Inkscape
+  - Marketplace
+  - OpenVSX
+  - Smithery
+  - Glama
+  - Spylls
+  - Allcorrect
+  - Godot
+  - Soapbox
+  - Dicio
+  - GooseMod
+  - GnuCash
+  - Webmin
+  - Hermes
+  - Taiga
+  - Galette
+  - Anan
+  - Vozo
+  - Smartling
+  - CIOL
+  - TreeGarden
+  - CVUniform
+  - iSmartRecruit
+  - API7
+  - Locd
+

@@ -1,0 +1,166 @@
+version: 1
+rules:
+  - pattern: "updaten"
+    locale: de
+    reason: "saas-ui-de-updaten"
+    hint: "aktualisieren"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "checken"
+    locale: de
+    reason: "saas-ui-de-checken"
+    hint: "prüfen / kontrollieren"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "submitten"
+    locale: de
+    reason: "saas-ui-de-submitten"
+    hint: "absenden / senden"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "refreshen"
+    locale: de
+    reason: "saas-ui-de-refreshen"
+    hint: "aktualisieren / neu laden"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "dropdownen"
+    locale: de
+    reason: "saas-ui-de-dropdownen"
+    hint: "aufklappen / Auswahlliste öffnen"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "togglen"
+    locale: de
+    reason: "saas-ui-de-togglen"
+    hint: "umschalten"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "hoverbar"
+    locale: de
+    reason: "saas-ui-de-hoverbar"
+    hint: "mit Zeiger erreichbar / Hover-Zustand"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "klickbarheit"
+    locale: de
+    reason: "saas-ui-de-klickbarheit"
+    hint: "Anklickbarkeit / ob klickbar"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "einlogbarkeit"
+    locale: de
+    reason: "saas-ui-de-einlogbarkeit"
+    hint: "Anmeldung möglich / Login verfügbar"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "dismissbarkeit"
+    locale: de
+    reason: "saas-ui-de-dismissbarkeit"
+    hint: "schließbar / ausblendbar"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "scrollbarkeit"
+    locale: de
+    reason: "saas-ui-de-scrollbarkeit"
+    hint: "scrollbar"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "modalheit"
+    locale: de
+    reason: "saas-ui-de-modalheit"
+    hint: "Modal-Dialog / Dialogfenster"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "toastheit"
+    locale: de
+    reason: "saas-ui-de-toastheit"
+    hint: "Toast-Benachrichtigung"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "onboardingheit"
+    locale: de
+    reason: "saas-ui-de-onboardingheit"
+    hint: "Einführung / Ersteinrichtung"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "sidebarheit"
+    locale: de
+    reason: "saas-ui-de-sidebarheit"
+    hint: "Seitenleiste"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "settingheit"
+    locale: de
+    reason: "saas-ui-de-settingheit"
+    hint: "Einstellungen"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "buttonheit"
+    locale: de
+    reason: "saas-ui-de-buttonheit"
+    hint: "Schaltfläche"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "popoverheit"
+    locale: de
+    reason: "saas-ui-de-popoverheit"
+    hint: "Popup-Fenster / Popover"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "actionieren"
+    locale: de
+    reason: "saas-ui-de-actionieren"
+    hint: "Aktion ausführen"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "speicherpoint"
+    locale: de
+    reason: "saas-ui-de-speicherpoint"
+    hint: "Speicherpunkt / Entwurf speichern"
+    severity: likely
+    source: "lab-saas-ui"
+
+  - pattern: "loginnbarkeit"
+    locale: de
+    reason: "saas-ui-de-loginability"
+    hint: "Anmeldung möglich — Anglizismus"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "filterbarkeit"
+    locale: de
+    reason: "saas-ui-de-filterbarkeit"
+    hint: "filterbar"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "archivizen"
+    locale: de
+    reason: "saas-ui-de-archivizen"
+    hint: "archivieren"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "favoritizen"
+    locale: de
+    reason: "saas-ui-de-favoritizen"
+    hint: "zu Favoriten hinzufügen"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "pinnen"
+    locale: de
+    reason: "saas-ui-de-pinnen"
+    hint: "anheften / fixieren"
+    severity: weak
+    source: "lab-saas-ui"
+
+  - pattern: "inboxheit"
+    locale: de
+    reason: "saas-ui-de-inboxheit"
+    hint: "Posteingang"
+    severity: confirmed
+    source: "lab-saas-ui-ever-teams"
+  - pattern: "subscriben"
+    locale: de
+    reason: "saas-ui-de-subscriben"
+    hint: "abonnieren"
+    severity: likely
+    source: "lab-saas-ui-ever-teams"

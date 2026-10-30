@@ -1,0 +1,95 @@
+version: 1
+rules:
+- pattern: chargebackness
+  locale: pl
+  reason: fintech-chargebackness-cross
+  hint: chargeback risk — invented English leftover
+  severity: confirmed
+  source: lab-fintech
+  override_ok: true
+- pattern: ibanize
+  locale: pl
+  reason: fintech-ibanize-cross
+  hint: validate IBAN — invented English leftover
+  severity: confirmed
+  source: lab-fintech
+  override_ok: true
+- pattern: sepaize
+  locale: pl
+  reason: fintech-sepaize-cross
+  hint: send via SEPA — invented English leftover
+  severity: confirmed
+  source: lab-fintech
+  override_ok: true
+- pattern: girokonto
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: fintech-v0-girokonto-cross
+  source: lab-fintech-v0
+- pattern: ueberweisung
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: fintech-v0-ueberweisung-cross
+  source: lab-fintech-v0
+- pattern: überweisung
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: fintech-v0-überweisung-cross
+  source: lab-fintech-v0
+- pattern: liquidado
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: fintech-v0-liquidado-cross
+  source: lab-fintech-v0
+- pattern: pendiente
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: fintech-v0-pendiente-cross
+  source: lab-fintech-v0
+- pattern: retenido
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: fintech-v0-retenido-cross
+  source: lab-fintech-v0
+- pattern: saldo
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: fintech-v0-saldo-cross
+  source: lab-fintech-v0
+- pattern: payability
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: fintech-v0-payability-cross
+  source: lab-fintech-v0
+- pattern: refundability
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: fintech-v0-refundability-cross
+  source: lab-fintech-v0

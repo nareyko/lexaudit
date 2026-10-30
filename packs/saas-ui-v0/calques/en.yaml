@@ -1,0 +1,204 @@
+version: 1
+rules:
+  # Non-native EN UI leftovers / false friends in product copy
+  - pattern: "informations"
+    locale: en
+    reason: "saas-ui-plural-informations"
+    hint: "use information (uncountable) or details"
+    severity: likely
+    source: "lab-saas-ui"
+    override_ok: true
+  - pattern: "connexion"
+    locale: en
+    reason: "saas-ui-fr-connexion"
+    hint: "connection (EN), not French connexion"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "actualize"
+    locale: en
+    reason: "saas-ui-actualize"
+    hint: "update / refresh — not actualize"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "actualise"
+    locale: en
+    reason: "saas-ui-actualise"
+    hint: "update / refresh — not actualise (UI sense)"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "authentification"
+    locale: en
+    reason: "saas-ui-fr-authentification"
+    hint: "authentication"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "savepoint"
+    locale: en
+    reason: "saas-ui-savepoint-ui"
+    hint: "checkpoint / draft save — savepoint is DB jargon in UI copy"
+    severity: weak
+    source: "lab-saas-ui"
+  - pattern: "pop-over"
+    locale: en
+    reason: "saas-ui-popover-hyphen"
+    hint: "popover (one word) or pop-up panel"
+    severity: weak
+    source: "lab-saas-ui"
+  - pattern: "dropdowns"
+    locale: en
+    reason: "saas-ui-dropdowns"
+    hint: "drop-down menus / lists — prefer drop-down as adjective"
+    severity: weak
+    source: "lab-saas-ui"
+  - pattern: "unfocus"
+    locale: en
+    reason: "saas-ui-unfocus"
+    hint: "blur / leave focus — unfocus is nonstandard UI English"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "clickability"
+    locale: en
+    reason: "saas-ui-clickability"
+    hint: "whether it is clickable / hit target — avoid -ability coinage"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "hoverability"
+    locale: en
+    reason: "saas-ui-hoverability"
+    hint: "hover state / pointer target"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "editability"
+    locale: en
+    reason: "saas-ui-editability"
+    hint: "whether editable / can be edited"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "dismissability"
+    locale: en
+    reason: "saas-ui-dismissability"
+    hint: "whether dismissible"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "scrollability"
+    locale: en
+    reason: "saas-ui-scrollability"
+    hint: "whether scrollable"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "expandability"
+    locale: en
+    reason: "saas-ui-expandability"
+    hint: "whether expandable"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "actionize"
+    locale: en
+    reason: "saas-ui-actionize"
+    hint: "run action / apply — invented verb"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "modalness"
+    locale: en
+    reason: "saas-ui-modalness"
+    hint: "modal state / dialog — invented noun"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "toastness"
+    locale: en
+    reason: "saas-ui-toastness"
+    hint: "toast notification — invented noun"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "sidebarness"
+    locale: en
+    reason: "saas-ui-sidebarness"
+    hint: "sidebar layout — invented noun"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "onboardingness"
+    locale: en
+    reason: "saas-ui-onboardingness"
+    hint: "onboarding flow — invented noun"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "settingness"
+    locale: en
+    reason: "saas-ui-settingness"
+    hint: "settings — invented noun"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "buttonness"
+    locale: en
+    reason: "saas-ui-buttonness"
+    hint: "button style / affordance — invented noun"
+    severity: confirmed
+    source: "lab-saas-ui"
+
+  - pattern: "logoutness"
+    locale: en
+    reason: "saas-ui-logoutness"
+    hint: "sign-out state — invented noun"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "loginability"
+    locale: en
+    reason: "saas-ui-loginability"
+    hint: "whether sign-in is possible"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "filterability"
+    locale: en
+    reason: "saas-ui-filterability"
+    hint: "whether filters apply"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "sortability"
+    locale: en
+    reason: "saas-ui-sortability"
+    hint: "whether sortable"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "draggability"
+    locale: en
+    reason: "saas-ui-draggability"
+    hint: "whether draggable"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "pinability"
+    locale: en
+    reason: "saas-ui-pinability"
+    hint: "whether pinnable"
+    severity: likely
+    source: "lab-saas-ui"
+  - pattern: "archivize"
+    locale: en
+    reason: "saas-ui-archivize"
+    hint: "archive — invented verb"
+    severity: confirmed
+    source: "lab-saas-ui"
+  - pattern: "favoritize"
+    locale: en
+    reason: "saas-ui-favoritize"
+    hint: "add to favorites — invented verb"
+    severity: confirmed
+    source: "lab-saas-ui"
+
+  - pattern: "subscribingness"
+    locale: en
+    reason: "saas-ui-subscribingness"
+    hint: "subscribe state — invented noun"
+    severity: confirmed
+    source: "lab-saas-ui-ever-teams"
+  - pattern: "inboxness"
+    locale: en
+    reason: "saas-ui-inboxness"
+    hint: "inbox view — invented noun"
+    severity: confirmed
+    source: "lab-saas-ui-ever-teams"
+  - pattern: "quickcreateness"
+    locale: en
+    reason: "saas-ui-quickcreateness"
+    hint: "quick create — invented noun"
+    severity: confirmed
+    source: "lab-saas-ui-ever-teams"

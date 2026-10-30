@@ -1,0 +1,32 @@
+# Opt-in cross-locale norm boost. Package default remains enable_crosslocale: false.
+# When on, lexaudit aggregates word norms from crosslocale_reference_locale (default en)
+# and boosts no-pair tiers for the audited locale. No embeddings on the audit path.
+#
+# Use when you audit RU/DE/… docs that share terminology with a polished EN tree
+# under the same roots. Skip if you only audit one locale or lack a reference corpus.
+#
+# Run from the repository root:
+#   uv run lexaudit audit --config examples/lexaudit.config.crosslocale.yaml --locale ru
+
+repo_root: ..
+output_dir: ../tmp/lexaudit-crosslocale
+locales: [ru, de]
+sources: [files]
+files_paths:
+  - ../docs
+min_length: 2
+
+proper_names_path: ./dicts/proper-names.yaml
+acronyms_path: ./dicts/acronyms.yaml
+allowlist_path: ./dicts/allowlist.yaml
+calque_rules_dir: ../rules/calques
+
+enable_morph: true
+enable_compound: true
+enable_foreign: true
+enable_calque: true
+enable_bilingual: false
+enable_crosslocale: true
+crosslocale_reference_locale: en
+enable_llm: false
+rank_mode: weighted

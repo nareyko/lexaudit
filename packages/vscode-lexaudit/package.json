@@ -1,12 +1,37 @@
 {
   "name": "vscode-lexaudit",
-  "displayName": "lexaudit (lab)",
-  "description": "Shells out to the lexaudit CLI. Local dogfood only — not on Marketplace.",
-  "version": "0.0.1",
-  "publisher": "nareyko-lab",
-  "engines": { "vscode": "^1.85.0" },
-  "categories": ["Linters"],
-  "activationEvents": ["onCommand:lexaudit.auditWorkspace", "onCommand:lexaudit.explainSelection"],
+  "displayName": "lexaudit",
+  "description": "Locale vocabulary audit: calques, inventeds, foreign slips. Shells out to the local lexaudit CLI — no cloud.",
+  "version": "0.3.0",
+  "publisher": "nareyko",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "lexaudit",
+    "calque",
+    "localization",
+    "i18n",
+    "spellcheck",
+    "false-friends"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nareyko/lexaudit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nareyko/lexaudit/issues"
+  },
+  "homepage": "https://github.com/nareyko/lexaudit/tree/main/packages/vscode-lexaudit",
+  "activationEvents": [
+    "onCommand:lexaudit.auditWorkspace",
+    "onCommand:lexaudit.explainSelection"
+  ],
   "main": "./extension.js",
   "contributes": {
     "commands": [
@@ -36,6 +61,7 @@
     }
   },
   "scripts": {
-    "smoke": "node ./extension.js --smoke"
+    "smoke": "node ./extension.js --smoke",
+    "package": "npx --yes @vscode/vsce package --no-dependencies --allow-missing-repository"
   }
 }

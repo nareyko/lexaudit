@@ -1,0 +1,95 @@
+version: 1
+rules:
+- pattern: requestness
+  locale: pl
+  reason: devdocs-requestness-cross
+  hint: request handling — invented English leftover
+  severity: confirmed
+  source: lab-developer-docs
+  override_ok: true
+- pattern: schemaize
+  locale: pl
+  reason: devdocs-schemaize-cross
+  hint: define schema — invented English leftover
+  severity: confirmed
+  source: lab-developer-docs
+  override_ok: true
+- pattern: openapiize
+  locale: pl
+  reason: devdocs-openapiize-cross
+  hint: generate OpenAPI — invented English leftover
+  severity: confirmed
+  source: lab-developer-docs
+  override_ok: true
+- pattern: responseness
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: developer-docs-v0-responseness-cross
+  source: lab-developer-docs-v0
+- pattern: endpointness
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: developer-docs-v0-endpointness-cross
+  source: lab-developer-docs-v0
+- pattern: payloadness
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: developer-docs-v0-payloadness-cross
+  source: lab-developer-docs-v0
+- pattern: serializability
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: developer-docs-v0-serializability-cross
+  source: lab-developer-docs-v0
+- pattern: deserializability
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: developer-docs-v0-deserializability-cross
+  source: lab-developer-docs-v0
+- pattern: middlewareiness
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: developer-docs-v0-middlewareiness-cross
+  source: lab-developer-docs-v0
+- pattern: routerness
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: developer-docs-v0-routerness-cross
+  source: lab-developer-docs-v0
+- pattern: handlerness
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: developer-docs-v0-handlerness-cross
+  source: lab-developer-docs-v0
+- pattern: dependencyness
+  match: exact
+  severity: likely
+  hint: pl leftover / coinage
+  override_ok: true
+  locale: pl
+  reason: developer-docs-v0-dependencyness-cross
+  source: lab-developer-docs-v0

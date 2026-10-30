@@ -1,14 +1,13 @@
-# P1 MCP / VS Code dogfood (nothing hosted)
-
-## Architecture
+# MCP / VS Code packaging (0.3.0)
 
 Both surfaces call the **local** `lexaudit` CLI / library. There is no cloud
 endpoint. Dictionaries still land in the user cache.
 
-| Surface | How to run | Hosting |
+| Surface | Artifact | Hosting |
 |---|---|---|
-| MCP | `pip install 'lexaudit[mcp]'` then `lexaudit-mcp` via stdio | none |
-| VS Code | sideload `packages/vscode-lexaudit` | none |
+| MCP | `pip install 'lexaudit[mcp]'` → `lexaudit-mcp` stdio | none |
+| MCP registry | `packages/mcp-lexaudit/server.json` | publish after PyPI 0.3.0 |
+| VS Code | `packages/vscode-lexaudit` → `.vsix` via `npm run package` | Marketplace after owner go |
 
 ## Cursor / Claude Desktop MCP snippet
 
@@ -24,14 +23,15 @@ endpoint. Dictionaries still land in the user cache.
 
 Tools: `audit`, `explain`, `expand_needle`, `fetch_dicts`.
 
-## VS Code lab extension
+## VS Code extension
 
 ```bash
-# Prefers `lexaudit` on PATH; falls back to `uv run lexaudit` from repo root
+# Prefers lexaudit on PATH; falls back to uv run lexaudit from repo root
 cd packages/vscode-lexaudit
-node extension.js --smoke
-# In VS Code: Developer: Install Extension from Location → this folder
-# Command palette: "lexaudit: Audit workspace"
+npm run smoke
+npm run package   # writes vscode-lexaudit-0.3.0.vsix
+# Sideload: Developer → Install Extension from Location
+# Or: vsce publish (owner go only, after PyPI CLI is installable)
 ```
 
 Smoke checks: CLI `--help` + offline `findings.json` → Problems diagnostics parser.
@@ -44,10 +44,16 @@ single-sourced in Python.
 bash scripts/docs_deslop_scan.sh
 ```
 
-Ban-list + bold-spam (>2 `**…**` per prose paragraph) on `README.md` + `docs/*.md`.
-Wired into `scripts/fairhelm_soft_dogfood.sh`.
+Ban-list + bold-spam (>2 bold spans per prose paragraph) on `README.md` + `docs/*.md`.
+
+## Publish order (owner go)
+
+1. PyPI `lexaudit==0.3.0` (wheel includes ten RC domain packs)
+2. MCP registry submit using `packages/mcp-lexaudit/server.json`
+3. VS Marketplace / Open VSX: `vsce publish` from `packages/vscode-lexaudit`
+4. Push remotes / tag
 
 ## Do not
 
-- Publish to VS Marketplace / Open VSX / Glama / Smithery until owner go.
-- Add a remote audit API in this track.
+- Publish Marketplace / MCP registry before PyPI 0.3.0 is live
+- Add a remote audit API in this track

@@ -55,7 +55,8 @@ def list_packs(*, include_lab: bool = False) -> list[dict[str, object]]:
     if root is None:
         return rows
     for pack_dir in sorted(p for p in root.iterdir() if p.is_dir() and not p.name.startswith("_")):
-        row = _pack_row(pack_dir, status="release")
+        # Preserve pack.yaml status (e.g. release-candidate); skip _lab here.
+        row = _pack_row(pack_dir)
         if row is not None:
             rows.append(row)
     if include_lab:

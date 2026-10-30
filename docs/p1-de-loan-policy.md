@@ -5,14 +5,14 @@ Does **not** flip package `enable_bilingual` default.
 
 ## Meaning (one paragraph)
 
-In polished **German product UI**, short English nouns are often kept on purpose
+In polished German product UI, short English nouns are often kept on purpose
 (`Dashboard`, `Toast`, `Store`, `Download`, `Upload`, `Inbox` as a mail folder).
-They are **intentional loans**, not untranslated leftovers. lexaudit must **not**
-treat them as leftovers by default: the package `DEFAULT_INTENTIONAL_LOANS` stays
+They are intentional loans, not untranslated leftovers. lexaudit must not treat
+them as leftovers by default: the package `DEFAULT_INTENTIONAL_LOANS` stays
 brand/protocol-shaped (`API`, `JSON`, `HTTP`, …). DE UI nouns enter only through
-**corpus extras** (bilingual) and optionally a **project allowlist** (monolingual
-foreign pass). Putting them in DEFAULT would hide the same Latin surfaces when
-they are real leftovers in RU/UK/community samples.
+corpus extras (bilingual) and optionally a project allowlist (monolingual foreign
+pass). Putting them in DEFAULT would hide the same Latin surfaces when they are
+real leftovers in RU/UK/community samples.
 
 ## Two layers
 

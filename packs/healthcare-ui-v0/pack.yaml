@@ -1,0 +1,17 @@
+id: healthcare-ui-v0
+version: 0.0.1-lab
+license: MIT
+locales:
+- en
+- de
+- es
+- pl
+- ru
+- sv
+- uk
+status: release-candidate
+rules_dir: calques
+notes: Thin healthcare / patient UI calques (lab). No clinical advice.
+sources:
+- https://www.who.int/about/policies/publishing/style-guide
+- https://www.cdc.gov/healthliteracy/developmaterials/plainlanguage.html

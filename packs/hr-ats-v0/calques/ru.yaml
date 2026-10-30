@@ -1,0 +1,146 @@
+version: 1
+rules:
+- pattern: шортлистабельность
+  locale: ru
+  reason: lab-hr-шортлистабельность
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: онбордить
+  locale: ru
+  reason: lab-hr-онбордить
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: пайплайнность
+  locale: ru
+  reason: lab-hr-пайплайнность
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: офферизировать
+  locale: ru
+  reason: lab-hr-офферизировать
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: атснесс
+  locale: ru
+  reason: lab-hr-атснесс
+  hint: RU loan/coinage — rewrite
+  severity: likely
+  source: lab-hr
+- pattern: скринапилити
+  locale: ru
+  reason: lab-hr-скринапилити
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: реквезишнайз
+  locale: ru
+  reason: lab-hr-реквезишнайз
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: сорсабилити
+  locale: ru
+  reason: lab-hr-сорсабилити
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: интервьюайз
+  locale: ru
+  reason: lab-hr-интервьюайз
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: скоркарднесс
+  locale: ru
+  reason: lab-hr-скоркарднесс
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: реджектабилити
+  locale: ru
+  reason: lab-hr-реджектабилити
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: хайрабилити
+  locale: ru
+  reason: lab-hr-хайрабилити
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: талентпулайз
+  locale: ru
+  reason: lab-hr-талентпулайз
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: хедкаунтнесс
+  locale: ru
+  reason: lab-hr-хедкаунтнесс
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: компбандабилити
+  locale: ru
+  reason: lab-hr-компбандабилити
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: офферлеттерайз
+  locale: ru
+  reason: lab-hr-офферлеттерайз
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: бэкграундчекнесс
+  locale: ru
+  reason: lab-hr-бэкграундчекнесс
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: референсайз
+  locale: ru
+  reason: lab-hr-референсайз
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: календарнесс
+  locale: ru
+  reason: lab-hr-календарнесс
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: шедьюлабилити
+  locale: ru
+  reason: lab-hr-шедьюлабилити
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: стейджабилити
+  locale: ru
+  reason: lab-hr-стейджабилити
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: кандидатайз
+  locale: ru
+  reason: lab-hr-кандидатайз
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: пайплайнайз
+  locale: ru
+  reason: lab-hr-пайплайнайз
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr
+- pattern: реджектризонайз
+  locale: ru
+  reason: lab-hr-реджектризонайз
+  hint: RU loan/coinage — rewrite
+  severity: confirmed
+  source: lab-hr

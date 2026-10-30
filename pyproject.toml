@@ -1,6 +1,6 @@
 [project]
 name = "lexaudit"
-version = "0.2.0"
+version = "0.3.0"
 description = "Locale vocabulary audit: inventeds, calques, foreign slips; page ranking for rewrite agents"
 readme = "README.md"
 license = "MIT"
@@ -74,6 +74,16 @@ packages = ["src/lexaudit"]
 [tool.hatch.build.targets.wheel.force-include]
 "rules/calques" = "lexaudit/rules/calques"
 "packs/core-calques-v1" = "lexaudit/packs_data/core-calques-v1"
+"packs/saas-ui-v0" = "lexaudit/packs_data/saas-ui-v0"
+"packs/fintech-v0" = "lexaudit/packs_data/fintech-v0"
+"packs/developer-docs-v0" = "lexaudit/packs_data/developer-docs-v0"
+"packs/ecommerce-ui-v0" = "lexaudit/packs_data/ecommerce-ui-v0"
+"packs/healthcare-ui-v0" = "lexaudit/packs_data/healthcare-ui-v0"
+"packs/legal-docs-v0" = "lexaudit/packs_data/legal-docs-v0"
+"packs/gaming-ui-v0" = "lexaudit/packs_data/gaming-ui-v0"
+"packs/edtech-v0" = "lexaudit/packs_data/edtech-v0"
+"packs/security-docs-v0" = "lexaudit/packs_data/security-docs-v0"
+"packs/hr-ats-v0" = "lexaudit/packs_data/hr-ats-v0"
 
 [tool.uv]
 package = true

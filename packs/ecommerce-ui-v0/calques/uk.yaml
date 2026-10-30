@@ -1,0 +1,86 @@
+version: 1
+rules:
+- pattern: cartness
+  locale: uk
+  reason: lab-ecommerce-cartness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-ecommerce
+  override_ok: true
+- pattern: checkoutness
+  locale: uk
+  reason: lab-ecommerce-checkoutness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-ecommerce
+  override_ok: true
+- pattern: wishlistability
+  locale: uk
+  reason: lab-ecommerce-wishlistability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-ecommerce
+  override_ok: true
+- pattern: skuize
+  locale: uk
+  reason: lab-ecommerce-skuize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-ecommerce
+  override_ok: true
+- pattern: refundize
+  locale: uk
+  reason: lab-ecommerce-refundize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-ecommerce
+  override_ok: true
+- pattern: shipability
+  locale: uk
+  reason: lab-ecommerce-shipability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-ecommerce
+  override_ok: true
+- pattern: basketize
+  locale: uk
+  reason: lab-ecommerce-basketize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-ecommerce
+  override_ok: true
+- pattern: voucherize
+  locale: uk
+  reason: lab-ecommerce-voucherize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-ecommerce
+  override_ok: true
+- pattern: promoability
+  locale: uk
+  reason: lab-ecommerce-promoability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-ecommerce
+  override_ok: true
+- pattern: stockness
+  locale: uk
+  reason: lab-ecommerce-stockness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-ecommerce
+  override_ok: true
+- pattern: fulfillness
+  locale: uk
+  reason: lab-ecommerce-fulfillness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-ecommerce
+  override_ok: true
+- pattern: returnability
+  locale: uk
+  reason: lab-ecommerce-returnability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-ecommerce
+  override_ok: true

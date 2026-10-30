@@ -99,8 +99,12 @@ FairHelm dogfood: root `lexaudit.config.bilingual.yaml` +
 
 When `enable_crosslocale: true`, the pipeline aggregates word norms from
 `crosslocale_reference_locale` (default `en`) and boosts no-pair tiers for the
-audited locale. Embeddings are not used on the audit path. Package / FairHelm
-main configs keep this flag **false** until opted in.
+audited locale. Embeddings are not used on the audit path. Package default stays
+**false**.
+
+Opt-in recipe: copy `examples/lexaudit.config.crosslocale.yaml`, keep a polished
+reference locale in the same `files_paths` / academy roots, then audit the
+target locale. Leave the flag off when you audit a single locale only.
 
 ## Phrase calques
 

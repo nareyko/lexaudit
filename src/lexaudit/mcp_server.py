@@ -1,8 +1,8 @@
 # mypy: ignore-errors
-"""Optional MCP server (P1 lab): audit / explain / expand-needle / fetch-dicts.
+"""Optional MCP server: audit / explain / expand-needle / fetch-dicts.
 
 Install with ``pip install 'lexaudit[mcp]'`` then run ``lexaudit-mcp``.
-Not published as a Marketplace extension in 0.2.0.
+Registry metadata: ``packages/mcp-lexaudit/server.json`` (publish with 0.3.0).
 """
 
 from __future__ import annotations

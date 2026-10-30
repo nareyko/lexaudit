@@ -1,0 +1,146 @@
+version: 1
+rules:
+- pattern: scormheit
+  locale: de
+  reason: lab-edtech-scormheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: quizbarkeit
+  locale: de
+  reason: lab-edtech-quizbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-edtech
+- pattern: coursewarisieren
+  locale: de
+  reason: lab-edtech-coursewarisieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: enrollbarkeit
+  locale: de
+  reason: lab-edtech-enrollbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-edtech
+- pattern: lmsieren
+  locale: de
+  reason: lab-edtech-lmsieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: xapiheit
+  locale: de
+  reason: lab-edtech-xapiheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: completionieren
+  locale: de
+  reason: lab-edtech-completionieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: modulisieren
+  locale: de
+  reason: lab-edtech-modulisieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: lessonisieren
+  locale: de
+  reason: lab-edtech-lessonisieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: gradbarkeit
+  locale: de
+  reason: lab-edtech-gradbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-edtech
+- pattern: rubricisieren
+  locale: de
+  reason: lab-edtech-rubricisieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: badgebarkeit
+  locale: de
+  reason: lab-edtech-badgebarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-edtech
+- pattern: certificateieren
+  locale: de
+  reason: lab-edtech-certificateieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: cohortheit
+  locale: de
+  reason: lab-edtech-cohortheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: syllabusieren
+  locale: de
+  reason: lab-edtech-syllabusieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: assignmentieren
+  locale: de
+  reason: lab-edtech-assignmentieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: submissionheit
+  locale: de
+  reason: lab-edtech-submissionheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: peerreviewbarkeit
+  locale: de
+  reason: lab-edtech-peerreviewbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-edtech
+- pattern: proctorieren
+  locale: de
+  reason: lab-edtech-proctorieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: attendbarkeit
+  locale: de
+  reason: lab-edtech-attendbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-edtech
+- pattern: playlistieren
+  locale: de
+  reason: lab-edtech-playlistieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: microlearningheit
+  locale: de
+  reason: lab-edtech-microlearningheit
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech
+- pattern: branchbarkeit
+  locale: de
+  reason: lab-edtech-branchbarkeit
+  hint: DE UI/coinage — rewrite
+  severity: likely
+  source: lab-edtech
+- pattern: remediateieren
+  locale: de
+  reason: lab-edtech-remediateieren
+  hint: DE UI/coinage — rewrite
+  severity: confirmed
+  source: lab-edtech

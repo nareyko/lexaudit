@@ -1,0 +1,78 @@
+version: 1
+rules:
+- pattern: exploitness
+  locale: sv
+  reason: lab-security-exploitness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+- pattern: sandboxize
+  locale: sv
+  reason: lab-security-sandboxize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+- pattern: phishability
+  locale: sv
+  reason: lab-security-phishability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+  override_ok: true
+- pattern: hardenability
+  locale: sv
+  reason: lab-security-hardenability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+  override_ok: true
+- pattern: zerodayness
+  locale: sv
+  reason: lab-security-zerodayness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+- pattern: payloadize
+  locale: sv
+  reason: lab-security-payloadize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+- pattern: severityness
+  locale: sv
+  reason: lab-security-severityness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+- pattern: threatmodelize
+  locale: sv
+  reason: lab-security-threatmodelize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+- pattern: vulnscanability
+  locale: sv
+  reason: lab-security-vulnscanability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+  override_ok: true
+- pattern: penability
+  locale: sv
+  reason: lab-security-penability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+  override_ok: true
+- pattern: redteamize
+  locale: sv
+  reason: lab-security-redteamize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security
+- pattern: blueteamness
+  locale: sv
+  reason: lab-security-blueteamness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-security

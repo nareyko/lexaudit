@@ -1,0 +1,171 @@
+version: 1
+rules:
+- pattern: exploitness
+  locale: en
+  reason: lab-security-exploitness
+  hint: 'security-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-security
+- pattern: sandboxize
+  locale: en
+  reason: lab-security-sandboxize
+  hint: 'security-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-security
+- pattern: phishability
+  locale: en
+  reason: lab-security-phishability
+  hint: 'security-docs-v0: invented -ability'
+  severity: likely
+  source: lab-security
+- pattern: hardenability
+  locale: en
+  reason: lab-security-hardenability
+  hint: 'security-docs-v0: invented -ability'
+  severity: likely
+  source: lab-security
+  override_ok: true
+- pattern: zerodayness
+  locale: en
+  reason: lab-security-zerodayness
+  hint: 'security-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-security
+- pattern: payloadize
+  locale: en
+  reason: lab-security-payloadize
+  hint: 'security-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-security
+- pattern: severityness
+  locale: en
+  reason: lab-security-severityness
+  hint: 'security-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-security
+- pattern: threatmodelize
+  locale: en
+  reason: lab-security-threatmodelize
+  hint: 'security-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-security
+- pattern: vulnscanability
+  locale: en
+  reason: lab-security-vulnscanability
+  hint: 'security-docs-v0: invented -ability'
+  severity: likely
+  source: lab-security
+- pattern: penability
+  locale: en
+  reason: lab-security-penability
+  hint: 'security-docs-v0: invented -ability'
+  severity: likely
+  source: lab-security
+- pattern: redteamize
+  locale: en
+  reason: lab-security-redteamize
+  hint: 'security-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-security
+- pattern: blueteamness
+  locale: en
+  reason: lab-security-blueteamness
+  hint: 'security-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-security
+- pattern: iocize
+  locale: en
+  reason: lab-security-iocize
+  hint: 'security-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-security
+- pattern: ttpsness
+  locale: en
+  reason: lab-security-ttpsness
+  hint: 'security-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-security
+- pattern: cveability
+  locale: en
+  reason: lab-security-cveability
+  hint: 'security-docs-v0: invented -ability'
+  severity: likely
+  source: lab-security
+- pattern: cweize
+  locale: en
+  reason: lab-security-cweize
+  hint: 'security-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-security
+- pattern: cvssness
+  locale: en
+  reason: lab-security-cvssness
+  hint: 'security-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-security
+- pattern: mitigability
+  locale: en
+  reason: lab-security-mitigability
+  hint: 'security-docs-v0: invented -ability'
+  severity: likely
+  source: lab-security
+- pattern: remediateize
+  locale: en
+  reason: lab-security-remediateize
+  hint: 'security-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-security
+- pattern: patchability
+  locale: en
+  reason: lab-security-patchability
+  hint: 'security-docs-v0: invented -ability'
+  severity: likely
+  source: lab-security
+- pattern: lateralize
+  locale: en
+  reason: lab-security-lateralize
+  hint: 'security-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-security
+- pattern: privilegeescability
+  locale: en
+  reason: lab-security-privilegeescability
+  hint: 'security-docs-v0: invented -ability'
+  severity: likely
+  source: lab-security
+- pattern: credentialstuffness
+  locale: en
+  reason: lab-security-credentialstuffness
+  hint: 'security-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-security
+- pattern: bruteforceability
+  locale: en
+  reason: lab-security-bruteforceability
+  hint: 'security-docs-v0: invented -ability'
+  severity: likely
+  source: lab-security
+- pattern: ransomwareize
+  locale: en
+  reason: lab-security-ransomwareize
+  hint: 'security-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-security
+- pattern: exfiltrateize
+  locale: en
+  reason: lab-security-exfiltrateize
+  hint: 'security-docs-v0: invented verb'
+  severity: confirmed
+  source: lab-security
+- pattern: beaconness
+  locale: en
+  reason: lab-security-beaconness
+  hint: 'security-docs-v0: invented noun'
+  severity: confirmed
+  source: lab-security
+- pattern: c2ability
+  locale: en
+  reason: lab-security-c2ability
+  hint: 'security-docs-v0: invented -ability'
+  severity: likely
+  source: lab-security

@@ -1,0 +1,16 @@
+id: ecommerce-ui-v0
+version: 0.0.1-lab
+license: MIT
+locales:
+- en
+- de
+- es
+- pl
+- ru
+- sv
+- uk
+status: release-candidate
+rules_dir: calques
+notes: Thin e-commerce UI calque seed (checkout / cart coinages). Lab only.
+sources:
+- https://www.nativelocalization.com/industries/fintech-localization/

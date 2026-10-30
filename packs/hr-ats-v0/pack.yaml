@@ -1,0 +1,19 @@
+id: hr-ats-v0
+version: 0.0.1-lab
+license: MIT
+locales:
+- en
+- de
+- es
+- pl
+- ru
+- sv
+- uk
+status: release-candidate
+rules_dir: calques
+notes: Thin ATS / recruiting UI coinages (shortlist, onboard, pipeline, offer). Lab
+  harvest 2026-10-30. Not legal or hiring advice.
+sources:
+- https://www.cvuniform.com/blog/risks-of-automatically-translating-candidate-experience?lang=en
+- https://www.ismartrecruit.com/blogs/multilingual-recruitment-best-practices
+- https://treegarden.io/blog/multilingual-ats-software/

@@ -1,0 +1,147 @@
+version: 1
+rules:
+  - pattern: "refundability"
+    locale: de
+    reason: "fintech-de-refundability"
+    hint: "erstattungsfähig / Erstattung möglich"
+    severity: likely
+    source: "lab-fintech"
+  - pattern: "chargebackness"
+    locale: de
+    reason: "fintech-de-chargebackness"
+    hint: "Chargeback-Risiko"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "settleness"
+    locale: de
+    reason: "fintech-de-settleness"
+    hint: "Abwicklungsstatus"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "payoutness"
+    locale: de
+    reason: "fintech-de-payoutness"
+    hint: "Auszahlungsstatus"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "ibanize"
+    locale: de
+    reason: "fintech-de-ibanize"
+    hint: "IBAN prüfen / eingeben"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "sepaize"
+    locale: de
+    reason: "fintech-de-sepaize"
+    hint: "per SEPA senden"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "kycess"
+    locale: de
+    reason: "fintech-de-kycess"
+    hint: "KYC-Status"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "walletness"
+    locale: de
+    reason: "fintech-de-walletness"
+    hint: "Wallet-Status"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "cardness"
+    locale: de
+    reason: "fintech-de-cardness"
+    hint: "Kartenstatus"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "fxness"
+    locale: de
+    reason: "fintech-de-fxness"
+    hint: "Devisenkurs / FX"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "ledgerness"
+    locale: de
+    reason: "fintech-de-ledgerness"
+    hint: "Hauptbuch-Status"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "payability"
+    locale: de
+    reason: "fintech-de-payability"
+    hint: "zahlbar / zahlungsfähig"
+    severity: likely
+    source: "lab-fintech"
+  - pattern: "wireability"
+    locale: de
+    reason: "fintech-de-wireability"
+    hint: "Überweisung möglich"
+    severity: likely
+    source: "lab-fintech"
+  - pattern: "checkingaccountness"
+    locale: de
+    reason: "fintech-de-checkingaccountness"
+    hint: "Girokonto"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "currentaccountness"
+    locale: de
+    reason: "fintech-de-currentaccountness"
+    hint: "Girokonto / Kontokorrent"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "pendiente"
+    locale: de
+    reason: "fintech-es-pendiente-in-de"
+    hint: "ausstehend / pending"
+    severity: likely
+    source: "lab-fintech"
+  - pattern: "liquidado"
+    locale: de
+    reason: "fintech-es-liquidado-in-de"
+    hint: "abgewickelt / settled"
+    severity: likely
+    source: "lab-fintech"
+  - pattern: "retenido"
+    locale: de
+    reason: "fintech-es-retenido-in-de"
+    hint: "einbehalten / reserved"
+    severity: likely
+    source: "lab-fintech"
+  - pattern: "dividendo"
+    locale: de
+    reason: "fintech-es-dividendo-in-de"
+    hint: "Dividende"
+    severity: likely
+    source: "lab-fintech"
+  - pattern: "acciones"
+    locale: de
+    reason: "fintech-es-acciones-in-de"
+    hint: "Aktien"
+    severity: likely
+    source: "lab-fintech"
+
+  - pattern: "payouten"
+    locale: de
+    reason: "fintech-de-payouten"
+    hint: "Auszahlung auslösen"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "refundbarkeit"
+    locale: de
+    reason: "fintech-de-refundbarkeit"
+    hint: "erstattungsfähig"
+    severity: likely
+    source: "lab-fintech"
+  - pattern: "settlementheit"
+    locale: de
+    reason: "fintech-de-settlementheit"
+    hint: "Settlement-Status"
+    severity: confirmed
+    source: "lab-fintech"
+  - pattern: "chargebacken"
+    locale: de
+    reason: "fintech-de-chargebacken"
+    hint: "Chargeback einleiten"
+    severity: likely
+    source: "lab-fintech"

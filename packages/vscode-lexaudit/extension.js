@@ -2,8 +2,8 @@
 "use strict";
 
 /**
- * Minimal VS Code extension (lab): shells out to lexaudit CLI.
- * No hosted service. Not published to Marketplace in 0.2.x.
+ * VS Code extension: shells out to lexaudit CLI.
+ * No hosted service. Package a .vsix with npm run package; publish on owner go.
  */
 
 const { spawnSync } = require("node:child_process");

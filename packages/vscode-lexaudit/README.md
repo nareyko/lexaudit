@@ -1,17 +1,38 @@
-# vscode-lexaudit (P1 lab, unpublished)
+# lexaudit (VS Code)
 
-Shells out to the `lexaudit` CLI. **Not** on the VS Code Marketplace.
+Shells out to the local `lexaudit` CLI. Detection only — no rewrite, no cloud.
 
-## Install (dogfood)
+## Requirements
 
-1. Put `lexaudit` on your PATH (`pipx install lexaudit` or `uv tool install lexaudit`).
-2. VS Code → Developer: Install Extension from Location → this folder.
-3. Command palette: `lexaudit: Audit workspace` or `lexaudit: Explain selection`.
-
-## Smoke
+Install the CLI first:
 
 ```bash
-node extension.js --smoke
+pipx install lexaudit
+# or: uv tool install lexaudit
 ```
 
-See [docs/p1-mcp-vscode-dogfood.md](../../docs/p1-mcp-vscode-dogfood.md).
+## Commands
+
+- `lexaudit: Audit workspace` — runs `lexaudit audit --check` and maps findings to Problems
+- `lexaudit: Explain selection` — runs `lexaudit explain` on the selected word
+
+## Settings
+
+| Setting | Default | Meaning |
+|---|---|---|
+| `lexaudit.locale` | `en` | Locale for the CLI |
+| `lexaudit.cli` | `lexaudit` | Binary name or absolute path |
+
+Optional: put `lexaudit.config.yaml` in the workspace root.
+
+## Smoke (developers)
+
+```bash
+cd packages/vscode-lexaudit
+npm run smoke
+npm run package   # writes a .vsix (publish separately)
+```
+
+## License
+
+MIT — same as the lexaudit package. See the repository root `LICENSE`.

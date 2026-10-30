@@ -1,0 +1,24 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name": "io.github.nareyko/lexaudit",
+  "description": "Locale vocabulary audit (calques, inventeds, foreign slips). Local CLI via stdio — no hosted API.",
+  "repository": {
+    "url": "https://github.com/nareyko/lexaudit",
+    "source": "github"
+  },
+  "version": "0.3.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "lexaudit",
+      "version": "0.3.0",
+      "packageArguments": [],
+      "environmentVariables": [],
+      "transport": {
+        "type": "stdio"
+      },
+      "runtimeHint": "uvx"
+    }
+  ],
+  "remotes": []
+}

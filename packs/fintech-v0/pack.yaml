@@ -1,0 +1,20 @@
+id: fintech-v0
+version: 0.0.1-lab
+license: MIT
+locales:
+- en
+- de
+- es
+- pl
+- ru
+- sv
+- uk
+status: release-candidate
+rules_dir: calques
+notes: Experimental fintech/payments wording traps from public localization notes
+  (Native Localization fintech, Translated Right, GB Translation). Not for GitHub
+  Release until metrics pass.
+sources:
+- https://www.nativelocalization.com/industries/fintech-localization/
+- https://www.translatedright.com/blog/fintech-app-translation-security-terminology-pitfalls-to-avoid/
+- https://www.gb-translation.com/es/traduccion-fintech/

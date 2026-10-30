@@ -1,0 +1,86 @@
+version: 1
+rules:
+- pattern: shortlistability
+  locale: uk
+  reason: lab-hr-shortlistability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true
+- pattern: onboardize
+  locale: uk
+  reason: lab-hr-onboardize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true
+- pattern: pipelineness
+  locale: uk
+  reason: lab-hr-pipelineness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true
+- pattern: offerize
+  locale: uk
+  reason: lab-hr-offerize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true
+- pattern: atsness
+  locale: uk
+  reason: lab-hr-atsness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true
+- pattern: screenability
+  locale: uk
+  reason: lab-hr-screenability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true
+- pattern: requisitionize
+  locale: uk
+  reason: lab-hr-requisitionize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true
+- pattern: sourcability
+  locale: uk
+  reason: lab-hr-sourcability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true
+- pattern: interviewize
+  locale: uk
+  reason: lab-hr-interviewize
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true
+- pattern: scorecardness
+  locale: uk
+  reason: lab-hr-scorecardness
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true
+- pattern: rejectability
+  locale: uk
+  reason: lab-hr-rejectability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true
+- pattern: hireability
+  locale: uk
+  reason: lab-hr-hireability
+  hint: English leftover coinage
+  severity: confirmed
+  source: lab-hr
+  override_ok: true

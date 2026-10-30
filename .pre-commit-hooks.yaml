@@ -1,0 +1,8 @@
+- id: lexaudit
+  name: lexaudit
+  description: Flag translation calques, false friends, and invented words in texts
+  entry: lexaudit audit --check --path
+  language: python
+  types_or: [markdown, html]
+  pass_filenames: true
+  minimum_pre_commit_version: "3.0.0"

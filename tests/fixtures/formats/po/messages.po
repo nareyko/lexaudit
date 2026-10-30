@@ -1,0 +1,6 @@
+msgid "Hello"
+msgstr "orientir greeting"
+
+msgid "Boat"
+msgstr ""
+"A denseness of notes"

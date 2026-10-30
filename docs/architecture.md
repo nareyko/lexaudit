@@ -27,7 +27,7 @@ Everything runs on an ordinary computer processor. No graphics card, no internet
 
 | Location | Role |
 |---|---|
-| `github.com/nareyko/lexaudit` | The package itself (AGPL-3.0-or-later, by Vadim Nareyko) |
+| `github.com/nareyko/lexaudit` | The package itself (MIT, by Vadim Nareyko) |
 | Your project, `lexaudit.config.yaml` | Your settings |
 | Your project, `dicts/*.yaml` | Your own names, abbreviations, allowed words |
 | Your project, output folder | Generated reports. Safe to delete and regenerate |

@@ -29,17 +29,17 @@ To evaluate `lexaudit` scientifically across **all 7 supported European language
 
 We compare three pipeline configurations across all 7 languages (3 defective pages and 3 clean pages per language, 21 defective pages total):
 
-- **Ablation A - Naive Hunspell (`--mode raw`)**: raw dictionary spellcheck without project allowlists, morphology, compound splitting, or calque rules.
-- **Ablation B - Allowlists + Morphology + Compound Splitting (`--mode raw`)**: removes brand/acronym/compound noise, but still ranks pages by raw unweighted suspect count.
-- **Ablation C - Full `lexaudit` (`--mode weighted`)**: adds `rules/calques/*.yaml` (including `override_ok`), context-scoped foreign weights, and hapax down-weighting (`0.1` for single-occurrence unknown tokens).
+- Ablation A - Naive Hunspell (`--mode raw`): raw dictionary spellcheck without project allowlists, morphology, compound splitting, or calque rules.
+- Ablation B - Allowlists + Morphology + Compound Splitting (`--mode raw`): removes brand/acronym/compound noise, but still ranks pages by raw unweighted suspect count.
+- Ablation C - Full `lexaudit` (`--mode weighted`): adds `rules/calques/*.yaml` (including `override_ok`), context-scoped foreign weights, and hapax down-weighting (`0.1` for single-occurrence unknown tokens).
 
 ### Macro-Averaged Summary Across All 7 Languages
 
 | Configuration | `Precision@2` | `Precision@3` | `MAP` (Mean Average Precision) | Known-Rule Calque Recall | Open-Set Calque Recall (including unseen) | Total CPU Time (42 pages) |
 |---|---:|---:|---:|---:|---:|---:|
-| **A. Naive Hunspell (`raw`)** | 0.0% | 23.8% | 0.389 | 0.0% (0/26) | 0.0% (0/33) | 0.54 s |
-| **B. Dictionaries + Morph/Compound (`raw`)** | 7.1% | 23.8% | 0.421 | 0.0% (0/26) | 0.0% (0/33) | 0.62 s |
-| **C. Full `lexaudit` (`weighted`)** | **100.0%** | **66.7%** | **0.838** | **100.0% (26/26)** | **77.9% (26/33)** | **0.66 s** |
+| A. Naive Hunspell (`raw`) | 0.0% | 23.8% | 0.389 | 0.0% (0/26) | 0.0% (0/33) | 0.54 s |
+| B. Dictionaries + Morph/Compound (`raw`) | 7.1% | 23.8% | 0.421 | 0.0% (0/26) | 0.0% (0/33) | 0.62 s |
+| C. Full `lexaudit` (`weighted`) | 100.0% | 66.7% | 0.838 | 100.0% (26/26) | 77.9% (26/33) | 0.66 s |
 
 ### Per-Language Breakdown (Ablation C vs. Ablation A)
 
@@ -70,14 +70,14 @@ Examining the exact English ranking output explains both the strength and the bo
 | #6 | DEFECT (page 06) |  0.1 | 1 | en-06-defect-unseen-neologism.md | dockwalkish |
 ```
 
-1. **Why `Precision@2 = 100.0%`:** Pages `04` and `05` contain curated calques (`orientir`, `surveyness`) and the false friend `denseness` (`override_ok: true`). Weighted scoring (`8.0` for `calque`, `6.0` for needle match) lifts them to `#1` and `#2` across all 7 languages.
-2. **Why `Precision@3 = 66.7%` (False Positive on Page `03` vs. False Negative on Page `06`):**
+1. Why Precision@2 = 100.0%: Pages `04` and `05` contain curated calques (`orientir`, `surveyness`) and the false friend `denseness` (`override_ok: true`). Weighted scoring (`8.0` for `calque`, `6.0` for needle match) lifts them to `#1` and `#2` across all 7 languages.
+2. Why Precision@3 = 66.7% (false positive on page `03` vs. false negative on page `06`):
    - On clean page `03`, specialist terms not yet in `proper-names.yaml` (`vinylester`, `Epoxidgrundierung`, `винилэфирной`) appear multiple times (`count >= 2`), earning a `suspect` score of `1.5 - 1.8`.
-   - On defective page `06`, the planted coinage `dockwalkish` (`Stegmanöverig`, `пирсовыйосмотр`) is an **unseen single-occurrence token** (`count = 1`) not yet in `rules/calques/*.yaml`. Because `lexaudit` down-weights unknown singletons to `0.1` to suppress catalogue-code noise (pages `01` and `02`), an unseen singleton neologism also receives `0.1`.
+   - On defective page `06`, the planted coinage `dockwalkish` (`Stegmanöverig`, `пирсовыйосмотр`) is an unseen single-occurrence token (`count = 1`) not yet in `rules/calques/*.yaml`. Because `lexaudit` down-weights unknown singletons to `0.1` to suppress catalogue-code noise (pages `01` and `02`), an unseen singleton neologism also receives `0.1`.
    - Furthermore, multi-word phrase calques made of valid dictionary words cannot be detected by token-level rules alone.
-3. **How teams close the remaining gap in production:**
-   - **Step 1:** Add recurring valid domain terms from page `03` (`vinylester`, `haulout`) to `dicts/proper-names.yaml` (drops page `03` score to `0.0`).
-   - **Step 2:** Run optional `lexaudit label --tiers likely,weak` (LLM triage) or promote recurring editorial mistakes into `rules/calques/<locale>.yaml`.
+3. How teams close the remaining gap in production:
+   - Step 1: Add recurring valid domain terms from page `03` (`vinylester`, `haulout`) to `dicts/proper-names.yaml` (drops page `03` score to `0.0`).
+   - Step 2: Run optional `lexaudit label --tiers likely,weak` (LLM triage) or promote recurring editorial mistakes into `rules/calques/<locale>.yaml`.
 
 ## 4. Reproduce the Study Locally
 

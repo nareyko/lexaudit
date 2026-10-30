@@ -1,0 +1,7 @@
+# Experimental - not part of v0.2.0 release artifacts.
+id: saas-ui-v0
+version: 0.0.0
+license: MIT
+locales: [en, de, es, pl, ru, sv, uk]
+status: lab
+notes: Seed shell for SaaS/product UI calques. Fill calques/*.yaml after corpus hunt.

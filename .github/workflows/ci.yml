@@ -4,15 +4,20 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   lint-test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.12"]
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v4
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python-version }}
       - name: Sync
         run: uv sync --extra dev
       - name: Spelling dictionaries (user cache, no apt)
@@ -24,9 +29,12 @@ jobs:
       - name: Pytest (unit, property/fuzz, golden regression, schema, read-only)
         run: uv run pytest
       - name: Complexity / CRAP gate
+        if: matrix.python-version == '3.12'
         run: uv run python scripts/crap_report.py
       - name: Package build smoke (wheel + sdist)
         run: uv build
+      - name: Pre-commit hook metadata
+        run: test -f .pre-commit-hooks.yaml && grep -q 'id: lexaudit' .pre-commit-hooks.yaml
 
   mutation:
     runs-on: ubuntu-latest
@@ -105,3 +113,26 @@ jobs:
           path: |
             artifacts/soft-audit-summary.md
             artifacts/diff.json
+
+  dogfood-action:
+    runs-on: ubuntu-latest
+    needs: lint-test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with:
+          python-version: "3.12"
+      - name: Install local package for Action dogfood
+        run: uv pip install --system .
+      - name: Audit synthetic demo (expect findings; allow failure)
+        continue-on-error: true
+        run: |
+          uv run lexaudit audit \
+            --config examples/synthetic-demo/lexaudit.config.yaml \
+            --locale en \
+            --check \
+            --format sarif \
+            --sarif-file lexaudit-results.sarif \
+            --github-annotations
+      - name: SARIF file produced
+        run: test -f lexaudit-results.sarif

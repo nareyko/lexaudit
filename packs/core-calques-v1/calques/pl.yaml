@@ -1,0 +1,44 @@
+version: 1
+rules:
+  # Editorial calque & false-friend needles (Polish)
+  - pattern: "orientir*"
+    locale: pl
+    match: glob
+    reason: "loan-calque-orientir"
+    hint: "wartosc orientacyjna / punkt odniesienia - nie orientir"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+  - pattern: "*-orientir"
+    locale: pl
+    match: glob
+    reason: "loan-calque-orientir"
+    hint: "wartosc orientacyjna"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+  - pattern: "denseness"
+    locale: pl
+    reason: "template-calque-denseness"
+    hint: "notatki / zestawienie danych - nie denseness"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+    override_ok: true
+  - pattern: "surveyness"
+    locale: pl
+    reason: "invented-calque"
+    hint: "inspekcja przedzakupowa / przeglad jachtu"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+  - pattern: "przedzakupow*"
+    locale: pl
+    match: glob
+    reason: "loan-calque-prepurchase"
+    hint: "inspekcja przed zakupem / przeglad przed zakupem"
+    severity: likely
+    source: "curated-calque-pack-v1"
+  - pattern: "czarterowalnosc*"
+    locale: pl
+    match: glob
+    reason: "invented-calque"
+    hint: "przydatnosc do czarteru"
+    severity: likely
+    source: "curated-calque-pack-v1"

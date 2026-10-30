@@ -1,0 +1,18 @@
+# Example consumer workflow (documentation). Copy into your repo and adjust paths.
+# This file is not required for lexaudit CI; it shows how to call the Action.
+name: example-lexaudit-consumer
+
+on:
+  workflow_dispatch:
+
+jobs:
+  audit-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./
+        with:
+          path: docs
+          locale: en
+          fail-on: calque,invented
+          upload-sarif: "false"

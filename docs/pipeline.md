@@ -8,15 +8,15 @@ Think of a security queue. Every word goes through several gates in a fixed orde
 
 ## The gates, in order
 
-1. **Read the text.** The tool cuts each file into pieces: title, summary, body. Code blocks, links and web addresses are skipped.
-2. **Split into words.** Hyphens and apostrophes inside a word stay in it.
-3. **Your allowlist.** Names, abbreviations and section markers you declared are fine.
-4. **Dictionary.** A word found in the language dictionary (Hunspell) is fine.
-5. **Word forms.** Russian and Ukrainian endings are checked with `pymorphy3`. "на скеге" is a normal case form, not an error. German and Swedish long words are split into known parts.
-6. **Foreign words.** A word in another script, or English filler words in a German page, is marked as foreign.
-7. **Calque rules.** Lists of known bad words per language. A rule can also overrule the dictionary when the word is a false friend (`override_ok`).
-8. **Everything left** is a suspect, in three tiers: confirmed, likely, weak.
-9. **Rank and write.** Pages get a score and the reports are written.
+1. Read the text. The tool cuts each file into pieces: title, summary, body. Code blocks, links and web addresses are skipped.
+2. Split into words. Hyphens and apostrophes inside a word stay in it.
+3. Your allowlist. Names, abbreviations and section markers you declared are fine.
+4. Dictionary. A word found in the language dictionary (Hunspell) is fine.
+5. Word forms. Russian and Ukrainian endings are checked with `pymorphy3`. "на скеге" is a normal case form, not an error. German and Swedish long words are split into known parts.
+6. Foreign words. A word in another script, or English filler words in a German page, is marked as foreign.
+7. Calque rules. Lists of known bad words per language. A rule can also overrule the dictionary when the word is a false friend (`override_ok`).
+8. Everything left is a suspect, in three tiers: confirmed, likely, weak.
+9. Rank and write. Pages get a score and the reports are written.
 
 ## Flow diagram
 

@@ -93,6 +93,11 @@ def run_locale_audit(
     )
     if cfg.enable_compound and locale in COMPOUND_LOCALES:
         apply_compound_second_pass(words, locale, compound_seed)
+    if cfg.enable_bilingual:
+        from lexaudit.detectors.bilingual import apply_bilingual_pass, pairs_from_config
+
+        pairs = pairs_from_config(list(cfg.bilingual_pairs), cfg.repo_root)
+        words = apply_bilingual_pass(words, pairs, enabled=True)
     pages = rank_pages(
         words,
         mode=cfg.rank_mode,  # type: ignore[arg-type]

@@ -50,6 +50,8 @@ class LexauditConfig:
     enable_foreign: bool = True
     enable_calque: bool = True
     enable_crosslocale: bool = False
+    enable_bilingual: bool = False
+    bilingual_pairs: tuple[dict[str, object], ...] = ()
     rank_mode: str = "weighted"
     rank_weights: RankWeights = field(default_factory=lambda: DEFAULT_RANK_WEIGHTS)
     needles: list[str] = field(default_factory=list)
@@ -67,6 +69,7 @@ class LexauditConfig:
             "enable_foreign": self.enable_foreign,
             "enable_calque": self.enable_calque,
             "enable_crosslocale": self.enable_crosslocale,
+            "enable_bilingual": self.enable_bilingual,
             "rank_mode": self.rank_mode,
             "rank_weights": {
                 "calque": rw.calque,
@@ -177,6 +180,10 @@ def load_config(path: Path) -> LexauditConfig:
         enable_foreign=bool(data.get("enable_foreign", True)),
         enable_calque=bool(data.get("enable_calque", True)),
         enable_crosslocale=bool(data.get("enable_crosslocale") or False),
+        enable_bilingual=bool(data.get("enable_bilingual") or False),
+        bilingual_pairs=tuple(
+            x for x in (data.get("bilingual_pairs") or []) if isinstance(x, dict)
+        ),
         rank_mode=_parse_rank_mode(data),
         rank_weights=_parse_rank_weights(data.get("rank_weights") or {}),
         needles=_str_list(data.get("needles")),

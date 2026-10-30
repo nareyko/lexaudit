@@ -3,6 +3,19 @@
 All notable changes to this project are listed here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [0.2.0] - 2026-10-30
+
+### Added
+- `audit --check` / `--fail-on` CI exit codes, `--format sarif|json`, GitHub annotations, HTML + findings.json reports with text excerpts
+- GitHub Action (`action.yml`), pre-commit hook, `workflow_dispatch` on CI
+- Corpus formats: HTML, gettext `.po`, XLIFF, MkDocs, Docusaurus, VitePress trees
+- `lexaudit pack list|install|verify` and `packs/core-calques-v1` artifact
+- Lazy dictionary download; Python 3.10+; MIT license (hosted AGPL note in docs/licensing.md)
+- Docs: backend hunspell vs spylls metrics; P1 lab notes (MCP, bilingual, domain packs)
+
+### Changed
+- Docs language: texts/passages as the primary unit; ranking tables say "texts"
+
 ## [0.1.0] - 2026-10-30
 
 First public release.

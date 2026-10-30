@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import cast
+from typing import Any, cast
 
 import click
 
@@ -42,45 +42,184 @@ def ping() -> None:
     "target_paths",
     type=click.Path(exists=True, path_type=Path),
     multiple=True,
-    help="Audit specific Markdown/JSON file(s) or folder(s) directly",
+    help="Audit specific Markdown/JSON/HTML/PO/XLIFF file(s) or folder(s) directly",
 )
 @click.option("--locale", default=None, help="Comma-separated locales or omit for config list")
 @click.option("--freeze-at", default=None, help="Freeze generated_at for deterministic JSON")
+@click.option(
+    "--check/--no-check",
+    default=False,
+    help="Exit 1 when calques/invented (or --fail-on) remain; exit 0 when clean",
+)
+@click.option(
+    "--fail-on",
+    default=None,
+    help="Statuses that fail --check (default calque,invented; or 'all').",
+)
+@click.option(
+    "--format",
+    "out_format",
+    type=click.Choice(["text", "json", "sarif"], case_sensitive=False),
+    default="text",
+    show_default=True,
+    help="Stdout machine format (reports are always written under output_dir)",
+)
+@click.option(
+    "--github-annotations",
+    is_flag=True,
+    help="Emit GitHub Actions ::error/::warning lines",
+)
+@click.option("--html/--no-html", default=True, help="Write report.html for editors")
+@click.option(
+    "--no-fetch-dicts",
+    is_flag=True,
+    help="Do not auto-download missing spelling dictionaries",
+)
+@click.option(
+    "--sarif-file",
+    type=click.Path(path_type=Path),
+    default=None,
+    help="Also write a SARIF file to this path (merged locales)",
+)
 def audit_cmd(
     config_path: Path | None,
     target_paths: tuple[Path, ...],
     locale: str | None,
     freeze_at: str | None,
+    check: bool,
+    fail_on: str | None,
+    out_format: str,
+    github_annotations: bool,
+    html: bool,
+    no_fetch_dicts: bool,
+    sarif_file: Path | None,
 ) -> None:
     """Run vocabulary audit and write reports (never modifies sources)."""
-    cfg = resolve_or_default_config(config_path)
+    from lexaudit.report.ci import parse_fail_on
+
+    try:
+        cfg = resolve_or_default_config(config_path)
+    except Exception as exc:
+        raise SystemExit(2) from exc
     if target_paths:
         cfg.sources = ["files"]
         cfg.files_paths = tuple(p.resolve() for p in target_paths)
     locales = [x.strip() for x in locale.split(",")] if locale else list(cfg.locales)
+    fail_set = parse_fail_on("calque,invented" if check and fail_on is None else fail_on)
+    if not no_fetch_dicts:
+        _ensure_locale_dicts(locales, cfg)
+    stamp = freeze_at or "1970-01-01T00:00:00Z"
+    all_findings: list[dict[str, Any]] = []
+    any_fail = False
+    last_paths: dict[str, Path] = {}
     for loc in locales:
-        stats: dict[str, int] = {}
-        words, pages, paths = run_locale_audit(
+        findings, paths, failed = _audit_one_locale(
             cfg,
             loc,
-            post_detectors=None,
-            freeze_generated_at=freeze_at or "1970-01-01T00:00:00Z",
-            detector_stats=stats,
+            stamp=stamp,
+            html=html,
+            want_sarif=(out_format == "sarif" or sarif_file is not None),
+            check=check,
+            fail_set=fail_set,
+            github_annotations=github_annotations,
+            text_stdout=(out_format == "text"),
         )
-        # recount detector stats
-        for w in words:
-            for d in w.detectors:
-                stats[d] = stats.get(d, 0) + 1
-        write_reports(
-            out_dir=cfg.output_dir / loc,
-            locale=loc,
-            words=words,
-            pages=pages,
-            config_hash=cfg.config_hash(),
-            freeze_generated_at=freeze_at or "1970-01-01T00:00:00Z",
-            detector_stats=stats,
+        all_findings.extend(findings)
+        last_paths = paths
+        any_fail = any_fail or failed
+    _emit_machine_output(out_format, all_findings, sarif_file, last_paths)
+    if check and any_fail:
+        raise SystemExit(1)
+
+
+def _ensure_locale_dicts(locales: list[str], cfg: Any) -> None:
+    from lexaudit.detectors.dictfetch import SOURCES as DICT_SOURCES
+    from lexaudit.detectors.dictfetch import cache_dir, fetch_dictionary
+    from lexaudit.detectors.hunspell import find_dict
+
+    for loc in locales:
+        if loc not in DICT_SOURCES or find_dict(loc, cfg.hunspell) is not None:
+            continue
+        click.echo(f"dictionary for {loc} missing; downloading to {cache_dir()} …", err=True)
+        try:
+            fetch_dictionary(loc, cache_dir())
+        except OSError as exc:
+            click.echo(f"warning: could not fetch dictionary for {loc}: {exc}", err=True)
+
+
+def _audit_one_locale(
+    cfg: Any,
+    loc: str,
+    *,
+    stamp: str,
+    html: bool,
+    want_sarif: bool,
+    check: bool,
+    fail_set: frozenset[str],
+    github_annotations: bool,
+    text_stdout: bool,
+) -> tuple[list[dict[str, Any]], dict[str, Path], bool]:
+    from lexaudit.report.ci import (
+        append_step_summary,
+        build_findings,
+        emit_github_annotations,
+        failing_words,
+    )
+
+    stats: dict[str, int] = {}
+    words, pages, _ = run_locale_audit(
+        cfg, loc, post_detectors=None, freeze_generated_at=stamp, detector_stats=stats
+    )
+    for w in words:
+        for d in w.detectors:
+            stats[d] = stats.get(d, 0) + 1
+    paths = write_reports(
+        out_dir=cfg.output_dir / loc,
+        locale=loc,
+        words=words,
+        pages=pages,
+        config_hash=cfg.config_hash(),
+        freeze_generated_at=stamp,
+        detector_stats=stats,
+        repo_root=cfg.repo_root,
+        write_html=html,
+        write_sarif_file=want_sarif,
+    )
+    findings = build_findings(words, locale=loc, repo_root=cfg.repo_root)
+    bad = failing_words(words, fail_on=fail_set, needles=cfg.needles) if check else []
+    if github_annotations:
+        emit_github_annotations(
+            [f for f in findings if f.get("status") in fail_set] if check else findings
         )
-        click.echo(f"{loc}: words={len(words)} pages={len(pages)} -> {paths['report']}")
+    append_step_summary(pages, loc)
+    if text_stdout:
+        click.echo(
+            f"{loc}: words={len(words)} texts={len(pages)} "
+            f"findings={len(findings)} -> {paths['report']}"
+        )
+        if check and bad:
+            click.echo(f"{loc}: CHECK FAIL ({len(bad)} words)", err=True)
+    return findings, paths, bool(bad)
+
+
+def _emit_machine_output(
+    out_format: str,
+    all_findings: list[dict[str, Any]],
+    sarif_file: Path | None,
+    last_paths: dict[str, Path],
+) -> None:
+    from lexaudit.report.ci import build_sarif, write_sarif
+
+    if out_format == "json":
+        click.echo(json.dumps(all_findings, ensure_ascii=False, indent=2, sort_keys=True))
+    elif out_format == "sarif":
+        doc = build_sarif(all_findings)
+        click.echo(json.dumps(doc, ensure_ascii=False, indent=2))
+        if sarif_file is not None:
+            write_sarif(sarif_file, doc)
+        elif last_paths.get("sarif"):
+            write_sarif(last_paths["sarif"], doc)
+
 
 
 def _words_from_report_json(data: dict[str, object]) -> list[ClassifiedWord]:
@@ -288,6 +427,57 @@ def expand_needle_cmd(
         rows, added = append_pending_from_needle_hits(rows, needle_hits)
         save_curated(write_queue, rows)
         click.echo(f"queue +{added} pending -> {write_queue}", err=True)
+
+
+@main.group("pack")
+def pack_group() -> None:
+    """List, install, and verify rule packs (MIT YAML bundles)."""
+
+
+@pack_group.command("list")
+def pack_list_cmd() -> None:
+    from lexaudit.packs import list_packs
+
+    rows = list_packs()
+    if not rows:
+        click.echo("No packs found.")
+        return
+    for row in rows:
+        loc_raw = row.get("locales") or []
+        loc_list = [str(x) for x in loc_raw] if isinstance(loc_raw, list) else []
+        click.echo(f"{row['id']}  v{row.get('version')}  locales={','.join(loc_list)}")
+
+
+@pack_group.command("install")
+@click.argument("pack_id")
+@click.option("--force", is_flag=True, help="Reinstall over existing cache copy")
+@click.option(
+    "--dest",
+    type=click.Path(path_type=Path),
+    default=None,
+    help="Install directory (default: user pack cache)",
+)
+def pack_install_cmd(pack_id: str, force: bool, dest: Path | None) -> None:
+    from lexaudit.packs import install_pack
+
+    try:
+        rules = install_pack(pack_id, dest=dest, force=force)
+    except FileNotFoundError as exc:
+        raise click.ClickException(str(exc)) from exc
+    click.echo(f"installed {pack_id} -> rules at {rules}")
+    click.echo(f"Set calque_rules_dir: {rules} in lexaudit.config.yaml")
+
+
+@pack_group.command("verify")
+@click.argument("pack_id")
+def pack_verify_cmd(pack_id: str) -> None:
+    from lexaudit.packs import verify_pack
+
+    try:
+        rules = verify_pack(pack_id)
+    except FileNotFoundError as exc:
+        raise click.ClickException(str(exc)) from exc
+    click.echo(f"ok: {pack_id} rules at {rules}")
 
 
 @main.group("eval")

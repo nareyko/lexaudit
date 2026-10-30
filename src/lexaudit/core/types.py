@@ -28,6 +28,7 @@ DEEP_LOCALES = ("ru", "en", "de")
 class VocabSample:
     path: str
     scope: str
+    line: int | None = None
 
 
 @dataclass

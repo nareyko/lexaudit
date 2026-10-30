@@ -11,12 +11,15 @@ SRC = Path(__file__).resolve().parents[1] / "src" / "lexaudit"
 ALLOWED_WRITE_FILES = {
     "report/write.py",
     "report/diff.py",  # baseline diff output only
+    "report/ci.py",  # SARIF + GitHub step summary only
     "report/curated_queue.py",  # curated rewrite queue markdown
     "curated/queue.py",  # curated queue JSON/markdown (I2)
     "llm/client.py",  # disk cache only
     "llm/emit.py",  # llm-labels.json under output_dir
     "cli/main.py",  # may create output dirs via report
     "detectors/crosslocale.py",  # embedding cache under output dir
+    "detectors/dictfetch.py",  # user dictionary cache
+    "packs.py",  # rule pack install into user cache
 }
 
 

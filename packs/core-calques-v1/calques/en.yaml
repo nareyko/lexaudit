@@ -1,0 +1,126 @@
+version: 1
+rules:
+  # Editorial calque & false-friend needles (2026-10-29)
+  - pattern: "orientir"
+    locale: en
+    reason: "loan-calque-orientir"
+    hint: "working rule / ballpark / figures - not orientir"
+    severity: confirmed
+    source: "editorial-calque-bank"
+  - pattern: "orientirs"
+    locale: en
+    reason: "loan-calque-orientir"
+    hint: "working figures / examples"
+    severity: confirmed
+    source: "editorial-calque-bank"
+  - pattern: "*-orientir"
+    locale: en
+    match: glob
+    reason: "loan-calque-orientir"
+    hint: "compound with orientir - rewrite"
+    severity: confirmed
+    source: "editorial-calque-bank"
+  - pattern: "*-orientirs"
+    locale: en
+    match: glob
+    reason: "loan-calque-orientir"
+    hint: "compound with orientirs - rewrite"
+    severity: confirmed
+    source: "editorial-calque-bank"
+  - pattern: "denseness"
+    locale: en
+    reason: "template-calque-denseness"
+    hint: "notes / guidance / reading - denseness is a false friend here"
+    severity: confirmed
+    source: "editorial-calque-bank"
+    override_ok: true
+  - pattern: "surveyness"
+    locale: en
+    reason: "invented-calque"
+    hint: "not a standard survey term"
+    severity: confirmed
+    source: "synthetic-test"
+  - pattern: "boatness"
+    locale: en
+    reason: "invented-calque"
+    hint: "avoid -ness coinages in editorial"
+    severity: likely
+    source: "synthetic-test"
+  - pattern: "yachtness"
+    locale: en
+    reason: "invented-calque"
+    hint: "avoid"
+    severity: likely
+    source: "synthetic-test"
+  - pattern: "offshoreability"
+    locale: en
+    reason: "invented-calque"
+    hint: "offshore capability / rating"
+    severity: confirmed
+    source: "synthetic-test"
+  - pattern: "sailability"
+    locale: en
+    reason: "borderline-neologism"
+    hint: "sailing ability / how she sails"
+    severity: weak
+    source: "editorial-watch"
+  - pattern: "refitness"
+    locale: en
+    reason: "invented-calque"
+    hint: "condition after refit"
+    severity: likely
+    source: "synthetic-test"
+  - pattern: "brokeragey"
+    locale: en
+    reason: "invented-calque"
+    hint: "brokerage listing tone"
+    severity: likely
+    source: "synthetic-test"
+  - pattern: "listingese"
+    locale: en
+    reason: "invented-calque"
+    hint: "listing jargon"
+    severity: likely
+    source: "synthetic-test"
+  - pattern: "surveyese"
+    locale: en
+    reason: "invented-calque"
+    hint: "survey jargon parody"
+    severity: likely
+    source: "synthetic-test"
+  - pattern: "chartery"
+    locale: en
+    reason: "invented-calque"
+    hint: "charter-oriented"
+    severity: weak
+    source: "synthetic-test"
+  - pattern: "liveaboardy"
+    locale: en
+    reason: "invented-calque"
+    hint: "liveaboard suitability"
+    severity: weak
+    source: "synthetic-test"
+  - pattern: "bluewaterness"
+    locale: en
+    reason: "invented-calque"
+    hint: "bluewater capability"
+    severity: confirmed
+    source: "synthetic-test"
+  - pattern: "upgradedness"
+    locale: en
+    reason: "invented-calque"
+    hint: "level of upgrades"
+    severity: likely
+    source: "synthetic-test"
+  - pattern: "keeledness"
+    locale: en
+    reason: "invented-calque"
+    hint: "keel type / configuration"
+    severity: likely
+    source: "synthetic-test"
+  - pattern: "rigish"
+    locale: en
+    reason: "invented-calque"
+    hint: "rig-related"
+    severity: weak
+    source: "synthetic-test"

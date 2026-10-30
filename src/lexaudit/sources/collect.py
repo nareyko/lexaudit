@@ -236,17 +236,36 @@ def collect_files(
         paths_iter: Iterator[Path]
         if resolved_target.is_file():
             paths_iter = iter((resolved_target,))
+            dir_walk = False
         else:
-            paths_iter = _walk_files(resolved_target, (".md", ".markdown"))
+            # Directory walks skip .json (explicit file targets still load JSON).
+            paths_iter = _walk_files(
+                resolved_target,
+                (".md", ".markdown", ".html", ".htm", ".po", ".xliff", ".xlf"),
+            )
+            dir_walk = True
         for path in paths_iter:
             real = path.resolve()
             if real in seen:
                 continue
             seen.add(real)
             rel = _rel(path, repo_root)
-            if path.suffix.lower() in (".md", ".markdown"):
+            suf = path.suffix.lower()
+            if suf in (".md", ".markdown"):
                 chunks.extend(_markdown_chunks(path, rel, source="files"))
-            elif path.suffix.lower() == ".json":
+            elif suf in (".html", ".htm"):
+                from lexaudit.sources.formats import collect_html_file
+
+                chunks.extend(collect_html_file(path, rel, source="files"))
+            elif suf == ".po":
+                from lexaudit.sources.formats import collect_po_file
+
+                chunks.extend(collect_po_file(path, rel))
+            elif suf in (".xliff", ".xlf"):
+                from lexaudit.sources.formats import collect_xliff_file
+
+                chunks.extend(collect_xliff_file(path, rel))
+            elif suf == ".json" and not dir_walk:
                 try:
                     data = json.loads(path.read_text(encoding="utf-8"))
                 except (OSError, json.JSONDecodeError):
@@ -304,5 +323,22 @@ def collect_all(
         chunks.extend(collect_files(repo_root, locale, files_paths=files_paths))
     if "jsonl_export" in wanted and jsonl_export is not None:
         chunks.extend(collect_jsonl_export(jsonl_export, locale))
+    if wanted & {"gettext", "po", "xliff", "html", "l10n"}:
+        from lexaudit.sources.formats import collect_l10n_tree
+
+        chunks.extend(collect_l10n_tree(repo_root, locale, files_paths=files_paths))
+    if "mkdocs" in wanted:
+        from lexaudit.sources.formats import collect_mkdocs
+
+        chunks.extend(collect_mkdocs(repo_root, locale))
+    if "docusaurus" in wanted:
+        from lexaudit.sources.formats import collect_docusaurus
+
+        chunks.extend(collect_docusaurus(repo_root, locale))
+    if "vitepress" in wanted:
+        from lexaudit.sources.formats import collect_vitepress
+
+        chunks.extend(collect_vitepress(repo_root, locale))
     chunks.sort(key=lambda c: (c.source, c.path, c.scope))
     return chunks
+

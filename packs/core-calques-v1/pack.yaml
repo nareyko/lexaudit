@@ -1,0 +1,8 @@
+id: core-calques-v1
+version: "1.0.0"
+name: Core calque rules (7 European locales)
+license: MIT
+locales: [en, de, es, pl, ru, sv, uk]
+rules_dir: calques
+description: >
+  Bundled language-core calques and false friends. Not a domain pack.

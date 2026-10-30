@@ -1,0 +1,126 @@
+version: 1
+rules:
+  # Editorial calque & false-friend needles (2026-10-29)
+  - pattern: "Orientir"
+    locale: de
+    reason: "loan-calque-orientir"
+    hint: "Faustregel / Richtwert - nicht Orientir"
+    severity: confirmed
+    source: "editorial-calque-bank"
+  - pattern: "orientir"
+    locale: de
+    reason: "loan-calque-orientir"
+    hint: "Faustregel / Richtwert"
+    severity: confirmed
+    source: "editorial-calque-bank"
+  - pattern: "*-Orientir"
+    locale: de
+    match: glob
+    reason: "loan-calque-orientir"
+    hint: "Kompositum mit Orientir - umschreiben"
+    severity: confirmed
+    source: "editorial-calque-bank"
+  - pattern: "*-orientir"
+    locale: de
+    match: glob
+    reason: "loan-calque-orientir"
+    hint: "Kompositum mit orientir - umschreiben"
+    severity: confirmed
+    source: "editorial-calque-bank"
+  - pattern: "denseness"
+    locale: de
+    reason: "template-calque-denseness"
+    hint: "Hinweise / Lesart - denseness ist hier falsch"
+    severity: confirmed
+    source: "editorial-calque-bank"
+    override_ok: true
+  - pattern: "surveyness"
+    locale: de
+    reason: "foreign-calque"
+    hint: "Begutachtung / Vor-Kauf-Gutachten"
+    severity: confirmed
+    source: "synthetic-test"
+  - pattern: "liveaboardig"
+    locale: de
+    reason: "invented-calque"
+    hint: "geeignet zum Wohnen an Bord"
+    severity: likely
+    source: "synthetic-test"
+  - pattern: "bluewaterig"
+    locale: de
+    reason: "invented-calque"
+    hint: "hochseetauglich"
+    severity: likely
+    source: "synthetic-test"
+  - pattern: "refitten"
+    locale: de
+    reason: "loan-verb-calque"
+    hint: "überholen / umbauen"
+    severity: weak
+    source: "editorial-watch"
+  - pattern: "charternmäßig"
+    locale: de
+    reason: "invented-calque"
+    hint: "chartertauglich"
+    severity: likely
+    source: "synthetic-test"
+  - pattern: "brokeragemäßig"
+    locale: de
+    reason: "invented-calque"
+    hint: "maklertypisch"
+    severity: likely
+    source: "synthetic-test"
+  - pattern: "listingmäßig"
+    locale: de
+    reason: "invented-calque"
+    hint: "anzeigentypisch"
+    severity: likely
+    source: "synthetic-test"
+  - pattern: "offshoremäßig"
+    locale: de
+    reason: "loan-calque"
+    hint: "hochseetauglich / Offshore-Tauglichkeit"
+    severity: weak
+    source: "editorial-watch"
+  - pattern: "inshoremäßig"
+    locale: de
+    reason: "loan-calque"
+    hint: "küstennah"
+    severity: weak
+    source: "editorial-watch"
+  - pattern: "performanceig"
+    locale: de
+    reason: "invented-calque"
+    hint: "leistungsstark / segelstark"
+    severity: likely
+    source: "synthetic-test"
+  - pattern: "handlingsstark"
+    locale: de
+    reason: "loan-compound-calque"
+    hint: "leicht zu handhaben"
+    severity: weak
+    source: "editorial-watch"
+  - pattern: "setupmäßig"
+    locale: de
+    reason: "loan-calque"
+    hint: "von der Ausrüstung her"
+    severity: weak
+    source: "editorial-watch"
+  - pattern: "upgradig"
+    locale: de
+    reason: "invented-calque"
+    hint: "mit vielen Upgrades"
+    severity: likely
+    source: "synthetic-test"
+  - pattern: "surveymäßig"
+    locale: de
+    reason: "loan-calque"
+    hint: "gutachterlich"
+    severity: likely
+    source: "editorial-watch"
+  - pattern: "keelmäßig"
+    locale: de
+    reason: "loan-calque"
+    hint: "was den Kiel betrifft"
+    severity: weak
+    source: "editorial-watch"

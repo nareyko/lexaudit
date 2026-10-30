@@ -12,28 +12,27 @@ It only reports. It never changes your texts.
 
 Unknown terms? See the [glossary](docs/glossary.md).
 
-- **Languages:** English (`en`), German (`de`), Spanish (`es`), Polish (`pl`), Russian (`ru`), Swedish (`sv`), Ukrainian (`uk`)
-- **Hardware:** CPU only
-- **Author:** Vadim Nareyko ([github.com/nareyko](https://github.com/nareyko))
-- **License:** [AGPL-3.0-or-later](LICENSE)
+- Languages: English (`en`), German (`de`), Spanish (`es`), Polish (`pl`), Russian (`ru`), Swedish (`sv`), Ukrainian (`uk`)
+- Hardware: CPU only
+- Author: Vadim Nareyko ([github.com/nareyko](https://github.com/nareyko))
+- License: [MIT](LICENSE)
 
 ![How lexaudit works](docs/images/lexaudit-overview.jpg)
 
 ---
 
-## Try it in 60 seconds
-
-### 1. Install and get the dictionaries
+## Try it in 30 seconds
 
 ```bash
-uv sync
-uv run lexaudit fetch-dicts     # downloads 7 spelling dictionaries, no admin rights
-uv run lexaudit doctor          # shows what is ready and what is missing
+pipx run lexaudit audit --path . --locale en --check
+# or: uvx lexaudit audit --path . --locale en --check
 ```
 
-`fetch-dicts` saves dictionaries in your user cache folder. `doctor` confirms that no GPU is needed and lists the installed languages. If the system `hunspell` program is installed, lexaudit uses it because it is a little faster. If not, a built-in Python checker is used, so nothing else has to be installed.
+Missing spelling dictionaries download automatically into your user cache. No GPU. No config file required. Exit code `1` means confirmed calques or invented words remain.
 
-### 2. Check a file or a whole project
+Optional helpers: `lexaudit doctor`, `lexaudit fetch-dicts`, `lexaudit init`.
+
+### Check a file or a whole project
 
 ```bash
 # One file or folder, no settings file needed
@@ -44,7 +43,7 @@ uv run lexaudit init
 uv run lexaudit audit --locale en
 ```
 
-### 3. Open the report
+### Open the report
 
 The reports are in the output folder, one subfolder per language. Start with `queue.md`:
 
@@ -58,7 +57,7 @@ The reports are in the output folder, one subfolder per language. Start with `qu
 
 A higher score means "look here first". `top_words` shows the words behind the score.
 
-### 4. Ask why a word was flagged
+### Ask why a word was flagged
 
 ```bash
 uv run lexaudit explain orientir --locale en
@@ -71,7 +70,7 @@ reason: loan-calque-orientir | detectors: calque, hunspell
 editorial hint: working rule / ballpark / figures - not orientir
 ```
 
-### 5. Reproduce our test results
+### Reproduce our test results
 
 ```bash
 uv run lexaudit audit --config examples/synthetic-demo/lexaudit.config.yaml

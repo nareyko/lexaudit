@@ -6,9 +6,9 @@
 
 **For non-technical users & editors (no GPU required):** `lexaudit` runs on any laptop CPU in under a second. It never modifies your articles or translations; it only produces readable reports (`queue.md`, `summary.md`) and explains flagged words (`lexaudit explain`).
 
-- **Author:** Vadim Nareyko ([github.com/nareyko](https://github.com/nareyko))
-- **Origin:** Extracted from the multilingual educational courses and engineering encyclopedias at **[FairHelm](https://fairhelm.com)**
-- **License:** [AGPL-3.0-or-later](../LICENSE)
+- Author: Vadim Nareyko ([github.com/nareyko](https://github.com/nareyko))
+- Origin: Extracted from multilingual courses and engineering encyclopedias at [FairHelm](https://fairhelm.com)
+- License: [MIT](../LICENSE) · hosted SaaS note: [licensing.md](licensing.md)
 
 ![Overview](images/lexaudit-overview.jpg)
 
@@ -82,8 +82,8 @@ flowchart LR
 
 ## Hard rules
 
-1. **No auto-replace** in prose sources.
-2. **Curated queue over raw counts**: editors and agents work from weighted and needle queues, not raw `unique_suspects`.
-3. **Calque needles** (`orientir`, `denseness`, ...) override dictionary `ok` when `override_ok: true`.
+1. No auto-replace in prose sources.
+2. Curated queue over raw counts: editors and agents work from weighted and needle queues, not raw `unique_suspects`.
+3. Calque needles (`orientir`, `denseness`, ...) override dictionary `ok` when `override_ok: true`.
 4. Soft CI and `eval regression` never fail the build on new anomalies.
 5. Host dictionaries stay outside `lexaudit` and are loaded via configuration paths.

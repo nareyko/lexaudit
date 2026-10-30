@@ -1,0 +1,93 @@
+name: lexaudit
+description: Audit Markdown and localization texts for calques, false friends, and invented words; emit SARIF.
+author: Vadim Nareyko
+branding:
+  icon: search
+  color: blue
+
+inputs:
+  path:
+    description: File or directory to audit (passed to --path). Default is the repository root.
+    required: false
+    default: "."
+  locale:
+    description: Locale code (en, de, es, pl, ru, sv, uk)
+    required: false
+    default: "en"
+  config:
+    description: Optional path to lexaudit.config.yaml
+    required: false
+    default: ""
+  fail-on:
+    description: Statuses that fail the job (default calque,invented). Use all for every anomaly.
+    required: false
+    default: "calque,invented"
+  fetch-dicts:
+    description: Download spelling dictionaries when missing
+    required: false
+    default: "true"
+  upload-sarif:
+    description: Upload results.sarif via codeql-action/upload-sarif
+    required: false
+    default: "true"
+  working-directory:
+    description: Working directory for the audit
+    required: false
+    default: "."
+
+runs:
+  using: composite
+  steps:
+    - name: Setup uv
+      uses: astral-sh/setup-uv@v4
+      with:
+        python-version: "3.12"
+
+    - name: Install lexaudit
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        set -euo pipefail
+        uv pip install --system "lexaudit>=0.2.0" || uv pip install --system .
+
+    - name: Fetch dictionaries
+      if: inputs.fetch-dicts == 'true'
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        set -euo pipefail
+        lexaudit fetch-dicts --locale "${{ inputs.locale }}" || true
+
+    - name: Run lexaudit
+      id: audit
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      env:
+        LEXAUDIT_SARIF: ${{ github.workspace }}/lexaudit-results.sarif
+      run: |
+        set -euo pipefail
+        ARGS=(audit --check --fail-on "${{ inputs.fail-on }}" --locale "${{ inputs.locale }}" --format sarif --github-annotations --sarif-file "$LEXAUDIT_SARIF" --html)
+        if [[ -n "${{ inputs.config }}" ]]; then
+          ARGS+=(--config "${{ inputs.config }}")
+        else
+          ARGS+=(--path "${{ inputs.path }}")
+        fi
+        if [[ "${{ inputs.fetch-dicts }}" != "true" ]]; then
+          ARGS+=(--no-fetch-dicts)
+        fi
+        set +e
+        lexaudit "${ARGS[@]}"
+        code=$?
+        set -e
+        echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+        if [[ ! -f "$LEXAUDIT_SARIF" ]]; then
+          echo '{"version":"2.1.0","runs":[]}' > "$LEXAUDIT_SARIF"
+        fi
+        exit "$code"
+
+    - name: Upload SARIF
+      if: always() && inputs.upload-sarif == 'true'
+      continue-on-error: true
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: ${{ github.workspace }}/lexaudit-results.sarif

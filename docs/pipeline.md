@@ -72,6 +72,16 @@ Safeguard: a valid case form such as Russian "на скеге" must not become a
 
 A Markdown file is split into `title` (first H1) and `body`. JSON sources use their own field names such as `bodyMarkdown`. Any scope starting with `body` counts as body text for the foreign-word and English-leak checks.
 
+## Optional bilingual leftover pass
+
+When `enable_bilingual: true`, after the monolingual gates the pipeline compares
+paired EN↔target Markdown files and flags shared Latin (or Cyrillic) tokens as
+`foreign` with reason `bilingual-untranslated`. Brand/protocol tokens stay in
+`DEFAULT_INTENTIONAL_LOANS`. Short **German UI loans** (`dashboard`, `toast`,
+`store`, `download`, `upload`, `inbox`) are **not** in that DEFAULT — merge them
+only via `bilingual_extra_loans_path` + `bilingual_extra_loans_locales: [de]`.
+See [p1-de-loan-policy.md](p1-de-loan-policy.md).
+
 ## Compound known parts (German, Swedish)
 
 Before the run, the splitter learns parts from your names and abbreviations. After the first pass it also learns every dictionary-approved word from the same run, then re-checks what is left.

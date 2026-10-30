@@ -27,9 +27,10 @@ uv run python scripts/bilingual_matrix_metrics.py --mode all --label heldout-v1
 
 ## DE UI loan list (approve / edit)
 
-Keep **out of** `DEFAULT_INTENTIONAL_LOANS`. Allow only via corpus extras /
-config allowlist when the target locale is `de` and the page is polished UI
-(`--extra-loans-locales de` + basename scope in metrics).
+Keep **out of** `DEFAULT_INTENTIONAL_LOANS`. Allow only via corpus extras when
+the target locale is `de` (audit: `bilingual_extra_loans_*`; metrics:
+`--extra-loans-locales de` + optional basename scope). Full recipe:
+`docs/p1-de-loan-policy.md` · example: `examples/dicts/intentional-extra-de.txt`.
 
 | Token | Keep as DE loan? | Notes |
 |---|---|---|

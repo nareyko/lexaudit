@@ -331,7 +331,7 @@ def matrix_pairs(*, mode: str = "all") -> list[tuple[str, str]]:
     """Directed locale pairs.
 
     mode:
-      - ``all`` — every directed pair among MATRIX_LOCALES (7×6=42)
+      - ``all`` — every directed pair among MATRIX_LOCALES (7x6=42)
       - ``anchors`` — only among en/de/ru (6)
       - ``anchors_x_others`` — en/de/ru ↔ es/pl/sv/uk both ways (24) + anchors (6) = 30
     """
@@ -367,11 +367,47 @@ def length_ratio_signal(source_text: str, target_text: str) -> float:
     return b / a
 
 
+def load_extra_loans(path: Path | None) -> frozenset[str]:
+    """Load one-token-per-line extras (# comments allowed). Casefolded."""
+    if path is None or not path.is_file():
+        return frozenset()
+    out: set[str] = set()
+    for line in path.read_text(encoding="utf-8").splitlines():
+        s = line.strip().casefold()
+        if not s or s.startswith("#"):
+            continue
+        out.add(s)
+    return frozenset(out)
+
+
+def intentional_loans_for_target(
+    target_locale: str,
+    *,
+    extra: frozenset[str] = frozenset(),
+    extra_locales: frozenset[str] = frozenset(),
+    base: frozenset[str] | None = None,
+) -> frozenset[str]:
+    """DEFAULT loans, plus extras only when target_locale is in extra_locales.
+
+    DE UI nouns (dashboard, toast, …) must stay out of DEFAULT — pass them via
+    ``extra`` + ``extra_locales={"de"}``. See docs/p1-de-loan-policy.md.
+    """
+    loans = DEFAULT_INTENTIONAL_LOANS if base is None else base
+    if not extra:
+        return loans
+    allowed = {x.casefold() for x in extra_locales}
+    if not allowed or target_locale.casefold() not in allowed:
+        return loans
+    return frozenset(loans | extra)
+
+
 def apply_bilingual_pass(
     words: list[ClassifiedWord],
     pairs: list[BilingualPair],
     *,
     enabled: bool,
+    extra_loans: frozenset[str] = frozenset(),
+    extra_loans_locales: frozenset[str] = frozenset(),
 ) -> list[ClassifiedWord]:
     if not enabled:
         return words
@@ -382,6 +418,11 @@ def apply_bilingual_pass(
             tgt = Path(pair.target_path).read_text(encoding="utf-8")
         except OSError:
             continue
+        loans = intentional_loans_for_target(
+            pair.target_locale,
+            extra=extra_loans,
+            extra_locales=extra_loans_locales,
+        )
         extra.extend(
             detect_pair_leftovers(
                 src,
@@ -389,6 +430,7 @@ def apply_bilingual_pass(
                 source_locale=pair.source_locale,
                 target_locale=pair.target_locale,
                 path=pair.target_path,
+                intentional_loans=loans,
             )
         )
     return [*words, *extra]

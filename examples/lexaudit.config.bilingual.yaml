@@ -1,5 +1,10 @@
 # Opt-in bilingual Latin-leak pass (lab). Package default remains enable_bilingual: false.
-# Copy and adjust roots for your docs tree. See docs/p1-owner-review-bilingual.md.
+# Copy and adjust roots for your docs tree. See docs/p1-de-loan-policy.md.
+#
+# DE UI nouns (Dashboard, Toast, …) are intentional on polished German pages.
+# They are NOT in the package DEFAULT allow — only via extras below (or metrics
+# --extra-loans). Same Latin surfaces stay leftovers on RU/UK unless you add
+# a separate extras file for those locales (usually you should not).
 
 repo_root: ..
 output_dir: ../tmp/lexaudit-bilingual
@@ -29,6 +34,10 @@ bilingual_pairs:
     target_locale: de
     source_root: ../docs/en
     target_root: ../docs/de
+
+# Corpus-local DE UI loans (extras only — never package DEFAULT).
+bilingual_extra_loans_path: ./dicts/intentional-extra-de.txt
+bilingual_extra_loans_locales: [de]
 
 enable_llm: false
 rank_mode: weighted

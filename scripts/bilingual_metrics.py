@@ -15,25 +15,15 @@ sys.path.insert(0, str(ROOT / "src"))
 from lexaudit.detectors.bilingual import (  # noqa: E402
     DEFAULT_INTENTIONAL_LOANS,
     detect_pair_leftovers,
+    intentional_loans_for_target,
     length_ratio_signal,
+    load_extra_loans,
 )
 
 
 def _load_gold(path: Path) -> list[dict[str, str]]:
     with path.open(encoding="utf-8", newline="") as f:
         return list(csv.DictReader(f))
-
-
-def _load_extra_loans(path: Path | None) -> frozenset[str]:
-    if path is None or not path.is_file():
-        return frozenset()
-    out: set[str] = set()
-    for line in path.read_text(encoding="utf-8").splitlines():
-        s = line.strip().casefold()
-        if not s or s.startswith("#"):
-            continue
-        out.add(s)
-    return frozenset(out)
 
 
 def main() -> int:
@@ -97,17 +87,15 @@ def main() -> int:
         elif row["label"] == "intentional":
             intentional_gold.add(key)
 
-    extra = _load_extra_loans(args.extra_loans)
-    extra_locales = {
+    extra = load_extra_loans(args.extra_loans)
+    extra_locales = frozenset(
         x.strip().casefold()
         for x in args.extra_loans_locales.split(",")
         if x.strip()
-    }
+    )
     extra_basenames = {
         x.strip() for x in args.extra_loans_basenames.split(",") if x.strip()
     }
-    loans_seeded = DEFAULT_INTENTIONAL_LOANS
-    loans_with_extra = frozenset(DEFAULT_INTENTIONAL_LOANS | extra)
 
     predicted: set[tuple[str, str, str]] = set()
     length_ratios: list[float] = []
@@ -128,6 +116,8 @@ def main() -> int:
         tgt_root = args.fixtures / tgt_loc
         if not tgt_root.is_dir():
             continue
+        # Empty --extra-loans-locales = allow extras on every target (lab metrics).
+        # Basename filter still scopes to polished pages when set.
         loc_ok = (not extra_locales) or (tgt_loc.casefold() in extra_locales)
         for md in sorted(tgt_root.glob("*.md")):
             rel = md.name
@@ -139,9 +129,14 @@ def main() -> int:
             length_ratios.append(length_ratio_signal(src_text, tgt_text))
             base_ok = (not extra_basenames) or (rel in extra_basenames)
             if rel == args.seeded_basename:
-                loans = loans_seeded
+                loans = DEFAULT_INTENTIONAL_LOANS
             elif loc_ok and base_ok and extra:
-                loans = loans_with_extra
+                # Metrics: empty locales means "all targets" — pass target itself.
+                loans = intentional_loans_for_target(
+                    tgt_loc,
+                    extra=extra,
+                    extra_locales=extra_locales or frozenset({tgt_loc.casefold()}),
+                )
             else:
                 loans = DEFAULT_INTENTIONAL_LOANS
             hits = detect_pair_leftovers(

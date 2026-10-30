@@ -1,0 +1,10 @@
+# DE UI loans kept on purpose in polished German product copy.
+# Policy: docs/p1-de-loan-policy.md
+# Wire via bilingual_extra_loans_path + bilingual_extra_loans_locales: [de]
+# Do NOT copy these into DEFAULT_INTENTIONAL_LOANS (hides RU leftovers).
+dashboard
+toast
+store
+download
+upload
+inbox

@@ -1,4 +1,6 @@
 # Section markers and technical compound terms for documentation audits.
+# Monolingual foreign/suspect pass only. Bilingual leftovers use a separate
+# extras file (intentional-extra-de.txt) — see docs/p1-de-loan-policy.md.
 version: 2
 
 section_markers:
@@ -9,6 +11,16 @@ section_markers:
   - Pipeline
 
 locale_loans:
+  # Optional monolingual twin of DE UI loans (foreign detector). Prefer the
+  # bilingual extras file for EN↔DE pair audits; list here only if DE pages
+  # are audited without enable_bilingual and you accept the same tokens as OK
+  # in every locale that shares this allowlist.
+  # - dashboard
+  # - toast
+  # - store
+  # - download
+  # - upload
+  # - inbox
   - allowlist
   - allowlists
   - cyclomatic

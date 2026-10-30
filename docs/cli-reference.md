@@ -168,6 +168,33 @@ uv run lexaudit explain предпокупочный --locale ru --json
 
 ---
 
+## Bilingual leftovers (opt-in)
+
+Package default: `enable_bilingual: false`. Example config:
+`examples/lexaudit.config.bilingual.yaml`.
+
+German product UI often **keeps** short English nouns on purpose. Those tokens
+are **not** leftovers by default — only via extras scoped to `de`:
+
+```yaml
+bilingual_extra_loans_path: ./dicts/intentional-extra-de.txt
+bilingual_extra_loans_locales: [de]
+```
+
+Token list: `examples/dicts/intentional-extra-de.txt`. Policy:
+[p1-de-loan-policy.md](p1-de-loan-policy.md). Do not put DE UI loans into the
+code DEFAULT allowlist (that would hide RU leftovers of the same Latin shape).
+
+Lab metrics (same idea, CLI flags):
+
+```bash
+uv run python scripts/bilingual_metrics.py \
+  --extra-loans examples/dicts/intentional-extra-de.txt \
+  --extra-loans-locales de
+```
+
+---
+
 ## `pack list` / `pack install` / `pack verify`
 
 Installable MIT YAML rule packs. Release packs live under `packs/`; experimental

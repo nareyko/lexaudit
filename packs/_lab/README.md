@@ -3,14 +3,14 @@
 Experimental industry packs. Do **not** attach to GitHub Releases with 0.2.x.
 See `docs/p1-0.3.0-prep.md` for promote checklist.
 
-| Pack | Focus |
-|---|---|
-| `saas-ui-v0` | Product UI calques / anglicisms |
-| `fintech-v0` | Payments / ledger leftovers |
-| `developer-docs-v0` | API prose coinages |
-| `ecommerce-ui-v0` | Checkout / cart coinages (thin) |
-| `healthcare-ui-v0` | Patient UI coinages (thin) |
-| `legal-docs-v0` | Contract prose coinages (thin) |
+| Pack | Focus | 0.3.0 proposal |
+|---|---|---|
+| `saas-ui-v0` | Product UI calques / anglicisms | promote |
+| `fintech-v0` | Payments / ledger leftovers | promote |
+| `developer-docs-v0` | API prose coinages | promote |
+| `ecommerce-ui-v0` | Checkout / cart coinages (thin) | keep lab |
+| `healthcare-ui-v0` | Patient UI coinages (thin) | keep lab |
+| `legal-docs-v0` | Contract prose coinages (thin) | keep lab |
 
 Measure / dogfood:
 

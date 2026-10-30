@@ -86,6 +86,13 @@ flowchart TB
 | `gold_slugs`, `regression_needles` | Pages and words for the quality checks |
 | `rank_weights` | How serious each kind of problem is |
 | `enable_llm` | Off by default. The optional label step needs your own endpoint |
+| `enable_bilingual` | Off by default. Opt-in EN↔locale leftover pass |
+| `bilingual_pairs` | List of `{source_locale, target_locale, source_root, target_root}` |
+| `bilingual_extra_loans_path` | One-token-per-line extras (e.g. DE UI nouns). Not package DEFAULT |
+| `bilingual_extra_loans_locales` | Locales that may merge those extras (use `[de]` for DE UI loans) |
+
+DE UI loans (`dashboard`, `toast`, …): see [p1-de-loan-policy.md](p1-de-loan-policy.md)
+and `examples/dicts/intentional-extra-de.txt`.
 
 ## Reproducible pictures
 

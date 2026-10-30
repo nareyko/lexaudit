@@ -52,6 +52,9 @@ class LexauditConfig:
     enable_crosslocale: bool = False
     enable_bilingual: bool = False
     bilingual_pairs: tuple[dict[str, object], ...] = ()
+    # Corpus-local intentional loans (e.g. DE UI nouns). Never merge into DEFAULT.
+    bilingual_extra_loans_path: Path | None = None
+    bilingual_extra_loans_locales: tuple[str, ...] = ()
     rank_mode: str = "weighted"
     rank_weights: RankWeights = field(default_factory=lambda: DEFAULT_RANK_WEIGHTS)
     needles: list[str] = field(default_factory=list)
@@ -183,6 +186,12 @@ def load_config(path: Path) -> LexauditConfig:
         enable_bilingual=bool(data.get("enable_bilingual") or False),
         bilingual_pairs=tuple(
             x for x in (data.get("bilingual_pairs") or []) if isinstance(x, dict)
+        ),
+        bilingual_extra_loans_path=_path_or_none(
+            base, data.get("bilingual_extra_loans_path")
+        ),
+        bilingual_extra_loans_locales=tuple(
+            _str_list(data.get("bilingual_extra_loans_locales"))
         ),
         rank_mode=_parse_rank_mode(data),
         rank_weights=_parse_rank_weights(data.get("rank_weights") or {}),

@@ -21,10 +21,12 @@
 | [Architecture](architecture.md) | What goes in, what comes out, package layout |
 | [Pipeline](pipeline.md) | The gates every word passes, statuses, calque rules |
 | [CLI reference](cli-reference.md) | `init`, `doctor`, `audit`, `explain`, `rank`, `expand-needle`, `label`, `eval`, `diff` |
+| [DE UI loans](p1-de-loan-policy.md) | German keeps Dashboard/Toast/… on purpose — extras only, not DEFAULT |
+| [0.3.0 prep](p1-0.3.0-prep.md) | Which `_lab` packs promote; bilingual stays opt-in |
 | [Agent workflow](agent-workflow.md) | From report to fixed page and back |
 | [Scores and metrics](weights-and-metrics.md) | How pages are scored, how quality is measured |
 
-Also see root [`README.md`](../README.md), [`examples/lexaudit.config.example.yaml`](../examples/lexaudit.config.example.yaml), and [`examples/synthetic-demo/lexaudit.config.yaml`](../examples/synthetic-demo/lexaudit.config.yaml).
+Also see root [`README.md`](../README.md), [`examples/lexaudit.config.example.yaml`](../examples/lexaudit.config.example.yaml), [`examples/lexaudit.config.bilingual.yaml`](../examples/lexaudit.config.bilingual.yaml), and [`examples/synthetic-demo/lexaudit.config.yaml`](../examples/synthetic-demo/lexaudit.config.yaml).
 
 ## 7-Language European Ablation Summary
 

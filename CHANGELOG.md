@@ -8,9 +8,18 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 ### Added
 - Pack field held-out corpus + metrics (`tests/fixtures/packs_field/`,
   `scripts/run_pack_field_metrics.py`, report + recall chart)
-- Bilingual `DEFAULT_TEMPLATE_CHROME` stop for CMS/nav shells
+- Pack wild Wikipedia corpus + fetch/metrics scripts (`packs_wild/`,
+  `fetch_wiki_pack_samples.py`, `run_pack_wild_metrics.py`)
+- Bilingual `DEFAULT_TEMPLATE_CHROME` stop, identical-segment leftovers,
+  optional `bilingual_chrome_path`
+- Crosslocale `ref_present` mode (default) + slug path pairing helpers
 - Crosslocale A/B dogfood script + verdict report
-- Thin Cyrillic→Latin bilingual fixture
+- Phrase calque seeds (en/de/ru); hapax wild sanity + MCP import smoke
+- Cyrillic→Latin bilingual onboarding fixture
+
+### Changed
+- LocalAI live smoke quarantined behind `LEXAUDIT_LOCALAI_SMOKE=1`
+- `.gitignore`: dumps / CX / tmp metrics / packaging artifacts stay local
 
 ## [0.3.0] - 2026-10-30
 

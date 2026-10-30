@@ -52,11 +52,16 @@ class LexauditConfig:
     enable_crosslocale: bool = False
     # When enable_crosslocale: compare suspects against this locale's vocab norms.
     crosslocale_reference_locale: str = "en"
+    # ref_present (default): boost when token appears in reference norms.
+    # no_pair: legacy lab mode — boost when absent from reference.
+    crosslocale_mode: str = "ref_present"
     enable_bilingual: bool = False
     bilingual_pairs: tuple[dict[str, object], ...] = ()
     # Corpus-local intentional loans (e.g. DE UI nouns). Never merge into DEFAULT.
     bilingual_extra_loans_path: Path | None = None
     bilingual_extra_loans_locales: tuple[str, ...] = ()
+    # Optional one-token-per-line CMS chrome extras (merged with DEFAULT_TEMPLATE_CHROME).
+    bilingual_chrome_path: Path | None = None
     rank_mode: str = "weighted"
     rank_weights: RankWeights = field(default_factory=lambda: DEFAULT_RANK_WEIGHTS)
     needles: list[str] = field(default_factory=list)
@@ -75,6 +80,7 @@ class LexauditConfig:
             "enable_calque": self.enable_calque,
             "enable_crosslocale": self.enable_crosslocale,
             "crosslocale_reference_locale": self.crosslocale_reference_locale,
+            "crosslocale_mode": self.crosslocale_mode,
             "enable_bilingual": self.enable_bilingual,
             "rank_mode": self.rank_mode,
             "rank_weights": {
@@ -190,6 +196,16 @@ def load_config(path: Path) -> LexauditConfig:
             data.get("crosslocale_reference_locale") or "en"
         ).strip()
         or "en",
+        crosslocale_mode=(
+            m
+            if (
+                m := str(data.get("crosslocale_mode") or "ref_present")
+                .strip()
+                .casefold()
+            )
+            in {"ref_present", "no_pair"}
+            else "ref_present"
+        ),
         enable_bilingual=bool(data.get("enable_bilingual") or False),
         bilingual_pairs=tuple(
             x for x in (data.get("bilingual_pairs") or []) if isinstance(x, dict)
@@ -200,6 +216,7 @@ def load_config(path: Path) -> LexauditConfig:
         bilingual_extra_loans_locales=tuple(
             _str_list(data.get("bilingual_extra_loans_locales"))
         ),
+        bilingual_chrome_path=_path_or_none(base, data.get("bilingual_chrome_path")),
         rank_mode=_parse_rank_mode(data),
         rank_weights=_parse_rank_weights(data.get("rank_weights") or {}),
         needles=_str_list(data.get("needles")),

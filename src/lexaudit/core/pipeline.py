@@ -29,7 +29,7 @@ def apply_crosslocale_pass(
     packs_root: Path,
     stats: dict[str, int],
 ) -> list[ClassifiedWord]:
-    """Boost suspect tiers when a token has no counterpart in the reference locale."""
+    """Boost suspect tiers using reference-locale norms (default: ref_present)."""
     ref = (cfg.crosslocale_reference_locale or "en").casefold()
     if locale.casefold() == ref:
         stats.setdefault("crosslocale", 0)
@@ -48,7 +48,7 @@ def apply_crosslocale_pass(
         files_paths=cfg.files_paths,
     )
     norms = aggregate_norms_from_chunks(ref_chunks, ref)
-    detect = make_crosslocale_detector(norms)
+    detect = make_crosslocale_detector(norms, mode=cfg.crosslocale_mode)
     hits = 0
     for w in words:
         updated = detect(w)  # type: ignore[operator]
@@ -170,6 +170,7 @@ def run_locale_audit(
             enabled=True,
             extra_loans=load_extra_loans(cfg.bilingual_extra_loans_path),
             extra_loans_locales=frozenset(cfg.bilingual_extra_loans_locales),
+            extra_chrome=load_extra_loans(cfg.bilingual_chrome_path),
         )
     pages = rank_pages(
         words,

@@ -220,3 +220,24 @@ rules:
     hint: "возглавить / взять управление — check if calque from EN take into own hands"
     severity: confirmed
     source: "phrase-calque-bank"
+  - pattern: "в ближайшем будущем"
+    locale: ru
+    match: phrase
+    reason: "phrase-calque-near-future"
+    hint: "скоро — канцелярит / calque padding"
+    severity: likely
+    source: "phrase-calque-bank"
+  - pattern: "обратить внимание на то"
+    locale: ru
+    match: phrase
+    reason: "phrase-calque-pay-attention"
+    hint: "учтите / заметьте — calque of pay attention to the fact"
+    severity: confirmed
+    source: "phrase-calque-bank"
+  - pattern: "имеет место быть"
+    locale: ru
+    match: phrase
+    reason: "phrase-calque-has-place"
+    hint: "есть / происходит — канцелярит"
+    severity: likely
+    source: "phrase-calque-bank"

@@ -45,21 +45,69 @@ def pairing_stats(
 
 def make_crosslocale_detector(
     paired_norms_other: set[str],
+    *,
+    mode: str = "ref_present",
 ) -> object:
-    """Boost tier when a suspect has no counterpart in the paired locale vocab."""
+    """Boost suspect tiers using reference-locale vocab norms.
+
+    Modes:
+    - ``ref_present`` (default): token appears in the reference corpus — typical
+      English leftover / loan surface that Hunspell flags in the target locale.
+    - ``no_pair``: token is absent from the reference corpus (legacy lab mode).
+    """
 
     def detect(word: ClassifiedWord) -> ClassifiedWord | None:
         if word.status not in {"suspect", "invented", "unsure", "morph-miss"}:
             return None
-        if word.normalized in paired_norms_other:
-            return None
+        present = word.normalized in paired_norms_other
+        if mode == "no_pair":
+            if present:
+                return None
+            tag = "+no-pair"
+        else:
+            if not present:
+                return None
+            tag = "+ref-present"
         word.detectors = sorted({*word.detectors, "crosslocale"})
         if word.tier == "weak" or word.tier is None:
             word.tier = "likely"
-            word.reason = (word.reason or "unknown") + "+no-pair"
+            word.reason = (word.reason or "unknown") + tag
         return word
 
     return detect
+
+
+def path_slug_key(path: str) -> str:
+    """Normalize path for cross-locale pairing (drop locale folder segment)."""
+    parts = Path(path).as_posix().split("/")
+    locales = {"en", "de", "es", "pl", "ru", "sv", "uk"}
+    filtered = [p for p in parts if p.casefold() not in locales]
+    return "/".join(filtered) if filtered else Path(path).name
+
+
+def pair_chunks_by_slug(
+    left: list[TextChunk],
+    right: list[TextChunk],
+) -> tuple[list[tuple[TextChunk, TextChunk]], list[TextChunk], list[TextChunk]]:
+    """Pair chunks by slug key + scope (locale folder ignored)."""
+    right_idx: dict[tuple[str, str], TextChunk] = {
+        (path_slug_key(c.path), c.scope): c for c in right
+    }
+    pairs: list[tuple[TextChunk, TextChunk]] = []
+    unmatched_left: list[TextChunk] = []
+    matched: set[tuple[str, str]] = set()
+    for c in left:
+        key = (path_slug_key(c.path), c.scope)
+        o = right_idx.get(key)
+        if o is None:
+            unmatched_left.append(c)
+        else:
+            pairs.append((c, o))
+            matched.add(key)
+    unmatched_right = [
+        c for c in right if (path_slug_key(c.path), c.scope) not in matched
+    ]
+    return pairs, unmatched_left, unmatched_right
 
 
 def load_embedding_cache(path: Path) -> dict[str, list[float]]:

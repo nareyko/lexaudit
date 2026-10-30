@@ -33,6 +33,11 @@ npm run smoke
 npm run package   # writes a .vsix (publish separately)
 ```
 
+## Privacy
+
+Runs entirely on your machine via the local CLI. No telemetry, no cloud audit
+endpoint, no account required.
+
 ## License
 
 MIT — same as the lexaudit package. See the repository root `LICENSE`.

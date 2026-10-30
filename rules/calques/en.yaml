@@ -138,3 +138,24 @@ rules:
     hint: "decide — avoid padded calque phrasing in tight UI/docs"
     severity: likely
     source: "phrase-calque-bank"
+  - pattern: "in the near future"
+    locale: en
+    match: phrase
+    reason: "phrase-calque-near-future"
+    hint: "soon — padded calque"
+    severity: likely
+    source: "phrase-calque-bank"
+  - pattern: "it goes without saying"
+    locale: en
+    match: phrase
+    reason: "phrase-calque-goes-without"
+    hint: "obviously — cut the filler calque"
+    severity: likely
+    source: "phrase-calque-bank"
+  - pattern: "pay attention to the fact"
+    locale: en
+    match: phrase
+    reason: "phrase-calque-pay-attention"
+    hint: "note that — calque of обратить внимание на то"
+    severity: confirmed
+    source: "phrase-calque-bank"

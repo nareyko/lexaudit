@@ -42,7 +42,7 @@ Refs: [Registry auth](https://modelcontextprotocol.io/registry/authentication) �
 
 | # | Step | Status |
 |---|---|---|
-| 1 | Skip LocalAI smoke unless `LEXAUDIT_LOCALAI_SMOKE=1` and health OK | □ agent |
+| 1 | Skip LocalAI smoke unless `LEXAUDIT_LOCALAI_SMOKE=1` and health OK | ☑ agent |
 | 2 | Document `uv sync --extra dev` then `uv run python -m pytest` | □ agent |
 | 3 | Privacy statement one-liner in VS Code README (local CLI only; no telemetry) | □ agent |
 

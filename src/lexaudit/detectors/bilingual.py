@@ -260,11 +260,12 @@ def untranslated_latin_in_target(
     min_len: int = 4,
     intentional_loans: frozenset[str] | None = None,
     function_stop: frozenset[str] | None = None,
+    extra_chrome: frozenset[str] | None = None,
 ) -> list[ClassifiedWord]:
     """Flag Latin tokens that appear in both source and target (likely leftover)."""
     allow = intentional_loans if intentional_loans is not None else DEFAULT_INTENTIONAL_LOANS
     stop = function_stop if function_stop is not None else DEFAULT_FUNCTION_STOP
-    chrome = DEFAULT_TEMPLATE_CHROME
+    chrome = DEFAULT_TEMPLATE_CHROME | (extra_chrome or frozenset())
     src = {m.group(0).casefold() for m in _LATIN_WORD.finditer(source_text)}
     out: list[ClassifiedWord] = []
     seen: set[str] = set()
@@ -330,6 +331,57 @@ def untranslated_cyrillic_in_target(
     return out
 
 
+def identical_segment_leftovers(
+    source_text: str,
+    target_text: str,
+    *,
+    path: str,
+    min_chars: int = 24,
+    intentional_loans: frozenset[str] | None = None,
+    chrome: frozenset[str] | None = None,
+) -> list[ClassifiedWord]:
+    """Flag near-identical Latin segments copied from source into target (soft)."""
+    allow = intentional_loans if intentional_loans is not None else DEFAULT_INTENTIONAL_LOANS
+    stop = DEFAULT_FUNCTION_STOP | DEFAULT_TEMPLATE_CHROME | (chrome or frozenset())
+    src_lines = {ln.strip().casefold() for ln in source_text.splitlines() if ln.strip()}
+    out: list[ClassifiedWord] = []
+    seen: set[str] = set()
+    for raw in target_text.splitlines():
+        line = raw.strip()
+        if len(line) < min_chars:
+            continue
+        key = line.casefold()
+        if key not in src_lines or key in seen:
+            continue
+        # Prefer a representative Latin token from the segment for ranking.
+        tokens = [m.group(0) for m in _LATIN_WORD.finditer(line)]
+        pick = next(
+            (
+                t
+                for t in tokens
+                if len(t) >= 4 and t.casefold() not in allow and t.casefold() not in stop
+            ),
+            None,
+        )
+        if pick is None:
+            continue
+        seen.add(key)
+        norm = pick.casefold()
+        out.append(
+            ClassifiedWord(
+                normalized=norm,
+                surface=pick,
+                count=1,
+                status="foreign",
+                samples=[VocabSample(path=path, scope="body")],
+                reason="bilingual-identical-segment",
+                detectors=["bilingual"],
+                tier="likely",
+            )
+        )
+    return out
+
+
 def detect_pair_leftovers(
     source_text: str,
     target_text: str,
@@ -338,24 +390,37 @@ def detect_pair_leftovers(
     target_locale: str,
     path: str,
     intentional_loans: frozenset[str] | None = None,
+    extra_chrome: frozenset[str] | None = None,
 ) -> list[ClassifiedWord]:
     """Choose Latin vs Cyrillic leftover detector from locale pair."""
     src_l = source_locale.casefold()
     # RU/UK source → Cyrillic overlap (into Latin or other Cyrillic targets)
     if src_l in CYRILLIC_LOCALES:
-        return untranslated_cyrillic_in_target(
+        hits = untranslated_cyrillic_in_target(
             source_text,
             target_text,
             path=path,
             intentional_loans=intentional_loans,
         )
-    # Default: Latin overlap (EN/DE/ES/PL/SV → *)
-    return untranslated_latin_in_target(
-        source_text,
-        target_text,
-        path=path,
-        intentional_loans=intentional_loans,
+    else:
+        # Default: Latin overlap (EN/DE/ES/PL/SV → *)
+        hits = untranslated_latin_in_target(
+            source_text,
+            target_text,
+            path=path,
+            intentional_loans=intentional_loans,
+            extra_chrome=extra_chrome,
+        )
+    hits.extend(
+        identical_segment_leftovers(
+            source_text,
+            target_text,
+            path=path,
+            intentional_loans=intentional_loans,
+            chrome=extra_chrome,
+        )
     )
+    return hits
 
 
 def matrix_pairs(*, mode: str = "all") -> list[tuple[str, str]]:
@@ -439,6 +504,7 @@ def apply_bilingual_pass(
     enabled: bool,
     extra_loans: frozenset[str] = frozenset(),
     extra_loans_locales: frozenset[str] = frozenset(),
+    extra_chrome: frozenset[str] = frozenset(),
 ) -> list[ClassifiedWord]:
     if not enabled:
         return words
@@ -462,6 +528,7 @@ def apply_bilingual_pass(
                 target_locale=pair.target_locale,
                 path=pair.target_path,
                 intentional_loans=loans,
+                extra_chrome=extra_chrome or None,
             )
         )
     return [*words, *extra]

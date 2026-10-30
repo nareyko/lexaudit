@@ -1,0 +1,8 @@
+# Optional CMS chrome extras (one token per line).
+# Wire via bilingual_chrome_path in config. Merged with DEFAULT_TEMPLATE_CHROME.
+permalink
+slug
+toc
+homepage
+breadcrumb
+breadcrumbs

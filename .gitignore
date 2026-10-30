@@ -43,6 +43,20 @@ packages/vscode-lexaudit/*.vsix
 frontend/
 lexaudit.config.local.yaml
 
+# Large external corpora / dumps — never commit
+dumps/
+*.tmx
+*.tmx.gz
+cx-corpora.*
+*.xml.bz2
+wiki-dump*
+tmp/wiki-probe/
+tmp/pack-wild/
+tmp/pack-field/
+tmp/crosslocale-dogfood/
+tmp/metrics/
+tmp/*.json
+
 # Internal evaluation reports, gold sets, and parity notes (kept local, not in public git tree)
 eval/
 gold/

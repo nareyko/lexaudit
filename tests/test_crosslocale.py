@@ -8,11 +8,13 @@ from lexaudit.detectors.crosslocale import (
     aggregate_norms_from_chunks,
     make_crosslocale_detector,
     pair_chunks_by_path,
+    pair_chunks_by_slug,
+    path_slug_key,
 )
 
 
-def test_make_crosslocale_boosts_unpaired_suspect() -> None:
-    detect = make_crosslocale_detector({"shared"})
+def test_make_crosslocale_boosts_ref_present_suspect() -> None:
+    detect = make_crosslocale_detector({"shared", "dashboard"})
     lone = ClassifiedWord(
         normalized="lonelytoken",
         surface="lonelytoken",
@@ -33,10 +35,42 @@ def test_make_crosslocale_boosts_unpaired_suspect() -> None:
         detectors=["hunspell"],
         tier="weak",
     )
+    assert detect(lone) is None
+    assert detect(shared) is not None
+    assert "crosslocale" in shared.detectors
+    assert shared.tier == "likely"
+    assert "+ref-present" in (shared.reason or "")
+
+
+def test_make_crosslocale_no_pair_mode() -> None:
+    detect = make_crosslocale_detector({"shared"}, mode="no_pair")
+    lone = ClassifiedWord(
+        normalized="lonelytoken",
+        surface="lonelytoken",
+        count=1,
+        status="suspect",
+        samples=[VocabSample(path="ru/a.md", scope="body")],
+        reason="unknown",
+        detectors=["hunspell"],
+        tier="weak",
+    )
     assert detect(lone) is not None
-    assert "crosslocale" in lone.detectors
-    assert lone.tier == "likely"
-    assert detect(shared) is None
+    assert "+no-pair" in (lone.reason or "")
+
+
+def test_path_slug_key_drops_locale_folder() -> None:
+    assert path_slug_key("packs_wild/saas-ui-v0/ru/wiki-saas.md") == (
+        "packs_wild/saas-ui-v0/wiki-saas.md"
+    )
+    left = [
+        TextChunk(path="x/ru/a.md", scope="body", text="dashboard leftover", source="files")
+    ]
+    right = [
+        TextChunk(path="x/en/a.md", scope="body", text="dashboard settings", source="files")
+    ]
+    pairs, u_l, u_r = pair_chunks_by_slug(left, right)
+    assert len(pairs) == 1
+    assert u_l == [] and u_r == []
 
 
 def test_pair_chunks_and_aggregate(tmp_path: Path) -> None:
@@ -56,6 +90,7 @@ def test_config_crosslocale_reference_default() -> None:
     cfg = load_config(root / "examples" / "lexaudit.config.example.yaml")
     assert cfg.enable_crosslocale is False
     assert cfg.crosslocale_reference_locale == "en"
+    assert cfg.crosslocale_mode == "ref_present"
 
 
 def test_pipeline_crosslocale_pass_skipped_for_reference(tmp_path: Path) -> None:

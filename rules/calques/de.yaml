@@ -131,3 +131,17 @@ rules:
     hint: "übernehmen / selbst steuern — literal calque"
     severity: confirmed
     source: "phrase-calque-bank"
+  - pattern: "in der nahen zukunft"
+    locale: de
+    match: phrase
+    reason: "phrase-calque-near-future"
+    hint: "bald — padded calque"
+    severity: likely
+    source: "phrase-calque-bank"
+  - pattern: "auf die tatsache achten"
+    locale: de
+    match: phrase
+    reason: "phrase-calque-pay-attention"
+    hint: "beachten — calque padding"
+    severity: likely
+    source: "phrase-calque-bank"

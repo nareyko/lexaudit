@@ -1,6 +1,7 @@
 # DE loan policy (lab · bilingual)
 
-Status: human pass recorded 2026-10-30. Does **not** flip `enable_bilingual`.
+Status: agent review signed 2026-10-30 (`docs/p1-owner-review-bilingual.md`).
+Does **not** flip package `enable_bilingual` default.
 
 ## Question
 

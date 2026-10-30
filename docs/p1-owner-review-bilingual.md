@@ -1,7 +1,7 @@
 # Owner review · bilingual default-on (checklist)
 
-Status: **awaiting owner**. Lab evidence is ready; `enable_bilingual` stays false
-in shipped defaults until this page is signed off.
+Status: **agent review signed 2026-10-30** (policy frozen). Package
+`enable_bilingual` remains **false** by default. Consumer opt-in allowed.
 
 ## Evidence already in-repo
 
@@ -20,35 +20,53 @@ Reproduce:
 
 ```bash
 uv run python scripts/bilingual_metrics.py
-uv run python scripts/bilingual_matrix_metrics.py --out tmp/bilingual-matrix/heldout.json
-# … plus real_public / community / live_weblate / live_crowdin commands
+uv run python scripts/bilingual_matrix_metrics.py --mode all --label heldout-v1
+# … plus real_public / community / live_weblate / live_crowdin / live_v1_others
 # listed in docs/p1-bilingual-research.md
 ```
 
 ## DE UI loan list (approve / edit)
 
 Keep **out of** `DEFAULT_INTENTIONAL_LOANS`. Allow only via corpus extras /
-config allowlist when the target locale is `de` and the page is polished UI:
+config allowlist when the target locale is `de` and the page is polished UI
+(`--extra-loans-locales de` + basename scope in metrics).
 
 | Token | Keep as DE loan? | Notes |
 |---|---|---|
-| `dashboard` | □ yes □ no | Jellyfin / Galette / GnuCash |
-| `toast` | □ yes □ no | Dicio / GooseMod |
-| `store` | □ yes □ no | GooseMod |
-| `download` | □ yes □ no | Immich / Jellyfin action label |
-| `upload` | □ yes □ no | Immich |
-| `inbox` | □ yes □ no | mail folder sense only |
+| `dashboard` | ☑ yes □ no | Jellyfin / Galette / Taiga / Soapbox — common DE UI noun |
+| `toast` | ☑ yes □ no | Dicio / GooseMod / Godot — loan often kept with German gloss |
+| `store` | ☑ yes □ no | GooseMod / app-store sense on polished DE |
+| `download` | ☑ yes □ no | Immich / Jellyfin action label on polished DE |
+| `upload` | ☑ yes □ no | Immich action label on polished DE |
+| `inbox` | ☑ yes □ no | mail-folder sense only; full EN inbox *paragraphs* stay leftover |
 
-## Default-on gate (all must be yes)
+### Agent review rationale (2026-10-30)
 
-1. □ DE loan table above reviewed (checks filled).
-2. □ Optional: authenticated Crowdin API sample accepted or explicitly waived.
-3. □ Opt-in example config reviewed (`examples/lexaudit.config.bilingual.yaml`).
-4. □ Owner sets `enable_bilingual: true` only in consumer configs first — package
-   default remains false until a later minor (0.3.x) decision.
+1. **All six = yes as DE loans**, matching `docs/p1-de-loan-policy.md`: intentional on
+   polished German UI, never global DEFAULT.
+2. **Why not DEFAULT:** the same Latin surfaces are leftovers in RU/UK/community
+   samples (`toast`, `dashboard`, `inbox`). Global allow would hide RU defects.
+3. **Mechanics already proven:** `intentional-extra-de.txt` +
+   `--extra-loans-locales de` + basename scope on live_weblate / live_crowdin.
+4. **`inbox` caveat:** loan = folder label; identical EN confirmation paragraphs
+   (Soapbox) remain leftover — gold/`leftover` handles that, not this allowlist.
+5. **ES/PL/SV/UK:** do **not** copy this DE list into DEFAULT either; live_v1_others
+   scores EN leftovers as leftover unless a future per-locale extras file exists.
+
+## Default-on gate
+
+1. ☑ DE loan table above reviewed (checks filled) — agent review 2026-10-30.
+2. ☑ Crowdin API sample **waived**: mirrors in `live_crowdin/` accepted as substitute
+   (REST 401 without token). Optional token sample later, not blocking.
+3. ☑ Opt-in example config reviewed: `examples/lexaudit.config.bilingual.yaml`
+   (`enable_bilingual: true`, EN→RU/DE pairs, package default unchanged).
+4. ☑ Package default stays **`enable_bilingual: false`**. Consumer configs may opt in
+   (FairHelm bridge only after an explicit follow-up). Full package default-on
+   deferred to a later 0.3.x decision if wanted.
 
 ## Out of scope for this review
 
 - Auto-rewrite of leftovers
 - Yacht / marine packs
 - Marketplace / hosted MCP
+- Putting DE UI loans into `DEFAULT_INTENTIONAL_LOANS`

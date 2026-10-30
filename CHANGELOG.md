@@ -18,6 +18,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Live Weblate leftover sample + DE loan policy doc; metrics
   `--extra-loans-locales` / `--extra-loans-basenames`
 - `scripts/fetch_weblate_leftover_sample.py` (optional refresh)
+- Crowdin-via-GitHub leftover sample (Jellyfin + Immich); owner-review checklist
+- Example opt-in config `examples/lexaudit.config.bilingual.yaml`
 
 ## [0.2.0] - 2026-10-30
 

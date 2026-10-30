@@ -1,0 +1,14 @@
+pair_id,source_locale,target_locale,rel_path,token,label,note
+immich-transfer,en,ru,immich-transfer.md,download,leftover,crowdin-github-mirror
+immich-transfer,en,ru,immich-transfer.md,upload,leftover,crowdin-github-mirror
+immich-transfer,en,ru,immich-transfer.md,details,leftover,crowdin-github-mirror
+immich-transfer,en,ru,immich-transfer.md,complete,leftover,crowdin-github-mirror
+jellyfin-dashboard,en,ru,jellyfin-dashboard.md,dashboard,leftover,crowdin-github-mirror
+jellyfin-dashboard,en,ru,jellyfin-dashboard.md,libraries,leftover,crowdin-github-mirror
+jellyfin-dashboard,en,ru,jellyfin-dashboard.md,display,leftover,crowdin-github-mirror
+jellyfin-download,en,ru,jellyfin-download.md,download,leftover,crowdin-github-mirror
+immich-transfer,en,de,immich-transfer.md,download,intentional,DE UI loan policy
+immich-transfer,en,de,immich-transfer.md,upload,intentional,DE UI loan policy
+immich-transfer,en,de,immich-transfer.md,details,leftover,crowdin-github-mirror
+jellyfin-dashboard,en,de,jellyfin-dashboard.md,dashboard,intentional,DE UI loan policy
+jellyfin-download,en,de,jellyfin-download.md,download,intentional,DE UI loan policy

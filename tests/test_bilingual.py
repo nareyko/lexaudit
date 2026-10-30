@@ -143,3 +143,17 @@ def test_live_weblate_fixtures() -> None:
     }
     assert "onboarding" in hits
     assert "complete" in hits
+
+
+def test_live_crowdin_fixtures() -> None:
+    root = FIXTURES / "live_crowdin"
+    assert (root / "SOURCES.md").is_file()
+    assert (root / "gold-leftovers.csv").is_file()
+    src = (root / "en" / "jellyfin-dashboard.md").read_text(encoding="utf-8")
+    tgt = (root / "ru" / "jellyfin-dashboard.md").read_text(encoding="utf-8")
+    hits = {
+        w.normalized
+        for w in untranslated_latin_in_target(src, tgt, path="ru/jellyfin.md")
+    }
+    assert "dashboard" in hits
+    assert "libraries" in hits

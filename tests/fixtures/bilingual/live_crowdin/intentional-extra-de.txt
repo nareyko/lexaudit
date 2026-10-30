@@ -1,0 +1,8 @@
+# DE UI loans for polished Crowdin-mirror pages (docs/p1-de-loan-policy.md).
+# Use with: --extra-loans-locales de --extra-loans-basenames …
+dashboard
+download
+upload
+toast
+store
+inbox

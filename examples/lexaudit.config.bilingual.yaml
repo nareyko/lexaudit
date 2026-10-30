@@ -1,0 +1,34 @@
+# Opt-in bilingual Latin-leak pass (lab). Package default remains enable_bilingual: false.
+# Copy and adjust roots for your docs tree. See docs/p1-owner-review-bilingual.md.
+
+repo_root: ..
+output_dir: ../tmp/lexaudit-bilingual
+locales: [en, ru, de]
+sources: [files]
+files_paths:
+  - ../docs
+min_length: 2
+
+proper_names_path: ./dicts/proper-names.yaml
+acronyms_path: ./dicts/acronyms.yaml
+allowlist_path: ./dicts/allowlist.yaml
+calque_rules_dir: ../packs/core-calques-v1/calques
+
+enable_morph: true
+enable_compound: true
+enable_foreign: true
+enable_calque: true
+enable_crosslocale: false
+enable_bilingual: true
+bilingual_pairs:
+  - source_locale: en
+    target_locale: ru
+    source_root: ../docs/en
+    target_root: ../docs/ru
+  - source_locale: en
+    target_locale: de
+    source_root: ../docs/en
+    target_root: ../docs/de
+
+enable_llm: false
+rank_mode: weighted

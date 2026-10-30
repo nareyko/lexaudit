@@ -200,10 +200,11 @@ uv run python scripts/bilingual_metrics.py \
 
 ## `pack list` / `pack install` / `pack verify`
 
-Installable YAML rule packs (**MIT**, same dual-license package as the CLI —
-see [licensing.md](licensing.md)). Release-candidate domain packs for **0.3.0** live under `packs/` (e.g. `saas-ui-v0`).
-`packs/_lab/` keeps thin `pack.yaml` stubs for `pack list --lab`; calques/fixtures
-are **not** duplicated there (content SSOT is `packs/<id>/`).
+Installable YAML rule packs (MIT; dual-license package — see
+[licensing.md](licensing.md)). Domain packs for 0.3.0 live under `packs/`
+(e.g. `saas-ui-v0`). `packs/_lab/` keeps thin `pack.yaml` stubs for
+`pack list --lab`; calques/fixtures are not duplicated there (content SSOT is
+`packs/<id>/`).
 
 ```bash
 uv run lexaudit pack list

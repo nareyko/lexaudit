@@ -20,8 +20,10 @@ cd "$LEX"
 echo "== doctor =="
 uv run lexaudit doctor --config "$CFG" || true
 
-echo "== pack list (release + lab) =="
-uv run lexaudit pack list --lab | head -20
+echo "== pack list (RC) =="
+uv run lexaudit pack list | head -20
+echo "== pack list --lab (stubs) =="
+uv run lexaudit pack list --lab | head -15
 
 echo "== soft audit ${LOCALES} (academy+packs via FairHelm config) =="
 set +e

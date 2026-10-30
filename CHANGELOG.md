@@ -36,6 +36,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
   (~1.4 MiB twin trees removed; hygiene fails if `_lab/*/calques` reappears)
 - `pack list --lab` lists stubs only (no duplicate RC+lab rows for the same id)
 - Docs diagrams: SVG SSOT; raster `docs/images/*.jpg` gitignored (~1.1 MiB off tree)
+- `run_lab_pack_metrics.py` resolves fixtures via `pack_content_dir` (thin `_lab` stubs)
 
 ## [0.3.0] - 2026-10-30
 

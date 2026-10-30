@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run lab_pack_metrics for every packs/_lab/* across all 7 locales."""
+"""Run lab_pack_metrics for every packs/_lab stub (content via pack_content_dir)."""
 
 from __future__ import annotations
 
@@ -8,9 +8,12 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from lab_pack_metrics import measure  # noqa: E402
+
+from lexaudit.packs import pack_content_dir  # noqa: E402
 
 LAB = ROOT / "packs" / "_lab"
 LOCALES = ("en", "de", "es", "pl", "ru", "sv", "uk")
@@ -19,17 +22,23 @@ LOCALES = ("en", "de", "es", "pl", "ru", "sv", "uk")
 def main() -> int:
     rows: list[dict[str, object]] = []
     failed = 0
-    for pack_dir in sorted(p for p in LAB.iterdir() if p.is_dir()):
+    for stub in sorted(p for p in LAB.iterdir() if p.is_dir()):
+        try:
+            content = pack_content_dir(stub.name, prefer_lab=True)
+        except FileNotFoundError as exc:
+            print(f"FAIL {stub.name}: {exc}")
+            failed += 1
+            continue
         for loc in LOCALES:
-            if not (pack_dir / "fixtures" / loc).is_dir():
+            if not (content / "fixtures" / loc).is_dir():
                 continue
-            report = measure(pack_dir.name, loc)
+            report = measure(stub.name, loc)
             rows.append(report)
             status = "ok" if report["lab_rank_ok"] else "FAIL"
             if not report["lab_rank_ok"]:
                 failed += 1
             print(
-                f"{status} {pack_dir.name}/{loc} "
+                f"{status} {stub.name}/{loc} "
                 f"recall={report['known_rule_recall']} "
                 f"calques={report['calque_words']}"
             )

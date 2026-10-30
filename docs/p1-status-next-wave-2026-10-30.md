@@ -25,6 +25,9 @@
 | Stale lab plan wording | points at 0.3.0 RC + index |
 | Twin `packs/_lab` trees | thin stubs only; `pack_content_dir` + hygiene gate |
 | Docs raster JPGs (~1.1 MiB) | SVG SSOT; `docs/images/*.jpg` gitignored + hygiene |
+| FairHelm soft dogfood (2026-10-30) | en/de/ru `--check` **0**; calque=0; scrub clear; CLEAR 11/11 |
+| `run_lab_pack_metrics` after stub dedupe | resolves fixtures via `pack_content_dir` → **70** rows, failed=0 |
+| Local `tmp/` disk cleanup | regenerable metric dirs removed; `dumps/` CX gz kept local |
 
 ## Still owner-only
 

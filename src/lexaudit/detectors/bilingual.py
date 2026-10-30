@@ -2,14 +2,22 @@
 
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+import regex  # type: ignore[import-untyped]
+
 from lexaudit.core.types import ClassifiedWord, VocabSample
 
-_LATIN_WORD = re.compile(r"\b[A-Za-z][A-Za-z'-]{2,}\b")
+_LATIN_WORD = regex.compile(r"\b[\p{Latin}][\p{Latin}'-]{2,}\b", regex.VERSION1)
+_CYRILLIC_WORD = regex.compile(r"\b[\p{Cyrillic}][\p{Cyrillic}'-]{2,}\b", regex.VERSION1)
+
+# Cyrillic tokens often kept intentionally (thin; expand carefully).
+DEFAULT_CYRILLIC_LOANS: frozenset[str] = frozenset()
+
+MATRIX_LOCALES: tuple[str, ...] = ("en", "de", "ru")
+CYRILLIC_LOCALES: frozenset[str] = frozenset({"ru", "uk"})
 
 # Function / glue words — weak leftover signal when a whole English clause is pasted.
 DEFAULT_FUNCTION_STOP: frozenset[str] = frozenset(
@@ -252,6 +260,80 @@ def untranslated_latin_in_target(
     return out
 
 
+def untranslated_cyrillic_in_target(
+    source_text: str,
+    target_text: str,
+    *,
+    path: str,
+    min_len: int = 4,
+    intentional_loans: frozenset[str] | None = None,
+) -> list[ClassifiedWord]:
+    """Flag Cyrillic tokens that appear in both source and target (RU→EN/DE leak)."""
+    allow = intentional_loans if intentional_loans is not None else DEFAULT_CYRILLIC_LOANS
+    src = {m.group(0).casefold() for m in _CYRILLIC_WORD.finditer(source_text)}
+    out: list[ClassifiedWord] = []
+    seen: set[str] = set()
+    for m in _CYRILLIC_WORD.finditer(target_text):
+        surface = m.group(0)
+        if len(surface) < min_len:
+            continue
+        key = surface.casefold()
+        if key not in src or key in seen or key in allow:
+            continue
+        seen.add(key)
+        out.append(
+            ClassifiedWord(
+                normalized=key,
+                surface=surface,
+                count=1,
+                status="foreign",
+                samples=[VocabSample(path=path, scope="body")],
+                reason="bilingual-untranslated-cyrillic",
+                detectors=["bilingual"],
+                tier="likely",
+            )
+        )
+    return out
+
+
+def detect_pair_leftovers(
+    source_text: str,
+    target_text: str,
+    *,
+    source_locale: str,
+    target_locale: str,
+    path: str,
+    intentional_loans: frozenset[str] | None = None,
+) -> list[ClassifiedWord]:
+    """Choose Latin vs Cyrillic leftover detector from locale pair."""
+    src_l = source_locale.casefold()
+    tgt_l = target_locale.casefold()
+    if src_l in CYRILLIC_LOCALES and tgt_l not in CYRILLIC_LOCALES:
+        return untranslated_cyrillic_in_target(
+            source_text,
+            target_text,
+            path=path,
+            intentional_loans=intentional_loans,
+        )
+    # Default: Latin overlap (EN/DE → RU, EN → DE, DE → EN, DE → RU)
+    return untranslated_latin_in_target(
+        source_text,
+        target_text,
+        path=path,
+        intentional_loans=intentional_loans,
+    )
+
+
+def matrix_pairs() -> list[tuple[str, str]]:
+    """All directed pairs among en/de/ru (6)."""
+    out: list[tuple[str, str]] = []
+    for src in MATRIX_LOCALES:
+        for tgt in MATRIX_LOCALES:
+            if src != tgt:
+                out.append((src, tgt))
+    return out
+
+
 def length_ratio_signal(source_text: str, target_text: str) -> float:
     """Soft ratio target/source character length (1.0 = equal)."""
     a = max(1, len(source_text.strip()))
@@ -274,7 +356,15 @@ def apply_bilingual_pass(
             tgt = Path(pair.target_path).read_text(encoding="utf-8")
         except OSError:
             continue
-        extra.extend(untranslated_latin_in_target(src, tgt, path=pair.target_path))
+        extra.extend(
+            detect_pair_leftovers(
+                src,
+                tgt,
+                source_locale=pair.source_locale,
+                target_locale=pair.target_locale,
+                path=pair.target_path,
+            )
+        )
     return [*words, *extra]
 
 

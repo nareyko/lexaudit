@@ -14,8 +14,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from lexaudit.detectors.bilingual import (  # noqa: E402
     DEFAULT_INTENTIONAL_LOANS,
+    detect_pair_leftovers,
     length_ratio_signal,
-    untranslated_latin_in_target,
 )
 
 
@@ -78,12 +78,19 @@ def main() -> int:
     p.add_argument("--min-precision", type=float, default=0.75)
     p.add_argument("--min-recall", type=float, default=0.60)
     p.add_argument("--label", default="held-out", help="Report label")
+    p.add_argument(
+        "--source-locale",
+        default="en",
+        help="Source locale folder under --fixtures (default en)",
+    )
     args = p.parse_args()
 
     rows = _load_gold(args.gold)
     leftover_gold: set[tuple[str, str, str]] = set()
     intentional_gold: set[tuple[str, str, str]] = set()
     for row in rows:
+        if row.get("source_locale", args.source_locale) != args.source_locale:
+            continue
         key = (row["target_locale"], row["rel_path"], row["token"].casefold())
         if row["label"] == "leftover":
             leftover_gold.add(key)
@@ -105,8 +112,19 @@ def main() -> int:
     predicted: set[tuple[str, str, str]] = set()
     length_ratios: list[float] = []
     official_alarms = 0
-    for tgt_loc in sorted({r["target_locale"] for r in rows} | {"ru", "de"}):
-        src_root = args.fixtures / "en"
+    src_locale = args.source_locale
+    target_locales = sorted(
+        {
+            r["target_locale"]
+            for r in rows
+            if r.get("source_locale", src_locale) == src_locale
+        }
+        | ({"ru", "de"} if src_locale == "en" else set())
+    )
+    for tgt_loc in target_locales:
+        if tgt_loc == src_locale:
+            continue
+        src_root = args.fixtures / src_locale
         tgt_root = args.fixtures / tgt_loc
         if not tgt_root.is_dir():
             continue
@@ -126,13 +144,15 @@ def main() -> int:
                 loans = loans_with_extra
             else:
                 loans = DEFAULT_INTENTIONAL_LOANS
-            hits = untranslated_latin_in_target(
+            hits = detect_pair_leftovers(
                 src_text,
                 tgt_text,
+                source_locale=src_locale,
+                target_locale=tgt_loc,
                 path=f"{tgt_loc}/{rel}",
-                intentional_loans=loans,
+                intentional_loans=loans if src_locale not in {"ru", "uk"} else None,
             )
-            seeded_exists = (args.fixtures / "en" / args.seeded_basename).is_file()
+            seeded_exists = (args.fixtures / src_locale / args.seeded_basename).is_file()
             if seeded_exists and rel != args.seeded_basename:
                 official_alarms += len(hits)
             for w in hits:

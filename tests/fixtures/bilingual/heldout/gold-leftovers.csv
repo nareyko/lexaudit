@@ -3,6 +3,7 @@ payments,en,ru,payments.md,pending,leftover,should flag
 payments,en,ru,payments.md,available,leftover,part of available balance
 payments,en,ru,payments.md,balance,leftover,part of available balance
 payments,en,ru,payments.md,webhook,leftover,prose leftover not code
+payments,en,ru,payments.md,überweisungen,leftover,DE token planted in EN+RU
 payments,en,ru,payments.md,sepa,intentional,keep SEPA
 payments,en,ru,payments.md,api,intentional,keep API
 settings,en,ru,settings.md,sidebar,leftover,UI calque leftover
@@ -21,6 +22,7 @@ payments,en,de,payments.md,available,leftover,should flag
 payments,en,de,payments.md,balance,leftover,should flag
 payments,en,de,payments.md,webhook,leftover,should flag
 payments,en,de,payments.md,setup,leftover,webhook setup
+payments,en,de,payments.md,überweisungen,leftover,DE token also in EN source
 payments,en,de,payments.md,sepa,intentional,keep SEPA
 payments,en,de,payments.md,api,intentional,keep API
 settings,en,de,settings.md,sidebar,leftover,should flag
@@ -37,3 +39,27 @@ api-guide,en,de,api-guide.md,get,intentional,HTTP method
 api-guide,en,de,api-guide.md,json,intentional,format
 api-guide,en,de,api-guide.md,openapi,intentional,spec
 api-guide,en,de,api-guide.md,api,intentional,keep
+payments,de,ru,payments.md,pending,leftover,DE→RU Latin leftover
+payments,de,ru,payments.md,available,leftover,DE→RU Latin leftover
+payments,de,ru,payments.md,balance,leftover,DE→RU Latin leftover
+payments,de,ru,payments.md,webhook,leftover,DE→RU Latin leftover
+payments,de,ru,payments.md,überweisungen,leftover,shared DE token in RU
+payments,de,ru,payments.md,sepa,intentional,keep SEPA
+payments,de,ru,payments.md,api,intentional,keep API
+settings,de,ru,settings.md,sidebar,leftover,DE→RU
+settings,de,ru,settings.md,toast,leftover,DE→RU
+settings,de,ru,settings.md,authentication,leftover,DE→RU
+settings,de,ru,settings.md,method,leftover,DE→RU
+settings,de,ru,settings.md,onboarding,leftover,DE→RU
+german-leak,de,en,german-leak.md,überweisungen,leftover,DE→EN dedicated pair
+german-leak,de,en,german-leak.md,auszahlungen,leftover,DE→EN dedicated pair
+payments,ru,en,payments.md,баланс,leftover,RU→EN Cyrillic leftover
+payments,ru,en,payments.md,перед,leftover,RU→EN Cyrillic leftover
+payments,ru,en,payments.md,выплатой,leftover,RU→EN Cyrillic leftover
+settings,ru,en,settings.md,откройте,leftover,RU→EN Cyrillic leftover
+settings,ru,en,settings.md,закройте,leftover,RU→EN Cyrillic leftover
+payments,ru,de,payments.md,баланс,leftover,RU→DE Cyrillic leftover
+payments,ru,de,payments.md,перед,leftover,RU→DE Cyrillic leftover
+payments,ru,de,payments.md,выплатой,leftover,RU→DE Cyrillic leftover
+settings,ru,de,settings.md,откройте,leftover,RU→DE Cyrillic leftover
+settings,ru,de,settings.md,закройте,leftover,RU→DE Cyrillic leftover

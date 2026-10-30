@@ -8,16 +8,18 @@ in shipped defaults until this page is signed off.
 | Corpus | Path | Ship bar (lab) |
 |---|---|---|
 | Synthetic held-out | `tests/fixtures/bilingual/heldout/` | pass |
-| Official docs + seeded | `tests/fixtures/bilingual/real_public/` | pass |
-| Community reconstructions | `tests/fixtures/bilingual/community/` | pass |
-| Live Weblate | `tests/fixtures/bilingual/live_weblate/` | pass |
-| Crowdin-via-GitHub | `tests/fixtures/bilingual/live_crowdin/` | pass (this pass) |
+| Held-out **6-pair matrix** (en/de/ru) | same + `german-leak.md` | pass (all scored pairs) |
+| Official docs + seeded | `tests/fixtures/bilingual/real_public/` | pass (EN→*) |
+| Community reconstructions | `tests/fixtures/bilingual/community/` | pass (EN→*) |
+| Live Weblate | `tests/fixtures/bilingual/live_weblate/` | pass (EN→*) |
+| Crowdin-via-GitHub | `tests/fixtures/bilingual/live_crowdin/` | pass (EN→*) |
 | DE loan policy | `docs/p1-de-loan-policy.md` | recorded |
 
 Reproduce:
 
 ```bash
 uv run python scripts/bilingual_metrics.py
+uv run python scripts/bilingual_matrix_metrics.py --out tmp/bilingual-matrix/heldout.json
 # … plus real_public / community / live_weblate / live_crowdin commands
 # listed in docs/p1-bilingual-research.md
 ```

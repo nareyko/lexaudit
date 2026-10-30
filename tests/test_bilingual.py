@@ -6,9 +6,12 @@ from pathlib import Path
 from lexaudit.detectors.bilingual import (
     DEFAULT_FUNCTION_STOP,
     DEFAULT_INTENTIONAL_LOANS,
+    detect_pair_leftovers,
     length_ratio_signal,
+    matrix_pairs,
     pair_paths,
     pairs_from_config,
+    untranslated_cyrillic_in_target,
     untranslated_latin_in_target,
 )
 
@@ -157,3 +160,34 @@ def test_live_crowdin_fixtures() -> None:
     }
     assert "dashboard" in hits
     assert "libraries" in hits
+
+
+def test_matrix_pairs_six_directions() -> None:
+    pairs = matrix_pairs()
+    assert len(pairs) == 6
+    assert ("en", "ru") in pairs and ("ru", "en") in pairs
+    assert ("de", "en") in pairs and ("en", "de") in pairs
+
+
+def test_cyrillic_overlap_ru_to_en() -> None:
+    src = (FIXTURES / "heldout" / "ru" / "settings.md").read_text(encoding="utf-8")
+    tgt = (FIXTURES / "heldout" / "en" / "settings.md").read_text(encoding="utf-8")
+    hits = {
+        w.normalized
+        for w in untranslated_cyrillic_in_target(src, tgt, path="en/settings.md")
+    }
+    assert "откройте" in hits
+    assert "закройте" in hits
+
+
+def test_detect_pair_leftovers_routes_by_locale() -> None:
+    src = (FIXTURES / "heldout" / "de" / "german-leak.md").read_text(encoding="utf-8")
+    tgt = (FIXTURES / "heldout" / "en" / "german-leak.md").read_text(encoding="utf-8")
+    hits = {
+        w.normalized
+        for w in detect_pair_leftovers(
+            src, tgt, source_locale="de", target_locale="en", path="en/german-leak.md"
+        )
+    }
+    assert "überweisungen" in hits
+    assert "auszahlungen" in hits

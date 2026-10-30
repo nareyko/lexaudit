@@ -1,0 +1,26 @@
+version: 1
+rules:
+  - pattern: "индемнити"
+    locale: ru
+    reason: "legal-indemnity-loan"
+    hint: "возмещение убытков / освобождение от ответственности"
+    severity: likely
+    source: "lab-legal"
+  - pattern: "ковенант"
+    locale: ru
+    reason: "legal-covenant-loan"
+    hint: "обязательство / условие договора"
+    severity: likely
+    source: "lab-legal"
+  - pattern: "варрантайз"
+    locale: ru
+    reason: "legal-warrantize-calque"
+    hint: "гарантировать"
+    severity: confirmed
+    source: "lab-legal"
+  - pattern: "нотис"
+    locale: ru
+    reason: "legal-notice-loan"
+    hint: "уведомление"
+    severity: likely
+    source: "lab-legal"

@@ -1,0 +1,50 @@
+version: 1
+rules:
+  - pattern: "patientness"
+    locale: en
+    reason: "health-patientness"
+    hint: "patient status — invented noun"
+    severity: confirmed
+    source: "lab-healthcare"
+  - pattern: "symptomize"
+    locale: en
+    reason: "health-symptomize"
+    hint: "report symptoms — invented verb"
+    severity: confirmed
+    source: "lab-healthcare"
+  - pattern: "diagnosability"
+    locale: en
+    reason: "health-diagnosability"
+    hint: "whether diagnosable"
+    severity: likely
+    source: "lab-healthcare"
+  - pattern: "appointability"
+    locale: en
+    reason: "health-appointability"
+    hint: "whether an appointment can be booked"
+    severity: likely
+    source: "lab-healthcare"
+  - pattern: "prescriptionize"
+    locale: en
+    reason: "health-prescriptionize"
+    hint: "issue a prescription — invented verb"
+    severity: confirmed
+    source: "lab-healthcare"
+  - pattern: "labresultness"
+    locale: en
+    reason: "health-labresultness"
+    hint: "lab result status — invented noun"
+    severity: confirmed
+    source: "lab-healthcare"
+  - pattern: "triageness"
+    locale: en
+    reason: "health-triageness"
+    hint: "triage state — invented noun"
+    severity: confirmed
+    source: "lab-healthcare"
+  - pattern: "refillability"
+    locale: en
+    reason: "health-refillability"
+    hint: "whether a refill is possible"
+    severity: likely
+    source: "lab-healthcare"

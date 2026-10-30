@@ -1,6 +1,7 @@
 # Lab packs (not released)
 
 Experimental industry packs. Do **not** attach to GitHub Releases with 0.2.x.
+See `docs/p1-0.3.0-prep.md` for promote checklist.
 
 | Pack | Focus |
 |---|---|
@@ -8,10 +9,12 @@ Experimental industry packs. Do **not** attach to GitHub Releases with 0.2.x.
 | `fintech-v0` | Payments / ledger leftovers |
 | `developer-docs-v0` | API prose coinages |
 | `ecommerce-ui-v0` | Checkout / cart coinages (thin) |
+| `healthcare-ui-v0` | Patient UI coinages (thin) |
+| `legal-docs-v0` | Contract prose coinages (thin) |
 
-Measure with:
+Measure:
 
 ```bash
 uv run python scripts/lab_pack_metrics.py --pack saas-ui-v0 --locale en
-uv run python scripts/lab_pack_metrics.py --pack ecommerce-ui-v0 --locale ru
+uv run python scripts/run_lab_pack_metrics.py
 ```

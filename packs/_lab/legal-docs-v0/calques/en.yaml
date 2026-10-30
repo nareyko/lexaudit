@@ -1,0 +1,50 @@
+version: 1
+rules:
+  - pattern: "hereinness"
+    locale: en
+    reason: "legal-hereinness"
+    hint: "in this agreement — invented noun"
+    severity: confirmed
+    source: "lab-legal"
+  - pattern: "thereofness"
+    locale: en
+    reason: "legal-thereofness"
+    hint: "of that — invented noun"
+    severity: confirmed
+    source: "lab-legal"
+  - pattern: "indemnifyability"
+    locale: en
+    reason: "legal-indemnifyability"
+    hint: "whether indemnified"
+    severity: likely
+    source: "lab-legal"
+  - pattern: "assignabilityness"
+    locale: en
+    reason: "legal-assignabilityness"
+    hint: "assignment — avoid stacked -ness"
+    severity: likely
+    source: "lab-legal"
+  - pattern: "warrantize"
+    locale: en
+    reason: "legal-warrantize"
+    hint: "warrant — invented verb"
+    severity: confirmed
+    source: "lab-legal"
+  - pattern: "covenantize"
+    locale: en
+    reason: "legal-covenantize"
+    hint: "covenant — invented verb"
+    severity: confirmed
+    source: "lab-legal"
+  - pattern: "noticeness"
+    locale: en
+    reason: "legal-noticeness"
+    hint: "notice — invented noun"
+    severity: confirmed
+    source: "lab-legal"
+  - pattern: "jurisdictionability"
+    locale: en
+    reason: "legal-jurisdictionability"
+    hint: "whether a court has jurisdiction"
+    severity: likely
+    source: "lab-legal"

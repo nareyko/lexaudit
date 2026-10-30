@@ -1,0 +1,26 @@
+version: 1
+rules:
+  - pattern: "appointmentheit"
+    locale: de
+    reason: "health-de-appointmentheit"
+    hint: "Termin"
+    severity: confirmed
+    source: "lab-healthcare"
+  - pattern: "refillbarkeit"
+    locale: de
+    reason: "health-de-refillbarkeit"
+    hint: "erneuerbar / Folgerezept möglich"
+    severity: likely
+    source: "lab-healthcare"
+  - pattern: "triageheit"
+    locale: de
+    reason: "health-de-triageheit"
+    hint: "Triage-Status"
+    severity: confirmed
+    source: "lab-healthcare"
+  - pattern: "symptomizen"
+    locale: de
+    reason: "health-de-symptomizen"
+    hint: "Symptome melden"
+    severity: confirmed
+    source: "lab-healthcare"

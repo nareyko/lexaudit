@@ -15,7 +15,8 @@ without shipping FairHelm marine content.
 | `fintech-v0` | Payment / ledger terms | [Native Localization fintech](https://www.nativelocalization.com/industries/fintech-localization/), [Translated Right](https://www.translatedright.com/blog/fintech-app-translation-security-terminology-pitfalls-to-avoid/), [GB Translation](https://www.gb-translation.com/es/traduccion-fintech/) |
 | `developer-docs-v0` | API prose coinages | [FastAPI RU prompt audit](https://github.com/fastapi/fastapi/pull/15920), [API7 translation notes](https://api7.ai/learning-center/api-101/translating-api-documentation-for-global-audiences) |
 
-Healthcare / legal / e-commerce remain candidates for a later hunt.
+E-commerce / healthcare / legal thin packs are seeded under `packs/_lab/`
+(`ecommerce-ui-v0`, `healthcare-ui-v0`, `legal-docs-v0`).
 
 ## Method used
 
@@ -40,11 +41,12 @@ Healthcare / legal / e-commerce remain candidates for a later hunt.
 | ecommerce-ui-v0 | en | 6 | 48.0 | 0.0 | yes |
 | ecommerce-ui-v0 | ru | 3 | 24.0 | 0.0 | yes |
 | ecommerce-ui-v0 | de | 3 | 24.0 | 0.0 | yes |
+| healthcare-ui-v0 | en/ru/de | see `run_lab_pack_metrics.py` | — | — | yes |
+| legal-docs-v0 | en/ru/de | see `run_lab_pack_metrics.py` | — | — | yes |
 
 Verdict: **iterate** (still fixture-backed; attach to Release only after owner go).
-Lab rank bar passes on EN/RU/DE fixtures after rule expansion + thin ecommerce pack.
-Community bilingual leftovers (Excalidraw / Ever-teams / Zulip / Homebox) feed
-saas-ui rule seeds; they do not change Release attach policy.
+Lab rank + known-rule recall ≥ 0.85 bars apply via `scripts/lab_pack_metrics.py`.
+0.3.0 promote checklist: `docs/p1-0.3.0-prep.md`.
 
 ## Hard rules
 

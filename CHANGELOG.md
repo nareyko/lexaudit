@@ -20,6 +20,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - `scripts/fetch_weblate_leftover_sample.py` (optional refresh)
 - Crowdin-via-GitHub leftover sample (Jellyfin + Immich); owner-review checklist
 - Example opt-in config `examples/lexaudit.config.bilingual.yaml`
+- Lab packs `healthcare-ui-v0`, `legal-docs-v0`; known-rule recall in
+  `lab_pack_metrics.py`; `run_lab_pack_metrics.py`; `docs/p1-0.3.0-prep.md`
 
 ## [0.2.0] - 2026-10-30
 

@@ -65,22 +65,19 @@ jobs:
         if: always()
         run: |
           uv run python - <<'PY'
-          import sqlite3
           from pathlib import Path
+          import scripts.check_mutation_score as cms
+
           cache = Path(".mutmut-cache")
           lines = ["# Mutation testing report", ""]
           if cache.is_file():
-              rows = dict(sqlite3.connect(cache).execute(
-                  "select status, count(*) from Mutant group by status"
-              ).fetchall())
-              killed = rows.get("ok_killed", 0)
-              survived = rows.get("bad_survived", 0)
-              total = killed + survived
-              rate = (killed / total * 100) if total else 0
+              killed, total, rate, rows = cms.score(cache, only_paths=cms.paths_to_mutate())
               lines += [
+                  "Scope: `setup.cfg` paths_to_mutate",
                   f"Total mutants: **{total}**",
                   f"- killed: {killed}",
-                  f"- survived: {survived}",
+                  f"- other: {total - killed}",
+                  f"- breakdown: `{rows}`",
                   "",
                   f"**Mutation score: {rate:.1f}%**",
                   "",

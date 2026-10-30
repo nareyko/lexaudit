@@ -20,7 +20,7 @@ pipx install lexaudit
 | Editor | Store |
 |---|---|
 | VS Code | [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=nareyko.vscode-lexaudit) |
-| Cursor / VSCodium / other Open VSX clients | [Open VSX](https://open-vsx.org/extension/nareyko/vscode-lexaudit) (after publish) |
+| Cursor / VSCodium / other Open VSX clients | [Open VSX](https://open-vsx.org/extension/nareyko/vscode-lexaudit) |
 
 Or install a release `.vsix` from
 [GitHub Releases](https://github.com/nareyko/lexaudit/releases).

@@ -145,3 +145,18 @@ rules:
     hint: "beachten — calque padding"
     severity: likely
     source: "phrase-calque-bank"
+  - pattern: "eine entscheidung treffen über"
+    locale: de
+    match: phrase
+    reason: "phrase-calque-make-decision"
+    hint: "entscheiden — padded calque"
+    severity: likely
+    source: "phrase-calque-bank"
+  - pattern: "es versteht sich von selbst"
+    locale: de
+    match: phrase
+    reason: "phrase-calque-goes-without"
+    hint: "offensichtlich — filler calque"
+    severity: likely
+    source: "phrase-calque-bank"
+

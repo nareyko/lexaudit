@@ -58,6 +58,37 @@ def test_make_crosslocale_no_pair_mode() -> None:
     assert "+no-pair" in (lone.reason or "")
 
 
+def test_make_crosslocale_ref_ok_requires_ok_set() -> None:
+    detect = make_crosslocale_detector(
+        {"shared", "dashboard"},
+        mode="ref_ok",
+        ok_norms={"dashboard"},
+    )
+    shared = ClassifiedWord(
+        normalized="shared",
+        surface="shared",
+        count=1,
+        status="suspect",
+        samples=[VocabSample(path="ru/a.md", scope="body")],
+        reason="unknown",
+        detectors=["hunspell"],
+        tier="weak",
+    )
+    dash = ClassifiedWord(
+        normalized="dashboard",
+        surface="dashboard",
+        count=1,
+        status="suspect",
+        samples=[VocabSample(path="ru/a.md", scope="body")],
+        reason="unknown",
+        detectors=["hunspell"],
+        tier="weak",
+    )
+    assert detect(shared) is None
+    assert detect(dash) is not None
+    assert "+ref-ok" in (dash.reason or "")
+
+
 def test_path_slug_key_drops_locale_folder() -> None:
     assert path_slug_key("packs_wild/saas-ui-v0/ru/wiki-saas.md") == (
         "packs_wild/saas-ui-v0/wiki-saas.md"

@@ -47,12 +47,15 @@ def make_crosslocale_detector(
     paired_norms_other: set[str],
     *,
     mode: str = "ref_present",
+    ok_norms: set[str] | None = None,
 ) -> object:
     """Boost suspect tiers using reference-locale vocab norms.
 
     Modes:
     - ``ref_present`` (default): token appears in the reference corpus — typical
       English leftover / loan surface that Hunspell flags in the target locale.
+    - ``ref_ok``: token is Hunspell-ok (or otherwise ok) in the reference locale
+      and present in reference norms — true C2 loan intuition.
     - ``no_pair``: token is absent from the reference corpus (legacy lab mode).
     """
 
@@ -64,6 +67,11 @@ def make_crosslocale_detector(
             if present:
                 return None
             tag = "+no-pair"
+        elif mode == "ref_ok":
+            ok = ok_norms if ok_norms is not None else paired_norms_other
+            if word.normalized not in ok:
+                return None
+            tag = "+ref-ok"
         else:
             if not present:
                 return None

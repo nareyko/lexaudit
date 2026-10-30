@@ -53,6 +53,7 @@ class LexauditConfig:
     # When enable_crosslocale: compare suspects against this locale's vocab norms.
     crosslocale_reference_locale: str = "en"
     # ref_present (default): boost when token appears in reference norms.
+    # ref_ok: boost when Hunspell-ok in reference (C2).
     # no_pair: legacy lab mode — boost when absent from reference.
     crosslocale_mode: str = "ref_present"
     enable_bilingual: bool = False
@@ -203,7 +204,7 @@ def load_config(path: Path) -> LexauditConfig:
                 .strip()
                 .casefold()
             )
-            in {"ref_present", "no_pair"}
+            in {"ref_present", "ref_ok", "no_pair"}
             else "ref_present"
         ),
         enable_bilingual=bool(data.get("enable_bilingual") or False),

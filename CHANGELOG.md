@@ -19,10 +19,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Phrase calque seeds (en/de/ru); hapax wild sanity + MCP tool smoke
 - VS Code `icon.png` (128×128); Cyrillic→Latin onboarding fixture
 - Soft cognate demote; FP-budget + clean/wild sanity + pack density scripts
+- Crosslocale `ref_ok` mode (boost when Hunspell-ok in reference locale)
+- Repo hygiene check + owner publish runbook; CI density/bilingual/hygiene gates
 - PyPI Trusted Publishing workflow stub (`workflow_dispatch` only)
 
 ### Changed
 - Length-ratio leftover uses synthetic `length-ratio` token (no source-word FP)
+- Pack density floors cover es/pl/sv/uk (≥12) as well as en/de/ru
 - LocalAI live smoke quarantined behind `LEXAUDIT_LOCALAI_SMOKE=1`
 - `.gitignore`: dumps / CX / tmp metrics / packaging artifacts stay local
 

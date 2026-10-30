@@ -28,6 +28,15 @@ jobs:
         run: uv run mypy --strict src/
       - name: Pytest (unit, property/fuzz, golden regression, schema, read-only)
         run: uv run pytest
+      - name: Pack density gate (7 locales)
+        if: matrix.python-version == '3.12'
+        run: uv run python scripts/check_pack_density.py
+      - name: Bilingual held-out ship bar
+        if: matrix.python-version == '3.12'
+        run: uv run python scripts/bilingual_metrics.py
+      - name: Repo hygiene (no dumps/tmp/vsix tracked)
+        if: matrix.python-version == '3.12'
+        run: uv run python scripts/check_repo_hygiene.py
       - name: Complexity / CRAP gate
         if: matrix.python-version == '3.12'
         run: uv run python scripts/crap_report.py

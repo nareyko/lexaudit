@@ -164,9 +164,12 @@ is the plan; checklist file is the executable owner list).
 4c. A4/E clean+wild sanity + pack density gate       ✅ 2026-10-30
 5. D agent shell (icon/docs/MCP smoke)               ✅ 2026-10-30
 5b. D Trusted Publishing workflow stub               ✅ 2026-10-30
-5c. D checklist items that need accounts             ⏳ owner
+5c. D density×7 + hygiene CI + owner runbook         ✅ 2026-10-30
+5d. C2 crosslocale `ref_ok` mode                     ✅ 2026-10-30
+5e. D checklist items that need accounts             ⏳ owner
 6. Publish go (PyPI → MCP → Marketplace → tag/push)  ⏳ owner
 ```
+
 
 ## Explicitly deferred
 - Bilingual / crosslocale package default-on

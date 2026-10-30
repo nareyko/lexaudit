@@ -48,7 +48,15 @@ def apply_crosslocale_pass(
         files_paths=cfg.files_paths,
     )
     norms = aggregate_norms_from_chunks(ref_chunks, ref)
-    detect = make_crosslocale_detector(norms, mode=cfg.crosslocale_mode)
+    ok_norms: set[str] | None = None
+    mode = cfg.crosslocale_mode
+    if mode == "ref_ok":
+        from lexaudit.detectors.hunspell import resolve_checker
+
+        checker = resolve_checker(ref, cfg.hunspell)
+        miss = checker.list_misspelled(sorted(norms))
+        ok_norms = {n for n in norms if n not in miss}
+    detect = make_crosslocale_detector(norms, mode=mode, ok_norms=ok_norms)
     hits = 0
     for w in words:
         updated = detect(w)  # type: ignore[operator]

@@ -1,7 +1,7 @@
 # Opt-in cross-locale norm boost. Package default remains enable_crosslocale: false.
 # When on, lexaudit aggregates word norms from crosslocale_reference_locale (default en)
 # and boosts suspects present in the reference (ref_present). Set crosslocale_mode:
-# no_pair for the legacy lab behaviour. No embeddings on the audit path.
+# ref_ok (Hunspell-ok in EN) or no_pair (legacy lab). No embeddings on the audit path.
 #
 # Use when you audit RU/DE/… docs that share terminology with a polished EN tree
 # under the same roots. Skip if you only audit one locale or lack a reference corpus.

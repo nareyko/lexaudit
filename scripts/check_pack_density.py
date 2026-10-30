@@ -14,7 +14,15 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 PACKS = ROOT / "packs"
 
-FLOORS = {"en": 20, "de": 12, "ru": 12}
+FLOORS = {
+    "en": 20,
+    "de": 12,
+    "ru": 12,
+    "es": 12,
+    "pl": 12,
+    "sv": 12,
+    "uk": 12,
+}
 SKIP = {"core-calques-v1", "_lab"}
 
 
@@ -51,10 +59,15 @@ def main() -> int:
 
         print(json.dumps({"rows": rows, "failed": failed}, indent=2, ensure_ascii=False))
     else:
-        print("pack density (en≥20 · de/ru≥12)")
+        print("pack density (en≥20 · de/ru/es/pl/sv/uk≥12)")
         for r in rows:
-            mark = "OK" if not any(f.startswith(str(r["pack"])) for f in failed) else "FAIL"
-            print(f"  {mark} {r['pack']}: en={r['en']} de={r['de']} ru={r['ru']}")
+            mark = (
+                "OK"
+                if not any(f.startswith(str(r["pack"]) + "/") for f in failed)
+                else "FAIL"
+            )
+            locs = " ".join(f"{loc}={r[loc]}" for loc in FLOORS)
+            print(f"  {mark} {r['pack']}: {locs}")
         if failed:
             print("failed:", ", ".join(failed))
         else:

@@ -1,8 +1,8 @@
 # P1 lab: domain rule packs (not for yachting)
 
-Status: **10** lab packs seeded and measured locally (2026-10-30 harvest).
-**Not** attached to the 0.2.0 release. Promote set for 0.3.0: first six —
-see `docs/p1-0.3.0-prep.md`.
+Status: **10** packs densified and promoted to `packs/` as **release-candidate**
+for 0.3.0 (local; not on PyPI yet). See `docs/p1-0.3.0-prep.md` and
+`docs/p1-owner-publish-runbook-2026-10-30.md`.
 
 ## Goal
 
@@ -16,9 +16,9 @@ without shipping marine / yacht content.
 | `saas-ui-v0` | AI/MT UI strings | [Zulip RU](https://zulip.readthedocs.io/en/stable/translating/russian.html), [Hermes](https://github.com/NousResearch/hermes-agent/pull/41677), [localize-ru](https://www.skills.sh/i18n-agent/i18nstack/localize-ru) |
 | `fintech-v0` | Payment / ledger | [Native Localization](https://www.nativelocalization.com/industries/fintech-localization/), [Translated Right](https://www.translatedright.com/blog/fintech-app-translation-security-terminology-pitfalls-to-avoid/) |
 | `developer-docs-v0` | API prose | [FastAPI](https://github.com/fastapi/fastapi/pull/15920), [API7](https://api7.ai/learning-center/api-101/translating-api-documentation-for-global-audiences) |
-| `ecommerce-ui-v0` | Checkout / cart | thin seed (promote with six) |
-| `healthcare-ui-v0` | Patient UI | thin seed (promote with six) |
-| `legal-docs-v0` | Contract prose | thin seed (promote with six) |
+| `ecommerce-ui-v0` | Checkout / cart | densified · RC in 0.3.0 |
+| `healthcare-ui-v0` | Patient UI | densified · RC in 0.3.0 |
+| `legal-docs-v0` | Contract prose | densified · RC in 0.3.0 |
 | `gaming-ui-v0` | Game HUD / loot | [Allcorrect guide](https://allcorrectgames.com/wp-content/uploads/2023/10/Localization_guide_2_allcorrect.pdf), [GameDeveloper](https://www.gamedeveloper.com/business/localising-your-game-how-to-make-it-not-suck), [IGDA](https://igda.org/news-archive/high-quality-localization-help-loc-help-you/), [Loc'd](https://locdandloaded.net/2021/05/31/style-guide/) |
 | `edtech-v0` | LMS / SCORM | [SCORMBuilder](https://scormbuilder.ai/blog/translate-scorm-course/), [Translated](https://translated.com/resources/e-learning-translation-interactivity-localization-guide), [Anan](https://anantranslations.com/scorm-xapi-translation-guide/), [Vozo](https://www.vozo.ai/blogs/e-learning-translation/elearning-courseware-translation-guide) |
 | `security-docs-v0` | Pen-test / security | [Smartling](https://www.smartling.com/questions/security-terminology-translation-consistency), [CIOL](https://www.ciol.org.uk/net-security), [UA terms paper](https://doi.org/10.30525/978-9934-26-548-8-26) |
@@ -27,7 +27,7 @@ without shipping marine / yacht content.
 ## Method used
 
 1. Mine public style guides and i18n reviews for recurring wrong tokens.
-2. Cap ~20–40 rules on `en` (and dense `de`/`ru` where useful); thin stubs elsewhere.
+2. Cap ~20–40 rules on `en`; `de`/`ru` ≥12 (often ≥24); `es`/`pl`/`sv`/`uk` ≥12.
 3. Mini fixtures: `01-clean*`, `04-defect-known`, `06-defect-open`.
 4. Measure with `scripts/lab_pack_metrics.py` / `run_lab_pack_metrics.py`.
 

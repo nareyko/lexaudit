@@ -10,7 +10,7 @@ lexaudit uses a **dual license**, depending on *how* you use the software.
 
 ## Plain words
 
-- Laptop or own CI: MIT. Fork, ship, sell, keep private — fine under MIT.
+- Laptop or own CI: MIT. Fork, ship, sell, keep private: fine under MIT.
 - Hosted multi-tenant service that other people’s clients talk to: that hosted
   service code is intended under AGPL-3.0-or-later (network copyleft).
 - This repository does not currently ship a hosted service. The AGPL file is the
@@ -28,6 +28,6 @@ lexaudit uses a **dual license**, depending on *how* you use the software.
 
 ## Where else it is stated
 
-- Root [`README.md`](../README.md) · [`docs/README.md`](README.md) · [`CONTRIBUTING.md`](../CONTRIBUTING.md)
+- Root [`README.md`](../README.md), [`docs/README.md`](README.md), [`CONTRIBUTING.md`](../CONTRIBUTING.md)
 - Package metadata: `pyproject.toml` → MIT (the published artifact)
 - Changelog: MIT package; hosted AGPL note points here

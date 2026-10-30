@@ -29,4 +29,4 @@ registry only after PyPI `lexaudit==0.3.0` is live (owner publish go).
 
 ## License
 
-MIT package; hosted multi-tenant SaaS use is AGPL — see `docs/licensing.md`.
+MIT package; hosted multi-tenant SaaS use is AGPL. See `docs/licensing.md`.

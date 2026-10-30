@@ -81,14 +81,14 @@ paired EN↔target texts and flags shared Latin (or Cyrillic) tokens as
 
 Pair sources in `bilingual_pairs`:
 
-- **Markdown roots** — `source_root` / `target_root` with same relative `.md` paths
-- **Academy JSON** — `source: academy` + `academy_root`; bodies from
+- **Markdown roots:** `source_root` / `target_root` with same relative `.md` paths
+- **Academy JSON:** `source: academy` + `academy_root`; bodies from
   `translations.{locale}.bodyMarkdown` are materialized under `materialize_dir`
   then compared by slug
 
 Brand/protocol tokens stay in `DEFAULT_INTENTIONAL_LOANS`. Short **German UI
 loans** (`dashboard`, `toast`, `store`, `download`, `upload`, `inbox`) are
-**not** in that DEFAULT — merge them only via `bilingual_extra_loans_path` +
+**not** in that DEFAULT; merge them only via `bilingual_extra_loans_path` +
 `bilingual_extra_loans_locales: [de]`. See [p1-de-loan-policy.md](p1-de-loan-policy.md).
 
 FairHelm dogfood: root `lexaudit.config.bilingual.yaml` +

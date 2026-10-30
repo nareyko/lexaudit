@@ -177,7 +177,7 @@ Package default: `enable_bilingual: false`. Example config:
 `examples/lexaudit.config.bilingual.yaml`.
 
 German product UI often **keeps** short English nouns on purpose. Those tokens
-are **not** leftovers by default — only via extras scoped to `de`:
+are not leftovers by default; only via extras scoped to `de`:
 
 ```yaml
 bilingual_extra_loans_path: ./dicts/intentional-extra-de.txt
@@ -200,7 +200,7 @@ uv run python scripts/bilingual_metrics.py \
 
 ## `pack list` / `pack install` / `pack verify`
 
-Installable YAML rule packs (MIT; dual-license package — see
+Installable YAML rule packs (MIT; dual-license package, see
 [licensing.md](licensing.md)). Domain packs for 0.3.0 live under `packs/`
 (e.g. `saas-ui-v0`). `packs/_lab/` keeps thin `pack.yaml` stubs for
 `pack list --lab`; calques/fixtures are not duplicated there (content SSOT is
@@ -214,7 +214,7 @@ uv run lexaudit pack verify saas-ui-v0 --dest /tmp/lexaudit-packs
 uv run lexaudit pack list --lab   # stubs only (status=lab); install --lab → packs/<id>
 ```
 
-Promote / publish status: `docs/p1-INDEX.md` · `docs/p1-0.3.0-prep.md`.
+Promote / publish status: `docs/p1-INDEX.md`, `docs/p1-0.3.0-prep.md`.
 
 ---
 

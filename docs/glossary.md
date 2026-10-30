@@ -20,7 +20,7 @@ No linguistics degree needed. Each term below has a one-line meaning and an exam
 | Open-set | Problems that no rule knew about in advance | A brand new calque |
 | CLEAR | A soft check that a fixed page no longer has its old problem | CLEAR / FAIL |
 | Deterministic | Same input always gives the same output | Reports are byte-identical |
-| Bilingual leftover | Same Latin (or Cyrillic) token in source and target — often untranslated | EN "sidebar" left in RU UI copy |
+| Bilingual leftover | Same Latin (or Cyrillic) token in source and target (often untranslated) | EN "sidebar" left in RU UI copy |
 | Crosslocale | Opt-in boost when a suspect in RU/DE also looks normal in EN | `enable_crosslocale` + `ref_ok` |
 | Pack | Installable YAML rule bundle under `packs/` | `saas-ui-v0` |
 

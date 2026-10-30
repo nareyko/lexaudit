@@ -1,4 +1,4 @@
-# DE UI loans · extras / allowlist (not DEFAULT)
+# DE UI loans: extras / allowlist (not DEFAULT)
 
 Status: agent review signed 2026-10-30 (`docs/p1-owner-review-bilingual.md`).
 Does **not** flip package `enable_bilingual` default.
@@ -9,7 +9,7 @@ In polished German product UI, short English nouns are often kept on purpose
 (`Dashboard`, `Toast`, `Store`, `Download`, `Upload`, `Inbox` as a mail folder).
 They are intentional loans, not untranslated leftovers. lexaudit must not treat
 them as leftovers by default: the package `DEFAULT_INTENTIONAL_LOANS` stays
-brand/protocol-shaped (`API`, `JSON`, `HTTP`, …). DE UI nouns enter only through
+brand/protocol-shaped (`API`, `JSON`, `HTTP`, ...). DE UI nouns enter only through
 corpus extras (bilingual) and optionally a project allowlist (monolingual foreign
 pass). Putting them in DEFAULT would hide the same Latin surfaces when they are
 real leftovers in RU/UK/community samples.
@@ -18,13 +18,13 @@ real leftovers in RU/UK/community samples.
 
 | Layer | What it clears | Where |
 |---|---|---|
-| **Bilingual leftover** (EN↔DE pair overlap) | Shared Latin token not leftover for target `de` | `bilingual_extra_loans_path` + `bilingual_extra_loans_locales: [de]` · or metrics `--extra-loans` |
+| **Bilingual leftover** (EN↔DE pair overlap) | Shared Latin token not leftover for target `de` | `bilingual_extra_loans_path` + `bilingual_extra_loans_locales: [de]`, or metrics `--extra-loans` |
 | **Monolingual foreign** | Same token not `foreign` on a DE page audited alone | `dicts/allowlist.yaml` → `locale_loans` (project-scoped; prefer commented until needed) |
 
 | Bucket | Tokens (examples) | Where |
 |---|---|---|
-| Brand / protocol / runtime | `API`, `JSON`, `HTTP`, `FastAPI`, `Pydantic`, … | `DEFAULT_INTENTIONAL_LOANS` |
-| DE UI loans (common, short) | `dashboard`, `toast`, `store`, `upload`, `download`, `inbox` (folder sense) | Extras / gold `intentional` — **not** DEFAULT |
+| Brand / protocol / runtime | `API`, `JSON`, `HTTP`, `FastAPI`, `Pydantic`, ... | `DEFAULT_INTENTIONAL_LOANS` |
+| DE UI loans (common, short) | `dashboard`, `toast`, `store`, `upload`, `download`, `inbox` (folder sense) | Extras / gold `intentional` (not DEFAULT) |
 | Leftover English | Full EN clauses; verbs/adjectives (`please`, `verify`); partial calques | Gold / report as leftover |
 
 ## Consumer recipe (audit)
@@ -46,7 +46,7 @@ bilingual_pairs:
     source_root: ./docs/en
     target_root: ./docs/de
 bilingual_extra_loans_path: ./dicts/intentional-extra-de.txt
-bilingual_extra_loans_locales: [de]   # required — empty locales = no merge in audit
+bilingual_extra_loans_locales: [de]   # required; empty locales = no merge in audit
 ```
 
 3. Keep `enable_bilingual: false` in the package / default project config.
@@ -69,7 +69,7 @@ uv run python scripts/bilingual_metrics.py \
 Fixture twins: `tests/fixtures/bilingual/live_weblate/intentional-extra-de.txt`,
 `live_crowdin/intentional-extra-de.txt`.
 
-## Evidence (live Weblate · hosted.weblate.org · 2026-10-30)
+## Evidence (live Weblate, hosted.weblate.org, 2026-10-30)
 
 | Signal | Example | Policy read |
 |---|---|---|
@@ -79,7 +79,7 @@ Fixture twins: `tests/fixtures/bilingual/live_weblate/intentional-extra-de.txt`,
 | DE keeps Store + Toast compound | GooseMod `Toast-Benachrichtigung` / `Store` | `store` intentional; compounds may evade exact token match |
 | Full EN paragraph untranslated | Soapbox inbox confirmation; Navigate CMS marketplace | leftover (high-severity) |
 
-## Evidence (Crowdin-synced GitHub mirrors · 2026-10-30)
+## Evidence (Crowdin-synced GitHub mirrors, 2026-10-30)
 
 | Signal | Example | Policy read |
 |---|---|---|

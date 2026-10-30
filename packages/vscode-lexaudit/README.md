@@ -1,6 +1,6 @@
 # lexaudit (VS Code)
 
-Shells out to the local `lexaudit` CLI. Detection only — no rewrite, no cloud.
+Shells out to the local `lexaudit` CLI. Detection only: no rewrite, no cloud.
 
 ## Requirements
 
@@ -13,8 +13,8 @@ pipx install lexaudit
 
 ## Commands
 
-- `lexaudit: Audit workspace` — runs `lexaudit audit --check` and maps findings to Problems
-- `lexaudit: Explain selection` — runs `lexaudit explain` on the selected word
+- `lexaudit: Audit workspace`: runs `lexaudit audit --check` and maps findings to Problems
+- `lexaudit: Explain selection`: runs `lexaudit explain` on the selected word
 
 ## Settings
 
@@ -40,4 +40,4 @@ endpoint, no account required.
 
 ## License
 
-MIT — same as the lexaudit package. See the repository root `LICENSE`.
+MIT, same as the lexaudit package. See the repository root `LICENSE`.

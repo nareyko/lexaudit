@@ -8,7 +8,7 @@
 
 - Author: Vadim Nareyko ([github.com/nareyko](https://github.com/nareyko))
 - Origin: Extracted from multilingual courses and engineering encyclopedias at [FairHelm](https://fairhelm.com)
-- License: **dual** — [MIT](../LICENSE) · [AGPL-3.0-or-later](../LICENSE-AGPL-HOSTED.md) for hosted SaaS · [licensing.md](licensing.md)
+- License: dual MIT package / AGPL-3.0-or-later hosted SaaS ([licensing.md](licensing.md))
 
 ![Overview](images/overview.svg)
 
@@ -21,8 +21,8 @@
 | [Architecture](architecture.md) | What goes in, what comes out, package layout |
 | [Pipeline](pipeline.md) | The gates every word passes, statuses, calque rules |
 | [CLI reference](cli-reference.md) | `init`, `doctor`, `audit`, `explain`, `rank`, `expand-needle`, `label`, `eval`, `diff` |
-| [Licensing](licensing.md) | Dual license: MIT package · AGPL for hosted SaaS |
-| [DE UI loans](p1-de-loan-policy.md) | German keeps Dashboard/Toast/… on purpose — extras only, not DEFAULT |
+| [Licensing](licensing.md) | Dual license: MIT package, AGPL for hosted SaaS |
+| [DE UI loans](p1-de-loan-policy.md) | German keeps Dashboard/Toast on purpose (extras only, not DEFAULT) |
 | [0.3.0 prep](p1-0.3.0-prep.md) | Ten RC packs in `packs/`; bilingual stays opt-in |
 | [Next-wave plan](p1-next-wave-plan-2026-10-30.md) | Wild wiki corpus, bilingual/crosslocale fixes, product shell |
 | [Next-wave status](p1-status-next-wave-2026-10-30.md) | What is thin now and how to fix it |
@@ -36,7 +36,7 @@ Also see root [`README.md`](../README.md), [`examples/lexaudit.config.example.ya
 
 ![Synthetic Benchmark](images/synthetic-benchmark.svg)
 
-On the stratified 42-page benchmark (`en`, `de`, `es`, `pl`, `ru`, `sv`, `uk`), a naive spellchecker ranks clean technical pages ahead of defective ones (`MAP = 0.389`, `Precision@2 = 0.0%`), whereas `lexaudit` raises `MAP` to **`0.838`** (`Precision@2 = 100.0%`, `Precision@3 = 66.7%`, `Known-Rule Recall = 100.0%`, `Open-Set Recall = 77.9%` in ~0.66 seconds on CPU). See [7-Locale Benchmark](synthetic-benchmark.md) for the full error analysis.
+On the stratified 42-page benchmark (`en`, `de`, `es`, `pl`, `ru`, `sv`, `uk`), a naive spellchecker ranks clean technical pages ahead of defective ones (`MAP = 0.389`, `Precision@2 = 0.0%`). Full `lexaudit` raises `MAP` to 0.838 (`Precision@2 = 100.0%`, `Precision@3 = 66.7%`, `Known-Rule Recall = 100.0%`, `Open-Set Recall = 77.9%` in ~0.66 seconds on CPU). See [7-Locale Benchmark](synthetic-benchmark.md) for the full error analysis.
 
 ## Auditing Markdown documentation out of the box (no GPU required)
 

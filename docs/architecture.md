@@ -27,7 +27,7 @@ Everything runs on an ordinary computer processor. No graphics card, no internet
 
 | Location | Role |
 |---|---|
-| `github.com/nareyko/lexaudit` | Package (dual: MIT · AGPL hosted) — [licensing.md](licensing.md) · author Vadim Nareyko |
+| `github.com/nareyko/lexaudit` | Package (dual: MIT / AGPL hosted). See [licensing.md](licensing.md). Author: Vadim Nareyko |
 | Your project, `lexaudit.config.yaml` | Your settings |
 | Your project, `dicts/*.yaml` | Your own names, abbreviations, allowed words |
 | Your project, output folder | Generated reports. Safe to delete and regenerate |
@@ -38,14 +38,14 @@ Everything runs on an ordinary computer processor. No graphics card, no internet
 ```text
 lexaudit/
   src/lexaudit/
-    cli/main.py          # init | doctor | audit | pack | explain | rank | …
+    cli/main.py          # init | doctor | audit | pack | explain | rank | ...
     config.py            # YAML to LexauditConfig (enable_bilingual default false)
     core/                # tokenize, classify, rank, pipeline
     detectors/           # allowlist, hunspell, morph, compound, foreign,
                          # english_leak, calque, bilingual + crosslocale (opt-in)
     packs.py             # pack list/install/verify; _lab stubs → packs/<id> content
     dictpacks/loader.py  # names, abbreviations, known compound parts
-    sources/collect.py   # Markdown, academy JSON, packs, HTML/PO/XLIFF, …
+    sources/collect.py   # Markdown, academy JSON, packs, HTML/PO/XLIFF, ...
     report/              # write, diff, expand_needle, CI/SARIF
     curated/queue.py     # rewrite-queue.md or JSON
     llm/                 # optional label step, cached on disk
@@ -93,9 +93,9 @@ flowchart TB
 | `bilingual_chrome_path` | Optional CMS/nav chrome extras (merged with built-in stop) |
 | `enable_crosslocale` | Opt-in reference-locale tier boost (default **false**) |
 | `crosslocale_reference_locale` | Usually `en` |
-| `crosslocale_mode` | `ref_present` (default) · `ref_ok` · `no_pair` |
+| `crosslocale_mode` | `ref_present` (default), `ref_ok`, `no_pair` |
 
-DE UI loans (`dashboard`, `toast`, …): see [p1-de-loan-policy.md](p1-de-loan-policy.md)
+DE UI loans (`dashboard`, `toast`, ...): see [p1-de-loan-policy.md](p1-de-loan-policy.md)
 and `examples/dicts/intentional-extra-de.txt`. Crosslocale recipe:
 `examples/lexaudit.config.crosslocale.yaml`.
 

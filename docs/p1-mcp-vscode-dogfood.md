@@ -44,7 +44,8 @@ single-sourced in Python.
 bash scripts/docs_deslop_scan.sh
 ```
 
-Ban-list + bold-spam (>2 bold spans per prose paragraph) on `README.md` + `docs/*.md`.
+Ban-list + bold-spam (>2 bold spans per prose paragraph) + symbol-spam on
+`README.md`, `CONTRIBUTING.md`, `SECURITY.md`, `docs/*.md`, and `packages/*/README.md`.
 
 ## Publish order (owner go)
 

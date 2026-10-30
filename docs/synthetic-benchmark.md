@@ -72,7 +72,7 @@ Examining the exact English ranking output explains both the strength and the bo
 2. Why Precision@3 = 66.7% (false positive on page `03` vs. false negative on page `06`):
    - On clean page `03`, specialist terms not yet in `proper-names.yaml` (`vinylester`, `Epoxidgrundierung`, `винилэфирной`) appear multiple times (`count >= 2`), earning a `suspect` score of `1.5 - 1.8`.
    - On defective page `06`, the planted coinage `dockwalkish` (`Stegmanöverig`, `пирсовыйосмотр`) is an unseen single-occurrence token (`count = 1`) not yet in `rules/calques/*.yaml`. Because `lexaudit` down-weights unknown singletons to `0.1` to suppress catalogue-code noise (pages `01` and `02`), an unseen singleton neologism also receives `0.1`.
-   - Furthermore, multi-word phrase calques made of valid dictionary words cannot be detected by token-level rules alone.
+   - Multi-word phrase calques made of valid dictionary words cannot be detected by token-level rules alone.
 3. How teams close the remaining gap in production:
    - Step 1: Add recurring valid domain terms from page `03` (`vinylester`, `haulout`) to `dicts/proper-names.yaml` (drops page `03` score to `0.0`).
    - Step 2: Run optional `lexaudit label --tiers likely,weak` (LLM triage) or promote recurring editorial mistakes into `rules/calques/<locale>.yaml`.

@@ -1,10 +1,16 @@
-# Dual license (MIT + AGPL for hosted)
+# Dual license (MIT + AGPL for hosted) — lexaudit only
 
-lexaudit uses a **dual license**, depending on *how* you use the software.
+This dual license applies to the **lexaudit** package repository
+(`github.com/nareyko/lexaudit`), not to FairHelm.
 
-| Use | License | Text |
+| Product | License |
+|---|---|
+| **lexaudit** (this repo) | Dual — see table below |
+| **FairHelm** (fairhelm.com / host monorepo) | **Proprietary** — not MIT, not AGPL, not dual-licensed |
+
+| Use of **lexaudit** | License | Text |
 |---|---|---|
-| CLI, Python library, rule YAML, packs from this repo (local / CI / embed in your product) | **MIT** | [`LICENSE`](../LICENSE) |
+| CLI, Python library, rule YAML, packs from this repo (local / CI / embed in *your* product) | **MIT** | [`LICENSE`](../LICENSE) |
 | **Hosted** multi-tenant SaaS that exposes lexaudit (or a fork) as a **network service** to third parties | **AGPL-3.0-or-later** | [`LICENSE-AGPL-HOSTED.md`](../LICENSE-AGPL-HOSTED.md) |
 | Spelling dictionaries from `lexaudit fetch-dicts` | **Upstream** (unchanged) | `*.license.txt` next to each dict |
 
@@ -14,12 +20,14 @@ lexaudit uses a **dual license**, depending on *how* you use the software.
 - **You offer lexaudit as a hosted service that other people’s browsers/API clients talk to** → that hosted service code is intended under AGPL-3.0-or-later (network copyleft: users of the service get source rights).
 - This repository **does not currently ship** a hosted service. The AGPL file is the license text for that intended use, not a second license on the MIT package itself.
 - Packs (`packs/*`, `packs/_lab/*`) stay **MIT**, same as the library.
+- Embedding lexaudit (MIT) inside a proprietary product such as FairHelm does **not** open-source FairHelm.
 
 ## What is *not* dual-licensed
 
 | Asset | Note |
 |---|---|
-| FairHelm marine / yacht dictionaries and content | Stay outside this public package |
+| FairHelm site, courses, content, dictionaries, bridge configs | **Proprietary** (host product) |
+| Marine / yacht FairHelm dictionaries | Stay outside this public package |
 | Hunspell / system dictionaries | Keep their own licenses; lexaudit does not relicense them |
 
 ## Where else it is stated

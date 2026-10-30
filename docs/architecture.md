@@ -27,7 +27,7 @@ Everything runs on an ordinary computer processor. No graphics card, no internet
 
 | Location | Role |
 |---|---|
-| `github.com/nareyko/lexaudit` | Package (MIT) · hosted SaaS intended AGPL — [licensing.md](licensing.md) · author Vadim Nareyko |
+| `github.com/nareyko/lexaudit` | lexaudit dual license (MIT · AGPL hosted) — [licensing.md](licensing.md); FairHelm host is proprietary · author Vadim Nareyko |
 | Your project, `lexaudit.config.yaml` | Your settings |
 | Your project, `dicts/*.yaml` | Your own names, abbreviations, allowed words |
 | Your project, output folder | Generated reports. Safe to delete and regenerate |

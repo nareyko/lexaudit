@@ -47,7 +47,7 @@ gov/civic (overlaps legal), media-streaming (overlaps SaaS), marine/yacht (**nev
 
 ```bash
 uv run python scripts/run_lab_pack_metrics.py
-# 2026-10-30: 10 packs × en/ru/de → failed=0
+# 2026-10-30: 10 packs × en/de/es/pl/ru/sv/uk → failed=0
 ```
 
 0.3.0 promote checklist: `docs/p1-0.3.0-prep.md`.

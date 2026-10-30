@@ -1,2 +1,26 @@
 version: 1
-rules: []
+rules:
+- pattern: onboardize
+  locale: es
+  reason: lab-hr-onboardize-cross
+  hint: onboardize — invented English leftover
+  severity: confirmed
+  source: lab-hr
+- pattern: offerize
+  locale: es
+  reason: lab-hr-offerize-cross
+  hint: offerize — invented English leftover
+  severity: confirmed
+  source: lab-hr
+- pattern: pipelineness
+  locale: es
+  reason: lab-hr-pipelineness-cross
+  hint: pipelineness — invented English leftover
+  severity: confirmed
+  source: lab-hr
+- pattern: atsness
+  locale: es
+  reason: lab-hr-atsness-cross
+  hint: atsness — invented English leftover
+  severity: confirmed
+  source: lab-hr

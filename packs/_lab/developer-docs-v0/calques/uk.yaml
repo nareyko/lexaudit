@@ -1,20 +1,23 @@
 version: 1
 rules:
-  - pattern: "requestness"
-    locale: uk
-    reason: "devdocs-requestness-cross"
-    hint: "request handling — invented English leftover"
-    severity: confirmed
-    source: "lab-developer-docs"
-  - pattern: "schemaize"
-    locale: uk
-    reason: "devdocs-schemaize-cross"
-    hint: "define schema — invented English leftover"
-    severity: confirmed
-    source: "lab-developer-docs"
-  - pattern: "openapiize"
-    locale: uk
-    reason: "devdocs-openapiize-cross"
-    hint: "generate OpenAPI — invented English leftover"
-    severity: confirmed
-    source: "lab-developer-docs"
+- pattern: requestness
+  locale: uk
+  reason: devdocs-requestness-cross
+  hint: request handling — invented English leftover
+  severity: confirmed
+  source: lab-developer-docs
+  override_ok: true
+- pattern: schemaize
+  locale: uk
+  reason: devdocs-schemaize-cross
+  hint: define schema — invented English leftover
+  severity: confirmed
+  source: lab-developer-docs
+  override_ok: true
+- pattern: openapiize
+  locale: uk
+  reason: devdocs-openapiize-cross
+  hint: generate OpenAPI — invented English leftover
+  severity: confirmed
+  source: lab-developer-docs
+  override_ok: true

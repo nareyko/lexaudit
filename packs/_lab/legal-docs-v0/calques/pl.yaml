@@ -1,2 +1,26 @@
 version: 1
-rules: []
+rules:
+- pattern: hereinness
+  locale: pl
+  reason: lab-legal-hereinness-cross
+  hint: hereinness — invented English leftover
+  severity: confirmed
+  source: lab-legal
+- pattern: warrantize
+  locale: pl
+  reason: lab-legal-warrantize-cross
+  hint: warrantize — invented English leftover
+  severity: confirmed
+  source: lab-legal
+- pattern: covenantize
+  locale: pl
+  reason: lab-legal-covenantize-cross
+  hint: covenantize — invented English leftover
+  severity: confirmed
+  source: lab-legal
+- pattern: noticeness
+  locale: pl
+  reason: lab-legal-noticeness-cross
+  hint: noticeness — invented English leftover
+  severity: confirmed
+  source: lab-legal

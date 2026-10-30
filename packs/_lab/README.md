@@ -16,11 +16,16 @@ See `docs/p1-0.3.0-prep.md` for promote checklist. Inventory: **10** packs.
 | `security-docs-v0` | Security / pen-test prose | keep lab (harvest) |
 | `hr-ats-v0` | ATS / recruiting coinages | keep lab (harvest) |
 
+All packs declare locales `[en, de, es, pl, ru, sv, uk]` with calques + fixtures
+per locale (es/pl/sv/uk use English leftover coinages as cross-locale needles;
+Ukrainian rules set `override_ok` so Latin leftovers still flag when hunspell
+marks them `ok`).
+
 Measure / dogfood:
 
 ```bash
-uv run python scripts/lab_pack_metrics.py --pack saas-ui-v0 --locale en
-uv run python scripts/run_lab_pack_metrics.py
+uv run python scripts/lab_pack_metrics.py --pack saas-ui-v0 --locale uk
+uv run python scripts/run_lab_pack_metrics.py   # 10 packs × 7 locales
 uv run lexaudit pack list --lab
 uv run lexaudit pack install saas-ui-v0 --lab --dest /tmp/lexaudit-packs --force
 uv run python scripts/promote_lab_pack.py saas-ui-v0   # dry-run validate

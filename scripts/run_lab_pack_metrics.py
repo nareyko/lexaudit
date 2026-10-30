@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run lab_pack_metrics for every packs/_lab/* with EN/RU/DE fixtures."""
+"""Run lab_pack_metrics for every packs/_lab/* across all 7 locales."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from lab_pack_metrics import measure  # noqa: E402
 
 LAB = ROOT / "packs" / "_lab"
-LOCALES = ("en", "ru", "de")
+LOCALES = ("en", "de", "es", "pl", "ru", "sv", "uk")
 
 
 def main() -> int:

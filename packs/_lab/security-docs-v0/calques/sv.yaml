@@ -1,2 +1,26 @@
 version: 1
-rules: []
+rules:
+- pattern: exploitness
+  locale: sv
+  reason: lab-security-exploitness-cross
+  hint: exploitness — invented English leftover
+  severity: confirmed
+  source: lab-security
+- pattern: sandboxize
+  locale: sv
+  reason: lab-security-sandboxize-cross
+  hint: sandboxize — invented English leftover
+  severity: confirmed
+  source: lab-security
+- pattern: zerodayness
+  locale: sv
+  reason: lab-security-zerodayness-cross
+  hint: zerodayness — invented English leftover
+  severity: confirmed
+  source: lab-security
+- pattern: payloadize
+  locale: sv
+  reason: lab-security-payloadize-cross
+  hint: payloadize — invented English leftover
+  severity: confirmed
+  source: lab-security

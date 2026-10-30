@@ -1,2 +1,30 @@
 version: 1
-rules: []
+rules:
+- pattern: patientness
+  locale: uk
+  reason: lab-healthcare-patientness-cross
+  hint: patientness — invented English leftover
+  severity: confirmed
+  source: lab-healthcare
+  override_ok: true
+- pattern: symptomize
+  locale: uk
+  reason: lab-healthcare-symptomize-cross
+  hint: symptomize — invented English leftover
+  severity: confirmed
+  source: lab-healthcare
+  override_ok: true
+- pattern: triageness
+  locale: uk
+  reason: lab-healthcare-triageness-cross
+  hint: triageness — invented English leftover
+  severity: confirmed
+  source: lab-healthcare
+  override_ok: true
+- pattern: prescriptionize
+  locale: uk
+  reason: lab-healthcare-prescriptionize-cross
+  hint: prescriptionize — invented English leftover
+  severity: confirmed
+  source: lab-healthcare
+  override_ok: true

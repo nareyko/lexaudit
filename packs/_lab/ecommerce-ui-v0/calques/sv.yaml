@@ -1,2 +1,26 @@
 version: 1
-rules: []
+rules:
+- pattern: cartness
+  locale: sv
+  reason: lab-ecommerce-cartness-cross
+  hint: cartness — invented English leftover
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: checkoutness
+  locale: sv
+  reason: lab-ecommerce-checkoutness-cross
+  hint: checkoutness — invented English leftover
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: skuize
+  locale: sv
+  reason: lab-ecommerce-skuize-cross
+  hint: skuize — invented English leftover
+  severity: confirmed
+  source: lab-ecommerce
+- pattern: refundize
+  locale: sv
+  reason: lab-ecommerce-refundize-cross
+  hint: refundize — invented English leftover
+  severity: confirmed
+  source: lab-ecommerce

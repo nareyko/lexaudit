@@ -1,14 +1,20 @@
 id: saas-ui-v0
 version: 0.0.1-lab
 license: MIT
-locales: [en, de, es, pl, ru, sv, uk]
+locales:
+- en
+- de
+- es
+- pl
+- ru
+- sv
+- uk
 status: lab
 rules_dir: calques
-notes: >-
-  Experimental SaaS/product UI calques from public style guides
-  (Zulip RU guide, Hermes desktop review, localize-ru skill notes).
-  Not for GitHub Release until metrics pass.
+notes: Experimental SaaS/product UI calques from public style guides (Zulip RU guide,
+  Hermes desktop review, localize-ru skill notes). Not for GitHub Release until metrics
+  pass.
 sources:
-  - https://zulip.readthedocs.io/en/stable/translating/russian.html
-  - https://github.com/NousResearch/hermes-agent/pull/41677
-  - https://www.skills.sh/i18n-agent/i18nstack/localize-ru
+- https://zulip.readthedocs.io/en/stable/translating/russian.html
+- https://github.com/NousResearch/hermes-agent/pull/41677
+- https://www.skills.sh/i18n-agent/i18nstack/localize-ru

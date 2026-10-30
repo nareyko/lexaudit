@@ -1,12 +1,18 @@
 id: developer-docs-v0
 version: 0.0.1-lab
 license: MIT
-locales: [en, de, es, pl, ru, sv, uk]
+locales:
+- en
+- de
+- es
+- pl
+- ru
+- sv
+- uk
 status: lab
 rules_dir: calques
-notes: >-
-  Experimental developer-docs / API prose traps (FastAPI RU review patterns,
+notes: Experimental developer-docs / API prose traps (FastAPI RU review patterns,
   API docs translation guidance). Preserve code tokens; flag invented prose.
 sources:
-  - https://github.com/fastapi/fastapi/pull/15920
-  - https://api7.ai/learning-center/api-101/translating-api-documentation-for-global-audiences
+- https://github.com/fastapi/fastapi/pull/15920
+- https://api7.ai/learning-center/api-101/translating-api-documentation-for-global-audiences

@@ -1,2 +1,26 @@
 version: 1
-rules: []
+rules:
+- pattern: lootability
+  locale: pl
+  reason: lab-gaming-lootability-cross
+  hint: lootability — invented English leftover
+  severity: confirmed
+  source: lab-gaming
+- pattern: matchmakeize
+  locale: pl
+  reason: lab-gaming-matchmakeize-cross
+  hint: matchmakeize — invented English leftover
+  severity: confirmed
+  source: lab-gaming
+- pattern: respawnness
+  locale: pl
+  reason: lab-gaming-respawnness-cross
+  hint: respawnness — invented English leftover
+  severity: confirmed
+  source: lab-gaming
+- pattern: inventoryize
+  locale: pl
+  reason: lab-gaming-inventoryize-cross
+  hint: inventoryize — invented English leftover
+  severity: confirmed
+  source: lab-gaming

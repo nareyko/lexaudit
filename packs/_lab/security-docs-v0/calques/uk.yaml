@@ -1,2 +1,30 @@
 version: 1
-rules: []
+rules:
+- pattern: exploitness
+  locale: uk
+  reason: lab-security-exploitness-cross
+  hint: exploitness — invented English leftover
+  severity: confirmed
+  source: lab-security
+  override_ok: true
+- pattern: sandboxize
+  locale: uk
+  reason: lab-security-sandboxize-cross
+  hint: sandboxize — invented English leftover
+  severity: confirmed
+  source: lab-security
+  override_ok: true
+- pattern: zerodayness
+  locale: uk
+  reason: lab-security-zerodayness-cross
+  hint: zerodayness — invented English leftover
+  severity: confirmed
+  source: lab-security
+  override_ok: true
+- pattern: payloadize
+  locale: uk
+  reason: lab-security-payloadize-cross
+  hint: payloadize — invented English leftover
+  severity: confirmed
+  source: lab-security
+  override_ok: true

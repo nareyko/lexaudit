@@ -1,20 +1,23 @@
 version: 1
 rules:
-  - pattern: "modalness"
-    locale: uk
-    reason: "saas-ui-modalness-cross"
-    hint: "modal dialog — invented English leftover"
-    severity: confirmed
-    source: "lab-saas-ui"
-  - pattern: "toastness"
-    locale: uk
-    reason: "saas-ui-toastness-cross"
-    hint: "toast notification — invented English leftover"
-    severity: confirmed
-    source: "lab-saas-ui"
-  - pattern: "actionize"
-    locale: uk
-    reason: "saas-ui-actionize-cross"
-    hint: "run action — invented English leftover"
-    severity: confirmed
-    source: "lab-saas-ui"
+- pattern: modalness
+  locale: uk
+  reason: saas-ui-modalness-cross
+  hint: modal dialog — invented English leftover
+  severity: confirmed
+  source: lab-saas-ui
+  override_ok: true
+- pattern: toastness
+  locale: uk
+  reason: saas-ui-toastness-cross
+  hint: toast notification — invented English leftover
+  severity: confirmed
+  source: lab-saas-ui
+  override_ok: true
+- pattern: actionize
+  locale: uk
+  reason: saas-ui-actionize-cross
+  hint: run action — invented English leftover
+  severity: confirmed
+  source: lab-saas-ui
+  override_ok: true

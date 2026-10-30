@@ -1,2 +1,26 @@
 version: 1
-rules: []
+rules:
+- pattern: patientness
+  locale: sv
+  reason: lab-healthcare-patientness-cross
+  hint: patientness — invented English leftover
+  severity: confirmed
+  source: lab-healthcare
+- pattern: symptomize
+  locale: sv
+  reason: lab-healthcare-symptomize-cross
+  hint: symptomize — invented English leftover
+  severity: confirmed
+  source: lab-healthcare
+- pattern: triageness
+  locale: sv
+  reason: lab-healthcare-triageness-cross
+  hint: triageness — invented English leftover
+  severity: confirmed
+  source: lab-healthcare
+- pattern: prescriptionize
+  locale: sv
+  reason: lab-healthcare-prescriptionize-cross
+  hint: prescriptionize — invented English leftover
+  severity: confirmed
+  source: lab-healthcare

@@ -21,7 +21,7 @@ from lab_pack_metrics import measure  # noqa: E402
 
 LAB = ROOT / "packs" / "_lab"
 RELEASE = ROOT / "packs"
-LOCALES = ("en", "ru", "de")
+LOCALES = ("en", "de", "es", "pl", "ru", "sv", "uk")
 
 
 def _validate(pack_id: str) -> list[str]:

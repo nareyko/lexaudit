@@ -1,2 +1,30 @@
 version: 1
-rules: []
+rules:
+- pattern: scormness
+  locale: uk
+  reason: lab-edtech-scormness-cross
+  hint: scormness — invented English leftover
+  severity: confirmed
+  source: lab-edtech
+  override_ok: true
+- pattern: coursewarize
+  locale: uk
+  reason: lab-edtech-coursewarize-cross
+  hint: coursewarize — invented English leftover
+  severity: confirmed
+  source: lab-edtech
+  override_ok: true
+- pattern: lmsize
+  locale: uk
+  reason: lab-edtech-lmsize-cross
+  hint: lmsize — invented English leftover
+  severity: confirmed
+  source: lab-edtech
+  override_ok: true
+- pattern: quizability
+  locale: uk
+  reason: lab-edtech-quizability-cross
+  hint: quizability — invented English leftover
+  severity: confirmed
+  source: lab-edtech
+  override_ok: true

@@ -57,6 +57,19 @@ def test_heldout_fixtures_exist() -> None:
         assert (FIXTURES / "heldout" / loc / "payments.md").is_file()
 
 
+def test_cyrillic_to_latin_grown_fixtures() -> None:
+    root = FIXTURES / "cyrillic_to_latin"
+    assert (root / "SOURCES.md").is_file()
+    for name in ("onboarding.md", "payments.md", "dashboard.md"):
+        assert (root / "en" / name).is_file()
+        assert (root / "ru" / name).is_file()
+    src = (root / "ru" / "payments.md").read_text(encoding="utf-8")
+    tgt = (root / "en" / "payments.md").read_text(encoding="utf-8")
+    hits = untranslated_cyrillic_in_target(src, tgt, path="en/payments.md")
+    norms = {w.normalized for w in hits}
+    assert "баланс" in norms or "перевод" in norms
+
+
 def test_pairs_from_config_heldout() -> None:
     root = FIXTURES / "heldout"
     pairs = pairs_from_config(
@@ -80,6 +93,19 @@ def test_length_ratio_soft_signal() -> None:
     hits = length_ratio_leftovers("short", "x" * 80, path="ru/x.md")
     assert hits and hits[0].reason.startswith("bilingual-length-ratio:")
     assert hits[0].tier == "weak"
+    assert hits[0].normalized == "length-ratio"
+
+
+def test_soft_cognate_demotes_tier_not_drop() -> None:
+    src = "Update the system profile and export the report.\n"
+    tgt = "Обновите system profile и сделайте export report.\n"
+    hits = detect_pair_leftovers(
+        src, tgt, source_locale="en", target_locale="ru", path="ru/x.md"
+    )
+    by_norm = {w.normalized: w for w in hits}
+    assert "system" in by_norm
+    assert by_norm["system"].tier == "weak"
+    assert "+cognate-soft" in (by_norm["system"].reason or "")
 
 
 def test_urls_and_code_not_counted_as_leftovers() -> None:

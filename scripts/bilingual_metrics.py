@@ -151,6 +151,9 @@ def main() -> int:
             if seeded_exists and rel != args.seeded_basename:
                 official_alarms += len(hits)
             for w in hits:
+                # Soft page signals are ranking-only — keep out of P/R gold.
+                if (w.reason or "").startswith("bilingual-length-ratio"):
+                    continue
                 predicted.add((tgt_loc, rel, w.normalized))
 
     # If gold only lists seeded rows, restrict scoring to those paths

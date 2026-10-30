@@ -54,6 +54,7 @@ tmp/wiki-probe/
 tmp/pack-wild/
 tmp/pack-field/
 tmp/crosslocale-dogfood/
+tmp/clean-wild/
 tmp/metrics/
 tmp/*.json
 

@@ -100,8 +100,10 @@ def _score_pair(
                 path=f"{target_locale}/{rel}",
                 intentional_loans=loans if source_locale not in {"ru", "uk"} else None,
             )
-            alarm_count += len(hits)
             for w in hits:
+                if (w.reason or "").startswith("bilingual-length-ratio"):
+                    continue
+                alarm_count += 1
                 predicted.add((rel, w.normalized))
 
     gold_paths = {rel for rel, _ in leftover_gold | intentional_gold}

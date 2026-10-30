@@ -29,7 +29,7 @@ Refs: [Publishing Extensions](https://code.visualstudio.com/api/working-with-ext
 
 | # | Step | Owner | Status |
 |---|---|---|---|
-| 1 | PyPI upload `lexaudit==0.3.0` with `mcp` extra installable | owner | □ |
+| 1 | PyPI upload `lexaudit==0.3.0` with `mcp` extra installable | owner | □ workflow stub ready |
 | 2 | Verify `server.json` name `io.github.nareyko/lexaudit`, description ≤100 chars | agent | ☑ |
 | 3 | Install `mcp-publisher`; GitHub auth for `io.github.nareyko/*` namespace | owner | □ |
 | 4 | `mcp-publisher publish` from `packages/mcp-lexaudit/` | owner | □ |

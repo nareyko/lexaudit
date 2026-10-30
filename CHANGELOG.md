@@ -18,8 +18,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - CX research notes + harvest script; trimmed `cx_samples/` fixtures
 - Phrase calque seeds (en/de/ru); hapax wild sanity + MCP tool smoke
 - VS Code `icon.png` (128×128); Cyrillic→Latin onboarding fixture
+- Soft cognate demote; FP-budget + clean/wild sanity + pack density scripts
+- PyPI Trusted Publishing workflow stub (`workflow_dispatch` only)
 
 ### Changed
+- Length-ratio leftover uses synthetic `length-ratio` token (no source-word FP)
 - LocalAI live smoke quarantined behind `LEXAUDIT_LOCALAI_SMOKE=1`
 - `.gitignore`: dumps / CX / tmp metrics / packaging artifacts stay local
 

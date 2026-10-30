@@ -1,0 +1,32 @@
+# Trusted Publishing stub — owner configures PyPI environment + OIDC.
+# Does not run on push. No long-lived PyPI token in the repo.
+# Refs: https://docs.pypi.org/trusted-publishers/
+
+name: publish-pypi
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type publish-0.3.0 to confirm"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    if: inputs.confirm == 'publish-0.3.0'
+    runs-on: ubuntu-latest
+    environment: pypi
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with:
+          python-version: "3.12"
+      - name: Build
+        run: uv build
+      - name: Publish to PyPI (Trusted Publishing)
+        uses: pypa/gh-action-pypi-publish@release/v1

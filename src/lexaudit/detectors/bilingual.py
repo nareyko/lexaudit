@@ -28,6 +28,124 @@ ANCHOR_LOCALES: tuple[str, ...] = ("en", "de", "ru")
 OTHER_LOCALES: tuple[str, ...] = ("es", "pl", "sv", "uk")
 CYRILLIC_LOCALES: frozenset[str] = frozenset({"ru", "uk"})
 
+# Soft cognates / shared Latin UI nouns: still flag, but demote tier (anti-FP rank).
+# Keep narrow — do not swallow real leftovers like sidebar/toast/onboarding.
+SOFT_COGNATE_DEMOTE: frozenset[str] = frozenset(
+    {
+        "system",
+        "systems",
+        "version",
+        "versions",
+        "normal",
+        "standard",
+        "global",
+        "local",
+        "social",
+        "digital",
+        "mobile",
+        "portal",
+        "service",
+        "services",
+        "product",
+        "products",
+        "model",
+        "models",
+        "client",
+        "server",
+        "format",
+        "formats",
+        "region",
+        "regions",
+        "address",
+        "message",
+        "messages",
+        "number",
+        "numbers",
+        "password",
+        "profile",
+        "profiles",
+        "contact",
+        "contacts",
+        "support",
+        "export",
+        "import",
+        "report",
+        "reports",
+        "filter",
+        "filters",
+        "group",
+        "groups",
+        "role",
+        "roles",
+        "session",
+        "sessions",
+        "event",
+        "events",
+        "action",
+        "actions",
+        "error",
+        "errors",
+        "warning",
+        "warnings",
+        "option",
+        "options",
+        "default",
+        "defaults",
+        "public",
+        "private",
+        "secure",
+        "security",
+        "privacy",
+        "policy",
+        "policies",
+        "license",
+        "licence",
+        "copyright",
+        "index",
+        "total",
+        "video",
+        "audio",
+        "online",
+        "offline",
+        "email",
+        "admin",
+        "user",
+        "users",
+        "file",
+        "files",
+        "page",
+        "type",
+        "types",
+        "mode",
+        "date",
+        "list",
+        "test",
+        "form",
+        "name",
+        "info",
+        "debug",
+        "level",
+        "levels",
+        "limit",
+        "limits",
+        "value",
+        "values",
+        "range",
+        "ranges",
+        "token",
+        "tokens",
+        "cache",
+        "queue",
+        "queues",
+        "sort",
+        "trace",
+        "offset",
+        "custom",
+        "terms",
+        "conditions",
+    }
+)
+
 # Function / glue words — weak leftover signal when a whole English clause is pasted.
 DEFAULT_FUNCTION_STOP: frozenset[str] = frozenset(
     {
@@ -391,6 +509,17 @@ def identical_segment_leftovers(
     return out
 
 
+def demote_soft_cognates(hits: list[ClassifiedWord]) -> list[ClassifiedWord]:
+    """C3: demote likely→weak for shared Latin cognates (ranking only)."""
+    for w in hits:
+        if w.normalized not in SOFT_COGNATE_DEMOTE:
+            continue
+        if w.tier == "likely":
+            w.tier = "weak"
+            w.reason = (w.reason or "bilingual") + "+cognate-soft"
+    return hits
+
+
 def detect_pair_leftovers(
     source_text: str,
     target_text: str,
@@ -421,14 +550,14 @@ def detect_pair_leftovers(
             extra_chrome=extra_chrome,
         )
         hits.extend(
-        identical_segment_leftovers(
-            source_text,
-            target_text,
-            path=path,
-            intentional_loans=intentional_loans,
-            chrome=extra_chrome,
+            identical_segment_leftovers(
+                source_text,
+                target_text,
+                path=path,
+                intentional_loans=intentional_loans,
+                chrome=extra_chrome,
+            )
         )
-    )
     hits.extend(
         length_ratio_leftovers(
             source_text,
@@ -436,7 +565,7 @@ def detect_pair_leftovers(
             path=path,
         )
     )
-    return hits
+    return demote_soft_cognates(hits)
 
 
 def matrix_pairs(*, mode: str = "all") -> list[tuple[str, str]]:
@@ -492,24 +621,18 @@ def length_ratio_leftovers(
     low: float = 0.55,
     high: float = 1.85,
 ) -> list[ClassifiedWord]:
-    """Soft page signal when target length diverges sharply from source."""
+    """Soft page signal when target length diverges sharply from source.
+
+    Uses a synthetic token so the alarm is not mistaken for a real leftover
+    word from the source (which would pollute precision gold).
+    """
     ratio = length_ratio_signal(source_text, target_text)
     if low <= ratio <= high:
         return []
-    # Prefer a Latin token from the longer side as a ranking anchor.
-    longer = target_text if ratio > 1.0 else source_text
-    pick = next(
-        (
-            m.group(0)
-            for m in _LATIN_WORD.finditer(strip_urls_emails_code(longer))
-            if len(m.group(0)) >= 4
-        ),
-        "length",
-    )
     return [
         ClassifiedWord(
-            normalized=pick.casefold(),
-            surface=pick,
+            normalized="length-ratio",
+            surface="(length-ratio)",
             count=1,
             status="foreign",
             samples=[VocabSample(path=path, scope="body")],

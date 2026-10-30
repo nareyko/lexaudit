@@ -38,6 +38,21 @@ def test_pair_paths_and_untranslated(tmp_path: Path) -> None:
     assert any(w.normalized == "denseness" for w in hits)
 
 
+def test_pair_paths_slug_fallback_when_roots_include_locale() -> None:
+    """Same pack root for both sides: pair en/… with ru/… via slug key."""
+    pack = Path(__file__).resolve().parent / "fixtures" / "packs_wild" / "saas-ui-v0"
+    if not (pack / "en").is_dir() or not (pack / "ru").is_dir():
+        return
+    pairs = pair_paths(pack, pack, source_locale="en", target_locale="ru")
+    # Exact rel never matches (en/x vs en/x); slug should still pair wiki-saas.md.
+    assert any(
+        Path(p.source_path).name == Path(p.target_path).name
+        and "/en/" in p.source_path.replace("\\", "/")
+        and "/ru/" in p.target_path.replace("\\", "/")
+        for p in pairs
+    )
+
+
 def test_intentional_loans_not_flagged() -> None:
     src = "Call the API with JSON and OpenAPI examples."
     tgt = "Вызовите API с примерами JSON и OpenAPI."  # noqa: RUF001

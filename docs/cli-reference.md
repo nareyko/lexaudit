@@ -62,6 +62,8 @@ uv run lexaudit audit --locale en
 uv run lexaudit audit --path ./my-article.md --locale ru
 uv run lexaudit audit --config ./lexaudit.config.yaml --locale en,de,es,pl,ru,sv,uk
 uv run lexaudit audit --config ./lexaudit.config.yaml --locale ru --freeze-at 1970-01-01T00:00:00Z
+# Opt-in CI gate (exit 1 on confirmed calque/invented by default):
+uv run lexaudit audit --path . --locale en --check
 ```
 
 Writes under `output_dir/<locale>/`:
@@ -199,18 +201,19 @@ uv run python scripts/bilingual_metrics.py \
 ## `pack list` / `pack install` / `pack verify`
 
 Installable YAML rule packs (**MIT**, same dual-license package as the CLI —
-see [licensing.md](licensing.md)). Release packs live under `packs/`; experimental
-ones under `packs/_lab/` (use `--lab`).
+see [licensing.md](licensing.md)). Release-candidate domain packs for **0.3.0**
+live under `packs/` (e.g. `saas-ui-v0`). Optional lab copies may still exist under
+`packs/_lab/` (`--lab`) for dogfood.
 
 ```bash
 uv run lexaudit pack list
-uv run lexaudit pack list --lab
 uv run lexaudit pack install core-calques-v1 --force
-uv run lexaudit pack install saas-ui-v0 --lab --dest /tmp/lexaudit-packs --force
+uv run lexaudit pack install saas-ui-v0 --dest /tmp/lexaudit-packs --force
 uv run lexaudit pack verify saas-ui-v0 --dest /tmp/lexaudit-packs
+uv run lexaudit pack list --lab   # experimental leftovers only
 ```
 
-Lab packs are for dogfood only until owner promote (`docs/p1-0.3.0-prep.md`).
+Promote / publish status: `docs/p1-INDEX.md` · `docs/p1-0.3.0-prep.md`.
 
 ---
 
@@ -218,5 +221,5 @@ Lab packs are for dogfood only until owner promote (`docs/p1-0.3.0-prep.md`).
 
 ```bash
 uv run lexaudit ping
-# -> lexaudit 0.1.0
+# -> lexaudit 0.3.0
 ```

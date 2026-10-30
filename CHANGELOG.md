@@ -23,9 +23,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Repo hygiene check + owner publish runbook; CI density/bilingual/hygiene gates
 - PyPI Trusted Publishing workflow stub (`workflow_dispatch` only)
 - `docs/p1-INDEX.md` navigation for prep docs
+- Bilingual `pair_paths` slug fallback (locale folder ignored; no self-pairs)
 
 ### Changed
 - Package `__version__` / GitHub Action pin aligned to **0.3.0** (was stale 0.2.0)
+- Docs: CLI ping/packs/`--check`; architecture crosslocale + CI gate wording
 - Length-ratio leftover uses synthetic `length-ratio` token (no source-word FP)
 - Pack density floors cover es/pl/sv/uk (≥12) as well as en/de/ru
 - LocalAI live smoke quarantined behind `LEXAUDIT_LOCALAI_SMOKE=1`

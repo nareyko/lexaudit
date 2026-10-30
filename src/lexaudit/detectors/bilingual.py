@@ -349,6 +349,11 @@ class BilingualPair:
     target_path: str
 
 
+def _rel_has_locale(rel: str, locale: str) -> bool:
+    loc = locale.casefold()
+    return any(part.casefold() == loc for part in Path(rel).parts)
+
+
 def pair_paths(
     source_root: Path,
     target_root: Path,
@@ -356,14 +361,30 @@ def pair_paths(
     source_locale: str,
     target_locale: str,
 ) -> list[BilingualPair]:
-    """Match files with the same relative path under two locale roots."""
+    """Match files under two locale roots (exact rel path, then slug fallback).
+
+    Slug fallback drops locale folder segments (`en`/`ru`/…) so
+    ``pack/en/wiki-saas.md`` pairs with ``pack/ru/wiki-saas.md`` when both
+    roots are the pack directory. Same-path self-pairs are never emitted.
+    """
+    from lexaudit.detectors.crosslocale import path_slug_key
+
     pairs: list[BilingualPair] = []
     if not source_root.is_dir() or not target_root.is_dir():
         return pairs
+    same_tree = source_root.resolve() == target_root.resolve()
+    used_tgt: set[Path] = set()
+    unmatched_src: list[Path] = []
     for src in sorted(source_root.rglob("*.md")):
         rel = src.relative_to(source_root).as_posix()
+        if same_tree and not _rel_has_locale(rel, source_locale):
+            continue
+        if same_tree:
+            # Exact rel would self-pair; defer to slug across locale folders.
+            unmatched_src.append(src)
+            continue
         tgt = target_root / rel
-        if tgt.is_file():
+        if tgt.is_file() and tgt.resolve() != src.resolve():
             pairs.append(
                 BilingualPair(
                     source_locale=source_locale,
@@ -372,6 +393,35 @@ def pair_paths(
                     target_path=str(tgt),
                 )
             )
+            used_tgt.add(tgt.resolve())
+        else:
+            unmatched_src.append(src)
+
+    tgt_by_slug: dict[str, Path] = {}
+    for tgt in sorted(target_root.rglob("*.md")):
+        if tgt.resolve() in used_tgt:
+            continue
+        trel = tgt.relative_to(target_root).as_posix()
+        if same_tree and not _rel_has_locale(trel, target_locale):
+            continue
+        key = path_slug_key(trel)
+        tgt_by_slug.setdefault(key, tgt)
+
+    for src in unmatched_src:
+        srel = src.relative_to(source_root).as_posix()
+        key = path_slug_key(srel)
+        tgt = tgt_by_slug.get(key)
+        if tgt is None or tgt.resolve() in used_tgt or tgt.resolve() == src.resolve():
+            continue
+        pairs.append(
+            BilingualPair(
+                source_locale=source_locale,
+                target_locale=target_locale,
+                source_path=str(src),
+                target_path=str(tgt),
+            )
+        )
+        used_tgt.add(tgt.resolve())
     return pairs
 
 

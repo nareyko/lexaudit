@@ -91,5 +91,6 @@ flowchart LR
 1. No auto-replace in prose sources.
 2. Curated queue over raw counts: editors and agents work from weighted and needle queues, not raw `unique_suspects`.
 3. Calque needles (`orientir`, `denseness`, ...) override dictionary `ok` when `override_ok: true`.
-4. Soft CI and `eval regression` never fail the build on new anomalies.
+4. Soft CI / `eval regression` stay non-blocking; opt-in `audit --check` may fail
+   on confirmed calque/invented when a host enables it.
 5. Host dictionaries stay outside `lexaudit` and are loaded via configuration paths.

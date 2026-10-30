@@ -42,8 +42,8 @@ lexaudit/
     config.py            # YAML to LexauditConfig (enable_bilingual default false)
     core/                # tokenize, classify, rank, pipeline
     detectors/           # allowlist, hunspell, morph, compound, foreign,
-                         # english_leak, calque, bilingual (opt-in)
-    packs.py             # pack list/install/verify (packs/ + packs/_lab --lab)
+                         # english_leak, calque, bilingual + crosslocale (opt-in)
+    packs.py             # pack list/install/verify (packs/ + optional packs/_lab)
     dictpacks/loader.py  # names, abbreviations, known compound parts
     sources/collect.py   # Markdown, academy JSON, packs, HTML/PO/XLIFF, …
     report/              # write, diff, expand_needle, CI/SARIF
@@ -90,9 +90,14 @@ flowchart TB
 | `bilingual_pairs` | List of `{source_locale, target_locale, source_root, target_root}` |
 | `bilingual_extra_loans_path` | One-token-per-line extras (e.g. DE UI nouns). Not package DEFAULT |
 | `bilingual_extra_loans_locales` | Locales that may merge those extras (use `[de]` for DE UI loans) |
+| `bilingual_chrome_path` | Optional CMS/nav chrome extras (merged with built-in stop) |
+| `enable_crosslocale` | Opt-in reference-locale tier boost (default **false**) |
+| `crosslocale_reference_locale` | Usually `en` |
+| `crosslocale_mode` | `ref_present` (default) · `ref_ok` · `no_pair` |
 
 DE UI loans (`dashboard`, `toast`, …): see [p1-de-loan-policy.md](p1-de-loan-policy.md)
-and `examples/dicts/intentional-extra-de.txt`.
+and `examples/dicts/intentional-extra-de.txt`. Crosslocale recipe:
+`examples/lexaudit.config.crosslocale.yaml`.
 
 ## Reproducible pictures
 
@@ -107,4 +112,5 @@ The same texts and settings give identical CSV and Markdown. In JSON, `--freeze-
 - Not a grammar checker like LanguageTool
 - Not a checker for translation keys or placeholders
 - Not an automatic translator or rewriter
-- Not a gate that fails your build when it finds suspects (it is a soft report)
+- Ranking is soft by default; `audit --check` / `--fail-on` can fail CI on
+  confirmed calques or invented words when you opt in

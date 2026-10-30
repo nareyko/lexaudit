@@ -30,6 +30,10 @@
 2. MCP registry + VS Marketplace  
 3. Tag `v0.3.0` + FairHelm submodule bump  
 
+Local agent prep for 0.3.0 is otherwise **complete** — remaining thin spots need
+accounts (see runbook). Doc drift / pairing polish may still appear; re-scan with
+`scripts/check_repo_hygiene.py` before publish.
+
 ## Do not commit
 
 `dumps/`, `cx-corpora.*`, `*.tmx*`, `tmp/**`, `dist/**`, `*.vsix`, `*.whl`,

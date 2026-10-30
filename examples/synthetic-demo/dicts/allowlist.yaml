@@ -1,0 +1,8 @@
+version: 2
+section_markers:
+  - Overview
+  - Summary
+  - Checklist
+locale_loans:
+  - allowlist
+  - workflow

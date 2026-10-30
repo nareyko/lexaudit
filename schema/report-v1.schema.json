@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/nareyko/lexaudit/schema/report-v1.schema.json",
+  "title": "lexaudit report v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "lexaudit_version",
+    "config_hash",
+    "locales"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "type": "string", "const": "1" },
+    "generated_at": { "type": "string", "minLength": 1 },
+    "lexaudit_version": { "type": "string", "minLength": 1 },
+    "config_hash": { "type": "string", "minLength": 1 },
+    "detector_stats": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "locales": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/localeReport" }
+    }
+  },
+  "$defs": {
+    "localeReport": {
+      "type": "object",
+      "required": ["locale", "stats", "words", "pages"],
+      "additionalProperties": false,
+      "properties": {
+        "locale": { "type": "string", "minLength": 2 },
+        "stats": {
+          "type": "object",
+          "required": ["ok", "proper", "acronym", "suspect", "all"],
+          "additionalProperties": { "type": "integer", "minimum": 0 },
+          "properties": {
+            "ok": { "type": "integer", "minimum": 0 },
+            "proper": { "type": "integer", "minimum": 0 },
+            "acronym": { "type": "integer", "minimum": 0 },
+            "foreign": { "type": "integer", "minimum": 0 },
+            "calque": { "type": "integer", "minimum": 0 },
+            "invented": { "type": "integer", "minimum": 0 },
+            "morph-miss": { "type": "integer", "minimum": 0 },
+            "template": { "type": "integer", "minimum": 0 },
+            "unsure": { "type": "integer", "minimum": 0 },
+            "suspect": { "type": "integer", "minimum": 0 },
+            "all": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "words": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/word" }
+        },
+        "pages": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/page" }
+        }
+      }
+    },
+    "word": {
+      "type": "object",
+      "required": [
+        "word",
+        "norm",
+        "status",
+        "tier",
+        "reason",
+        "detectors",
+        "count",
+        "samples",
+        "occurrences"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "word": { "type": "string" },
+        "norm": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ok",
+            "proper",
+            "acronym",
+            "foreign",
+            "calque",
+            "invented",
+            "morph-miss",
+            "template",
+            "unsure",
+            "suspect"
+          ]
+        },
+        "tier": {
+          "type": ["string", "null"],
+          "enum": ["confirmed", "likely", "weak", null]
+        },
+        "reason": { "type": "string" },
+        "detectors": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "count": { "type": "integer", "minimum": 0 },
+        "samples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["path", "scope"],
+            "additionalProperties": false,
+            "properties": {
+              "path": { "type": "string" },
+              "scope": { "type": "string" },
+              "excerpt": { "type": "string" }
+            }
+          }
+        },
+        "occurrences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["path", "scope"],
+            "additionalProperties": false,
+            "properties": {
+              "path": { "type": "string" },
+              "scope": { "type": "string" },
+              "line": { "type": ["integer", "null"] }
+            }
+          }
+        }
+      }
+    },
+    "page": {
+      "type": "object",
+      "required": ["path", "score", "unique_suspects", "top_words"],
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string" },
+        "score": { "type": "number" },
+        "unique_suspects": { "type": "integer", "minimum": 0 },
+        "top_words": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

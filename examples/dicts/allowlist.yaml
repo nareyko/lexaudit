@@ -1,0 +1,25 @@
+# Section markers and technical compound terms for documentation audits.
+version: 2
+
+section_markers:
+  - Overview
+  - Contents
+  - Install
+  - Architecture
+  - Pipeline
+
+locale_loans:
+  - allowlist
+  - allowlists
+  - cyclomatic
+  - labeling
+  - monorepo
+  - prioritizer
+  - runbook
+  - spellchecker
+  - spellcheckers
+  - submodule
+  - submodules
+  - codebase
+  - workflow
+  - workflows

@@ -1,0 +1,32 @@
+# Proper names and software tools used in lexaudit documentation.
+version: 1
+
+project_and_authors:
+  - lexaudit
+  - FairHelm
+  - Vadim
+  - Nareyko
+  - Vadim Nareyko
+
+software_and_libraries:
+  - GitHub
+  - Git
+  - Python
+  - Hunspell
+  - LocalAI
+  - Ollama
+  - OpenAI
+  - LanguageTool
+  - pymorphy3
+  - spaCy
+  - PyYAML
+  - Ruff
+  - mypy
+  - pytest
+  - mutmut
+  - Radon
+  - Hatchling
+  - Click
+  - Ubuntu
+  - Qwen
+  - Alibaba

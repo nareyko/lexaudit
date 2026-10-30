@@ -1,0 +1,45 @@
+version: 1
+rules:
+  # Editorial calque & false-friend needles (Ukrainian)
+  - pattern: "орієнтирн*"
+    locale: uk
+    match: glob
+    reason: "loan-calque-orientir"
+    hint: "орієнтовний показник / практичне правило"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+  - pattern: "orientir*"
+    locale: uk
+    match: glob
+    reason: "loan-calque-orientir"
+    hint: "орієнтовна цифра / правило"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+  - pattern: "denseness"
+    locale: uk
+    reason: "template-calque-denseness"
+    hint: "нотатки / щільність даних - не denseness"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+    override_ok: true
+  - pattern: "передпокупочн*"
+    locale: uk
+    match: glob
+    reason: "loan-calque-prepurchase"
+    hint: "огляд перед купівлею / сюрвей перед купівлею"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+  - pattern: "чекліст*"
+    locale: uk
+    match: glob
+    reason: "loan-calque-checklist"
+    hint: "контрольний список / перелік перевірки"
+    severity: likely
+    source: "curated-calque-pack-v1"
+  - pattern: "блувотер*"
+    locale: uk
+    match: glob
+    reason: "loan-calque-bluewater"
+    hint: "океанський перехід / далеке плавання"
+    severity: confirmed
+    source: "curated-calque-pack-v1"

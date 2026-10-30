@@ -1,0 +1,61 @@
+{
+  "schema_version": "1",
+  "generated_at": "2026-10-29T00:00:00Z",
+  "lexaudit_version": "0.1.0",
+  "config_hash": "abc123",
+  "locales": [
+    {
+      "locale": "en",
+      "stats": {
+        "ok": 1,
+        "proper": 1,
+        "acronym": 0,
+        "suspect": 1,
+        "all": 3
+      },
+      "words": [
+        {
+          "word": "boat",
+          "norm": "boat",
+          "status": "ok",
+          "tier": null,
+          "reason": "hunspell",
+          "detectors": ["hunspell"],
+          "count": 2,
+          "samples": [{ "path": "a.md", "scope": "body" }],
+          "occurrences": [{ "path": "a.md", "scope": "body", "line": 1 }]
+        },
+        {
+          "word": "AcmeCorp",
+          "norm": "acmecorp",
+          "status": "proper",
+          "tier": null,
+          "reason": "proper-names",
+          "detectors": ["proper"],
+          "count": 1,
+          "samples": [{ "path": "a.md", "scope": "title" }],
+          "occurrences": [{ "path": "a.md", "scope": "title", "line": null }]
+        },
+        {
+          "word": "xxyzzyq",
+          "norm": "xxyzzyq",
+          "status": "suspect",
+          "tier": "likely",
+          "reason": "unknown",
+          "detectors": ["hunspell"],
+          "count": 1,
+          "samples": [{ "path": "b.md", "scope": "body" }],
+          "occurrences": [{ "path": "b.md", "scope": "body", "line": 3 }]
+        }
+      ],
+      "pages": [
+        {
+          "path": "b.md",
+          "score": 1.0,
+          "unique_suspects": 1,
+          "top_words": ["xxyzzyq"]
+        }
+      ]
+    }
+  ]
+}

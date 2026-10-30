@@ -1,0 +1,44 @@
+version: 1
+rules:
+  # Editorial calque & false-friend needles (Swedish)
+  - pattern: "orientir*"
+    locale: sv
+    match: glob
+    reason: "loan-calque-orientir"
+    hint: "riktvarde / tumregel - inte orientir"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+  - pattern: "*-orientir"
+    locale: sv
+    match: glob
+    reason: "loan-calque-orientir"
+    hint: "riktvarde / tumregel"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+  - pattern: "denseness"
+    locale: sv
+    reason: "template-calque-denseness"
+    hint: "anteckningar / underlag - inte denseness"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+    override_ok: true
+  - pattern: "surveyness"
+    locale: sv
+    reason: "invented-calque"
+    hint: "besiktning fore kop"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+  - pattern: "bluewaterig*"
+    locale: sv
+    match: glob
+    reason: "invented-calque"
+    hint: "oceangaende / langfards-"
+    severity: likely
+    source: "curated-calque-pack-v1"
+  - pattern: "charterbarhet*"
+    locale: sv
+    match: glob
+    reason: "invented-calque"
+    hint: "lamplighet for charter"
+    severity: likely
+    source: "curated-calque-pack-v1"

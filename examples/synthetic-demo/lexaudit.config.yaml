@@ -1,0 +1,61 @@
+# Stratified 42-page synthetic benchmark configuration across all 7 European locales.
+# 6 pages per locale (3 clean technical pages + 3 defective pages: known calques,
+# dictionary false friends, and unseen open-set neologisms).
+# Run from the repository root:
+#   uv run lexaudit audit --config examples/synthetic-demo/lexaudit.config.yaml
+
+repo_root: .
+output_dir: ../../tmp/synthetic-demo-out
+locales: [en, de, es, pl, ru, sv, uk]
+sources: [files]
+min_length: 2
+
+proper_names_path: ./dicts/proper-names.yaml
+acronyms_path: ./dicts/acronyms.yaml
+allowlist_path: ./dicts/allowlist.yaml
+calque_rules_dir: ../../rules/calques
+
+enable_morph: true
+enable_compound: true
+enable_foreign: true
+enable_calque: true
+enable_crosslocale: false
+enable_llm: false
+rank_mode: weighted
+
+needles:
+  - orientir
+  - denseness
+  - surveyness
+  - checklista
+  - przedzakupow
+  - предпокуп
+  - блувотер
+  - чеклист
+  - листинг
+  - bluewaterig
+  - передпокупочн
+  - чекліст
+
+gold_slugs:
+  - en-04-defect-known-calques
+  - en-05-defect-false-friend
+  - en-06-defect-unseen-neologism
+  - de-04-defect-known-calques
+  - de-05-defect-english-leak
+  - de-06-defect-unseen-neologism
+  - es-04-defect-known-calques
+  - es-05-defect-false-friend
+  - es-06-defect-unseen-neologism
+  - pl-04-defect-known-calques
+  - pl-05-defect-false-friend
+  - pl-06-defect-unseen-neologism
+  - ru-04-defect-known-calques
+  - ru-05-defect-false-friend
+  - ru-06-defect-unseen-neologism
+  - sv-04-defect-known-calques
+  - sv-05-defect-false-friend
+  - sv-06-defect-unseen-neologism
+  - uk-04-defect-known-calques
+  - uk-05-defect-false-friend
+  - uk-06-defect-unseen-neologism

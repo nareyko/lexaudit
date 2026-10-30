@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/nareyko/lexaudit/schema/gold-v1.schema.json",
+  "title": "lexaudit gold label record v1",
+  "type": "object",
+  "required": [
+    "id",
+    "locale",
+    "word",
+    "context",
+    "path",
+    "label",
+    "annotator"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "locale": { "type": "string", "minLength": 2 },
+    "word": { "type": "string", "minLength": 1 },
+    "context": { "type": "string" },
+    "path": { "type": "string" },
+    "label": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "proper",
+        "acronym",
+        "foreign",
+        "calque",
+        "invented",
+        "morph-miss",
+        "template",
+        "unsure",
+        "suspect"
+      ]
+    },
+    "annotator": { "type": "string", "minLength": 1 },
+    "note": { "type": "string" },
+    "tier": {
+      "type": ["string", "null"],
+      "enum": ["confirmed", "likely", "weak", null]
+    },
+    "split": {
+      "type": "string",
+      "enum": ["dev", "holdout", "sample"]
+    }
+  }
+}

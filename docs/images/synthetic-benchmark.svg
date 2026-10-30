@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="lexaudit 7-locale scientific ablation benchmark">
+  <rect width="1280" height="720" fill="#f7f5f0"/>
+  <rect x="40" y="28" width="1200" height="84" rx="12" fill="#1b2a4a"/>
+  <text x="72" y="66" font-family="DejaVu Sans,sans-serif" font-size="25" font-weight="700" fill="#ffffff">Scientific Ablation Study: 42 Stratified Pages Across 7 European Languages</text>
+  <text x="72" y="94" font-family="DejaVu Sans,sans-serif" font-size="15" fill="#cfe8e8">EN, DE, ES, PL, RU, SV, UK (6 pages/language: 3 clean incl. unseen specialist jargon vs 3 defective incl. unseen neologisms)</text>
+
+  <!-- Column A -->
+  <rect x="40" y="138" width="376" height="466" rx="12" fill="#ffffff" stroke="#c5cdd8" stroke-width="2.5"/>
+  <rect x="40" y="138" width="376" height="52" rx="12" fill="#8b3a4a"/>
+  <text x="228" y="170" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#ffffff">A. Naive Spellchecker (Raw)</text>
+
+  <text x="64" y="220" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#4a5568">Raw Hunspell count only (no allowlists,</text>
+  <text x="64" y="240" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#4a5568">no morphology, no compound splitting)</text>
+
+  <rect x="64" y="264" width="328" height="146" rx="8" fill="#fdf2f2" stroke="#e5b4b4"/>
+  <text x="84" y="296" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#8b3a4a">MAP (Ranking Quality): 0.389</text>
+  <text x="84" y="326" font-family="DejaVu Sans,sans-serif" font-size="15" fill="#1b2a4a">- Top-2 Precision (P@2): 0.0%</text>
+  <text x="84" y="354" font-family="DejaVu Sans,sans-serif" font-size="15" fill="#1b2a4a">- Top-3 Precision (P@3): 23.8%</text>
+  <text x="84" y="382" font-family="DejaVu Sans,sans-serif" font-size="15" fill="#1b2a4a">- Calque Recall: 0.0% (0 / 33)</text>
+
+  <text x="64" y="444" font-family="DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#8b3a4a">Why it fails editors:</text>
+  <text x="64" y="470" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Flags every brand (Garmin, Victron) and</text>
+  <text x="64" y="492" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">  acronym (EPIRB, SOLAS) as an error.</text>
+  <text x="64" y="518" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Clean technical articles rank #1 and #2</text>
+  <text x="64" y="540" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">  in all 7 European languages.</text>
+  <text x="64" y="566" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Completely misses dictionary false friends.</text>
+
+  <!-- Column B -->
+  <rect x="452" y="138" width="376" height="466" rx="12" fill="#ffffff" stroke="#3a5a8c" stroke-width="2.5"/>
+  <rect x="452" y="138" width="376" height="52" rx="12" fill="#3a5a8c"/>
+  <text x="640" y="170" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#ffffff">B. Dicts + Morph/Compounds</text>
+
+  <text x="476" y="220" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#4a5568">Clears brands, DE/SV compounds &amp; RU/UK</text>
+  <text x="476" y="240" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#4a5568">cases, but ranks by unweighted word count</text>
+
+  <rect x="476" y="264" width="328" height="146" rx="8" fill="#f0f4f8" stroke="#c5cdd8"/>
+  <text x="496" y="296" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#3a5a8c">MAP (Ranking Quality): 0.421</text>
+  <text x="496" y="326" font-family="DejaVu Sans,sans-serif" font-size="15" fill="#1b2a4a">- Top-2 Precision (P@2): 7.1%</text>
+  <text x="496" y="354" font-family="DejaVu Sans,sans-serif" font-size="15" fill="#1b2a4a">- Top-3 Precision (P@3): 23.8%</text>
+  <text x="496" y="382" font-family="DejaVu Sans,sans-serif" font-size="15" fill="#1b2a4a">- Calque Recall: 0.0% (0 / 33)</text>
+
+  <text x="476" y="444" font-family="DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#3a5a8c">Why raw counts are still not enough:</text>
+  <text x="476" y="470" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Eliminates ~50% of false alarms on brands</text>
+  <text x="476" y="492" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">  and compound nouns.</text>
+  <text x="476" y="518" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- However, 4 rare catalogue part codes on a</text>
+  <text x="476" y="540" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">  clean page still outrank 1-2 real calques.</text>
+  <text x="476" y="566" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Still blind to false friends ("denseness").</text>
+
+  <!-- Column C -->
+  <rect x="864" y="138" width="376" height="466" rx="12" fill="#ffffff" stroke="#0d7377" stroke-width="3"/>
+  <rect x="864" y="138" width="376" height="52" rx="12" fill="#0d7377"/>
+  <text x="1052" y="170" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#ffffff">C. Full lexaudit (Weighted CPU)</text>
+
+  <text x="888" y="220" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#4a5568">Calque rules + override_ok + context</text>
+  <text x="888" y="240" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#4a5568">weights + singleton noise floor (0.1)</text>
+
+  <rect x="888" y="264" width="328" height="156" rx="8" fill="#eaf6f6" stroke="#0d7377"/>
+  <text x="908" y="294" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#0d7377">MAP: 0.838 (+115% vs Naive)</text>
+  <text x="908" y="322" font-family="DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#0d7377">- Top-2 Precision (P@2): 100.0%</text>
+  <text x="908" y="348" font-family="DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#1b2a4a">- Top-3 Precision (P@3): 66.7%</text>
+  <text x="908" y="374" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#1b2a4a">- Known-Rule Recall: 100.0% (26/26)</text>
+  <text x="908" y="398" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#1b2a4a">- Open-Set Recall: 77.9% (26/33)</text>
+
+  <text x="888" y="448" font-family="DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#0d7377">Honest scientific boundary (P@3 = 66.7%):</text>
+  <text x="888" y="474" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Known calques &amp; false friends rank #1 &amp; #2.</text>
+  <text x="888" y="500" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Repeated unseen specialist jargon (score ~1.6)</text>
+  <text x="888" y="522" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">  outranks a single unseen neologism (score 0.1)</text>
+  <text x="888" y="544" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">  until added to dicts or triaged via LLM label.</text>
+
+  <!-- Footer -->
+  <rect x="40" y="626" width="1200" height="60" rx="10" fill="#ffffff" stroke="#c5cdd8" stroke-width="1.5"/>
+  <text x="640" y="662" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#1b2a4a">Total CPU Runtime (42 pages, 7 languages): 0.66 seconds (0 GPU)  |  Reproduce: uv run pytest tests/test_synthetic_benchmark.py</text>
+</svg>

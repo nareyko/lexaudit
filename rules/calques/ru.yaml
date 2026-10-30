@@ -1,0 +1,215 @@
+version: 1
+rules:
+  - pattern: "diy-осмотр"
+    locale: ru
+    reason: "calque-diy-survey"
+    hint: "смешение DIY + осмотр; лучше «самостоятельный осмотр» или «осмотр своими силами»"
+    severity: likely
+    source: "editorial-calque-bank"
+  # Editorial calque & false-friend needles (2026-10-29)
+  # Note: «скеге» in «на скеге» is prepositional case of скег - NOT a calque; do not rule-match.
+  - pattern: "предпокупочн*"
+    locale: ru
+    match: glob
+    reason: "loan-calque-prepurchase"
+    hint: "осмотр перед покупкой / сюрвей перед покупкой"
+    severity: confirmed
+    source: "editorial-calque-bank"
+  - pattern: "чеклист*"
+    locale: ru
+    match: glob
+    reason: "loan-calque-checklist"
+    hint: "контрольный список / список"
+    severity: likely
+    source: "editorial-calque-bank"
+  - pattern: "блувотер*"
+    locale: ru
+    match: glob
+    reason: "loan-calque-bluewater"
+    hint: "океанский переход / океанские переходы"
+    severity: confirmed
+    source: "editorial-calque-bank"
+  - pattern: "denseness"
+    locale: ru
+    reason: "template-calque-denseness"
+    hint: "цифры / материалы / чтение SERP - не denseness"
+    severity: confirmed
+    source: "editorial-calque-bank"
+    override_ok: true
+  - pattern: "чеклист"
+    locale: ru
+    reason: "loan-calque-checklist"
+    hint: "часто лучше «контрольный список» / «чек-лист» с дефисом по редакционной норме"
+    severity: likely
+    source: "editorial-loan-watch"
+  - pattern: "фидбек"
+    locale: ru
+    reason: "loan-calque-feedback"
+    hint: "отзыв / обратная связь"
+    severity: weak
+    source: "editorial-loan-watch"
+  - pattern: "апгрейд"
+    locale: ru
+    reason: "loan-calque-upgrade"
+    hint: "модернизация / обновление"
+    severity: weak
+    source: "editorial-loan-watch"
+  - pattern: "сетап"
+    locale: ru
+    reason: "loan-calque-setup"
+    hint: "компоновка / оснащение"
+    severity: weak
+    source: "editorial-loan-watch"
+  - pattern: "рефит"
+    locale: ru
+    reason: "loan-calque-refit"
+    hint: "переоборудование (если не осознанный морской термин)"
+    severity: weak
+    source: "maritime-loan-watch"
+  - pattern: "листинге"
+    locale: ru
+    reason: "loan-calque-listing"
+    hint: "в объявлении"
+    severity: likely
+    source: "curated-calque-pack-v1"
+    override_ok: true
+  - pattern: "листинга"
+    locale: ru
+    reason: "loan-calque-listing"
+    hint: "объявления"
+    severity: likely
+    source: "curated-calque-pack-v1"
+    override_ok: true
+  - pattern: "листинг"
+    locale: ru
+    reason: "loan-calque-listing"
+    hint: "объявление"
+    severity: likely
+    source: "curated-calque-pack-v1"
+    override_ok: true
+  - pattern: "оффшорный"
+    locale: ru
+    reason: "loan-calque-offshore"
+    hint: "океанский / для дальних переходов (если не термин класса)"
+    severity: weak
+    source: "curated-calque-pack-v1"
+  - pattern: "оффшорная"
+    locale: ru
+    reason: "loan-calque-offshore"
+    hint: "океанская"
+    severity: weak
+    source: "curated-calque-pack-v1"
+  - pattern: "иншорный"
+    locale: ru
+    reason: "loan-calque-inshore"
+    hint: "прибрежный"
+    severity: likely
+    source: "curated-calque-pack-v1"
+  - pattern: "хендлинг"
+    locale: ru
+    reason: "loan-calque-handling"
+    hint: "управляемость"
+    severity: likely
+    source: "curated-calque-pack-v1"
+  - pattern: "перформанс"
+    locale: ru
+    reason: "loan-calque-performance"
+    hint: "ходкость / характеристики"
+    severity: likely
+    source: "curated-calque-pack-v1"
+  - pattern: "лайаут"
+    locale: ru
+    reason: "loan-calque-layout"
+    hint: "планировка"
+    severity: likely
+    source: "curated-calque-pack-v1"
+  - pattern: "сёрвейор"
+    locale: ru
+    reason: "loan-calque-surveyor"
+    hint: "сюрвейер (принятый термин) vs выдуманная форма"
+    severity: weak
+    source: "curated-calque-pack-v1"
+  - pattern: "сёрвей"
+    locale: ru
+    reason: "loan-calque-survey"
+    hint: "сюрвей (если не в allowlist)"
+    severity: weak
+    source: "curated-calque-pack-v1"
+  - pattern: "байер"
+    locale: ru
+    reason: "loan-calque-buyer"
+    hint: "покупатель"
+    severity: likely
+    source: "curated-calque-pack-v1"
+  - pattern: "селлер"
+    locale: ru
+    reason: "loan-calque-seller"
+    hint: "продавец"
+    severity: likely
+    source: "curated-calque-pack-v1"
+  - pattern: "брокерэдж"
+    locale: ru
+    reason: "loan-calque-brokerage"
+    hint: "брокерская комиссия / брокеридж"
+    severity: likely
+    source: "curated-calque-pack-v1"
+  - pattern: "мейк"
+    locale: ru
+    reason: "loan-calque-make"
+    hint: "марка / производитель"
+    severity: likely
+    source: "curated-calque-pack-v1"
+  - pattern: "моделйир"
+    locale: ru
+    reason: "invented-calque"
+    hint: "модель год"
+    severity: confirmed
+    source: "synthetic-test"
+  - pattern: "драфт"
+    locale: ru
+    reason: "loan-calque-draft"
+    hint: "осадка"
+    severity: likely
+    source: "curated-calque-pack-v1"
+  - pattern: "бим"
+    locale: ru
+    reason: "loan-calque-beam"
+    hint: "ширина"
+    severity: weak
+    source: "curated-calque-pack-v1"
+  - pattern: "хэдрум"
+    locale: ru
+    reason: "loan-calque-headroom"
+    hint: "высота в каюте"
+    severity: likely
+    source: "curated-calque-pack-v1"
+  - pattern: "койл"
+    locale: ru
+    reason: "loan-calque-coil"
+    hint: "бухта / кольцо троса"
+    severity: weak
+    source: "curated-calque-pack-v1"
+  - pattern: "тёрн"
+    locale: ru
+    reason: "loan-calque-turn"
+    hint: "оборот / галс"
+    severity: weak
+    source: "curated-calque-pack-v1"
+  - pattern: "скипперство"
+    locale: ru
+    reason: "loan-calque-skippering"
+    hint: "работа шкипером"
+    severity: likely
+    source: "curated-calque-pack-v1"
+  - pattern: "чартерныйй"
+    locale: ru
+    reason: "morph-calque-typo"
+    hint: "чартерный"
+    severity: confirmed
+    source: "synthetic-test"
+  - pattern: "препуркчес"
+    locale: ru
+    reason: "loan-calque-prepurchase"
+    hint: "предпродажный"
+    severity: confirmed
+    source: "curated-calque-pack-v1"

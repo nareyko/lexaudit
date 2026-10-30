@@ -1,0 +1,10 @@
+{
+  "translations": {
+    "en": {
+      "title": "Boat survey overview",
+      "excerpt": "A solid boat hull.",
+      "metaDescription": "Survey guide",
+      "bodyMarkdown": "The boat has a sound hull and deck."
+    }
+  }
+}

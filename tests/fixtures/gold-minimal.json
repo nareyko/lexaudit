@@ -1,0 +1,12 @@
+{
+  "id": "en-0001",
+  "locale": "en",
+  "word": "xxyzzyq",
+  "context": "The xxyzzyq failed on survey.",
+  "path": "b.md",
+  "label": "invented",
+  "annotator": "majority",
+  "note": "all three models agreed",
+  "tier": "confirmed",
+  "split": "dev"
+}

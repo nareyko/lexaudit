@@ -1,0 +1,55 @@
+# Technical acronyms and initialisms for documentation audits.
+version: 1
+
+items:
+  - AGPL
+  - API
+  - ASCII
+  - CC
+  - CI
+  - CLI
+  - CRAP
+  - CPU
+  - CSV
+  - CSVs
+  - DE
+  - EN
+  - ES
+  - F1
+  - FAQ
+  - FN
+  - FP
+  - GB
+  - GPU
+  - H1
+  - HTML
+  - HTTP
+  - ICU
+  - ID
+  - IDs
+  - JSON
+  - JSONL
+  - LLM
+  - LLMs
+  - MB
+  - MD
+  - NLP
+  - OSS
+  - PL
+  - PR
+  - RU
+  - SHA
+  - SSOT
+  - SV
+  - SVG
+  - TN
+  - TP
+  - TS
+  - TSV
+  - UI
+  - UK
+  - URL
+  - URLs
+  - UTF
+  - XML
+  - YAML

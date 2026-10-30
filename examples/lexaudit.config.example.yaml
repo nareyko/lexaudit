@@ -1,0 +1,27 @@
+# Standard configuration for auditing Markdown documentation (e.g. lexaudit itself).
+# Run from the repository root:
+#   uv run lexaudit audit --config examples/lexaudit.config.example.yaml --locale en
+
+repo_root: ..
+output_dir: ../tmp/lexaudit
+locales: [en]
+sources: [files]
+files_paths:
+  - ../README.md
+  - ../CONTRIBUTING.md
+  - ../SECURITY.md
+  - ../docs
+min_length: 2
+
+proper_names_path: ./dicts/proper-names.yaml
+acronyms_path: ./dicts/acronyms.yaml
+allowlist_path: ./dicts/allowlist.yaml
+calque_rules_dir: ../rules/calques
+
+enable_morph: true
+enable_compound: true
+enable_foreign: true
+enable_calque: true
+enable_crosslocale: false
+enable_llm: false
+rank_mode: weighted

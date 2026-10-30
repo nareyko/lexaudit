@@ -1,0 +1,331 @@
+{
+  "config_hash": "9ca51d8f5391609f",
+  "detector_stats": {
+    "hunspell": 10,
+    "template": 1
+  },
+  "generated_at": "1970-01-01T00:00:00Z",
+  "lexaudit_version": "0.1.0",
+  "locales": [
+    {
+      "locale": "en",
+      "pages": [],
+      "stats": {
+        "acronym": 0,
+        "all": 11,
+        "calque": 0,
+        "foreign": 0,
+        "invented": 0,
+        "morph-miss": 0,
+        "ok": 10,
+        "proper": 0,
+        "suspect": 0,
+        "template": 1,
+        "unsure": 0
+      },
+      "words": [
+        {
+          "count": 3,
+          "detectors": [
+            "hunspell"
+          ],
+          "norm": "boat",
+          "occurrences": [
+            {
+              "line": null,
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "bodyMarkdown"
+            },
+            {
+              "line": null,
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "excerpt"
+            },
+            {
+              "line": null,
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "title"
+            }
+          ],
+          "reason": "hunspell",
+          "samples": [
+            {
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "bodyMarkdown"
+            },
+            {
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "excerpt"
+            },
+            {
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "title"
+            }
+          ],
+          "status": "ok",
+          "tier": null,
+          "word": "boat"
+        },
+        {
+          "count": 2,
+          "detectors": [
+            "hunspell"
+          ],
+          "norm": "hull",
+          "occurrences": [
+            {
+              "line": null,
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "bodyMarkdown"
+            },
+            {
+              "line": null,
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "excerpt"
+            }
+          ],
+          "reason": "hunspell",
+          "samples": [
+            {
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "bodyMarkdown"
+            },
+            {
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "excerpt"
+            }
+          ],
+          "status": "ok",
+          "tier": null,
+          "word": "hull"
+        },
+        {
+          "count": 2,
+          "detectors": [
+            "hunspell"
+          ],
+          "norm": "survey",
+          "occurrences": [
+            {
+              "line": null,
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "metaDescription"
+            },
+            {
+              "line": null,
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "title"
+            }
+          ],
+          "reason": "hunspell",
+          "samples": [
+            {
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "metaDescription"
+            },
+            {
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "title"
+            }
+          ],
+          "status": "ok",
+          "tier": null,
+          "word": "Survey"
+        },
+        {
+          "count": 1,
+          "detectors": [
+            "hunspell"
+          ],
+          "norm": "and",
+          "occurrences": [
+            {
+              "line": null,
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "bodyMarkdown"
+            }
+          ],
+          "reason": "hunspell",
+          "samples": [
+            {
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "bodyMarkdown"
+            }
+          ],
+          "status": "ok",
+          "tier": null,
+          "word": "and"
+        },
+        {
+          "count": 1,
+          "detectors": [
+            "hunspell"
+          ],
+          "norm": "deck",
+          "occurrences": [
+            {
+              "line": null,
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "bodyMarkdown"
+            }
+          ],
+          "reason": "hunspell",
+          "samples": [
+            {
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "bodyMarkdown"
+            }
+          ],
+          "status": "ok",
+          "tier": null,
+          "word": "deck"
+        },
+        {
+          "count": 1,
+          "detectors": [
+            "hunspell"
+          ],
+          "norm": "guide",
+          "occurrences": [
+            {
+              "line": null,
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "metaDescription"
+            }
+          ],
+          "reason": "hunspell",
+          "samples": [
+            {
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "metaDescription"
+            }
+          ],
+          "status": "ok",
+          "tier": null,
+          "word": "guide"
+        },
+        {
+          "count": 1,
+          "detectors": [
+            "hunspell"
+          ],
+          "norm": "has",
+          "occurrences": [
+            {
+              "line": null,
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "bodyMarkdown"
+            }
+          ],
+          "reason": "hunspell",
+          "samples": [
+            {
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "bodyMarkdown"
+            }
+          ],
+          "status": "ok",
+          "tier": null,
+          "word": "has"
+        },
+        {
+          "count": 1,
+          "detectors": [
+            "template"
+          ],
+          "norm": "overview",
+          "occurrences": [
+            {
+              "line": null,
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "title"
+            }
+          ],
+          "reason": "section-marker",
+          "samples": [
+            {
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "title"
+            }
+          ],
+          "status": "template",
+          "tier": null,
+          "word": "overview"
+        },
+        {
+          "count": 1,
+          "detectors": [
+            "hunspell"
+          ],
+          "norm": "solid",
+          "occurrences": [
+            {
+              "line": null,
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "excerpt"
+            }
+          ],
+          "reason": "hunspell",
+          "samples": [
+            {
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "excerpt"
+            }
+          ],
+          "status": "ok",
+          "tier": null,
+          "word": "solid"
+        },
+        {
+          "count": 1,
+          "detectors": [
+            "hunspell"
+          ],
+          "norm": "sound",
+          "occurrences": [
+            {
+              "line": null,
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "bodyMarkdown"
+            }
+          ],
+          "reason": "hunspell",
+          "samples": [
+            {
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "bodyMarkdown"
+            }
+          ],
+          "status": "ok",
+          "tier": null,
+          "word": "sound"
+        },
+        {
+          "count": 1,
+          "detectors": [
+            "hunspell"
+          ],
+          "norm": "the",
+          "occurrences": [
+            {
+              "line": null,
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "bodyMarkdown"
+            }
+          ],
+          "reason": "hunspell",
+          "samples": [
+            {
+              "path": "infra/corpus-ci/pending-academy-articles/demo/mini.json",
+              "scope": "bodyMarkdown"
+            }
+          ],
+          "status": "ok",
+          "tier": null,
+          "word": "The"
+        }
+      ]
+    }
+  ],
+  "schema_version": "1"
+}

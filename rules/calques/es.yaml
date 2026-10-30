@@ -1,0 +1,43 @@
+version: 1
+rules:
+  # Editorial calque & false-friend needles (Spanish)
+  - pattern: "orientir*"
+    locale: es
+    match: glob
+    reason: "loan-calque-orientir"
+    hint: "valor orientativo / regla practica - no orientir"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+  - pattern: "*-orientir"
+    locale: es
+    match: glob
+    reason: "loan-calque-orientir"
+    hint: "valor orientativo / cifra de referencia"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+  - pattern: "denseness"
+    locale: es
+    reason: "template-calque-denseness"
+    hint: "notas / resumen / densidad de datos - no denseness"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+    override_ok: true
+  - pattern: "surveyness"
+    locale: es
+    reason: "invented-calque"
+    hint: "inspeccion precompra / peritaje"
+    severity: confirmed
+    source: "curated-calque-pack-v1"
+  - pattern: "checklista*"
+    locale: es
+    match: glob
+    reason: "loan-calque-checklist"
+    hint: "lista de verificacion / lista de control"
+    severity: likely
+    source: "curated-calque-pack-v1"
+  - pattern: "charterabilidad"
+    locale: es
+    reason: "invented-calque"
+    hint: "aptitud para el charter / alquiler"
+    severity: likely
+    source: "curated-calque-pack-v1"

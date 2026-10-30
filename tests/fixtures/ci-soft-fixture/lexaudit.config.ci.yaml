@@ -1,0 +1,20 @@
+repo_root: ./corpus
+output_dir: ./out
+locales: [en]
+sources: [academy]
+min_length: 2
+
+proper_names_path: ./dicts/proper.yaml
+acronyms_path: ./dicts/acronyms.yaml
+allowlist_path: ./dicts/allow.yaml
+
+enable_morph: false
+enable_compound: false
+enable_foreign: false
+enable_calque: false
+enable_crosslocale: false
+enable_llm: false
+
+rank_mode: weighted
+
+# Ubuntu CI: apt install hunspell hunspell-en-us (system hunspell).

@@ -55,7 +55,13 @@ vsce login nareyko
 vsce publish
 ```
 
-Optional: same `.vsix` → Open VSX.
+Optional Open VSX (same `.vsix`, separate account):
+
+```bash
+npx ovsx publish packages/vscode-lexaudit/vscode-lexaudit-0.3.0.vsix -p "$OVSX_TOKEN"
+```
+
+Do not commit the token or the `.vsix`.
 
 ### 5. Tag + FairHelm submodule bump
 

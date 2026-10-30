@@ -241,3 +241,10 @@ rules:
     hint: "есть / происходит — канцелярит"
     severity: likely
     source: "phrase-calque-bank"
+  - pattern: "принять решение о"
+    locale: ru
+    match: phrase
+    reason: "phrase-calque-make-decision"
+    hint: "решить — calque padding of make a decision about"
+    severity: likely
+    source: "phrase-calque-bank"

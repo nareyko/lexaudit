@@ -8,20 +8,21 @@
 | Pack density | 10/10 × **7 locales** green |
 | Bilingual FP | held-out + anchors P=R=1.0 |
 | Crosslocale | `ref_present` default; **`ref_ok`** mode (C2) available |
-| Phrase rules | en 5 · de 5 · ru 4 |
+| Phrase rules | en 5 · de 5 · ru 5 |
 | Product shell | icon + MCP smoke + publish runbook + PyPI workflow stub |
 | Hygiene | `check_repo_hygiene.py` — dumps/tmp/vsix not tracked |
+| Docs index | `docs/p1-INDEX.md` |
 | Owner path | `docs/p1-owner-publish-runbook-2026-10-30.md` |
+| Version sync | `__version__` ↔ pyproject `0.3.0`; Action pin ≥0.3.0 |
 
 ## Latest local closures
 
 | Item | Landing |
 |---|---|
-| 7-locale density + CI | `check_pack_density.py` + ci.yml |
-| C2 `ref_ok` | hunspell-ok norms in reference locale |
-| DE phrase bank | +2 → 5 phrases |
-| Owner publish runbook | accounts-only steps, no secrets in git |
-| Hygiene gate | CI + script; notes local `dumps/`/`tmp/`/`dist/` |
+| Version drift 0.2.0 leftover | `__init__.py` + `action.yml` + sync test |
+| RU phrase bank | +1 → 5 (parity with en/de) |
+| P1 docs navigation | `p1-INDEX.md` |
+| Stale lab plan wording | points at 0.3.0 RC + index |
 
 ## Still owner-only
 

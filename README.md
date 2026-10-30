@@ -10,7 +10,8 @@ lexaudit reads your files, ignores the harmless things, and gives you a short ra
 
 It only reports. It never changes your texts.
 
-Unknown terms? See the [glossary](docs/glossary.md).
+Unknown terms? See the [glossary](docs/glossary.md).  
+0.3.0 prep / publish path: [docs/p1-INDEX.md](docs/p1-INDEX.md).
 
 - Languages: English (`en`), German (`de`), Spanish (`es`), Polish (`pl`), Russian (`ru`), Swedish (`sv`), Ukrainian (`uk`)
 - Hardware: CPU only

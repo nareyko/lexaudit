@@ -1,6 +1,7 @@
 # P1 lab execution plan (local only · no PyPI / no marketplace)
 
-Status: **complete locally** (2026-10-30). Not part of the 0.2.0 Release assets.
+Status: **complete locally** (2026-10-30). Packs promoted as release-candidate for
+**0.3.0** (not on PyPI until owner publish). See `docs/p1-INDEX.md`.
 Follow-ups done locally: bilingual corpora + DE loan policy + owner-review
 checklist + lab pack expansion (healthcare/legal) + 0.3.0 prep doc.
 `enable_bilingual` still false (`docs/p1-owner-review-bilingual.md`).
@@ -17,7 +18,7 @@ Finish three lab tracks with **measurable** outcomes, then run project gates
 
 1. Corpus hunt notes + cited public sources (SaaS UI, fintech, developer docs).
 2. Seed packs under `packs/_lab/{saas-ui-v0,fintech-v0,developer-docs-v0}/` with
-   20–40 rules for `en`/`de`/`ru` (other locales thin stubs).
+   20–40 rules for `en`; `de`/`ru` often ≥24; `es`/`pl`/`sv`/`uk` ≥12.
 3. Mini stratified fixtures (clean / known defect / open-set) per pack.
 4. `scripts/lab_pack_metrics.py` → known-rule recall + clean FP count.
 5. Report in `docs/p1-domain-packs-research.md` (ship / iterate / drop).

@@ -11,6 +11,8 @@ Owner-executable. Local packaging already done; publish needs accounts.
 | MCP entrypoint | `lexaudit-mcp` via `pip install 'lexaudit[mcp]'` |
 | MCP metadata | `packages/mcp-lexaudit/server.json` |
 | Dogfood doc | `docs/p1-mcp-vscode-dogfood.md` |
+| Publish runbook | `docs/p1-owner-publish-runbook-2026-10-30.md` |
+| Docs index | `docs/p1-INDEX.md` |
 
 ## VS Code Marketplace
 

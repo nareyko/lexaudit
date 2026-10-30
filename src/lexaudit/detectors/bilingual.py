@@ -91,6 +91,35 @@ DEFAULT_FUNCTION_STOP: frozenset[str] = frozenset(
     }
 )
 
+# CMS / site-shell chrome often shared EN↔locale (nav labels, not prose leftovers).
+# Do not put real UI leftovers here (sidebar, toast, dashboard, inbox, …) — those
+# belong in corpus extras / gold. This set is for template shells and brand crumbs.
+DEFAULT_TEMPLATE_CHROME: frozenset[str] = frozenset(
+    {
+        "definition",
+        "related",
+        "limits",
+        "academy",
+        "wiki",
+        "blog",
+        "courses",
+        "services",
+        "yachts",
+        "models",
+        "buying",
+        "cruising",
+        "ownership",
+        "systems",
+        "fairhelm",
+        "judgment",
+        "permalink",
+        "slug",
+        "toc",
+        "breadcrumb",
+        "breadcrumbs",
+    }
+)
+
 # Intentional English tokens often kept in RU/DE technical prose.
 # Keep this set brand/protocol-shaped — do not add generic prose leftovers
 # (pending, sidebar, query, parameters, …) or held-out recall collapses.
@@ -235,6 +264,7 @@ def untranslated_latin_in_target(
     """Flag Latin tokens that appear in both source and target (likely leftover)."""
     allow = intentional_loans if intentional_loans is not None else DEFAULT_INTENTIONAL_LOANS
     stop = function_stop if function_stop is not None else DEFAULT_FUNCTION_STOP
+    chrome = DEFAULT_TEMPLATE_CHROME
     src = {m.group(0).casefold() for m in _LATIN_WORD.finditer(source_text)}
     out: list[ClassifiedWord] = []
     seen: set[str] = set()
@@ -246,7 +276,7 @@ def untranslated_latin_in_target(
         # Kebab heading/anchor leftovers (why-you-need-…, path-parameters-with-types)
         if key.count("-") >= 2:
             continue
-        if key not in src or key in seen or key in allow or key in stop:
+        if key not in src or key in seen or key in allow or key in stop or key in chrome:
             continue
         seen.add(key)
         out.append(

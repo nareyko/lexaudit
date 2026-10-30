@@ -6,6 +6,7 @@ from pathlib import Path
 from lexaudit.detectors.bilingual import (
     DEFAULT_FUNCTION_STOP,
     DEFAULT_INTENTIONAL_LOANS,
+    DEFAULT_TEMPLATE_CHROME,
     detect_pair_leftovers,
     length_ratio_signal,
     matrix_pairs,
@@ -90,6 +91,26 @@ def test_kebab_anchor_slugs_skipped() -> None:
     tgt = "См. why-you-need-kubernetes-and-what-can-it-do в обзоре.\n"
     hits = untranslated_latin_in_target(src, tgt, path="ru/x.md")
     assert hits == []
+
+
+def test_template_chrome_skipped_but_prose_leftover_kept() -> None:
+    assert "definition" in DEFAULT_TEMPLATE_CHROME
+    assert "fairhelm" in DEFAULT_TEMPLATE_CHROME
+    assert "sidebar" not in DEFAULT_TEMPLATE_CHROME
+    src = (
+        "FairHelm academy wiki definition related limits services courses "
+        "yachts and a denseness leftover sidebar note.\n"
+    )
+    tgt = (
+        "FairHelm academy wiki definition related limits services courses "
+        "yachts и leftover denseness sidebar.\n"
+    )
+    hits = {w.normalized for w in untranslated_latin_in_target(src, tgt, path="ru/x.md")}
+    assert "definition" not in hits
+    assert "fairhelm" not in hits
+    assert "academy" not in hits
+    assert "denseness" in hits
+    assert "sidebar" in hits
 
 
 def test_real_public_fixtures_and_seeded_leak() -> None:
@@ -190,6 +211,19 @@ def test_matrix_pairs_v1_directions() -> None:
 def test_cyrillic_overlap_ru_to_en() -> None:
     src = (FIXTURES / "heldout" / "ru" / "settings.md").read_text(encoding="utf-8")
     tgt = (FIXTURES / "heldout" / "en" / "settings.md").read_text(encoding="utf-8")
+    hits = {
+        w.normalized
+        for w in untranslated_cyrillic_in_target(src, tgt, path="en/settings.md")
+    }
+    assert "откройте" in hits
+    assert "закройте" in hits
+
+
+def test_cyrillic_to_latin_thin_fixture() -> None:
+    root = FIXTURES / "cyrillic_to_latin"
+    assert (root / "SOURCES.md").is_file()
+    src = (root / "ru" / "settings.md").read_text(encoding="utf-8")
+    tgt = (root / "en" / "settings.md").read_text(encoding="utf-8")
     hits = {
         w.normalized
         for w in untranslated_cyrillic_in_target(src, tgt, path="en/settings.md")

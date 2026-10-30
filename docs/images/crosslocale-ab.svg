@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-label="Crosslocale A/B · suspect & foreign counts (ru)">
+<rect width="100%" height="100%" fill="#f7f5f0"/>
+<text x="24" y="36" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#1b2a4a">Crosslocale A/B · suspect & foreign counts (ru)</text>
+<line x1="160" y1="56" x2="160" y2="340" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="160" y1="340" x2="920" y2="340" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="188.5" y="256.3" width="133.0" height="83.7" fill="#0d7377" rx="4"/>
+<text x="255.0" y="248.3" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="12" fill="#1b2a4a">23.00</text>
+<text x="255.0" y="358" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="10" fill="#4a5568" transform="rotate(-28 255.0,358)">suspect off</text>
+<rect x="378.5" y="256.3" width="133.0" height="83.7" fill="#0d7377" rx="4"/>
+<text x="445.0" y="248.3" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="12" fill="#1b2a4a">23.00</text>
+<text x="445.0" y="358" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="10" fill="#4a5568" transform="rotate(-28 445.0,358)">suspect on</text>
+<rect x="568.5" y="56.0" width="133.0" height="284.0" fill="#0d7377" rx="4"/>
+<text x="635.0" y="48.0" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="12" fill="#1b2a4a">78.00</text>
+<text x="635.0" y="358" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="10" fill="#4a5568" transform="rotate(-28 635.0,358)">foreign off</text>
+<rect x="758.5" y="56.0" width="133.0" height="284.0" fill="#0d7377" rx="4"/>
+<text x="825.0" y="48.0" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="12" fill="#1b2a4a">78.00</text>
+<text x="825.0" y="358" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="10" fill="#4a5568" transform="rotate(-28 825.0,358)">foreign on</text>
+</svg>

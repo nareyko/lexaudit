@@ -1,32 +1,47 @@
 __pycache__/
 *.py[cod]
+*$py.class
 *.egg-info/
 .eggs/
 dist/
 build/
 .venv/
 venv/
+.env
+.env.*
+!.env.example
 .mypy_cache/
 .ruff_cache/
 .pytest_cache/
 .coverage
+.coverage.*
+coverage.xml
 htmlcov/
 *.log
 .cache/
 gold/cache/
 # raw LLM dumps embed host corpus paths — keep local / private only
 gold/raw/
-dist/
 tmp/
 *.swp
+*~
 .DS_Store
+.idea/
+.vscode/
+*.whl
+*.tar.gz
+*.vsix
 
 .mutmut-cache
 coverage.json
-htmlcov/
 mutants/
 artifacts/
 tests/fixtures/ci-soft-fixture/out/
+
+# Local dogfood / packaging outputs
+packages/vscode-lexaudit/*.vsix
+frontend/
+lexaudit.config.local.yaml
 
 # Internal evaluation reports, gold sets, and parity notes (kept local, not in public git tree)
 eval/

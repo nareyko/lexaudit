@@ -51,7 +51,7 @@ lexaudit/
     llm/                 # optional label step, cached on disk
     eval/                # quality metrics
   packs/core-calques-v1/ # release pack
-  packs/_lab/            # experimental domain packs (0.3.0 owner go)
+  packs/                 # core + domain packs (RC in 0.3.0); _lab/ for experiments
   rules/calques/         # optional host-bridge copy of core calques
   schema/report-v1.schema.json
   scripts/render_diagrams.py

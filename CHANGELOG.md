@@ -6,7 +6,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 ## [Unreleased]
 
 ### Added
-- (empty — next after 0.3.0)
+- Pack field held-out corpus + metrics (`tests/fixtures/packs_field/`,
+  `scripts/run_pack_field_metrics.py`, report + recall chart)
+- Bilingual `DEFAULT_TEMPLATE_CHROME` stop for CMS/nav shells
+- Crosslocale A/B dogfood script + verdict report
+- Thin Cyrillic→Latin bilingual fixture
 
 ## [0.3.0] - 2026-10-30
 

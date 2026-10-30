@@ -65,7 +65,7 @@ def list_packs(*, include_lab: bool = False) -> list[dict[str, object]]:
 
 
 def list_lab_packs() -> list[dict[str, object]]:
-    """Experimental packs under packs/_lab/ (not Release assets)."""
+    """Lab registry stubs under packs/_lab/ (content may live in packs/<id>)."""
     rows: list[dict[str, object]] = []
     root = bundled_packs_root()
     if root is None:
@@ -80,6 +80,30 @@ def list_lab_packs() -> list[dict[str, object]]:
     return rows
 
 
+def pack_content_dir(pack_id: str, *, prefer_lab: bool = False) -> Path:
+    """Resolve calques/fixtures directory for a pack id.
+
+    After promote, ``packs/<id>`` holds the content. ``packs/_lab/<id>`` may be a
+    thin stub (pack.yaml only) to avoid twin trees in git.
+    """
+    root = bundled_packs_root()
+    if root is None:
+        msg = "no bundled packs/ directory found"
+        raise FileNotFoundError(msg)
+    lab = root / "_lab" / pack_id
+    release = root / pack_id
+    candidates: list[Path] = []
+    if prefer_lab:
+        candidates.extend([lab, release])
+    else:
+        candidates.extend([release, lab])
+    for path in candidates:
+        if path.is_dir() and (path / "calques").is_dir():
+            return path
+    msg = f"pack content not found for {pack_id!r} under packs/ or packs/_lab/"
+    raise FileNotFoundError(msg)
+
+
 def install_pack(
     pack_id: str,
     *,
@@ -92,8 +116,9 @@ def install_pack(
     if root is None:
         msg = "no bundled packs/ directory found"
         raise FileNotFoundError(msg)
-    src = (root / "_lab" / pack_id) if lab else (root / pack_id)
-    if not src.is_dir():
+    try:
+        src = pack_content_dir(pack_id, prefer_lab=lab)
+    except FileNotFoundError:
         if not lab:
             # accept zip from dist/packs
             zip_path = root.parent / "dist" / "packs" / f"{pack_id}.zip"
@@ -107,7 +132,7 @@ def install_pack(
                 return _rules_dir(target)
         known = [p["id"] for p in list_packs(include_lab=lab)]
         msg = f"unknown pack {pack_id!r}; known: {known}"
-        raise FileNotFoundError(msg)
+        raise FileNotFoundError(msg) from None
     target = (dest or packs_cache_dir()) / pack_id
     if target.exists():
         if not force:

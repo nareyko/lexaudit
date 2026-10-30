@@ -38,6 +38,8 @@ bilingual_pairs:
 # Corpus-local DE UI loans (extras only — never package DEFAULT).
 bilingual_extra_loans_path: ./dicts/intentional-extra-de.txt
 bilingual_extra_loans_locales: [de]
+# Optional CMS/nav chrome extras (see examples/dicts/bilingual-chrome-extra.txt).
+# bilingual_chrome_path: ./dicts/bilingual-chrome-extra.txt
 
 enable_llm: false
 rank_mode: weighted

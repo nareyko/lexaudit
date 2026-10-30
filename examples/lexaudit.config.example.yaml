@@ -23,5 +23,8 @@ enable_compound: true
 enable_foreign: true
 enable_calque: true
 enable_crosslocale: false
+# crosslocale_reference_locale: en
+# crosslocale_mode: ref_present   # or ref_ok / no_pair
+enable_bilingual: false
 enable_llm: false
 rank_mode: weighted

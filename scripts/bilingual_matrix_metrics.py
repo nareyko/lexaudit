@@ -108,9 +108,7 @@ def _score_pair(
 
     gold_paths = {rel for rel, _ in leftover_gold | intentional_gold}
     has_gold = bool(leftover_gold or intentional_gold)
-    predicted_scored = (
-        {k for k in predicted if k[0] in gold_paths} if gold_paths else predicted
-    )
+    predicted_scored = {k for k in predicted if k[0] in gold_paths} if gold_paths else predicted
 
     tp = len(predicted_scored & leftover_gold)
     fp = len(predicted_scored - leftover_gold)
@@ -127,16 +125,10 @@ def _score_pair(
         precision_out = round(precision, 4)
         recall_out = round(recall, 4)
         f1_out = (
-            round(2 * precision * recall / (precision + recall), 4)
-            if (precision + recall)
-            else 0.0
+            round(2 * precision * recall / (precision + recall), 4) if (precision + recall) else 0.0
         )
         intentional_fp = predicted_scored & intentional_gold
-        ship = (
-            precision >= min_precision
-            and recall >= min_recall
-            and len(intentional_fp) == 0
-        )
+        ship = precision >= min_precision and recall >= min_recall and len(intentional_fp) == 0
 
     intentional_fp_list = sorted(
         f"{rel}:{tok}" for rel, tok in (predicted_scored & intentional_gold)
@@ -159,19 +151,11 @@ def _score_pair(
         "intentional_fp": intentional_fp_list if has_gold else [],
         "length_ratio_mean": round(sum(length_ratios) / max(1, len(length_ratios)), 4),
         "lab_ship_bar": ship,
-        "detector": (
-            "cyrillic-overlap"
-            if source_locale in {"ru", "uk"}
-            else "latin-overlap"
-        ),
-        "false_positives": sorted(
-            f"{a}:{b}" for a, b in (predicted_scored - leftover_gold)
-        )[:12]
+        "detector": ("cyrillic-overlap" if source_locale in {"ru", "uk"} else "latin-overlap"),
+        "false_positives": sorted(f"{a}:{b}" for a, b in (predicted_scored - leftover_gold))[:12]
         if has_gold
         else [],
-        "false_negatives": sorted(
-            f"{a}:{b}" for a, b in (leftover_gold - predicted_scored)
-        )[:12]
+        "false_negatives": sorted(f"{a}:{b}" for a, b in (leftover_gold - predicted_scored))[:12]
         if has_gold
         else [],
     }
@@ -187,12 +171,7 @@ def main() -> int:
     p.add_argument(
         "--gold",
         type=Path,
-        default=ROOT
-        / "tests"
-        / "fixtures"
-        / "bilingual"
-        / "heldout"
-        / "gold-leftovers.csv",
+        default=ROOT / "tests" / "fixtures" / "bilingual" / "heldout" / "gold-leftovers.csv",
     )
     p.add_argument("--extra-loans", type=Path, default=None)
     p.add_argument("--extra-loans-locales", default="")
@@ -218,14 +197,8 @@ def main() -> int:
 
     gold_rows = _load_gold(args.gold) if args.gold.is_file() else []
     extra = _load_extra_loans(args.extra_loans)
-    extra_locales = {
-        x.strip().casefold()
-        for x in args.extra_loans_locales.split(",")
-        if x.strip()
-    }
-    extra_basenames = {
-        x.strip() for x in args.extra_loans_basenames.split(",") if x.strip()
-    }
+    extra_locales = {x.strip().casefold() for x in args.extra_loans_locales.split(",") if x.strip()}
+    extra_basenames = {x.strip() for x in args.extra_loans_basenames.split(",") if x.strip()}
 
     pairs = []
     for src, tgt in matrix_pairs(mode=args.mode):
@@ -257,11 +230,7 @@ def main() -> int:
         "lab_ship_bar_all_scored": ship_ok,
         "failed_pairs": [r["pair"] for r in failed],
         "by_anchor": {
-            loc: [
-                r["pair"]
-                for r in pairs
-                if loc in (r["source_locale"], r["target_locale"])
-            ]
+            loc: [r["pair"] for r in pairs if loc in (r["source_locale"], r["target_locale"])]
             for loc in ("en", "de", "ru", "es", "pl", "sv", "uk")
         },
     }

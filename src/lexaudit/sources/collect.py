@@ -341,4 +341,3 @@ def collect_all(
         chunks.extend(collect_vitepress(repo_root, locale))
     chunks.sort(key=lambda c: (c.source, c.path, c.scope))
     return chunks
-

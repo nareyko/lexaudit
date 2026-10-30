@@ -114,9 +114,7 @@ def test_length_ratio_soft_signal() -> None:
 def test_soft_cognate_demotes_tier_not_drop() -> None:
     src = "Update the system profile and export the report.\n"
     tgt = "Обновите system profile и сделайте export report.\n"
-    hits = detect_pair_leftovers(
-        src, tgt, source_locale="en", target_locale="ru", path="ru/x.md"
-    )
+    hits = detect_pair_leftovers(src, tgt, source_locale="en", target_locale="ru", path="ru/x.md")
     by_norm = {w.normalized: w for w in hits}
     assert "system" in by_norm
     assert by_norm["system"].tier == "weak"
@@ -222,10 +220,7 @@ def test_live_weblate_fixtures() -> None:
     assert (root / "intentional-extra-de.txt").is_file()
     src = (root / "en" / "soapbox-onboarding.md").read_text(encoding="utf-8")
     tgt = (root / "ru" / "soapbox-onboarding.md").read_text(encoding="utf-8")
-    hits = {
-        w.normalized
-        for w in untranslated_latin_in_target(src, tgt, path="ru/onboarding.md")
-    }
+    hits = {w.normalized for w in untranslated_latin_in_target(src, tgt, path="ru/onboarding.md")}
     assert "onboarding" in hits
     assert "complete" in hits
 
@@ -236,10 +231,7 @@ def test_live_crowdin_fixtures() -> None:
     assert (root / "gold-leftovers.csv").is_file()
     src = (root / "en" / "jellyfin-dashboard.md").read_text(encoding="utf-8")
     tgt = (root / "ru" / "jellyfin-dashboard.md").read_text(encoding="utf-8")
-    hits = {
-        w.normalized
-        for w in untranslated_latin_in_target(src, tgt, path="ru/jellyfin.md")
-    }
+    hits = {w.normalized for w in untranslated_latin_in_target(src, tgt, path="ru/jellyfin.md")}
     assert "dashboard" in hits
     assert "libraries" in hits
 
@@ -252,10 +244,7 @@ def test_live_v1_others_fixtures() -> None:
         assert (root / loc / "dicio-toast.md").is_file()
     src = (root / "en" / "soapbox-onboarding.md").read_text(encoding="utf-8")
     tgt = (root / "es" / "soapbox-onboarding.md").read_text(encoding="utf-8")
-    hits = {
-        w.normalized
-        for w in untranslated_latin_in_target(src, tgt, path="es/onboarding.md")
-    }
+    hits = {w.normalized for w in untranslated_latin_in_target(src, tgt, path="es/onboarding.md")}
     assert "onboarding" in hits
     assert "complete" in hits
 
@@ -272,10 +261,7 @@ def test_matrix_pairs_v1_directions() -> None:
 def test_cyrillic_overlap_ru_to_en() -> None:
     src = (FIXTURES / "heldout" / "ru" / "settings.md").read_text(encoding="utf-8")
     tgt = (FIXTURES / "heldout" / "en" / "settings.md").read_text(encoding="utf-8")
-    hits = {
-        w.normalized
-        for w in untranslated_cyrillic_in_target(src, tgt, path="en/settings.md")
-    }
+    hits = {w.normalized for w in untranslated_cyrillic_in_target(src, tgt, path="en/settings.md")}
     assert "откройте" in hits
     assert "закройте" in hits
 
@@ -285,10 +271,7 @@ def test_cyrillic_to_latin_thin_fixture() -> None:
     assert (root / "SOURCES.md").is_file()
     src = (root / "ru" / "settings.md").read_text(encoding="utf-8")
     tgt = (root / "en" / "settings.md").read_text(encoding="utf-8")
-    hits = {
-        w.normalized
-        for w in untranslated_cyrillic_in_target(src, tgt, path="en/settings.md")
-    }
+    hits = {w.normalized for w in untranslated_cyrillic_in_target(src, tgt, path="en/settings.md")}
     assert "откройте" in hits
     assert "закройте" in hits
 

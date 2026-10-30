@@ -3,6 +3,9 @@
 
 Does not publish, tag, or bump the package version. Use --apply only after
 owner go (docs/p1-0.3.0-prep.md). Always runs lab_pack_metrics first.
+
+After promote, ``packs/_lab/<id>`` may be a thin stub (pack.yaml only); content
+SSOT is ``packs/<id>/``.
 """
 
 from __future__ import annotations
@@ -15,9 +18,12 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from lab_pack_metrics import measure  # noqa: E402
+
+from lexaudit.packs import pack_content_dir  # noqa: E402
 
 LAB = ROOT / "packs" / "_lab"
 RELEASE = ROOT / "packs"
@@ -26,23 +32,23 @@ LOCALES = ("en", "de", "es", "pl", "ru", "sv", "uk")
 
 def _validate(pack_id: str) -> list[str]:
     errors: list[str] = []
-    src = LAB / pack_id
-    if not src.is_dir():
-        return [f"missing lab pack {pack_id}"]
-    meta_path = src / "pack.yaml"
+    stub = LAB / pack_id
+    meta_path = stub / "pack.yaml"
     if not meta_path.is_file():
-        return [f"missing pack.yaml for {pack_id}"]
+        return [f"missing lab stub pack.yaml for {pack_id}"]
     meta = yaml.safe_load(meta_path.read_text(encoding="utf-8")) or {}
     if not isinstance(meta, dict):
         return [f"invalid pack.yaml for {pack_id}"]
     if meta.get("license") != "MIT":
         errors.append("license must be MIT")
     if meta.get("status") != "lab":
-        errors.append("status must be lab before promote")
-    if (RELEASE / pack_id).exists():
-        errors.append(f"release path already exists: packs/{pack_id}")
+        errors.append("status must be lab on the _lab stub")
+    try:
+        content = pack_content_dir(pack_id, prefer_lab=True)
+    except FileNotFoundError as exc:
+        return [str(exc)]
     for loc in LOCALES:
-        fx = src / "fixtures" / loc
+        fx = content / "fixtures" / loc
         if not fx.is_dir():
             continue
         try:
@@ -59,8 +65,17 @@ def _validate(pack_id: str) -> list[str]:
 
 
 def _apply(pack_id: str) -> Path:
+    """Copy full lab tree if present; otherwise content already in packs/."""
     src = LAB / pack_id
     dest = RELEASE / pack_id
+    if dest.exists():
+        return dest
+    if not (src / "calques").is_dir():
+        msg = (
+            f"cannot --apply {pack_id}: packs/_lab has no calques/ "
+            f"(already promoted?). Content should be under packs/{pack_id}/"
+        )
+        raise FileNotFoundError(msg)
     shutil.copytree(src, dest)
     meta_path = dest / "pack.yaml"
     meta = yaml.safe_load(meta_path.read_text(encoding="utf-8")) or {}
@@ -89,12 +104,25 @@ def main() -> int:
             print(f"FAIL {err}", file=sys.stderr)
         return 1
 
+    release = RELEASE / args.pack_id
+    if release.is_dir() and (release / "calques").is_dir():
+        print(f"OK already promoted {args.pack_id} → packs/{args.pack_id}/")
+        if args.apply:
+            print("nothing to copy (thin _lab stub; content SSOT is packs/)")
+        else:
+            print("dry-run metrics green")
+        return 0
+
     print(f"OK validate {args.pack_id}")
     if not args.apply:
         print("dry-run only; re-run with --apply after owner go")
         return 0
 
-    dest = _apply(args.pack_id)
+    try:
+        dest = _apply(args.pack_id)
+    except FileNotFoundError as exc:
+        print(f"FAIL {exc}", file=sys.stderr)
+        return 1
     print(f"promoted -> {dest} (status=release-candidate)")
     print("Still not a PyPI/Release attach — finish docs/p1-0.3.0-prep.md checklist.")
     return 0

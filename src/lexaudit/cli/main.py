@@ -221,7 +221,6 @@ def _emit_machine_output(
             write_sarif(last_paths["sarif"], doc)
 
 
-
 def _words_from_report_json(data: dict[str, object]) -> list[ClassifiedWord]:
     from lexaudit.core.types import Tier, VocabSample, VocabStatus
 
@@ -452,8 +451,7 @@ def pack_list_cmd(lab: bool) -> None:
         loc_list = [str(x) for x in loc_raw] if isinstance(loc_raw, list) else []
         status = row.get("status") or "release"
         click.echo(
-            f"{row['id']}  v{row.get('version')}  status={status}  "
-            f"locales={','.join(loc_list)}"
+            f"{row['id']}  v{row.get('version')}  status={status}  locales={','.join(loc_list)}"
         )
 
 

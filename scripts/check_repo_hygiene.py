@@ -60,6 +60,16 @@ def main() -> int:
         for p in bad:
             print(f"  {p}")
         return 1
+    # Twin trees: promoted packs must not keep full calques under _lab/.
+    lab = ROOT / "packs" / "_lab"
+    if lab.is_dir():
+        twins = [str(p.relative_to(ROOT)) for p in lab.glob("*/calques") if p.is_dir()]
+        if twins:
+            print("hygiene FAIL — duplicate lab calques (use packs/<id>/ only):")
+            for t in twins:
+                print(f"  {t}")
+            return 1
+
     print("hygiene OK — no dumps/tmp/wheels/vsix/local-config tracked")
     # Reminder for untracked local bulk (informational).
     for rel in ("dumps", "tmp", "dist"):

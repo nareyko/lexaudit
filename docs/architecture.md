@@ -43,7 +43,7 @@ lexaudit/
     core/                # tokenize, classify, rank, pipeline
     detectors/           # allowlist, hunspell, morph, compound, foreign,
                          # english_leak, calque, bilingual + crosslocale (opt-in)
-    packs.py             # pack list/install/verify (packs/ + optional packs/_lab)
+    packs.py             # pack list/install/verify; _lab stubs → packs/<id> content
     dictpacks/loader.py  # names, abbreviations, known compound parts
     sources/collect.py   # Markdown, academy JSON, packs, HTML/PO/XLIFF, …
     report/              # write, diff, expand_needle, CI/SARIF
@@ -51,7 +51,7 @@ lexaudit/
     llm/                 # optional label step, cached on disk
     eval/                # quality metrics
   packs/core-calques-v1/ # release pack
-  packs/                 # core + domain packs (RC in 0.3.0); _lab/ for experiments
+  packs/                 # core + domain RC content; _lab/ = thin pack.yaml stubs only
   rules/calques/         # optional host-bridge copy of core calques
   schema/report-v1.schema.json
   scripts/render_diagrams.py

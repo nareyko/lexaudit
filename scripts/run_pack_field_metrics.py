@@ -51,9 +51,7 @@ def _measure(pack: str, locale: str) -> dict[str, object]:
         calque_rules_dir=rules.resolve(),
         output_dir=(ROOT / "tmp" / "pack-field" / pack / locale).resolve(),
     )
-    words, pages, _ = run_locale_audit(
-        cfg, locale, freeze_generated_at="1970-01-01T00:00:00Z"
-    )
+    words, pages, _ = run_locale_audit(cfg, locale, freeze_generated_at="1970-01-01T00:00:00Z")
     calque_norms = {w.normalized.casefold() for w in words if w.status == "calque"}
     hit = gold_tokens & calque_norms
     recall = (len(hit) / len(gold_tokens)) if gold_tokens else 0.0
@@ -110,15 +108,10 @@ def main() -> int:
         for loc in LOCALES:
             rows.append(_measure(pack, loc))
 
-    failed = [
-        r
-        for r in rows
-        if not (r["recall_ok"] and r["clean_ok"] and r["rank_ok"])
-    ]
+    failed = [r for r in rows if not (r["recall_ok"] and r["clean_ok"] and r["rank_ok"])]
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(
-        json.dumps({"rows": rows, "failed": len(failed)}, indent=2, ensure_ascii=False)
-        + "\n",
+        json.dumps({"rows": rows, "failed": len(failed)}, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
 

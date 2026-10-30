@@ -1,32 +1,21 @@
-# Lab packs (not released)
+# Lab registry (thin stubs)
 
-Experimental industry packs. Do **not** attach to GitHub Releases with 0.2.x.
-See `docs/p1-0.3.0-prep.md` for promote checklist. Inventory: **10** packs.
+After 0.3.0 promote, **calques + fixtures live only under** `packs/<id>/`
+(status `release-candidate`). Each `packs/_lab/<id>/` keeps a `pack.yaml` stub
+(`status: lab`) so `lexaudit pack list --lab` still works, without a second
+copy of YAML/fixtures in git (~1.4 MiB saved).
 
-| Pack | Focus | 0.3.0 proposal |
+| Pack | Focus | Content SSOT |
 |---|---|---|
-| `saas-ui-v0` | Product UI calques / anglicisms | promote |
-| `fintech-v0` | Payments / ledger leftovers | promote |
-| `developer-docs-v0` | API prose coinages | promote |
-| `ecommerce-ui-v0` | Checkout / cart coinages | promote |
-| `healthcare-ui-v0` | Patient UI coinages | promote |
-| `legal-docs-v0` | Contract prose coinages | promote |
-| `gaming-ui-v0` | Game HUD / loot coinages | keep lab (harvest) |
-| `edtech-v0` | LMS / SCORM coinages | keep lab (harvest) |
-| `security-docs-v0` | Security / pen-test prose | keep lab (harvest) |
-| `hr-ats-v0` | ATS / recruiting coinages | keep lab (harvest) |
-
-All packs declare locales `[en, de, es, pl, ru, sv, uk]` with calques + fixtures
-per locale (es/pl/sv/uk use English leftover coinages as cross-locale needles;
-Ukrainian rules set `override_ok` so Latin leftovers still flag when hunspell
-marks them `ok`).
-
-Measure / dogfood:
+| `saas-ui-v0` … `hr-ats-v0` (10) | domain coinages | `packs/<id>/` |
 
 ```bash
 uv run python scripts/lab_pack_metrics.py --pack saas-ui-v0 --locale uk
-uv run python scripts/run_lab_pack_metrics.py   # 10 packs × 7 locales
+uv run python scripts/run_lab_pack_metrics.py
 uv run lexaudit pack list --lab
+# install resolves content from packs/<id> when _lab has no calques/
 uv run lexaudit pack install saas-ui-v0 --lab --dest /tmp/lexaudit-packs --force
-uv run python scripts/promote_lab_pack.py saas-ui-v0   # dry-run validate
 ```
+
+Do **not** re-copy calques into `_lab/` — that recreates twin trees.
+Promote notes: `docs/p1-0.3.0-prep.md` · index: `docs/p1-INDEX.md`.

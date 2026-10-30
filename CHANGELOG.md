@@ -32,6 +32,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Pack density floors cover es/pl/sv/uk (≥12) as well as en/de/ru
 - LocalAI live smoke quarantined behind `LEXAUDIT_LOCALAI_SMOKE=1`
 - `.gitignore`: dumps / CX / tmp metrics / packaging artifacts stay local
+- `packs/_lab/` deduped to thin `pack.yaml` stubs; calques/fixtures SSOT in `packs/<id>/`
+  (~1.4 MiB twin trees removed; hygiene fails if `_lab/*/calques` reappears)
 
 ## [0.3.0] - 2026-10-30
 

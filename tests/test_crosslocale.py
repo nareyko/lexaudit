@@ -93,12 +93,8 @@ def test_path_slug_key_drops_locale_folder() -> None:
     assert path_slug_key("packs_wild/saas-ui-v0/ru/wiki-saas.md") == (
         "packs_wild/saas-ui-v0/wiki-saas.md"
     )
-    left = [
-        TextChunk(path="x/ru/a.md", scope="body", text="dashboard leftover", source="files")
-    ]
-    right = [
-        TextChunk(path="x/en/a.md", scope="body", text="dashboard settings", source="files")
-    ]
+    left = [TextChunk(path="x/ru/a.md", scope="body", text="dashboard leftover", source="files")]
+    right = [TextChunk(path="x/en/a.md", scope="body", text="dashboard settings", source="files")]
     pairs, u_l, u_r = pair_chunks_by_slug(left, right)
     assert len(pairs) == 1
     assert u_l == [] and u_r == []

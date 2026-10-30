@@ -33,7 +33,10 @@ def _patterns_for_locale(rules_dir: Path, locale: str) -> set[str]:
 
 
 def measure(pack: str, locale: str) -> dict[str, object]:
-    pack_dir = ROOT / "packs" / "_lab" / pack
+    # Content SSOT is packs/<id> after promote; _lab may be a thin stub.
+    from lexaudit.packs import pack_content_dir
+
+    pack_dir = pack_content_dir(pack, prefer_lab=True)
     rules = pack_dir / "calques"
     fixtures = pack_dir / "fixtures" / locale
     if not rules.is_dir() or not fixtures.is_dir():
@@ -47,9 +50,7 @@ def measure(pack: str, locale: str) -> dict[str, object]:
         calque_rules_dir=rules.resolve(),
         output_dir=(ROOT / "tmp" / "lab-packs" / pack / locale).resolve(),
     )
-    words, pages, _ = run_locale_audit(
-        cfg, locale, freeze_generated_at="1970-01-01T00:00:00Z"
-    )
+    words, pages, _ = run_locale_audit(cfg, locale, freeze_generated_at="1970-01-01T00:00:00Z")
     flagged = {
         w.normalized
         for w in words
@@ -95,10 +96,9 @@ def measure(pack: str, locale: str) -> dict[str, object]:
     }
     ok = True
     if defect_pages and clean_pages:
-        ok = (
-            report["defect_known_score"] is not None
-            and float(report["defect_known_score"]) > float(report["clean_score_max"])
-        )
+        ok = report["defect_known_score"] is not None and float(
+            report["defect_known_score"]
+        ) > float(report["clean_score_max"])
     if expected:
         ok = ok and recall >= 0.85
     report["lab_rank_ok"] = ok

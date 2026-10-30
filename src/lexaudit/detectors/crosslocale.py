@@ -112,9 +112,7 @@ def pair_chunks_by_slug(
         else:
             pairs.append((c, o))
             matched.add(key)
-    unmatched_right = [
-        c for c in right if (path_slug_key(c.path), c.scope) not in matched
-    ]
+    unmatched_right = [c for c in right if (path_slug_key(c.path), c.scope) not in matched]
     return pairs, unmatched_left, unmatched_right
 
 

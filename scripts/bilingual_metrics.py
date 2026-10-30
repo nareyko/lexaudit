@@ -36,12 +36,7 @@ def main() -> int:
     p.add_argument(
         "--gold",
         type=Path,
-        default=ROOT
-        / "tests"
-        / "fixtures"
-        / "bilingual"
-        / "heldout"
-        / "gold-leftovers.csv",
+        default=ROOT / "tests" / "fixtures" / "bilingual" / "heldout" / "gold-leftovers.csv",
     )
     p.add_argument(
         "--extra-loans",
@@ -89,24 +84,16 @@ def main() -> int:
 
     extra = load_extra_loans(args.extra_loans)
     extra_locales = frozenset(
-        x.strip().casefold()
-        for x in args.extra_loans_locales.split(",")
-        if x.strip()
+        x.strip().casefold() for x in args.extra_loans_locales.split(",") if x.strip()
     )
-    extra_basenames = {
-        x.strip() for x in args.extra_loans_basenames.split(",") if x.strip()
-    }
+    extra_basenames = {x.strip() for x in args.extra_loans_basenames.split(",") if x.strip()}
 
     predicted: set[tuple[str, str, str]] = set()
     length_ratios: list[float] = []
     official_alarms = 0
     src_locale = args.source_locale
     target_locales = sorted(
-        {
-            r["target_locale"]
-            for r in rows
-            if r.get("source_locale", src_locale) == src_locale
-        }
+        {r["target_locale"] for r in rows if r.get("source_locale", src_locale) == src_locale}
         | ({"ru", "de"} if src_locale == "en" else set())
     )
     for tgt_loc in target_locales:
@@ -158,9 +145,7 @@ def main() -> int:
 
     # If gold only lists seeded rows, restrict scoring to those paths
     gold_paths = {rel for _, rel, _ in leftover_gold | intentional_gold}
-    predicted_scored = (
-        {k for k in predicted if k[1] in gold_paths} if gold_paths else predicted
-    )
+    predicted_scored = {k for k in predicted if k[1] in gold_paths} if gold_paths else predicted
 
     tp = len(predicted_scored & leftover_gold)
     fp = len(predicted_scored - leftover_gold)
@@ -180,12 +165,12 @@ def main() -> int:
         "recall": round(recall, 4),
         "f1": round(f1, 4),
         "intentional_fp": sorted(f"{a}/{b}:{c}" for a, b, c in intentional_fp),
-        "false_positives": sorted(
-            f"{a}/{b}:{c}" for a, b, c in (predicted_scored - leftover_gold)
-        )[:30],
-        "false_negatives": sorted(
-            f"{a}/{b}:{c}" for a, b, c in (leftover_gold - predicted_scored)
-        )[:30],
+        "false_positives": sorted(f"{a}/{b}:{c}" for a, b, c in (predicted_scored - leftover_gold))[
+            :30
+        ],
+        "false_negatives": sorted(f"{a}/{b}:{c}" for a, b, c in (leftover_gold - predicted_scored))[
+            :30
+        ],
         "length_ratio_mean": round(sum(length_ratios) / max(1, len(length_ratios)), 4),
         "official_alarm_count": official_alarms,
         "extra_loans": len(extra),
@@ -193,11 +178,7 @@ def main() -> int:
         "lab_recall_ok": recall >= args.min_recall,
         "lab_intentional_clean": len(intentional_fp) == 0,
     }
-    ok = (
-        report["lab_precision_ok"]
-        and report["lab_recall_ok"]
-        and report["lab_intentional_clean"]
-    )
+    ok = report["lab_precision_ok"] and report["lab_recall_ok"] and report["lab_intentional_clean"]
     report["lab_ship_bar"] = ok
     if args.json:
         print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))

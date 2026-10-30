@@ -39,12 +39,8 @@ def test_de_ui_extras_clear_leftover_only_for_de() -> None:
     de_tgt = "Öffnen Sie das Dashboard und schließen Sie den Toast.\n"
     ru_tgt = "Откройте Dashboard и закройте Toast.\n"
     extras = frozenset({"dashboard", "toast"})
-    de_loans = intentional_loans_for_target(
-        "de", extra=extras, extra_locales=frozenset({"de"})
-    )
-    ru_loans = intentional_loans_for_target(
-        "ru", extra=extras, extra_locales=frozenset({"de"})
-    )
+    de_loans = intentional_loans_for_target("de", extra=extras, extra_locales=frozenset({"de"}))
+    ru_loans = intentional_loans_for_target("ru", extra=extras, extra_locales=frozenset({"de"}))
     de_hits = {
         w.normalized
         for w in untranslated_latin_in_target(

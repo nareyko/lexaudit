@@ -61,11 +61,7 @@ def main() -> int:
     else:
         print("pack density (en≥20 · de/ru/es/pl/sv/uk≥12)")
         for r in rows:
-            mark = (
-                "OK"
-                if not any(f.startswith(str(r["pack"]) + "/") for f in failed)
-                else "FAIL"
-            )
+            mark = "OK" if not any(f.startswith(str(r["pack"]) + "/") for f in failed) else "FAIL"
             locs = " ".join(f"{loc}={r[loc]}" for loc in FLOORS)
             print(f"  {mark} {r['pack']}: {locs}")
         if failed:

@@ -55,9 +55,8 @@ def main() -> int:
     rows: list[dict[str, object]] = []
     for lang, q in DEFAULT_QUERIES:
         query = f"language:{lang} {q}"
-        url = (
-            "https://hosted.weblate.org/api/units/?"
-            + urllib.parse.urlencode({"q": query, "page_size": 20})
+        url = "https://hosted.weblate.org/api/units/?" + urllib.parse.urlencode(
+            {"q": query, "page_size": 20}
         )
         try:
             data = _fetch(url)

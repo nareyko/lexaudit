@@ -410,18 +410,18 @@ def pair_paths(
     for src in unmatched_src:
         srel = src.relative_to(source_root).as_posix()
         key = path_slug_key(srel)
-        tgt = tgt_by_slug.get(key)
-        if tgt is None or tgt.resolve() in used_tgt or tgt.resolve() == src.resolve():
+        matched = tgt_by_slug.get(key)
+        if matched is None or matched.resolve() in used_tgt or matched.resolve() == src.resolve():
             continue
         pairs.append(
             BilingualPair(
                 source_locale=source_locale,
                 target_locale=target_locale,
                 source_path=str(src),
-                target_path=str(tgt),
+                target_path=str(matched),
             )
         )
-        used_tgt.add(tgt.resolve())
+        used_tgt.add(matched.resolve())
     return pairs
 
 

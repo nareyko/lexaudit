@@ -50,12 +50,8 @@ def main() -> int:
                 calque_rules_dir=rules.resolve(),
                 output_dir=(ROOT / "tmp" / "pack-wild" / pack / loc).resolve(),
             )
-            words, pages, _ = run_locale_audit(
-                cfg, loc, freeze_generated_at="1970-01-01T00:00:00Z"
-            )
-            calques = sorted(
-                {w.normalized for w in words if w.status == "calque"}
-            )
+            words, pages, _ = run_locale_audit(cfg, loc, freeze_generated_at="1970-01-01T00:00:00Z")
+            calques = sorted({w.normalized for w in words if w.status == "calque"})
             rows.append(
                 {
                     "pack": pack,

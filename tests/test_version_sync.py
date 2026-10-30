@@ -18,4 +18,4 @@ def test_action_yml_pins_current_major_minor() -> None:
     root = Path(__file__).resolve().parents[1]
     action = (root / "action.yml").read_text(encoding="utf-8")
     major_minor = ".".join(lexaudit.__version__.split(".")[:2])
-    assert f'lexaudit>={major_minor}' in action or f'lexaudit>={lexaudit.__version__}' in action
+    assert f"lexaudit>={major_minor}" in action or f"lexaudit>={lexaudit.__version__}" in action

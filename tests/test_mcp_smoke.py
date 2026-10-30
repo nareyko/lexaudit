@@ -30,10 +30,7 @@ def test_identical_segment_and_chrome_extras() -> None:
     )
 
     src = "Please verify denseness before release.\nSave your preferences now permanently.\n"
-    tgt = (
-        "Please verify denseness before release.\n"
-        "Сохраните настройки. denseness остался.\n"
-    )
+    tgt = "Please verify denseness before release.\nСохраните настройки. denseness остался.\n"
     segs = identical_segment_leftovers(src, tgt, path="ru/x.md")
     assert any(w.reason == "bilingual-identical-segment" for w in segs)
     hits = detect_pair_leftovers(

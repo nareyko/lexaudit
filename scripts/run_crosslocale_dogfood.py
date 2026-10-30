@@ -41,9 +41,7 @@ def _run(*, cross: bool, out_tag: str) -> dict[str, object]:
         crosslocale_reference_locale="en",
         output_dir=(ROOT / "tmp" / "crosslocale-dogfood" / out_tag).resolve(),
     )
-    words, pages, _ = run_locale_audit(
-        cfg, "ru", freeze_generated_at="1970-01-01T00:00:00Z"
-    )
+    words, pages, _ = run_locale_audit(cfg, "ru", freeze_generated_at="1970-01-01T00:00:00Z")
     by_status: dict[str, int] = {}
     by_tier: dict[str, int] = {}
     cross_hits = 0

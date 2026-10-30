@@ -19,5 +19,10 @@ By contributing you agree your patches to this repository are licensed under the
 uv sync --extra dev
 uv run ruff check . && uv run ruff format --check .
 uv run mypy --strict src/
-uv run pytest
+uv run python -m pytest
+uv run python scripts/check_pack_density.py
+uv run python scripts/check_repo_hygiene.py
 ```
+
+0.3.0 prep / publish docs: [docs/p1-INDEX.md](docs/p1-INDEX.md).
+Do not commit `dumps/`, `tmp/`, `dist/`, `*.vsix`, or `lexaudit.config.local.yaml`.

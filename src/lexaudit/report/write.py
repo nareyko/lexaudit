@@ -79,8 +79,7 @@ def build_report_doc(
     ]
     doc: dict[str, Any] = {
         "schema_version": "1",
-        "generated_at": generated_at
-        or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "generated_at": generated_at or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "lexaudit_version": __version__,
         "config_hash": config_hash,
         "locales": [
@@ -166,11 +165,11 @@ details {{ margin: 0.6rem 0; padding: 0.4rem 0.6rem; background: #fff; border: 1
 <table>
 <thead><tr><th>score</th><th>unique</th><th>path</th><th>top words</th></tr></thead>
 <tbody>
-{''.join(rows)}
+{"".join(rows)}
 </tbody>
 </table>
 <h2>Findings</h2>
-{''.join(finding_blocks) if finding_blocks else '<p>No anomalies.</p>'}
+{"".join(finding_blocks) if finding_blocks else "<p>No anomalies.</p>"}
 </body>
 </html>
 """
@@ -344,4 +343,3 @@ def write_reports(
         )
         paths["sarif"] = sarif_path
     return paths
-

@@ -32,9 +32,7 @@ def build_mcp() -> Any:
     try:
         from mcp.server.fastmcp import FastMCP
     except ImportError as exc:  # pragma: no cover
-        raise SystemExit(
-            "mcp package missing; install with: pip install 'lexaudit[mcp]'"
-        ) from exc
+        raise SystemExit("mcp package missing; install with: pip install 'lexaudit[mcp]'") from exc
 
     mcp = FastMCP("lexaudit")
 

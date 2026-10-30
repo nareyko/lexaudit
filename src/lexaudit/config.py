@@ -193,17 +193,11 @@ def load_config(path: Path) -> LexauditConfig:
         enable_foreign=bool(data.get("enable_foreign", True)),
         enable_calque=bool(data.get("enable_calque", True)),
         enable_crosslocale=bool(data.get("enable_crosslocale") or False),
-        crosslocale_reference_locale=str(
-            data.get("crosslocale_reference_locale") or "en"
-        ).strip()
+        crosslocale_reference_locale=str(data.get("crosslocale_reference_locale") or "en").strip()
         or "en",
         crosslocale_mode=(
             m
-            if (
-                m := str(data.get("crosslocale_mode") or "ref_present")
-                .strip()
-                .casefold()
-            )
+            if (m := str(data.get("crosslocale_mode") or "ref_present").strip().casefold())
             in {"ref_present", "ref_ok", "no_pair"}
             else "ref_present"
         ),
@@ -211,12 +205,8 @@ def load_config(path: Path) -> LexauditConfig:
         bilingual_pairs=tuple(
             x for x in (data.get("bilingual_pairs") or []) if isinstance(x, dict)
         ),
-        bilingual_extra_loans_path=_path_or_none(
-            base, data.get("bilingual_extra_loans_path")
-        ),
-        bilingual_extra_loans_locales=tuple(
-            _str_list(data.get("bilingual_extra_loans_locales"))
-        ),
+        bilingual_extra_loans_path=_path_or_none(base, data.get("bilingual_extra_loans_path")),
+        bilingual_extra_loans_locales=tuple(_str_list(data.get("bilingual_extra_loans_locales"))),
         bilingual_chrome_path=_path_or_none(base, data.get("bilingual_chrome_path")),
         rank_mode=_parse_rank_mode(data),
         rank_weights=_parse_rank_weights(data.get("rank_weights") or {}),

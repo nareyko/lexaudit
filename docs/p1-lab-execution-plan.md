@@ -1,7 +1,8 @@
 # P1 lab execution plan (local only · no PyPI / no marketplace)
 
 Status: **complete locally** (2026-10-30). Not part of the 0.2.0 Release assets.
-Follow-up iterate: real_public corpus + expanded lab packs (this session).
+Follow-ups done locally: real_public → community → live Weblate + DE loan policy.
+`enable_bilingual` still false pending owner go / optional Crowdin sample.
 
 ## Goal
 

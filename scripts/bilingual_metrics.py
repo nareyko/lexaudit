@@ -60,6 +60,16 @@ def main() -> int:
         help="Optional token list merged into allowlist for non-seeded files",
     )
     p.add_argument(
+        "--extra-loans-locales",
+        default="",
+        help="Comma locales that may merge --extra-loans (empty = all non-seeded)",
+    )
+    p.add_argument(
+        "--extra-loans-basenames",
+        default="",
+        help="Comma basenames that may merge --extra-loans (empty = all non-seeded)",
+    )
+    p.add_argument(
         "--seeded-basename",
         default="seeded-leak.md",
         help="Basename that keeps DEFAULT loans only (no --extra-loans merge)",
@@ -81,8 +91,16 @@ def main() -> int:
             intentional_gold.add(key)
 
     extra = _load_extra_loans(args.extra_loans)
-    loans_official = frozenset(DEFAULT_INTENTIONAL_LOANS | extra)
+    extra_locales = {
+        x.strip().casefold()
+        for x in args.extra_loans_locales.split(",")
+        if x.strip()
+    }
+    extra_basenames = {
+        x.strip() for x in args.extra_loans_basenames.split(",") if x.strip()
+    }
     loans_seeded = DEFAULT_INTENTIONAL_LOANS
+    loans_with_extra = frozenset(DEFAULT_INTENTIONAL_LOANS | extra)
 
     predicted: set[tuple[str, str, str]] = set()
     length_ratios: list[float] = []
@@ -92,6 +110,7 @@ def main() -> int:
         tgt_root = args.fixtures / tgt_loc
         if not tgt_root.is_dir():
             continue
+        loc_ok = (not extra_locales) or (tgt_loc.casefold() in extra_locales)
         for md in sorted(tgt_root.glob("*.md")):
             rel = md.name
             src = src_root / rel
@@ -100,7 +119,13 @@ def main() -> int:
             src_text = src.read_text(encoding="utf-8")
             tgt_text = md.read_text(encoding="utf-8")
             length_ratios.append(length_ratio_signal(src_text, tgt_text))
-            loans = loans_seeded if rel == args.seeded_basename else loans_official
+            base_ok = (not extra_basenames) or (rel in extra_basenames)
+            if rel == args.seeded_basename:
+                loans = loans_seeded
+            elif loc_ok and base_ok and extra:
+                loans = loans_with_extra
+            else:
+                loans = DEFAULT_INTENTIONAL_LOANS
             hits = untranslated_latin_in_target(
                 src_text,
                 tgt_text,

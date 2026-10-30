@@ -128,3 +128,18 @@ def test_community_imperfect_fixtures() -> None:
     assert "inbox" in hits
     assert "platform" in hits
     assert "home" in hits
+
+
+def test_live_weblate_fixtures() -> None:
+    root = FIXTURES / "live_weblate"
+    assert (root / "SOURCES.md").is_file()
+    assert (root / "gold-leftovers.csv").is_file()
+    assert (root / "intentional-extra-de.txt").is_file()
+    src = (root / "en" / "soapbox-onboarding.md").read_text(encoding="utf-8")
+    tgt = (root / "ru" / "soapbox-onboarding.md").read_text(encoding="utf-8")
+    hits = {
+        w.normalized
+        for w in untranslated_latin_in_target(src, tgt, path="ru/onboarding.md")
+    }
+    assert "onboarding" in hits
+    assert "complete" in hits

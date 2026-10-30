@@ -15,6 +15,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Community imperfect bilingual corpus (Excalidraw / Ever-teams / Zulip / Homebox
   reconstructions) + English function-word stop list
 - Thin lab pack `ecommerce-ui-v0`
+- Live Weblate leftover sample + DE loan policy doc; metrics
+  `--extra-loans-locales` / `--extra-loans-basenames`
+- `scripts/fetch_weblate_leftover_sample.py` (optional refresh)
 
 ## [0.2.0] - 2026-10-30
 

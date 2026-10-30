@@ -1,0 +1,7 @@
+# DE UI loans for live_weblate polished pages (see docs/p1-de-loan-policy.md).
+# Applied only with: --extra-loans-locales de
+dashboard
+toast
+store
+upload
+inbox

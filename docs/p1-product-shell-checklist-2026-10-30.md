@@ -21,8 +21,8 @@ Owner-executable. Local packaging already done; publish needs accounts.
 | 1 | Create publisher on [Marketplace manage](https://marketplace.visualstudio.com/manage) id=`nareyko` | owner | □ |
 | 2 | Add PNG icon 128×128 (not SVG) to `packages/vscode-lexaudit/` + `package.json` `icon` | agent | ☑ `icon.png` |
 | 3 | Confirm README images are HTTPS only (no local SVG embeds in Marketplace README) | agent | ☑ no images in README |
-| 4 | `vsce login nareyko` (or Trusted Publishing / OIDC) | owner | □ |
-| 5 | After PyPI 0.3.0 live: `vsce publish` | owner | □ |
+| 4 | `vsce login nareyko` (or Trusted Publishing / OIDC) | owner | □ no `VSCE_PAT` in agent env |
+| 5 | After PyPI 0.3.0 live: `vsce publish` | owner | □ `.vsix` on GitHub Release |
 | 6 | Optional: publish same `.vsix` to Open VSX | owner | □ |
 
 Refs: [Publishing Extensions](https://code.visualstudio.com/api/working-with-extensions/publishing-extension).
@@ -31,10 +31,10 @@ Refs: [Publishing Extensions](https://code.visualstudio.com/api/working-with-ext
 
 | # | Step | Owner | Status |
 |---|---|---|---|
-| 1 | PyPI upload `lexaudit==0.3.0` with `mcp` extra installable | owner | □ workflow stub ready |
+| 1 | PyPI upload `lexaudit==0.3.0` with `mcp` extra installable | owner | □ Trusted Publisher missing |
 | 2 | Verify `server.json` name `io.github.nareyko/lexaudit`, description ≤100 chars | agent | ☑ |
-| 3 | Install `mcp-publisher`; GitHub auth for `io.github.nareyko/*` namespace | owner | □ |
-| 4 | `mcp-publisher publish` from `packages/mcp-lexaudit/` | owner | □ |
+| 3 | Install `mcp-publisher`; GitHub auth for `io.github.nareyko/*` namespace | agent | ☑ login OK 2026-10-30 |
+| 4 | `mcp-publisher publish` from `packages/mcp-lexaudit/` | blocked | □ needs PyPI 0.3.0 first |
 | 5 | Add CI smoke: import FastMCP tools without network LLM | agent | ☑ `test_mcp_smoke` |
 
 Refs: [Registry auth](https://modelcontextprotocol.io/registry/authentication) ·

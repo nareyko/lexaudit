@@ -1,7 +1,8 @@
 # Owner publish runbook · lexaudit 0.3.0
 
-Local gates are green. This runbook needs **your accounts** — the agent cannot
-finish these steps. No secrets belong in the repo.
+Live progress: [`p1-publish-status-2026-10-30.md`](p1-publish-status-2026-10-30.md)
+(`main` + `v0.3.0` + GitHub Release already pushed). Remaining steps need
+**your PyPI / Marketplace accounts**. No secrets belong in the repo.
 
 Remote: `git@github.com:nareyko/lexaudit.git` (`main` may be many commits ahead
 of `origin` after the local prep wave — expect a large first push).

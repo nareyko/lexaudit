@@ -7,7 +7,8 @@ Navigation for the 2026-10-30 prep wave. Prefer these over older notes when they
 | Doc | Role |
 |---|---|
 | [p1-status-next-wave-2026-10-30.md](p1-status-next-wave-2026-10-30.md) | Current snapshot |
-| [p1-owner-publish-runbook-2026-10-30.md](p1-owner-publish-runbook-2026-10-30.md) | **Owner-only** PyPI / MCP / Marketplace |
+| [p1-publish-status-2026-10-30.md](p1-publish-status-2026-10-30.md) | **Live status** — what pushed / what owner still owns |
+| [p1-owner-publish-runbook-2026-10-30.md](p1-owner-publish-runbook-2026-10-30.md) | Owner steps PyPI / MCP / Marketplace |
 | [p1-0.3.0-prep.md](p1-0.3.0-prep.md) | Promote locks + checklist |
 | [p1-next-wave-plan-2026-10-30.md](p1-next-wave-plan-2026-10-30.md) | Research plan (tracks A–E) |
 

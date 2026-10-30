@@ -15,7 +15,7 @@ Unknown terms? See the [glossary](docs/glossary.md).
 - Languages: English (`en`), German (`de`), Spanish (`es`), Polish (`pl`), Russian (`ru`), Swedish (`sv`), Ukrainian (`uk`)
 - Hardware: CPU only
 - Author: Vadim Nareyko ([github.com/nareyko](https://github.com/nareyko))
-- License (**lexaudit only**): **dual** — [MIT](LICENSE) package · [AGPL-3.0-or-later](LICENSE-AGPL-HOSTED.md) hosted SaaS ([details](docs/licensing.md)). FairHelm remains proprietary.
+- License: **dual** — [MIT](LICENSE) package · [AGPL-3.0-or-later](LICENSE-AGPL-HOSTED.md) hosted SaaS ([details](docs/licensing.md))
 
 ![How lexaudit works](docs/images/lexaudit-overview.jpg)
 
@@ -155,11 +155,9 @@ Test layers: unit and integration tests (branch coverage 80% or more), the 7-lan
 
 Pictures in `docs/images` are generated from code: run `python scripts/render_diagrams.py` (needs Inkscape and Pillow). Never edit the JPG files by hand.
 
-## License (dual — lexaudit only)
+## License (dual)
 
-Applies to **this package**, not to FairHelm (FairHelm is proprietary).
-
-| How you use **lexaudit** | License |
+| How you use it | License |
 |---|---|
 | CLI, library, YAML rules, packs (local, CI, embed) | **[MIT](LICENSE)** |
 | Hosted multi-tenant SaaS over the network to third parties | **[AGPL-3.0-or-later](LICENSE-AGPL-HOSTED.md)** |

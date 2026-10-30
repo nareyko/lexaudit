@@ -27,7 +27,7 @@ Everything runs on an ordinary computer processor. No graphics card, no internet
 
 | Location | Role |
 |---|---|
-| `github.com/nareyko/lexaudit` | lexaudit dual license (MIT · AGPL hosted) — [licensing.md](licensing.md); FairHelm host is proprietary · author Vadim Nareyko |
+| `github.com/nareyko/lexaudit` | Package (dual: MIT · AGPL hosted) — [licensing.md](licensing.md) · author Vadim Nareyko |
 | Your project, `lexaudit.config.yaml` | Your settings |
 | Your project, `dicts/*.yaml` | Your own names, abbreviations, allowed words |
 | Your project, output folder | Generated reports. Safe to delete and regenerate |
@@ -52,7 +52,7 @@ lexaudit/
     eval/                # quality metrics
   packs/core-calques-v1/ # release pack
   packs/_lab/            # experimental domain packs (0.3.0 owner go)
-  rules/calques/         # FairHelm bridge copy of core calques
+  rules/calques/         # optional host-bridge copy of core calques
   schema/report-v1.schema.json
   scripts/render_diagrams.py
   scripts/fairhelm_soft_dogfood.sh

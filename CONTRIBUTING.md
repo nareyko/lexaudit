@@ -3,9 +3,7 @@
 `lexaudit` is created and maintained by **Vadim Nareyko**
 ([github.com/nareyko](https://github.com/nareyko)).
 
-## Dual license (lexaudit only)
-
-This applies to **lexaudit**, not to FairHelm (FairHelm is proprietary).
+## Dual license
 
 | Contribution surface | License |
 |---|---|

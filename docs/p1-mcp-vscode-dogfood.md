@@ -2,8 +2,8 @@
 
 ## Architecture
 
-Both surfaces call the **local** `lexaudit` CLI / library. There is no FairHelm
-or lexaudit cloud endpoint. Dictionaries still land in the user cache.
+Both surfaces call the **local** `lexaudit` CLI / library. There is no cloud
+endpoint. Dictionaries still land in the user cache.
 
 | Surface | How to run | Hosting |
 |---|---|---|

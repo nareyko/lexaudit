@@ -7,7 +7,7 @@ see `docs/p1-0.3.0-prep.md`.
 ## Goal
 
 Industry calque / false-friend packs installable later via `lexaudit pack install …`,
-without shipping FairHelm marine content.
+without shipping marine / yacht content.
 
 ## Inventory (10)
 
@@ -54,6 +54,6 @@ uv run python scripts/run_lab_pack_metrics.py
 
 ## Hard rules
 
-- No yacht / marine / survey-boat pack in the public repo.
+- No yacht / marine / survey-boat pack in the public repo (hard rule).
 - MIT license for packs.
 - Keep under `packs/_lab/` until owner go for promote.

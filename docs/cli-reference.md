@@ -197,7 +197,8 @@ uv run python scripts/bilingual_metrics.py \
 
 ## `pack list` / `pack install` / `pack verify`
 
-Installable MIT YAML rule packs. Release packs live under `packs/`; experimental
+Installable YAML rule packs (**MIT**, same dual-license package as the CLI —
+see [licensing.md](licensing.md)). Release packs live under `packs/`; experimental
 ones under `packs/_lab/` (use `--lab`).
 
 ```bash

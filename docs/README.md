@@ -8,7 +8,7 @@
 
 - Author: Vadim Nareyko ([github.com/nareyko](https://github.com/nareyko))
 - Origin: Extracted from multilingual courses and engineering encyclopedias at [FairHelm](https://fairhelm.com)
-- License: [MIT](../LICENSE) · hosted SaaS note: [licensing.md](licensing.md)
+- License: **dual** — [MIT](../LICENSE) (package) · [AGPL-3.0-or-later](../LICENSE-AGPL-HOSTED.md) (hosted SaaS) · [licensing.md](licensing.md)
 
 ![Overview](images/lexaudit-overview.jpg)
 
@@ -21,6 +21,7 @@
 | [Architecture](architecture.md) | What goes in, what comes out, package layout |
 | [Pipeline](pipeline.md) | The gates every word passes, statuses, calque rules |
 | [CLI reference](cli-reference.md) | `init`, `doctor`, `audit`, `explain`, `rank`, `expand-needle`, `label`, `eval`, `diff` |
+| [Licensing](licensing.md) | Dual license: MIT package · AGPL for hosted SaaS |
 | [DE UI loans](p1-de-loan-policy.md) | German keeps Dashboard/Toast/… on purpose — extras only, not DEFAULT |
 | [0.3.0 prep](p1-0.3.0-prep.md) | Which `_lab` packs promote; bilingual stays opt-in |
 | [Agent workflow](agent-workflow.md) | From report to fixed page and back |

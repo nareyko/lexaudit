@@ -1,18 +1,29 @@
-# Licensing
+# Dual license (MIT + AGPL for hosted)
 
-The **lexaudit** command-line tool, Python library, rule YAML files, and packs
-published from this repository are licensed under the **MIT License** (see
-`LICENSE`).
+lexaudit uses a **dual license**, depending on *how* you use the software.
 
-## Hosted services
+| Use | License | Text |
+|---|---|---|
+| CLI, Python library, rule YAML, packs from this repo (local / CI / embed in your product) | **MIT** | [`LICENSE`](../LICENSE) |
+| **Hosted** multi-tenant SaaS that exposes lexaudit (or a fork) as a **network service** to third parties | **AGPL-3.0-or-later** | [`LICENSE-AGPL-HOSTED.md`](../LICENSE-AGPL-HOSTED.md) |
+| Spelling dictionaries from `lexaudit fetch-dicts` | **Upstream** (unchanged) | `*.license.txt` next to each dict |
 
-If you run a **hosted** multi-tenant SaaS that exposes lexaudit (or a fork) as a
-network service to third parties, that hosted service code is intended to be
-licensed under **AGPL-3.0-or-later**. See `LICENSE-AGPL-HOSTED.md` for the full
-text. This repository does not currently ship a hosted service.
+## Plain words
 
-## Dictionaries
+- **You run lexaudit on your laptop or in your own CI** → MIT. Fork, ship, sell, keep private — fine under MIT.
+- **You offer lexaudit as a hosted service that other people’s browsers/API clients talk to** → that hosted service code is intended under AGPL-3.0-or-later (network copyleft: users of the service get source rights).
+- This repository **does not currently ship** a hosted service. The AGPL file is the license text for that intended use, not a second license on the MIT package itself.
+- Packs (`packs/*`, `packs/_lab/*`) stay **MIT**, same as the library.
 
-Spelling dictionaries downloaded by `lexaudit fetch-dicts` keep their **upstream**
-licenses (saved as `*.license.txt` next to each dictionary). They are not
-relicensed by lexaudit.
+## What is *not* dual-licensed
+
+| Asset | Note |
+|---|---|
+| FairHelm marine / yacht dictionaries and content | Stay outside this public package |
+| Hunspell / system dictionaries | Keep their own licenses; lexaudit does not relicense them |
+
+## Where else it is stated
+
+- Root [`README.md`](../README.md) · [`docs/README.md`](README.md) · [`CONTRIBUTING.md`](../CONTRIBUTING.md)
+- Package metadata: `pyproject.toml` → MIT (the published artifact)
+- Changelog: MIT package; hosted AGPL note points here

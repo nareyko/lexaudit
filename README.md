@@ -15,7 +15,7 @@ Unknown terms? See the [glossary](docs/glossary.md).
 - Languages: English (`en`), German (`de`), Spanish (`es`), Polish (`pl`), Russian (`ru`), Swedish (`sv`), Ukrainian (`uk`)
 - Hardware: CPU only
 - Author: Vadim Nareyko ([github.com/nareyko](https://github.com/nareyko))
-- License: [MIT](LICENSE)
+- License: **dual** — [MIT](LICENSE) for the package · [AGPL-3.0-or-later](LICENSE-AGPL-HOSTED.md) for hosted SaaS ([details](docs/licensing.md))
 
 ![How lexaudit works](docs/images/lexaudit-overview.jpg)
 
@@ -154,6 +154,15 @@ uv build
 Test layers: unit and integration tests (branch coverage 80% or more), the 7-language benchmark, property-based fuzzing (Hypothesis), golden regression with a read-only check of your files, JSON Schema contract, complexity gate (CRAP), mutation testing (kill rate 80% or more).
 
 Pictures in `docs/images` are generated from code: run `python scripts/render_diagrams.py` (needs Inkscape and Pillow). Never edit the JPG files by hand.
+
+## License (dual)
+
+| How you use it | License |
+|---|---|
+| CLI, library, YAML rules, packs (local, CI, embed) | **[MIT](LICENSE)** |
+| Hosted multi-tenant SaaS over the network to third parties | **[AGPL-3.0-or-later](LICENSE-AGPL-HOSTED.md)** |
+
+Full wording: [docs/licensing.md](docs/licensing.md). Dictionaries from `fetch-dicts` keep their upstream licenses.
 
 ## Origin and author
 

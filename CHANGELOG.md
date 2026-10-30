@@ -5,6 +5,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+### Changed
+- Docs: dual-license wording (MIT package · AGPL-3.0-or-later for hosted SaaS) in
+  README, CONTRIBUTING, `docs/licensing.md`, architecture, docs index
+
 ### Added (P1 lab only — not on PyPI yet)
 - Lab domain packs `saas-ui-v0`, `fintech-v0`, `developer-docs-v0` under `packs/_lab/` + `scripts/lab_pack_metrics.py`
 - Bilingual held-out protocol, gold CSV, allowlist, `scripts/bilingual_metrics.py`
@@ -32,7 +36,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - GitHub Action (`action.yml`), pre-commit hook, `workflow_dispatch` on CI
 - Corpus formats: HTML, gettext `.po`, XLIFF, MkDocs, Docusaurus, VitePress trees
 - `lexaudit pack list|install|verify` and `packs/core-calques-v1` artifact
-- Lazy dictionary download; Python 3.10+; MIT license (hosted AGPL note in docs/licensing.md)
+- Lazy dictionary download; Python 3.10+; dual license (MIT package · AGPL for hosted SaaS — docs/licensing.md)
 - Docs: backend hunspell vs spylls metrics; P1 lab notes (MCP, bilingual, domain packs)
 
 ### Changed

@@ -41,6 +41,24 @@ hello world
         assert expected in tokens
 
 
+def test_frontmatter_strip_only_once() -> None:
+    """Only the leading YAML fence is removed (sub count=1, not 2)."""
+    raw = """---
+title: one
+---
+bodyword
+---
+title: two
+---
+tailword
+"""
+    plain = strip_for_tokenize(raw)
+    assert "bodyword" in plain
+    assert "tailword" in plain
+    # Second fence pair is body content after first strip — keep a marker.
+    assert "title" in plain or "two" in plain
+
+
 def test_keeps_hyphen_apostrophe_skips_digits() -> None:
     tokens = tokenize("centre-cockpit's 42 hr36 boats", locale="en")
     assert "centre-cockpit's" in tokens

@@ -52,6 +52,41 @@ def test_add_tokens_count_samples_and_dedupe() -> None:
     assert occ["boat"].samples[1].path == "b.md"
 
 
+def test_add_tokens_default_max_samples_is_five() -> None:
+    """Default max_samples=5 (mutmut number +1 must fail)."""
+    occ: dict[str, VocabOccurrence] = {}
+    for i in range(6):
+        add_tokens(
+            occ,
+            [{"normalized": "keel", "surface": "keel"}],
+            path=f"p{i}.md",
+            scope="body",
+        )
+    assert occ["keel"].count == 6
+    assert len(occ["keel"].samples) == 5
+
+
+def test_add_tokens_dedupe_requires_path_and_scope() -> None:
+    """Same path + different scope is a new sample (and≠or)."""
+    occ: dict[str, VocabOccurrence] = {}
+    add_tokens(
+        occ,
+        [{"normalized": "mast", "surface": "mast"}],
+        path="same.md",
+        scope="body",
+        max_samples=5,
+    )
+    add_tokens(
+        occ,
+        [{"normalized": "mast", "surface": "mast"}],
+        path="same.md",
+        scope="title",
+        max_samples=5,
+    )
+    assert len(occ["mast"].samples) == 2
+    assert {s.scope for s in occ["mast"].samples} == {"body", "title"}
+
+
 def test_rank_pages_filters_and_sorts() -> None:
     assert "suspect" in SUSPECT_STATUSES
     assert "foreign" in SUSPECT_STATUSES

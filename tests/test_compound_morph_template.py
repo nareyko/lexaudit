@@ -79,6 +79,10 @@ def test_template_detector() -> None:
     assert out.status == "template"
     assert out.reason == "section-marker"
     assert out.tier is None
+    assert "template" in out.detectors
+    assert "hunspell" in out.detectors
+    assert out.detectors == sorted(out.detectors)
+    assert all(d in {"hunspell", "template"} for d in out.detectors)
     assert det(_suspect("boat")) is None
 
 

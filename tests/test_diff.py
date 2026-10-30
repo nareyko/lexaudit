@@ -98,3 +98,14 @@ def test_diff_identical_no_change(tmp_path: Path) -> None:
     assert d["counts"]["new"] == 0
     assert d["counts"]["gone"] == 0
     assert d["counts"]["tier_changed"] == 0
+
+
+def test_diff_same_weak_tier_unchanged(tmp_path: Path) -> None:
+    """Identical weak tiers must not look like a change (kills tier-key string mutants)."""
+    doc = _minimal("en", [_word("orientir", status="calque", tier="weak")])
+    bp = tmp_path / "base.json"
+    cp = tmp_path / "cur.json"
+    bp.write_text(json.dumps(doc), encoding="utf-8")
+    cp.write_text(json.dumps(doc), encoding="utf-8")
+    d = diff_reports(bp, cp)
+    assert d["counts"] == {"new": 0, "gone": 0, "tier_changed": 0}

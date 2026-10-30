@@ -73,12 +73,22 @@ def test_proper_acronym_template_short_circuit() -> None:
         path="a.md",
         scope="title",
     )
+
+    class RecordingMiss(AllMissChecker):
+        def __init__(self) -> None:
+            self.probed: list[str] = []
+
+        def list_misspelled(self, words: list[str]) -> set[str]:
+            self.probed.extend(words)
+            return set(words)
+
+    checker = RecordingMiss()
     classified = classify_occurrences(
         occurrences=occ,
         proper={"acmecorp"},
         acronyms={"epirb"},
         templates={"overview"},
-        checker=AllMissChecker(),
+        checker=checker,
     )
     by = {c.normalized: c for c in classified}
     assert by["acmecorp"].status == "proper"
@@ -91,6 +101,11 @@ def test_proper_acronym_template_short_circuit() -> None:
     assert by["overview"].reason == "section-marker"
     assert by["overview"].detectors == ["template"]
     assert by["acmecorp"].tier is None
+    # Allowlisted norms must not be sent to hunspell (kills or→and on skip).
+    probed_l = {w.casefold() for w in checker.probed}
+    assert "acmecorp" not in probed_l
+    assert "epirb" not in probed_l
+    assert "overview" not in probed_l
 
 
 def test_hunspell_ok_vs_suspect_and_sort() -> None:

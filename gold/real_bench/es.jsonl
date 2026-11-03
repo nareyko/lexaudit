@@ -1,0 +1,14 @@
+{"path": "tests/fixtures/real_bench/mt/es/mt-actualmente.md", "line": 3, "span": "Actualmente", "label": "false_friend", "source_lang": "en", "suggestion": "En realidad / De hecho", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/es/mt-actualmente.md", "line": 3, "span": "Actualmente", "label": "false_friend", "source_lang": "en", "suggestion": "En realidad", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/es/mt-actualmente.md", "line": 4, "span": "hace sentido", "label": "calque", "source_lang": "en", "suggestion": "tiene sentido", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/es/mt-actualmente.md", "line": 4, "span": "hace sentido", "label": "calque", "source_lang": "en", "suggestion": "tiene sentido", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/es/mt-libreria.md", "line": 3, "span": "librería", "label": "false_friend", "source_lang": "en", "suggestion": "biblioteca (de software)", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/es/mt-libreria.md", "line": 3, "span": "librería", "label": "false_friend", "source_lang": "en", "suggestion": "biblioteca", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/es/mt-libreria.md", "line": 4, "span": "tomar parte", "label": "calque", "source_lang": "en", "suggestion": "participar", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/es/mt-libreria.md", "line": 4, "span": "tomar parte", "label": "calque", "source_lang": "en", "suggestion": "participar", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/clean/es/fh-ci-pipeline.md", "line": 3, "span": "pruebas unitarias", "label": "ok_term", "source_lang": "es", "suggestion": "", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/clean/es/fh-ci-pipeline.md", "line": 3, "span": "pruebas unitarias", "label": "ok_term", "source_lang": "es", "suggestion": "", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/es/mt-tomar-control.md", "line": 3, "span": "toma el control", "label": "calque", "source_lang": "en", "suggestion": "asume el control", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/es/mt-tomar-control.md", "line": 3, "span": "toma el control", "label": "ok_term", "source_lang": "es", "suggestion": "", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/es/mt-tomar-control.md", "line": 4, "span": "Eventualmente", "label": "false_friend", "source_lang": "en", "suggestion": "Al final", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/es/mt-tomar-control.md", "line": 4, "span": "Eventualmente", "label": "false_friend", "source_lang": "en", "suggestion": "Finalmente", "annotator": "A2"}

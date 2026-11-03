@@ -1,0 +1,16 @@
+{"path": "tests/fixtures/real_bench/mt/en/mt-from-ru-calque.md", "line": 3, "span": "takes the control", "label": "calque", "source_lang": "ru", "suggestion": "takes control", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/en/mt-from-ru-calque.md", "line": 3, "span": "takes the control", "label": "calque", "source_lang": "ru", "suggestion": "takes control", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/en/mt-from-ru-calque.md", "line": 4, "span": "has place", "label": "calque", "source_lang": "ru", "suggestion": "happens / is appropriate", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/en/mt-from-ru-calque.md", "line": 4, "span": "has place", "label": "calque", "source_lang": "ru", "suggestion": "is appropriate", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/en/mt-make-sense-en.md", "line": 3, "span": "makes a sense", "label": "calque", "source_lang": "ru", "suggestion": "makes sense", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/en/mt-make-sense-en.md", "line": 3, "span": "makes a sense", "label": "calque", "source_lang": "ru", "suggestion": "makes sense", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/en/mt-make-sense-en.md", "line": 4, "span": "accept a participation", "label": "calque", "source_lang": "ru", "suggestion": "take part", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/en/mt-make-sense-en.md", "line": 4, "span": "accept a participation", "label": "calque", "source_lang": "ru", "suggestion": "participate", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/en.jsonl", "line": 1, "span": "recieve", "label": "other_error", "source_lang": "en", "suggestion": "receive", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/en.jsonl", "line": 1, "span": "recieve", "label": "other_error", "source_lang": "en", "suggestion": "receive", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/en.jsonl", "line": 6, "span": "make a sense", "label": "calque", "source_lang": "ru", "suggestion": "make sense", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/en.jsonl", "line": 6, "span": "make a sense", "label": "calque", "source_lang": "ru", "suggestion": "make sense", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/clean/en/fh-ci-pipeline.md", "line": 3, "span": "unit tests", "label": "ok_term", "source_lang": "en", "suggestion": "", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/clean/en/fh-ci-pipeline.md", "line": 3, "span": "unit tests", "label": "ok_term", "source_lang": "en", "suggestion": "", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/en/mt-realize-en.md", "line": 3, "span": "realize", "label": "false_friend", "source_lang": "ru", "suggestion": "understand / acknowledge", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/en/mt-realize-en.md", "line": 3, "span": "realize", "label": "ok_term", "source_lang": "en", "suggestion": "", "annotator": "A2"}

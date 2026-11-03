@@ -1,0 +1,14 @@
+{"path": "tests/fixtures/real_bench/mt/de/mt-realize.md", "line": 3, "span": "realisieren", "label": "false_friend", "source_lang": "en", "suggestion": "verstehen / einsehen", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/de/mt-realize.md", "line": 3, "span": "realisieren", "label": "false_friend", "source_lang": "en", "suggestion": "einsehen", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/de/mt-realize.md", "line": 4, "span": "macht Sinn", "label": "calque", "source_lang": "en", "suggestion": "ergibt Sinn / ist sinnvoll", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/de/mt-realize.md", "line": 4, "span": "macht Sinn", "label": "calque", "source_lang": "en", "suggestion": "ist sinnvoll", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/de/mt-eventually.md", "line": 3, "span": "Eventuell", "label": "false_friend", "source_lang": "en", "suggestion": "Am Ende / Schließlich", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/de/mt-eventually.md", "line": 3, "span": "Eventuell", "label": "false_friend", "source_lang": "en", "suggestion": "Schließlich", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/de/mt-eventually.md", "line": 4, "span": "nehmen Teil", "label": "calque", "source_lang": "en", "suggestion": "nehmen teil", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/de/mt-eventually.md", "line": 4, "span": "nehmen Teil", "label": "calque", "source_lang": "en", "suggestion": "nehmen teil", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/clean/de/fh-ci-pipeline.md", "line": 3, "span": "Unit-Tests", "label": "ok_term", "source_lang": "de", "suggestion": "", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/clean/de/fh-ci-pipeline.md", "line": 3, "span": "Unit-Tests", "label": "ok_term", "source_lang": "de", "suggestion": "", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/de/mt-actual-plan.md", "line": 3, "span": "aktuelle Plan", "label": "false_friend", "source_lang": "en", "suggestion": "jetzige Plan", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/de/mt-actual-plan.md", "line": 3, "span": "aktuelle Plan", "label": "ok_term", "source_lang": "de", "suggestion": "", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/de/mt-actual-plan.md", "line": 4, "span": "Kontrolle über", "label": "calque", "source_lang": "en", "suggestion": "die Steuerung", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/de/mt-actual-plan.md", "line": 4, "span": "Kontrolle über", "label": "calque", "source_lang": "en", "suggestion": "Steuerung", "annotator": "A2"}

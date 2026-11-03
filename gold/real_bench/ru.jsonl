@@ -1,0 +1,16 @@
+{"path": "tests/fixtures/real_bench/mt/ru/mt-makes-sense.md", "line": 3, "span": "делает смысл", "label": "calque", "source_lang": "en", "suggestion": "имеет смысл", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/ru/mt-makes-sense.md", "line": 3, "span": "делает смысл", "label": "calque", "source_lang": "en", "suggestion": "имеет смысл", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/ru/mt-makes-sense.md", "line": 4, "span": "принимать участие", "label": "calque", "source_lang": "en", "suggestion": "участвовать", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/ru/mt-makes-sense.md", "line": 4, "span": "принимать участие", "label": "calque", "source_lang": "en", "suggestion": "участвовать", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/ru/mt-take-control.md", "line": 3, "span": "берёт контроль", "label": "calque", "source_lang": "en", "suggestion": "берёт управление", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/ru/mt-take-control.md", "line": 3, "span": "берёт контроль", "label": "calque", "source_lang": "en", "suggestion": "принимает управление", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/ru/mt-take-control.md", "line": 4, "span": "имеет место", "label": "ok_term", "source_lang": "ru", "suggestion": "", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/ru/mt-take-control.md", "line": 4, "span": "имеет место", "label": "ok_term", "source_lang": "ru", "suggestion": "", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/ru.jsonl", "line": 1, "span": "делает смысл", "label": "calque", "source_lang": "en", "suggestion": "имеет смысл", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/ru.jsonl", "line": 1, "span": "делает смысл", "label": "calque", "source_lang": "en", "suggestion": "имеет смысл", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/ru.jsonl", "line": 5, "span": "Актуальный план", "label": "false_friend", "source_lang": "en", "suggestion": "текущий план", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/ru.jsonl", "line": 5, "span": "Актуальный план", "label": "false_friend", "source_lang": "en", "suggestion": "текущий план", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/clean/ru/fh-ci-pipeline.md", "line": 3, "span": "модульные тесты", "label": "ok_term", "source_lang": "ru", "suggestion": "", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/clean/ru/fh-ci-pipeline.md", "line": 3, "span": "модульные тесты", "label": "ok_term", "source_lang": "ru", "suggestion": "", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/ru/mt-realize-plan.md", "line": 3, "span": "реализовать", "label": "false_friend", "source_lang": "en", "suggestion": "осознать", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/ru/mt-realize-plan.md", "line": 3, "span": "реализовать", "label": "calque", "source_lang": "en", "suggestion": "понять", "annotator": "A2"}

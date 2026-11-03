@@ -1,0 +1,14 @@
+{"path": "tests/fixtures/real_bench/mt/pl/mt-ewentualnie.md", "line": 3, "span": "Ewentualnie", "label": "false_friend", "source_lang": "en", "suggestion": "W końcu / Ostatecznie", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/pl/mt-ewentualnie.md", "line": 3, "span": "Ewentualnie", "label": "false_friend", "source_lang": "en", "suggestion": "Ostatecznie", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/pl/mt-ewentualnie.md", "line": 4, "span": "robi sens", "label": "calque", "source_lang": "en", "suggestion": "ma sens", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/pl/mt-ewentualnie.md", "line": 4, "span": "robi sens", "label": "calque", "source_lang": "en", "suggestion": "ma sens", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/pl/mt-aktualnie.md", "line": 3, "span": "Aktualnie", "label": "false_friend", "source_lang": "en", "suggestion": "Obecnie / Teraz", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/pl/mt-aktualnie.md", "line": 3, "span": "Aktualnie", "label": "false_friend", "source_lang": "en", "suggestion": "Obecnie", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/pl/mt-take-part-pl.md", "line": 3, "span": "brać udział", "label": "ok_term", "source_lang": "pl", "suggestion": "", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/pl/mt-take-part-pl.md", "line": 3, "span": "brać udział", "label": "ok_term", "source_lang": "pl", "suggestion": "", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/clean/pl/fh-ci-pipeline.md", "line": 3, "span": "testy jednostkowe", "label": "ok_term", "source_lang": "pl", "suggestion": "", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/clean/pl/fh-ci-pipeline.md", "line": 3, "span": "testy jednostkowe", "label": "ok_term", "source_lang": "pl", "suggestion": "", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/pl/mt-aktualnie.md", "line": 4, "span": "brać udział", "label": "ok_term", "source_lang": "pl", "suggestion": "", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/pl/mt-aktualnie.md", "line": 4, "span": "brać udział", "label": "ok_term", "source_lang": "pl", "suggestion": "", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/pl/mt-take-part-pl.md", "line": 5, "span": "bierze kontrolę", "label": "calque", "source_lang": "en", "suggestion": "przejmuje sterowanie", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/pl/mt-take-part-pl.md", "line": 5, "span": "bierze kontrolę", "label": "calque", "source_lang": "en", "suggestion": "przejmuje kontrolę", "annotator": "A2"}

@@ -1,0 +1,14 @@
+{"path": "tests/fixtures/real_bench/mt/sv/mt-eventuellt.md", "line": 3, "span": "Eventuellt", "label": "false_friend", "source_lang": "en", "suggestion": "Till slut / Så småningom", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/sv/mt-eventuellt.md", "line": 3, "span": "Eventuellt", "label": "false_friend", "source_lang": "en", "suggestion": "Så småningom", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/sv/mt-eventuellt.md", "line": 4, "span": "gör mening", "label": "calque", "source_lang": "en", "suggestion": "är meningsfullt", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/sv/mt-eventuellt.md", "line": 4, "span": "gör mening", "label": "calque", "source_lang": "en", "suggestion": "ger mening", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/sv/mt-aktuellt.md", "line": 3, "span": "aktuella planen", "label": "false_friend", "source_lang": "en", "suggestion": "faktiska planen", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/sv/mt-aktuellt.md", "line": 3, "span": "aktuella planen", "label": "false_friend", "source_lang": "en", "suggestion": "nuvarande planen", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/sv/mt-aktuellt.md", "line": 4, "span": "ta del", "label": "ok_term", "source_lang": "sv", "suggestion": "", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/sv/mt-aktuellt.md", "line": 4, "span": "ta del", "label": "ok_term", "source_lang": "sv", "suggestion": "", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/clean/sv/fh-ci-pipeline.md", "line": 3, "span": "enhetstester", "label": "ok_term", "source_lang": "sv", "suggestion": "", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/clean/sv/fh-ci-pipeline.md", "line": 3, "span": "enhetstester", "label": "ok_term", "source_lang": "sv", "suggestion": "", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/sv/mt-ta-kontroll.md", "line": 3, "span": "tar kontroll", "label": "calque", "source_lang": "en", "suggestion": "tar över styrningen", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/sv/mt-ta-kontroll.md", "line": 3, "span": "tar kontroll", "label": "calque", "source_lang": "en", "suggestion": "övertar styrningen", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/sv/mt-ta-kontroll.md", "line": 5, "span": "ta del", "label": "ok_term", "source_lang": "sv", "suggestion": "", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/sv/mt-ta-kontroll.md", "line": 5, "span": "ta del", "label": "ok_term", "source_lang": "sv", "suggestion": "", "annotator": "A2"}

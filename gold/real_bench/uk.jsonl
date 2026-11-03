@@ -1,0 +1,16 @@
+{"path": "tests/fixtures/real_bench/mt/uk/mt-take-part.md", "line": 3, "span": "приймати участь", "label": "calque", "source_lang": "en", "suggestion": "брати участь", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/uk/mt-take-part.md", "line": 3, "span": "приймати участь", "label": "calque", "source_lang": "en", "suggestion": "брати участь", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/uk/mt-take-part.md", "line": 4, "span": "робить сенс", "label": "calque", "source_lang": "en", "suggestion": "має сенс", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/uk/mt-take-part.md", "line": 4, "span": "робить сенс", "label": "calque", "source_lang": "en", "suggestion": "має сенс", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/uk/mt-take-part.md", "line": 5, "span": "В залежності від", "label": "calque", "source_lang": "ru", "suggestion": "Залежно від", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/uk/mt-take-part.md", "line": 5, "span": "В залежності від", "label": "calque", "source_lang": "ru", "suggestion": "Залежно від", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/uk/mt-from-ru-control.md", "line": 3, "span": "бере контроль", "label": "calque", "source_lang": "ru", "suggestion": "бере управління", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/uk/mt-from-ru-control.md", "line": 3, "span": "бере контроль", "label": "calque", "source_lang": "ru", "suggestion": "бере управління", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/uk.jsonl", "line": 1, "span": "lexical-pair", "label": "other_error", "source_lang": "uk", "suggestion": "", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/uk.jsonl", "line": 1, "span": "lexical-pair", "label": "other_error", "source_lang": "uk", "suggestion": "", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/clean/uk/fh-ci-pipeline.md", "line": 3, "span": "модульні тести", "label": "ok_term", "source_lang": "uk", "suggestion": "", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/clean/uk/fh-ci-pipeline.md", "line": 3, "span": "модульні тести", "label": "ok_term", "source_lang": "uk", "suggestion": "", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/uk/mt-depend-on.md", "line": 3, "span": "В залежності від", "label": "calque", "source_lang": "ru", "suggestion": "Залежно від", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/uk/mt-depend-on.md", "line": 3, "span": "В залежності від", "label": "calque", "source_lang": "ru", "suggestion": "Залежно від", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/mt/uk/mt-depend-on.md", "line": 4, "span": "прийняти участь", "label": "calque", "source_lang": "en", "suggestion": "взяти участь", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/mt/uk/mt-depend-on.md", "line": 4, "span": "прийняти участь", "label": "false_friend", "source_lang": "en", "suggestion": "взяти участь", "annotator": "A2"}

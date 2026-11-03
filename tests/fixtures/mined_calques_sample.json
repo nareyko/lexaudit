@@ -1,0 +1,95 @@
+{
+  "note": "Offline sample for scripts/mine_calques_wiktionary.py — original research notes, not Wiktionary verbatim.",
+  "candidates": [
+    {
+      "lemma": "actualmente",
+      "locale": "es",
+      "kind": "false_friend",
+      "source_lang": "en",
+      "hint": "currently OK; not English 'actually' → en realidad",
+      "score": 90,
+      "origin": "fixture"
+    },
+    {
+      "lemma": "librería",
+      "locale": "es",
+      "kind": "false_friend",
+      "source_lang": "en",
+      "hint": "bookstore OK; not English 'library' → biblioteca",
+      "score": 88,
+      "origin": "fixture"
+    },
+    {
+      "lemma": "realisieren",
+      "locale": "de",
+      "kind": "false_friend",
+      "source_lang": "en",
+      "hint": "implement OK; not English 'realize/understand' → merken",
+      "score": 86,
+      "origin": "fixture"
+    },
+    {
+      "lemma": "ewentualnie",
+      "locale": "pl",
+      "kind": "false_friend",
+      "source_lang": "en",
+      "hint": "optionally OK; not English 'eventually' → ostatecznie",
+      "score": 84,
+      "origin": "fixture"
+    },
+    {
+      "lemma": "aktualnie",
+      "locale": "pl",
+      "kind": "false_friend",
+      "source_lang": "en",
+      "hint": "currently OK; not English 'actually' → właściwie",
+      "score": 84,
+      "origin": "fixture"
+    },
+    {
+      "lemma": "eventuellt",
+      "locale": "sv",
+      "kind": "false_friend",
+      "source_lang": "en",
+      "hint": "possibly OK; not English 'eventually' → så småningom",
+      "score": 82,
+      "origin": "fixture"
+    },
+    {
+      "lemma": "приймати участь",
+      "locale": "uk",
+      "kind": "calque",
+      "source_lang": "ru",
+      "hint": "брати участь",
+      "score": 95,
+      "origin": "fixture"
+    },
+    {
+      "lemma": "в залежності від",
+      "locale": "uk",
+      "kind": "calque",
+      "source_lang": "ru",
+      "hint": "залежно від",
+      "score": 94,
+      "origin": "fixture"
+    },
+    {
+      "lemma": "делает смысл",
+      "locale": "ru",
+      "kind": "calque",
+      "source_lang": "en",
+      "hint": "имеет смысл",
+      "score": 96,
+      "origin": "fixture"
+    },
+    {
+      "lemma": "orientir",
+      "locale": "en",
+      "kind": "calque",
+      "source_lang": "ru",
+      "hint": "working rule / ballpark",
+      "score": 92,
+      "origin": "fixture"
+    }
+  ]
+}

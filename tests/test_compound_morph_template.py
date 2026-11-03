@@ -72,6 +72,32 @@ def test_compound_sv_and_noop_en() -> None:
     assert det(_suspect("boathouse")) is None
 
 
+def test_compound_hyphen_tech_and_suffix() -> None:
+    det = make_compound_detector("de", {"version", "wert", "beobacht"})
+    out = det(_suspect("api-versionierung"))
+    assert out is not None
+    assert out.status == "ok"
+    assert out.reason == "compound-hyphen"
+    out2 = det(_suspect("max-age-werte"))
+    assert out2 is not None
+    assert out2.status == "ok"
+    out3 = det(_suspect("beobachtbarkeit"))
+    assert out3 is not None
+    assert out3.status == "ok"
+    assert out3.reason in {"compound-suffix", "compound-split"}
+    out4 = det(_suspect("commit"))
+    assert out4 is not None
+    assert out4.reason == "tech-term"
+
+
+def test_compound_sv_fugen_and_het() -> None:
+    det = make_compound_detector("sv", {"uppdatering", "observerbar", "sökväg", "version"})
+    assert det(_suspect("uppdateringstoken")) is not None
+    assert det(_suspect("observerbarhet")) is not None
+    assert det(_suspect("sökvägsversioner")) is not None
+    assert det(_suspect("tokenautentisering")) is not None
+
+
 def test_template_detector() -> None:
     det = make_template_detector({"overview", "faq"})
     out = det(_suspect("overview"))

@@ -1,0 +1,6 @@
+{"id": "pl-self-001", "source": "robić sens", "target": "mieć sens", "error_type": "Calque", "sentence": "Ten plan wdrożenia zaczyna robić sens dopiero po testach.", "provenance": "CC0 self-curated; calque of EN 'make sense'."}
+{"id": "pl-self-002", "source": "aktualnie", "target": "właściwie", "error_type": "false_friend", "sentence": "Aktualnie canary padł przez timeout migracji.", "provenance": "CC0 self-curated; EN actually≠PL aktualnie in discourse sense."}
+{"id": "pl-self-003", "source": "ewentualnie", "target": "w końcu", "error_type": "false_friend", "sentence": "Ewentualnie balansuje ruch na ciepłe repliki.", "provenance": "CC0 self-curated; EN eventually≠PL ewentualnie."}
+{"id": "pl-self-004", "source": "supportować", "target": "wspierać", "error_type": "Calque", "sentence": "On-call musi supportować tylko podpisane webhooki.", "provenance": "CC0 self-curated anglicism; prefer wspierać/obsługiwać."}
+{"id": "pl-self-005", "source": "performować", "target": "wykonać", "error_type": "Calque", "sentence": "Worker powinien performować backfill partiami.", "provenance": "CC0 self-curated invented loan from EN perform."}
+{"id": "pl-self-006", "source": "brać kontrolę", "target": "przejąć sterowanie", "error_type": "Calque", "sentence": "Operator musi brać kontrolę nad canary ręcznie.", "provenance": "CC0 self-curated; calque of EN 'take control'."}

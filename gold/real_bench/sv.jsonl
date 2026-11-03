@@ -12,3 +12,11 @@
 {"path": "tests/fixtures/real_bench/mt/sv/mt-ta-kontroll.md", "line": 3, "span": "tar kontroll", "label": "calque", "source_lang": "en", "suggestion": "övertar styrningen", "annotator": "A2"}
 {"path": "tests/fixtures/real_bench/mt/sv/mt-ta-kontroll.md", "line": 5, "span": "ta del", "label": "ok_term", "source_lang": "sv", "suggestion": "", "annotator": "A1"}
 {"path": "tests/fixtures/real_bench/mt/sv/mt-ta-kontroll.md", "line": 5, "span": "ta del", "label": "ok_term", "source_lang": "sv", "suggestion": "", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/sv.jsonl", "line": 1, "span": "göra sense", "label": "calque", "source_lang": "en", "suggestion": "ge mening", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/sv.jsonl", "line": 1, "span": "göra sense", "label": "calque", "source_lang": "en", "suggestion": "ge mening", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/sv.jsonl", "line": 2, "span": "eventuellt", "label": "false_friend", "source_lang": "en", "suggestion": "slutligen", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/sv.jsonl", "line": 2, "span": "eventuellt", "label": "false_friend", "source_lang": "en", "suggestion": "slutligen", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/sv.jsonl", "line": 3, "span": "realisera", "label": "false_friend", "source_lang": "en", "suggestion": "inse", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/sv.jsonl", "line": 3, "span": "realisera", "label": "false_friend", "source_lang": "en", "suggestion": "inse", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/sv.jsonl", "line": 4, "span": "downloada", "label": "calque", "source_lang": "en", "suggestion": "ladda ner", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/sv.jsonl", "line": 4, "span": "downloada", "label": "calque", "source_lang": "en", "suggestion": "ladda ner", "annotator": "A2"}

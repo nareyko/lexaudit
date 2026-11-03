@@ -1,0 +1,6 @@
+{"id": "sv-self-001", "source": "göra sense", "target": "ge mening", "error_type": "Calque", "sentence": "Utrullningsplanen måste göra sense för on-call.", "provenance": "CC0 self-curated; calque of EN 'make sense'."}
+{"id": "sv-self-002", "source": "eventuellt", "target": "slutligen", "error_type": "false_friend", "sentence": "Eventuellt fallerar canaryn och vi rullar tillbaka.", "provenance": "CC0 self-curated; EN eventually≠SV eventuellt (false friend)."}
+{"id": "sv-self-003", "source": "realisera", "target": "inse", "error_type": "false_friend", "sentence": "Först nu realiserar vi replay-risken i kön.", "provenance": "CC0 self-curated; EN realize≠SV realisera in cognition sense."}
+{"id": "sv-self-004", "source": "downloada", "target": "ladda ner", "error_type": "Calque", "sentence": "Klienter får downloada artefakter först efter signaturkollen.", "provenance": "CC0 self-curated anglicism; prefer ladda ner."}
+{"id": "sv-self-005", "source": "performa", "target": "utföra", "error_type": "Calque", "sentence": "Workern ska performa backfill i idempotenta batchar.", "provenance": "CC0 self-curated invented loan from EN perform."}
+{"id": "sv-self-006", "source": "ta kontroll", "target": "styra", "error_type": "Calque", "sentence": "Operatören måste ta kontroll över canaryn manuellt.", "provenance": "CC0 self-curated; calque of EN 'take control'."}

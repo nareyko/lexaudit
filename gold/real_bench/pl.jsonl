@@ -12,3 +12,11 @@
 {"path": "tests/fixtures/real_bench/mt/pl/mt-aktualnie.md", "line": 4, "span": "brać udział", "label": "ok_term", "source_lang": "pl", "suggestion": "", "annotator": "A2"}
 {"path": "tests/fixtures/real_bench/mt/pl/mt-take-part-pl.md", "line": 5, "span": "bierze kontrolę", "label": "calque", "source_lang": "en", "suggestion": "przejmuje sterowanie", "annotator": "A1"}
 {"path": "tests/fixtures/real_bench/mt/pl/mt-take-part-pl.md", "line": 5, "span": "bierze kontrolę", "label": "calque", "source_lang": "en", "suggestion": "przejmuje kontrolę", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/pl.jsonl", "line": 1, "span": "robić sens", "label": "calque", "source_lang": "en", "suggestion": "mieć sens", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/pl.jsonl", "line": 1, "span": "robić sens", "label": "calque", "source_lang": "en", "suggestion": "mieć sens", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/pl.jsonl", "line": 2, "span": "aktualnie", "label": "false_friend", "source_lang": "en", "suggestion": "właściwie", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/pl.jsonl", "line": 2, "span": "aktualnie", "label": "false_friend", "source_lang": "en", "suggestion": "właściwie", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/pl.jsonl", "line": 3, "span": "ewentualnie", "label": "false_friend", "source_lang": "en", "suggestion": "w końcu", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/pl.jsonl", "line": 3, "span": "ewentualnie", "label": "false_friend", "source_lang": "en", "suggestion": "w końcu", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/pl.jsonl", "line": 4, "span": "supportować", "label": "calque", "source_lang": "en", "suggestion": "wspierać", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/pl.jsonl", "line": 4, "span": "supportować", "label": "calque", "source_lang": "en", "suggestion": "wspierać", "annotator": "A2"}

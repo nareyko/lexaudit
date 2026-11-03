@@ -41,13 +41,21 @@ def test_competitor_benchmark_lexaudit_only_smoke(tmp_path: Path) -> None:
 
     report = json.loads(out_json.read_text(encoding="utf-8"))
     assert report["lexaudit_only"] is True
-    assert set(report["tools"]) >= {"lexaudit", "hunspell", "cspell", "vale", "languagetool"}
+    assert set(report["tools"]) >= {
+        "lexaudit_strict",
+        "lexaudit_full",
+        "hunspell",
+        "cspell",
+        "vale",
+        "languagetool",
+    }
 
-    lex = report["tools"]["lexaudit"]
-    assert lex["available"] is True
-    assert lex["word_precision"] is not None
-    assert lex["page_p_at_3"] is not None
-    assert lex["seconds"] is not None and lex["seconds"] >= 0
+    for key in ("lexaudit_strict", "lexaudit_full"):
+        lex = report["tools"][key]
+        assert lex["available"] is True
+        assert lex["word_precision"] is not None
+        assert lex["page_p_at_3"] is not None
+        assert lex["seconds"] is not None and lex["seconds"] >= 0
 
     for name in ("hunspell", "cspell", "vale", "languagetool"):
         row = report["tools"][name]
@@ -58,5 +66,6 @@ def test_competitor_benchmark_lexaudit_only_smoke(tmp_path: Path) -> None:
 
     md = out_md.read_text(encoding="utf-8")
     assert "Competitor benchmark" in md
-    assert "lexaudit" in md
+    assert "lexaudit (strict" in md
+    assert "lexaudit (full" in md
     assert "N/A" in md or "skipped" in md

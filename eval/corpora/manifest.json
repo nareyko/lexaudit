@@ -1,6 +1,6 @@
 {
   "version": "0.4-v2",
-  "generated_at": "2026-11-03T15:26:16Z",
+  "generated_at": "2026-11-03T19:03:23Z",
   "allowed_licenses": [
     "MIT",
     "Apache-2.0",
@@ -2174,7 +2174,7 @@
       "locale": "uk",
       "path": "gec/uk.jsonl",
       "sha256": "b14e0b574546c72633bb6d9c4192911e9bdbe2f91a4b94cd8020b1c833fb030b",
-      "retrieved": "2026-11-03T15:26:16Z",
+      "retrieved": "2026-11-03T19:03:23Z",
       "bytes": 8733,
       "notes": "Lexical Spelling/Calque pairs extracted from annotated samples."
     },
@@ -2185,7 +2185,7 @@
       "locale": "en",
       "path": "gec/en.jsonl",
       "sha256": "693a95db6c250a2fc723c74838a6084ffbedfa1c80b68024ce54d19b6d6c822e",
-      "retrieved": "2026-11-03T15:26:16Z",
+      "retrieved": "2026-11-03T19:03:23Z",
       "bytes": 1517,
       "notes": "Original FairHelm/lexaudit CC0 fixture (self-curated). mhagiwara/github-typo-corpus was inspected 2026-11-03: no clear Apache-2.0/MIT/BSD/CC grant in-repo (terms follow upstream commits), so it was NOT downloaded into fixtures. Verified mhagiwara/github-typo-corpus lacks a clear permissive LICENSE file; not mirrored."
     },
@@ -2196,9 +2196,53 @@
       "locale": "ru",
       "path": "gec/ru.jsonl",
       "sha256": "beb7830bc2839281291732b5a77b8f7916044ee63ae1c4ed1921b84bd8ee2688",
-      "retrieved": "2026-11-03T15:26:16Z",
+      "retrieved": "2026-11-03T19:03:23Z",
       "bytes": 1864,
       "notes": "Original FairHelm/lexaudit CC0 fixture (self-curated)."
+    },
+    {
+      "source": "fairhelm-lexaudit-self-gec",
+      "url": "https://fairhelm.com/",
+      "license": "CC0-1.0",
+      "locale": "de",
+      "path": "gec/de.jsonl",
+      "sha256": "dabfa1b744ed64a61a2f8150d328f43f61f5254204d9fe6f45ec9b1efbc2133e",
+      "retrieved": "2026-11-03T19:03:23Z",
+      "bytes": 1556,
+      "notes": "CC0 self-curated; calque of EN 'makes sense' (cf. Wiktionary / German editorial guidance against 'Sinn machen')."
+    },
+    {
+      "source": "fairhelm-lexaudit-self-gec",
+      "url": "https://fairhelm.com/",
+      "license": "CC0-1.0",
+      "locale": "es",
+      "path": "gec/es.jsonl",
+      "sha256": "37dd0bf29b689b3400be8d5c280cf138f854efe80a5841770b23b3f43cbaab66",
+      "retrieved": "2026-11-03T19:03:23Z",
+      "bytes": 1443,
+      "notes": "CC0 self-curated; calque of EN 'make sense'."
+    },
+    {
+      "source": "fairhelm-lexaudit-self-gec",
+      "url": "https://fairhelm.com/",
+      "license": "CC0-1.0",
+      "locale": "pl",
+      "path": "gec/pl.jsonl",
+      "sha256": "def9d3b2950868252034c5c6ebcc3fe8b665229cf02bc813ff069c3e365a26d2",
+      "retrieved": "2026-11-03T19:03:23Z",
+      "bytes": 1403,
+      "notes": "CC0 self-curated; calque of EN 'make sense'."
+    },
+    {
+      "source": "fairhelm-lexaudit-self-gec",
+      "url": "https://fairhelm.com/",
+      "license": "CC0-1.0",
+      "locale": "sv",
+      "path": "gec/sv.jsonl",
+      "sha256": "c147c02ed1d94843942ea7777f133ba6025626bb25ae25933e8b77d0caba61a9",
+      "retrieved": "2026-11-03T19:03:23Z",
+      "bytes": 1384,
+      "notes": "CC0 self-curated; calque of EN 'make sense'."
     }
   ]
 }

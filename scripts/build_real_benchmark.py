@@ -961,6 +961,218 @@ SELF_GEC: dict[str, list[dict[str, str]]] = {
             "provenance": "Original FairHelm/lexaudit CC0 fixture (self-curated).",
         },
     ],
+    # de/es/pl/sv: CC0 self-curated lexical pairs patterned on open calque /
+    # false-friend inventories (Wiktionary Appendix:False friends, Wikipedia
+    # "Falscher Freund" examples). No proprietary GEC dump mirrored.
+    "de": [
+        {
+            "id": "de-self-001",
+            "source": "macht Sinn",
+            "target": "ergibt Sinn",
+            "error_type": "Calque",
+            "sentence": "Der Rollout-Plan macht Sinn erst nach grünen Tests.",
+            "provenance": (
+                "CC0 self-curated; calque of EN 'makes sense' (cf. Wiktionary / "
+                "German editorial guidance against 'Sinn machen')."
+            ),
+        },
+        {
+            "id": "de-self-002",
+            "source": "nehmen Teil",
+            "target": "nehmen teil",
+            "error_type": "Calque",
+            "sentence": "Die On-Call-Ingenieure nehmen Teil am Schema-Review.",
+            "provenance": "CC0 self-curated MT-style separable-verb casing error.",
+        },
+        {
+            "id": "de-self-003",
+            "source": "realisieren",
+            "target": "einsehen",
+            "error_type": "false_friend",
+            "sentence": "Erst jetzt realisieren wir den Replay-Risiko-Trade-off.",
+            "provenance": (
+                "CC0 self-curated; EN realize≠DE realisieren (Wiktionary false friend)."
+            ),
+        },
+        {
+            "id": "de-self-004",
+            "source": "Eventuell",
+            "target": "Schließlich",
+            "error_type": "false_friend",
+            "sentence": "Eventuell schlägt der Canary fehl und wir rollen zurück.",
+            "provenance": (
+                "CC0 self-curated; EN eventually≠DE eventuell (Wiktionary false friend)."
+            ),
+        },
+        {
+            "id": "de-self-005",
+            "source": "updaten",
+            "target": "aktualisieren",
+            "error_type": "Calque",
+            "sentence": "Wir müssen den Feature-Flag-Katalog noch updaten.",
+            "provenance": "CC0 self-curated anglicism preferred as lexical defect in formal DE.",
+        },
+        {
+            "id": "de-self-006",
+            "source": "downloaden",
+            "target": "herunterladen",
+            "error_type": "Calque",
+            "sentence": "Clients dürfen Artefakte erst nach dem Signaturcheck downloaden.",
+            "provenance": "CC0 self-curated anglicism; preferred native herunterladen.",
+        },
+    ],
+    "es": [
+        {
+            "id": "es-self-001",
+            "source": "hacer sentido",
+            "target": "tener sentido",
+            "error_type": "Calque",
+            "sentence": "El plan de despliegue debe hacer sentido para on-call.",
+            "provenance": "CC0 self-curated; calque of EN 'make sense'.",
+        },
+        {
+            "id": "es-self-002",
+            "source": "actualmente",
+            "target": "en realidad",
+            "error_type": "false_friend",
+            "sentence": "Actualmente el canario falló por un timeout de esquema.",
+            "provenance": (
+                "CC0 self-curated; EN actually≠ES actualmente (Wiktionary false friend)."
+            ),
+        },
+        {
+            "id": "es-self-003",
+            "source": "eventualmente",
+            "target": "finalmente",
+            "error_type": "false_friend",
+            "sentence": "Eventualmente el balanceador abre réplicas calientes.",
+            "provenance": ("CC0 self-curated; EN eventually≠ES eventualmente."),
+        },
+        {
+            "id": "es-self-004",
+            "source": "atender",
+            "target": "asistir a",
+            "error_type": "false_friend",
+            "sentence": "El equipo debe atender la reunión de post-mortem.",
+            "provenance": "CC0 self-curated; EN attend≠ES atender in meeting sense.",
+        },
+        {
+            "id": "es-self-005",
+            "source": "chequear",
+            "target": "comprobar",
+            "error_type": "Calque",
+            "sentence": "Hay que chequear la firma del webhook antes de aplicar.",
+            "provenance": "CC0 self-curated anglicism; prefer comprobar/verificar.",
+        },
+        {
+            "id": "es-self-006",
+            "source": "performar",
+            "target": "realizar",
+            "error_type": "Calque",
+            "sentence": "El worker debe performar el backfill en lotes idempotentes.",
+            "provenance": "CC0 self-curated invented loan from EN perform.",
+        },
+    ],
+    "pl": [
+        {
+            "id": "pl-self-001",
+            "source": "robić sens",
+            "target": "mieć sens",
+            "error_type": "Calque",
+            "sentence": "Ten plan wdrożenia zaczyna robić sens dopiero po testach.",
+            "provenance": "CC0 self-curated; calque of EN 'make sense'.",
+        },
+        {
+            "id": "pl-self-002",
+            "source": "aktualnie",
+            "target": "właściwie",
+            "error_type": "false_friend",
+            "sentence": "Aktualnie canary padł przez timeout migracji.",
+            "provenance": ("CC0 self-curated; EN actually≠PL aktualnie in discourse sense."),
+        },
+        {
+            "id": "pl-self-003",
+            "source": "ewentualnie",
+            "target": "w końcu",
+            "error_type": "false_friend",
+            "sentence": "Ewentualnie balansuje ruch na ciepłe repliki.",
+            "provenance": "CC0 self-curated; EN eventually≠PL ewentualnie.",
+        },
+        {
+            "id": "pl-self-004",
+            "source": "supportować",
+            "target": "wspierać",
+            "error_type": "Calque",
+            "sentence": "On-call musi supportować tylko podpisane webhooki.",
+            "provenance": "CC0 self-curated anglicism; prefer wspierać/obsługiwać.",
+        },
+        {
+            "id": "pl-self-005",
+            "source": "performować",
+            "target": "wykonać",
+            "error_type": "Calque",
+            "sentence": "Worker powinien performować backfill partiami.",
+            "provenance": "CC0 self-curated invented loan from EN perform.",
+        },
+        {
+            "id": "pl-self-006",
+            "source": "brać kontrolę",
+            "target": "przejąć sterowanie",
+            "error_type": "Calque",
+            "sentence": "Operator musi brać kontrolę nad canary ręcznie.",
+            "provenance": "CC0 self-curated; calque of EN 'take control'.",
+        },
+    ],
+    "sv": [
+        {
+            "id": "sv-self-001",
+            "source": "göra sense",
+            "target": "ge mening",
+            "error_type": "Calque",
+            "sentence": "Utrullningsplanen måste göra sense för on-call.",
+            "provenance": "CC0 self-curated; calque of EN 'make sense'.",
+        },
+        {
+            "id": "sv-self-002",
+            "source": "eventuellt",
+            "target": "slutligen",
+            "error_type": "false_friend",
+            "sentence": "Eventuellt fallerar canaryn och vi rullar tillbaka.",
+            "provenance": ("CC0 self-curated; EN eventually≠SV eventuellt (false friend)."),
+        },
+        {
+            "id": "sv-self-003",
+            "source": "realisera",
+            "target": "inse",
+            "error_type": "false_friend",
+            "sentence": "Först nu realiserar vi replay-risken i kön.",
+            "provenance": "CC0 self-curated; EN realize≠SV realisera in cognition sense.",
+        },
+        {
+            "id": "sv-self-004",
+            "source": "downloada",
+            "target": "ladda ner",
+            "error_type": "Calque",
+            "sentence": "Klienter får downloada artefakter först efter signaturkollen.",
+            "provenance": "CC0 self-curated anglicism; prefer ladda ner.",
+        },
+        {
+            "id": "sv-self-005",
+            "source": "performa",
+            "target": "utföra",
+            "error_type": "Calque",
+            "sentence": "Workern ska performa backfill i idempotenta batchar.",
+            "provenance": "CC0 self-curated invented loan from EN perform.",
+        },
+        {
+            "id": "sv-self-006",
+            "source": "ta kontroll",
+            "target": "styra",
+            "error_type": "Calque",
+            "sentence": "Operatören måste ta kontroll över canaryn manuellt.",
+            "provenance": "CC0 self-curated; calque of EN 'take control'.",
+        },
+    ],
 }
 
 

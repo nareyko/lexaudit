@@ -12,3 +12,11 @@
 {"path": "tests/fixtures/real_bench/mt/es/mt-tomar-control.md", "line": 3, "span": "toma el control", "label": "ok_term", "source_lang": "es", "suggestion": "", "annotator": "A2"}
 {"path": "tests/fixtures/real_bench/mt/es/mt-tomar-control.md", "line": 4, "span": "Eventualmente", "label": "false_friend", "source_lang": "en", "suggestion": "Al final", "annotator": "A1"}
 {"path": "tests/fixtures/real_bench/mt/es/mt-tomar-control.md", "line": 4, "span": "Eventualmente", "label": "false_friend", "source_lang": "en", "suggestion": "Finalmente", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/es.jsonl", "line": 1, "span": "hacer sentido", "label": "calque", "source_lang": "en", "suggestion": "tener sentido", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/es.jsonl", "line": 1, "span": "hacer sentido", "label": "calque", "source_lang": "en", "suggestion": "tener sentido", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/es.jsonl", "line": 2, "span": "actualmente", "label": "false_friend", "source_lang": "en", "suggestion": "en realidad", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/es.jsonl", "line": 2, "span": "actualmente", "label": "false_friend", "source_lang": "en", "suggestion": "en realidad", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/es.jsonl", "line": 3, "span": "eventualmente", "label": "false_friend", "source_lang": "en", "suggestion": "finalmente", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/es.jsonl", "line": 3, "span": "eventualmente", "label": "false_friend", "source_lang": "en", "suggestion": "finalmente", "annotator": "A2"}
+{"path": "tests/fixtures/real_bench/gec/es.jsonl", "line": 5, "span": "chequear", "label": "calque", "source_lang": "en", "suggestion": "comprobar", "annotator": "A1"}
+{"path": "tests/fixtures/real_bench/gec/es.jsonl", "line": 5, "span": "chequear", "label": "calque", "source_lang": "en", "suggestion": "comprobar", "annotator": "A2"}

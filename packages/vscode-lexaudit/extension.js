@@ -31,7 +31,28 @@ function collectDiagnosticsFromFindings(findingsPath, vscode, diagnosticCollecti
     if (!filePath) continue;
     const list = byFile.get(filePath) || [];
     const line = typeof row.line === "number" && row.line > 0 ? row.line - 1 : 0;
-    const range = new vscode.Range(line, 0, line, 200);
+    // Prefer precise 1-based columns from CLI / SARIF (start_col / end_col / column).
+    const startCol1 =
+      (typeof row.start_col === "number" && row.start_col > 0 && row.start_col) ||
+      (typeof row.startColumn === "number" && row.startColumn > 0 && row.startColumn) ||
+      (typeof row.column === "number" && row.column > 0 && row.column) ||
+      0;
+    const endCol1 =
+      (typeof row.end_col === "number" && row.end_col > 0 && row.end_col) ||
+      (typeof row.endColumn === "number" && row.endColumn > 0 && row.endColumn) ||
+      0;
+    const word = String(row.word || row.normalized || "");
+    let startCol0;
+    let endCol0;
+    if (startCol1 > 0) {
+      startCol0 = startCol1 - 1;
+      endCol0 = endCol1 > startCol1 ? endCol1 - 1 : startCol0 + Math.max(word.length, 1);
+    } else {
+      // Fallback: whole line when CLI omitted columns (pre-0.4 findings).
+      startCol0 = 0;
+      endCol0 = 200;
+    }
+    const range = new vscode.Range(line, startCol0, line, endCol0);
     const msg = `${row.word || row.normalized || "?"} [${row.status || "?"}]: ${
       row.hint || row.reason || "lexaudit finding"
     }`;
@@ -173,6 +194,8 @@ if (require.main === module && process.argv.includes("--smoke")) {
       {
         path: path.join(tmp, "a.md"),
         line: 1,
+        start_col: 5,
+        end_col: 14,
         word: "denseness",
         status: "calque",
         reason: "template-calque-denseness",
@@ -181,13 +204,21 @@ if (require.main === module && process.argv.includes("--smoke")) {
     ]),
     "utf8",
   );
+  const captured = [];
   const collection = {
     clear() {},
-    set() {},
+    set(_uri, diags) {
+      captured.push(...diags);
+    },
   };
   const n = collectDiagnosticsFromFindings(findingsPath, fakeVscode, collection);
   if (n !== 1) {
     console.error("smoke: expected 1 diagnostic, got", n);
+    process.exit(1);
+  }
+  const range = captured[0] && captured[0].range;
+  if (!range || range.b !== 4 || range.d !== 13) {
+    console.error("smoke: expected Range cols 4..13 from start_col/end_col, got", range);
     process.exit(1);
   }
   console.log("smoke: extension module loads; CLI status=", helpStatus, "; diagnostics=", n);

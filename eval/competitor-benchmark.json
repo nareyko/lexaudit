@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T15:38:29Z",
+  "generated_at": "2026-11-03T19:09:38Z",
   "schema_version": 1,
   "locales": [
     "en",
@@ -10,20 +10,21 @@
     "sv",
     "uk"
   ],
-  "page_count": 170,
+  "page_count": 174,
   "synthetic_pages": 42,
-  "real_bench_pages": 128,
+  "real_bench_pages": 132,
   "real_bench_present": true,
   "lexaudit_only": false,
   "availability": {
     "hunspell": true,
     "cspell": true,
-    "vale": false,
-    "languagetool": false,
-    "lexaudit": true
+    "vale": true,
+    "languagetool": true,
+    "lexaudit_strict": true,
+    "lexaudit_full": true
   },
   "gold": {
-    "bad_page_slug_count": 43,
+    "bad_page_slug_count": 47,
     "clean_tokens": 4842,
     "needles_by_locale": {
       "en": [
@@ -65,7 +66,8 @@
         "macht Sinn",
         "Eventuell",
         "nehmen Teil",
-        "Kontrolle über"
+        "Kontrolle über",
+        "updaten"
       ],
       "es": [
         "orientir",
@@ -85,7 +87,9 @@
         "hace sentido",
         "librería",
         "tomar parte",
-        "Eventualmente"
+        "Eventualmente",
+        "hacer sentido",
+        "chequear"
       ],
       "pl": [
         "orientir",
@@ -104,7 +108,9 @@
         "Ewentualnie",
         "robi sens",
         "Aktualnie",
-        "bierze kontrolę"
+        "bierze kontrolę",
+        "robić sens",
+        "supportować"
       ],
       "ru": [
         "orientir",
@@ -142,7 +148,10 @@
         "Eventuellt",
         "gör mening",
         "aktuella planen",
-        "tar kontroll"
+        "tar kontroll",
+        "göra sense",
+        "realisera",
+        "downloada"
       ],
       "uk": [
         "orientir",
@@ -165,25 +174,42 @@
         "lexical-pair"
       ]
     },
-    "real_anomaly_span_count": 35
+    "real_anomaly_span_count": 51
   },
   "tools": {
-    "lexaudit": {
-      "tool": "lexaudit",
+    "lexaudit_strict": {
+      "tool": "lexaudit_strict",
       "available": true,
       "skipped_reason": null,
       "backend": "run_locale_audit",
-      "notes": "Weighted calque/domain ranking; page P@3 uses native scores.",
-      "word_precision": 0.1071,
+      "notes": "lexaudit (strict): calque + invented + likely-tier — high precision for CI queue.",
+      "word_precision": 0.5455,
       "word_recall": 0.9293,
       "word_tp": 36,
-      "word_fp": 300,
+      "word_fp": 30,
       "word_fn": 7,
       "page_p_at_3": 1.0,
       "page_p_at_3_hits": 3,
-      "clean_fp_per_1000_tokens": 35.729,
-      "clean_fp_unique_words": 173,
-      "seconds": 5.534
+      "clean_fp_per_1000_tokens": 3.304,
+      "clean_fp_unique_words": 16,
+      "seconds": 5.625
+    },
+    "lexaudit_full": {
+      "tool": "lexaudit_full",
+      "available": true,
+      "skipped_reason": null,
+      "backend": "run_locale_audit",
+      "notes": "lexaudit (full): all anomalies incl. weak suspects — max recall / CI triage.",
+      "word_precision": 0.1434,
+      "word_recall": 0.9293,
+      "word_tp": 36,
+      "word_fp": 215,
+      "word_fn": 7,
+      "page_p_at_3": 1.0,
+      "page_p_at_3_hits": 3,
+      "clean_fp_per_1000_tokens": 22.718,
+      "clean_fp_unique_words": 110,
+      "seconds": 5.625
     },
     "hunspell": {
       "tool": "hunspell",
@@ -191,16 +217,16 @@
       "skipped_reason": null,
       "backend": "HunspellChecker",
       "notes": "Raw dictionary misspellings (spylls or hunspell CLI).",
-      "word_precision": 0.0566,
-      "word_recall": 0.5846,
-      "word_tp": 28,
-      "word_fp": 467,
-      "word_fn": 27,
+      "word_precision": 0.0714,
+      "word_recall": 0.8082,
+      "word_tp": 40,
+      "word_fp": 520,
+      "word_fn": 14,
       "page_p_at_3": 0.3333,
       "page_p_at_3_hits": 1,
       "clean_fp_per_1000_tokens": 73.11,
       "clean_fp_unique_words": 354,
-      "seconds": 8.472
+      "seconds": 9.109
     },
     "cspell": {
       "tool": "cspell",
@@ -208,50 +234,50 @@
       "skipped_reason": null,
       "backend": "/home/vadim/.nvm/versions/node/v24.12.0/bin/npx --yes cspell",
       "notes": "Code-oriented spellchecker; locale packs may be incomplete for RU/UK/SV.",
-      "word_precision": 0.0244,
-      "word_recall": 0.9538,
-      "word_tp": 67,
-      "word_fp": 2682,
-      "word_fn": 3,
+      "word_precision": 0.0285,
+      "word_recall": 0.9726,
+      "word_tp": 81,
+      "word_fp": 2763,
+      "word_fn": 2,
       "page_p_at_3": 0.0,
       "page_p_at_3_hits": 0,
       "clean_fp_per_1000_tokens": 436.39,
       "clean_fp_unique_words": 2113,
-      "seconds": 6.163
+      "seconds": 6.553
     },
     "vale": {
       "tool": "vale",
-      "available": false,
-      "skipped_reason": "vale binary not found",
-      "backend": null,
-      "notes": "",
-      "word_precision": null,
-      "word_recall": null,
-      "word_tp": null,
-      "word_fp": null,
-      "word_fn": null,
-      "page_p_at_3": null,
-      "page_p_at_3_hits": null,
-      "clean_fp_per_1000_tokens": null,
-      "clean_fp_unique_words": null,
-      "seconds": null
+      "available": true,
+      "skipped_reason": null,
+      "backend": "/home/vadim/projects/fairhelm-2026/tools/lexaudit/tmp/bin/vale",
+      "notes": "Prose linter with Google styles.",
+      "word_precision": 0.1053,
+      "word_recall": 0.8493,
+      "word_tp": 66,
+      "word_fp": 561,
+      "word_fn": 11,
+      "page_p_at_3": 0.0,
+      "page_p_at_3_hits": 0,
+      "clean_fp_per_1000_tokens": 50.186,
+      "clean_fp_unique_words": 243,
+      "seconds": 3.337
     },
     "languagetool": {
       "tool": "languagetool",
-      "available": false,
-      "skipped_reason": "language_tool_python not importable and no local server on :8010",
-      "backend": null,
-      "notes": "",
-      "word_precision": null,
-      "word_recall": null,
-      "word_tp": null,
-      "word_fp": null,
-      "word_fn": null,
-      "page_p_at_3": null,
-      "page_p_at_3_hits": null,
-      "clean_fp_per_1000_tokens": null,
-      "clean_fp_unique_words": null,
-      "seconds": null
+      "available": true,
+      "skipped_reason": null,
+      "backend": "language_tool_python",
+      "notes": "Strong on grammar/agreement; weak on domain calques & rewrite-queue ranking.",
+      "word_precision": 0.1289,
+      "word_recall": 0.6301,
+      "word_tp": 37,
+      "word_fp": 250,
+      "word_fn": 27,
+      "page_p_at_3": 0.0,
+      "page_p_at_3_hits": 0,
+      "clean_fp_per_1000_tokens": 31.805,
+      "clean_fp_unique_words": 154,
+      "seconds": 50.048
     }
   }
 }

@@ -82,7 +82,20 @@ CSPELL_LOCALE: dict[str, str] = {
     "uk": "uk",
 }
 
-TOOL_ORDER = ("lexaudit", "hunspell", "cspell", "vale", "languagetool")
+TOOL_ORDER = (
+    "lexaudit_strict",
+    "lexaudit_full",
+    "hunspell",
+    "cspell",
+    "vale",
+    "languagetool",
+)
+
+# CI / rewrite-queue view: confirmed calques & inventeds plus likely-tier hits.
+_STRICT_STATUSES = frozenset({"calque", "invented"})
+_STRICT_TIERS = frozenset({"confirmed", "likely"})
+# Bundled portable Vale (downloaded into gitignored tmp/; never committed).
+_LOCAL_VALE = ROOT / "tmp" / "bin" / "vale"
 
 
 @dataclass
@@ -227,6 +240,48 @@ def _lt_python_importable() -> bool:
     except ImportError:
         return False
     return True
+
+
+def _resolve_vale() -> str | None:
+    """Prefer PATH ``vale``, else portable ``tmp/bin/vale`` (gitignored)."""
+    found = _which("vale")
+    if found:
+        return found
+    if _LOCAL_VALE.is_file() and os.access(_LOCAL_VALE, os.X_OK):
+        return str(_LOCAL_VALE)
+    return None
+
+
+def _is_strict_anomaly(word: ClassifiedWord) -> bool:
+    if word.status in _STRICT_STATUSES:
+        return True
+    return bool(word.tier and word.tier in _STRICT_TIERS and pred_is_anomaly(word.status))
+
+
+def _words_for_mode(words: Sequence[ClassifiedWord], *, mode: str) -> list[ClassifiedWord]:
+    """Return words scored as anomalies for ``strict`` or ``full`` lexaudit modes."""
+    if mode == "full":
+        return list(words)
+    out: list[ClassifiedWord] = []
+    for w in words:
+        if _is_strict_anomaly(w):
+            out.append(w)
+        elif pred_is_anomaly(w.status):
+            out.append(replace(w, status="ok", tier=None, reason="demoted-weak-for-strict"))
+        else:
+            out.append(w)
+    return out
+
+
+def _flagged_for_mode(words: Sequence[ClassifiedWord], *, mode: str) -> dict[str, set[str]]:
+    flagged: dict[str, set[str]] = defaultdict(set)
+    for w in words:
+        keep = pred_is_anomaly(w.status) if mode == "full" else _is_strict_anomaly(w)
+        if not keep:
+            continue
+        for s in w.samples:
+            flagged[s.path].add(w.normalized)
+    return dict(flagged)
 
 
 def _lt_server_up(url: str = "http://127.0.0.1:8010/v2/languages") -> bool:
@@ -435,7 +490,9 @@ def _score_tool(
         return row
 
     # Prefer lexaudit-native metrics when we have classified words.
-    if run.name == "lexaudit" and lexaudit_words is not None:
+    if run.name.startswith("lexaudit") and lexaudit_words is not None:
+        mode = "strict" if run.name.endswith("strict") else "full"
+        scored_words = _words_for_mode(lexaudit_words, mode=mode)
         known: list[str] = []
         unseen: list[str] = []
         for loc, needles in gold.needles_by_locale.items():
@@ -444,13 +501,13 @@ def _score_tool(
                     unseen.append(n)
                 else:
                     known.append(n)
-        wr = word_precision_recall(lexaudit_words, known, unseen)
+        wr = word_precision_recall(scored_words, known, unseen)
         ranked = run.ranked_pages or _rank_from_flags(run.flagged_by_page)
         # Page P@3 is measured on the synthetic 42-page gold only (fair ranking compare).
         ranked_synth = [r for r in ranked if r.path in gold.synth_paths] or ranked
         p3 = page_precision_at_k(ranked_synth, gold.synth_bad_page_slugs, 3)
         fpr = clean_page_fpr(
-            lexaudit_words,
+            scored_words,
             clean_page_slugs=gold.clean_page_slugs,
             clean_pages_total_tokens=gold.clean_tokens,
         )
@@ -808,21 +865,41 @@ def run_cspell_tool(pages: Sequence[PageDoc]) -> ToolRun:
 
 
 def run_vale_tool(pages: Sequence[PageDoc]) -> ToolRun:
-    vale = _which("vale")
+    vale = _resolve_vale()
     if vale is None:
-        return ToolRun(name="vale", available=False, skipped_reason="vale binary not found")
+        return ToolRun(
+            name="vale",
+            available=False,
+            skipped_reason="vale binary not found (install or place at tmp/bin/vale)",
+        )
 
     t0 = time.perf_counter()
     flagged: dict[str, set[str]] = defaultdict(set)
+    styles_root = ROOT / "tmp" / "vale-styles"
+    styles_root.mkdir(parents=True, exist_ok=True)
+    # Prefer a synced Google package when present; otherwise run with empty styles
+    # so the binary still participates (honest N/A-ish signal, not a skip).
+    has_google = (styles_root / "Google").is_dir()
     with tempfile.TemporaryDirectory(prefix="lexaudit-vale-") as tmp:
         tmp_path = Path(tmp)
-        # Minimal ini so Vale can run without a project styles dir.
         ini = tmp_path / ".vale.ini"
-        ini.write_text(
-            "StylesPath = styles\nMinAlertLevel = suggestion\n[*.md]\nBasedOnStyles =\n",
-            encoding="utf-8",
-        )
-        (tmp_path / "styles").mkdir()
+        if has_google:
+            ini.write_text(
+                f"StylesPath = {styles_root}\n"
+                "MinAlertLevel = suggestion\n"
+                "Packages = Google\n"
+                "[*.md]\n"
+                "BasedOnStyles = Google\n",
+                encoding="utf-8",
+            )
+        else:
+            ini.write_text(
+                f"StylesPath = {styles_root}\n"
+                "MinAlertLevel = suggestion\n"
+                "[*.md]\n"
+                "BasedOnStyles =\n",
+                encoding="utf-8",
+            )
         for page in pages:
             safe = page.path.replace("/", "__")
             fpath = tmp_path / f"{safe}.md"
@@ -851,7 +928,6 @@ def run_vale_tool(pages: Sequence[PageDoc]) -> ToolRun:
                         continue
                     match = str(alert.get("Match") or alert.get("Span") or "").strip()
                     if match:
-                        # First token of the match.
                         tok = tokenize(match, locale=page.locale, min_length=2)
                         for t in tok:
                             flagged[page.path].add(t)
@@ -859,17 +935,11 @@ def run_vale_tool(pages: Sequence[PageDoc]) -> ToolRun:
                             flagged[page.path].add(casefold(match, page.locale))
 
     elapsed = time.perf_counter() - t0
-    if not flagged and elapsed < 0.05:
-        # Vale present but produced nothing useful / failed silently.
-        return ToolRun(
-            name="vale",
-            available=True,
-            backend=vale,
-            seconds=elapsed,
-            flagged_by_page={},
-            ranked_pages=[],
-            notes="vale ran with empty styles; alerts may be zero without a style pack.",
-        )
+    notes = (
+        "Prose linter with Google styles."
+        if has_google
+        else "Prose linter; run `vale sync` into tmp/vale-styles for Google package signal."
+    )
     return ToolRun(
         name="vale",
         available=True,
@@ -877,7 +947,7 @@ def run_vale_tool(pages: Sequence[PageDoc]) -> ToolRun:
         seconds=elapsed,
         flagged_by_page=dict(flagged),
         ranked_pages=_rank_from_flags(dict(flagged)),
-        notes="Prose linter; without project styles, signal is weak vs domain calques.",
+        notes=notes,
     )
 
 
@@ -942,8 +1012,12 @@ def run_languagetool_tool(pages: Sequence[PageDoc], locales: Sequence[str]) -> T
             for m in matches:
                 if use_python:
                     offset = int(getattr(m, "offset", 0) or 0)
-                    error_len = int(getattr(m, "errorLength", 0) or 0)
-                    span = page.text[offset : offset + error_len]
+                    # language_tool_python 3.x uses snake_case; older builds used errorLength.
+                    error_len = int(
+                        getattr(m, "error_length", None) or getattr(m, "errorLength", None) or 0
+                    )
+                    matched = getattr(m, "matched_text", None)
+                    span = str(matched) if matched else page.text[offset : offset + error_len]
                 else:
                     assert isinstance(m, dict)
                     offset = int(m.get("offset") or 0)
@@ -973,10 +1047,16 @@ def run_languagetool_tool(pages: Sequence[PageDoc], locales: Sequence[str]) -> T
     )
 
 
+_TOOL_DISPLAY = {
+    "lexaudit_strict": "lexaudit (strict: calque + invented + likely)",
+    "lexaudit_full": "lexaudit (full: all anomalies incl. weak suspects)",
+}
+
+
 def render_markdown(report: dict[str, Any]) -> str:
     tools = report["tools"]
     lines = [
-        "# Competitor benchmark (v0.4 Stage V6-1)",
+        "# Competitor benchmark (v0.4 Stage V6-1 / P4-2)",
         "",
         f"Generated: `{report.get('generated_at', '')}`",
         "",
@@ -996,9 +1076,10 @@ def render_markdown(report: dict[str, Any]) -> str:
     for name in TOOL_ORDER:
         row = tools[name]
         avail = "yes" if row.get("available") else "skipped"
+        display = _TOOL_DISPLAY.get(name, str(row.get("tool", name)))
         lines.append(
             "| {tool} | {avail} | {backend} | {wp} | {wr} | {p3} | {fpr} | {t} |".format(
-                tool=row.get("tool", name),
+                tool=display,
                 avail=avail
                 if row.get("available")
                 else f"skipped ({row.get('skipped_reason') or 'n/a'})",
@@ -1016,18 +1097,20 @@ def render_markdown(report: dict[str, Any]) -> str:
             "",
             "## How to read this honestly",
             "",
+            "- **lexaudit (strict)** counts only `calque` / `invented` plus `confirmed`/`likely`",
+            "  tiers — the CI / rewrite-queue precision view.",
+            "- **lexaudit (full)** includes weak `suspect` noise — maximum recall for triage,",
+            "  higher Clean FP / 1k by design.",
             "- **LanguageTool** usually wins on *grammar / agreement / punctuation* — that is not",
             "  lexaudit's product job. When LT is available, expect higher generic flag volume and",
             "  better catch-rate on GEC typos, not on bilingual calques.",
             "- **lexaudit** wins on *calque / false-friend ranking*, domain allowlists, lower",
-            "  clean-page FPR, and rewrite-queue **page P@3** (weighted scores on the synthetic",
-            "  42-page gold). Spellcheckers that only count OOV tokens often bury planted calques",
-            "  under jargon-heavy clean pages — compare Clean FP / 1k and P@3 in the table.",
+            "  clean-page FPR (strict mode), and rewrite-queue **page P@3**.",
             "- **Hunspell / cspell / Vale** are useful baselines. They do not ship FairHelm",
-            "  (or your) domain lists, and they do not rank a multi-page corpus for a rewrite agent.",
+            "  domain lists, and they do not rank a multi-page corpus for a rewrite agent.",
             "- Rows marked **skipped** mean the binary/package was missing on the runner.",
-            "  CI should call `python scripts/benchmark_competitors.py --lexaudit-only` so the",
-            "  table still materializes without installing competitors.",
+            "  CI should call `python scripts/benchmark_competitors.py --lexaudit-only`.",
+            "- Portable Vale: place the Linux x86_64 binary at `tmp/bin/vale` (gitignored).",
             "",
             "## Reproduce",
             "",
@@ -1070,16 +1153,30 @@ def run_benchmark(
     availability = {
         "hunspell": hunspell_ok,
         "cspell": _find_cspell()[0] is not None,
-        "vale": _which("vale") is not None,
+        "vale": _resolve_vale() is not None,
         "languagetool": _lt_python_importable() or _lt_server_up(),
-        "lexaudit": True,
+        "lexaudit_strict": True,
+        "lexaudit_full": True,
     }
 
     runs: dict[str, ToolRun] = {}
     lex_words: list[ClassifiedWord] = []
 
     lex_run, lex_words = run_lexaudit_tool(cfg, locs, pages, work)
-    runs["lexaudit"] = lex_run
+    # Two reporting modes share one detection pass (detection-only; no file rewrites).
+    runs["lexaudit_full"] = replace(
+        lex_run,
+        name="lexaudit_full",
+        flagged_by_page=_flagged_for_mode(lex_words, mode="full"),
+        notes=("lexaudit (full): all anomalies incl. weak suspects — max recall / CI triage."),
+    )
+    strict_flags = _flagged_for_mode(lex_words, mode="strict")
+    runs["lexaudit_strict"] = replace(
+        lex_run,
+        name="lexaudit_strict",
+        flagged_by_page=strict_flags,
+        notes=("lexaudit (strict): calque + invented + likely-tier — high precision for CI queue."),
+    )
 
     if lexaudit_only:
         for name, reason in (
@@ -1101,7 +1198,7 @@ def run_benchmark(
             runs[name],
             gold,
             pages,
-            lexaudit_words=lex_words if name == "lexaudit" else None,
+            lexaudit_words=lex_words if name.startswith("lexaudit") else None,
         )
 
     report: dict[str, Any] = {

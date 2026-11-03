@@ -102,6 +102,7 @@ select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
 "scripts/render_diagrams.py" = ["E501", "RUF001"]
 "scripts/reproduce_benchmark_table.py" = ["E501"]
 "scripts/mine_calques_wiktionary.py" = ["E501", "RUF001"]
+"scripts/benchmark_competitors.py" = ["E501", "RUF001"]
 "src/lexaudit/mcp_server.py" = ["E501"]
 "lab/**" = ["E501", "RUF001"]
 # Cyrillic fixtures in bilingual MCP smoke (format collapses to one line).

@@ -5,6 +5,23 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+## [0.4.2] - 2026-11-03
+
+### Added
+- `collect_ts_prose` source for locale-scoped TypeScript reader strings
+- JSON non-prose key filter in `collect_md` (slug/url/href/icon/…)
+- FairHelm calque regression test for known rewrite-queue needles
+
+### Fixed
+- Neologism false positives: DE/SV productive `-ung/-ning/-heit/-keit` nouns
+  (`Werftrechnung`), ES accented plurals (`catabáticos`), DE orthography glosses
+  (`Ausbildungstörn` → foreign, not invented)
+- Cross-locale developer-doc tech loans for Clean FPR on ru/es/uk (and others)
+- Clean FPR / 1k ≤ 20 on all 7 real-bench locales (ru/es/uk previously 35–43)
+
+### Changed
+- Competitor + real-benchmark tables regenerated for 0.4.2 precision
+
 ## [0.4.0] - 2026-11-03
 
 ### Added

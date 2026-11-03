@@ -3,11 +3,63 @@
 from __future__ import annotations
 
 import json
+import re
 from collections.abc import Iterator
 from pathlib import Path
 from typing import Any
 
 from lexaudit.core.types import TextChunk
+
+# Non-prose JSON keys (ids, URLs, paths, icons) — skip in collect_md / UI JSON.
+_JSON_NON_PROSE_KEYS: frozenset[str] = frozenset(
+    {
+        "id",
+        "slug",
+        "url",
+        "href",
+        "icon",
+        "image",
+        "avatar",
+        "date",
+        "publishedat",
+        "updatedat",
+        "code",
+        "locale",
+        "category",
+        "path",
+        "ctaurl",
+        "videourl",
+        "src",
+        "srcset",
+        "thumbnail",
+        "ogimage",
+        "canonical",
+        "key",
+        "uid",
+        "uuid",
+        "filename",
+        "filetype",
+        "mimetype",
+        "extension",
+    }
+)
+
+_URL_OR_PATH_RE = re.compile(
+    r"^(?:https?://|/|\./|\.\./|[A-Za-z0-9_.-]+/(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]*)$"
+)
+_TS_STRING_RE = re.compile(
+    r""""((?:\\.|[^"\\])*)"|'((?:\\.|[^'\\])*)'|`((?:\\.|[^`\\]|\$\{[^}]*\})*)`""",
+    re.MULTILINE,
+)
+_TS_LOCALE_OBJECT_RE = re.compile(
+    r"""(?P<loc>\b(?:en|de|es|pl|ru|sv|uk|ar|zh|he)\b)\s*:\s*\{""",
+    re.MULTILINE,
+)
+_TS_CASE_RETURN_RE = re.compile(
+    r"""case\s+["'](?P<loc>en|de|es|pl|ru|sv|uk|ar|zh|he)["']\s*:\s*return\s+"""
+    r"""(?P<q>["'`])(?P<body>(?:\\.|(?!\2).)*)(?P=q)""",
+    re.MULTILINE,
+)
 
 
 def _walk_files(root: Path, suffixes: tuple[str, ...]) -> Iterator[Path]:
@@ -29,9 +81,31 @@ def _rel(path: Path, repo_root: Path) -> str:
         return path.as_posix()
 
 
+def _leaf_key(prefix: str) -> str:
+    if not prefix:
+        return ""
+    # Strip list indices: faqItems[0].question → question
+    cleaned = re.sub(r"\[\d+\]", "", prefix)
+    return cleaned.rsplit(".", 1)[-1].casefold()
+
+
+def _is_non_prose_json_string(prefix: str, value: str) -> bool:
+    key = _leaf_key(prefix)
+    if key in _JSON_NON_PROSE_KEYS:
+        return True
+    stripped = value.strip()
+    if not stripped:
+        return True
+    if _URL_OR_PATH_RE.match(stripped):
+        return True
+    return bool(
+        stripped.startswith(("http://", "https://", "mailto:", "/")) and " " not in stripped
+    )
+
+
 def _iter_json_strings(node: Any, prefix: str = "") -> Iterator[tuple[str, str]]:
     if isinstance(node, str):
-        if node.strip():
+        if node.strip() and not _is_non_prose_json_string(prefix, node):
             yield prefix or "json", node
     elif isinstance(node, list):
         for i, item in enumerate(node):
@@ -39,6 +113,10 @@ def _iter_json_strings(node: Any, prefix: str = "") -> Iterator[tuple[str, str]]
     elif isinstance(node, dict):
         for key, val in sorted(node.items(), key=lambda kv: str(kv[0])):
             next_prefix = f"{prefix}.{key}" if prefix else str(key)
+            if isinstance(val, str) and _is_non_prose_json_string(next_prefix, val):
+                continue
+            if str(key).casefold() in _JSON_NON_PROSE_KEYS and not isinstance(val, (dict, list)):
+                continue
             yield from _iter_json_strings(val, next_prefix)
 
 
@@ -168,6 +246,134 @@ def collect_md(repo_root: Path, locale: str) -> list[TextChunk]:
                     continue
                 for scope, text in _iter_json_strings(data):
                     chunks.append(TextChunk(path=rel, scope=scope, text=text, source="md"))
+    return chunks
+
+
+def _unescape_ts_string(raw: str) -> str:
+    """Unescape common TS/JS string escapes without breaking UTF-8 prose."""
+    return (
+        raw.replace(r"\\", "\0")
+        .replace(r"\n", "\n")
+        .replace(r"\t", "\t")
+        .replace(r"\'", "'")
+        .replace(r"\"", '"')
+        .replace(r"\`", "`")
+        .replace("\0", "\\")
+    )
+
+
+def _extract_balanced_object(src: str, open_brace_index: int) -> str | None:
+    """Return substring of `{...}` starting at ``open_brace_index``, or None."""
+    if open_brace_index < 0 or open_brace_index >= len(src) or src[open_brace_index] != "{":
+        return None
+    depth = 0
+    in_str: str | None = None
+    escape = False
+    for i in range(open_brace_index, len(src)):
+        ch = src[i]
+        if in_str:
+            if escape:
+                escape = False
+                continue
+            if ch == "\\":
+                escape = True
+                continue
+            if ch == in_str:
+                in_str = None
+            continue
+        if ch in {'"', "'", "`"}:
+            in_str = ch
+            continue
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return src[open_brace_index : i + 1]
+    return None
+
+
+def _strings_from_ts_fragment(fragment: str) -> list[str]:
+    out: list[str] = []
+    for m in _TS_STRING_RE.finditer(fragment):
+        raw = (
+            m.group(1)
+            if m.group(1) is not None
+            else m.group(2)
+            if m.group(2) is not None
+            else m.group(3)
+        )
+        if raw is None:
+            continue
+        # Skip template interpolations / code-like tokens.
+        if "${" in raw:
+            continue
+        text = _unescape_ts_string(raw).strip()
+        if len(text) < 4:
+            continue
+        if _URL_OR_PATH_RE.match(text) or text.startswith(("http://", "https://", "@/", "./")):
+            continue
+        # Skip pure identifiers / CSS-ish tokens.
+        if re.fullmatch(r"[A-Za-z0-9_./:-]+", text) and " " not in text:
+            continue
+        out.append(text)
+    return out
+
+
+def collect_ts_prose(repo_root: Path, locale: str) -> list[TextChunk]:
+    """Read-only extract of locale-scoped reader strings from ``frontend/src/lib/yachts/``."""
+    root = repo_root / "frontend" / "src" / "lib" / "yachts"
+    chunks: list[TextChunk] = []
+    loc = locale.casefold()
+    if not root.is_dir():
+        return chunks
+    for path in _walk_files(root, (".ts", ".tsx")):
+        if (
+            "__tests__" in path.parts
+            or path.name.endswith(".test.ts")
+            or path.name.endswith(".test.tsx")
+        ):
+            continue
+        try:
+            src = path.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        rel = _rel(path, repo_root)
+        collected: list[str] = []
+        # Pattern A: `case "ru": return "..."`
+        for m in _TS_CASE_RETURN_RE.finditer(src):
+            if m.group("loc").casefold() != loc:
+                continue
+            body = _unescape_ts_string(m.group("body")).strip()
+            if len(body) >= 4:
+                collected.append(body)
+        # Pattern B: `ru: { ... }` locale object literals
+        for m in _TS_LOCALE_OBJECT_RE.finditer(src):
+            if m.group("loc").casefold() != loc:
+                continue
+            brace_at = src.find("{", m.start())
+            block = _extract_balanced_object(src, brace_at)
+            if not block:
+                continue
+            collected.extend(_strings_from_ts_fragment(block))
+        if not collected:
+            continue
+        # Deduplicate while preserving order.
+        seen: set[str] = set()
+        unique: list[str] = []
+        for t in collected:
+            if t in seen:
+                continue
+            seen.add(t)
+            unique.append(t)
+        chunks.append(
+            TextChunk(
+                path=rel,
+                scope=f"ts:{loc}",
+                text="\n\n".join(unique),
+                source="ts_prose",
+            )
+        )
     return chunks
 
 
@@ -346,6 +552,8 @@ def collect_all(
         chunks.extend(collect_packs(repo_root, locale, packs_root=packs_root))
     if "md" in wanted:
         chunks.extend(collect_md(repo_root, locale))
+    if "ts_prose" in wanted:
+        chunks.extend(collect_ts_prose(repo_root, locale))
     if "files" in wanted or "docs" in wanted:
         chunks.extend(collect_files(repo_root, locale, files_paths=files_paths))
     if "jsonl_export" in wanted and jsonl_export is not None:

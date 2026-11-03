@@ -1,6 +1,6 @@
 [project]
 name = "lexaudit"
-version = "0.4.0"
+version = "0.4.2"
 description = "Locale vocabulary audit: inventeds, calques, foreign slips; page ranking for rewrite agents"
 readme = "README.md"
 license = "MIT"
@@ -111,7 +111,9 @@ select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
 "tests/test_calque_examples_contract.py" = ["RUF001"]
 "tests/test_calque_context.py" = ["RUF001"]
 "tests/test_neologism_generator.py" = ["RUF001"]
+"tests/test_fairhelm_calque_regression_v042.py" = ["RUF001"]
 "src/lexaudit/detectors/neologism.py" = ["RUF001"]
+"src/lexaudit/detectors/compound.py" = ["RUF001"]
 
 [tool.ruff.format]
 quote-style = "double"

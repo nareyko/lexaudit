@@ -163,6 +163,98 @@ DEVELOPER_DOCS_TECH_PARTS: frozenset[str] = frozenset(
     }
 )
 
+# Cross-locale developer-doc loans (Cyrillic / Spanish / Polish IT prose).
+# Stems are matched after light inflection peel — keep protocol-/tool-shaped.
+CROSS_LOCALE_TECH_LOANS: frozenset[str] = frozenset(
+    {
+        # Shared Latin loans appearing outside DE/SV compound path
+        "backend",
+        "backends",
+        "commit",
+        "commits",
+        "cookie",
+        "cookies",
+        "etag",
+        "etags",
+        "fastapi",
+        "handler",
+        "handlers",
+        "http",
+        "https",
+        "idempotent",
+        "idempotentes",
+        "major",
+        "microservicio",
+        "microservicios",
+        "multiprocesamiento",
+        "observabilidad",
+        "openapi",
+        "proxy",
+        "pydantic",
+        "python",
+        "schema",
+        "swagger",
+        "token",
+        "tokens",
+        "heurística",
+        "heuristica",
+        "manejador",
+        "manejadores",
+        "reintentan",
+        "reintentar",
+        "rupturista",
+        "rupturistas",
+        "etagi",
+        "handlery",
+        "wersjonowanie",
+        "wersjonowanego",
+        "wersjonowany",
+        # Russian IT loans / calqued stems in clean tech docs
+        "автозавершение",
+        "бд",
+        "бэкенд",
+        "бэкендам",
+        "бэкенды",
+        "версионирование",
+        "версионированный",
+        "версионированн",
+        "воркер",
+        "воркеров",
+        "воркеры",
+        "деплой",
+        "дозагрузк",
+        "дозагрузки",
+        "коммит",
+        "коммита",
+        "коммитов",
+        "конкурентности",
+        "конкурентность",
+        "прокси",
+        "релизн",
+        "релизного",
+        "ротируйте",
+        "ротировать",
+        "сгенерированной",
+        "сгенерированн",
+        "токен",
+        "токенами",
+        "токенов",
+        "трейс",
+        "трейсы",
+        # Ukrainian
+        "версіонований",
+        "версіонування",
+        "воркери",
+        "воркерів",
+        "коміт",
+        "коміту",
+        "комітів",
+        "релізн",
+        "релізним",
+        "трейси",
+    }
+)
+
 # German / Swedish stems frequently glued to the tech parts above.
 _NATIVE_TECH_STEMS: frozenset[str] = frozenset(
     {
@@ -243,11 +335,97 @@ def _strip_inflection(part: str, locale: str) -> str:
         for ending in ("ungen", "en", "er", "e", "n", "s"):
             if len(p) - len(ending) >= 3 and p.endswith(ending):
                 return p[: -len(ending)]
-    else:
+        return p
+    if locale == "sv":
         for ending in ("erna", "orna", "ar", "or", "er", "en", "et", "n", "s"):
             if len(p) - len(ending) >= 3 and p.endswith(ending):
                 return p[: -len(ending)]
+        return p
+    if locale in {"es", "en", "pl"}:
+        for ending in ("es", "os", "as", "s"):
+            if len(p) - len(ending) >= 3 and p.endswith(ending):
+                return p[: -len(ending)]
+        return p
+    if locale == "ru":
+        for ending in (
+            "ями",
+            "ами",
+            "ого",
+            "ему",
+            "ыми",
+            "ией",
+            "ой",
+            "ый",
+            "ий",
+            "ая",
+            "ое",
+            "ые",
+            "ов",
+            "ев",
+            "ам",
+            "ям",
+            "ах",
+            "ях",
+            "ом",
+            "ем",
+            "ую",
+            "юю",
+            "а",
+            "я",
+            "у",
+            "ы",
+            "и",
+            "е",
+        ):
+            if len(p) - len(ending) >= 3 and p.endswith(ending):
+                return p[: -len(ending)]
+        return p
+    if locale == "uk":
+        for ending in (
+            "ями",
+            "ами",
+            "ого",
+            "ому",
+            "ими",
+            "ій",
+            "ий",
+            "а",
+            "я",
+            "у",
+            "ю",
+            "і",
+            "и",
+            "е",
+            "ів",
+            "їв",
+            "ам",
+            "ям",
+            "ах",
+            "ях",
+            "ом",
+            "ем",
+        ):
+            if len(p) - len(ending) >= 3 and p.endswith(ending):
+                return p[: -len(ending)]
+        return p
+    for ending in ("erna", "orna", "ar", "or", "er", "en", "et", "n", "s"):
+        if len(p) - len(ending) >= 3 and p.endswith(ending):
+            return p[: -len(ending)]
     return p
+
+
+def _match_cross_locale_tech(word: str, locale: str) -> bool:
+    """True when ``word`` is a known developer-doc loan (any locale)."""
+    w = word.casefold()
+    if w in DEVELOPER_DOCS_TECH_PARTS or w in CROSS_LOCALE_TECH_LOANS:
+        return True
+    stem = _strip_inflection(w, locale)
+    if stem in DEVELOPER_DOCS_TECH_PARTS or stem in CROSS_LOCALE_TECH_LOANS:
+        return True
+    for loan in CROSS_LOCALE_TECH_LOANS:
+        if len(loan) >= 5 and (w.startswith(loan) or stem.startswith(loan)):
+            return True
+    return False
 
 
 def _part_known(part: str, known: set[str], locale: str) -> bool:
@@ -334,6 +512,8 @@ def _can_split(word: str, known: set[str], *, min_part: int = 3, locale: str = "
 
 def _is_standalone_tech_loan(word: str, known: set[str], locale: str) -> bool:
     w = word.casefold()
+    if _match_cross_locale_tech(w, locale):
+        return True
     if w in known:
         return True
     return _part_known(w, known, locale) and (
@@ -344,30 +524,31 @@ def _is_standalone_tech_loan(word: str, known: set[str], locale: str) -> bool:
 def make_compound_detector(
     locale: str, known_words: set[str]
 ) -> Callable[[ClassifiedWord], ClassifiedWord | None]:
-    if locale not in SUPPORTED:
-
-        def _noop(word: ClassifiedWord) -> ClassifiedWord | None:
-            return None
-
-        return _noop
+    """DE/SV compound splitter; tech-loan clearing runs for every locale."""
 
     known = {k.casefold() for k in known_words}
     known |= {p.casefold() for p in DEVELOPER_DOCS_TECH_PARTS}
     known |= {p.casefold() for p in _NATIVE_TECH_STEMS}
+    known |= {p.casefold() for p in CROSS_LOCALE_TECH_LOANS}
+    compound_locale = locale in SUPPORTED
 
     def detect(word: ClassifiedWord) -> ClassifiedWord | None:
         if word.status != "suspect":
             return None
         norm = word.normalized.casefold()
         reason: str | None = None
-        if _can_split_hyphenated(norm, known, locale):
-            reason = "compound-hyphen"
-        elif _can_split_closed(norm, known, locale):
-            reason = "compound-split"
-        elif _is_standalone_tech_loan(norm, known, locale):
+        if _is_standalone_tech_loan(norm, known, locale):
             reason = "tech-term"
-        elif _part_known(norm, known, locale) and any(
-            norm.endswith(suf) and len(norm) > len(suf) + 2 for suf in _suffixes_for(locale)
+        elif compound_locale and _can_split_hyphenated(norm, known, locale):
+            reason = "compound-hyphen"
+        elif compound_locale and _can_split_closed(norm, known, locale):
+            reason = "compound-split"
+        elif (
+            compound_locale
+            and _part_known(norm, known, locale)
+            and any(
+                norm.endswith(suf) and len(norm) > len(suf) + 2 for suf in _suffixes_for(locale)
+            )
         ):
             # Productive derivation from a known stem (Beobachtbarkeit, Observerbarhet).
             reason = "compound-suffix"

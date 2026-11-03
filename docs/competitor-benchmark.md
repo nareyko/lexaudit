@@ -1,6 +1,6 @@
 # Competitor benchmark (v0.4 Stage V6-1 / P4-2)
 
-Generated: `2026-11-03T19:09:38Z`
+Generated: `2026-11-03T20:34:37Z`
 
 Same gold set: synthetic-demo **42 pages** (7 locales × 6) + `gold/real_bench` consensus anomalies.
 
@@ -8,12 +8,12 @@ Same gold set: synthetic-demo **42 pages** (7 locales × 6) + `gold/real_bench` 
 
 | Tool | Available | Backend | Word P | Word R | Page P@3 | Clean FP / 1k | Time |
 |---|---|---|---:|---:|---:|---:|---:|
-| lexaudit (strict: calque + invented + likely) | yes | run_locale_audit | 54.5% | 92.9% | 100.0% | 3.3 | 5.62s |
-| lexaudit (full: all anomalies incl. weak suspects) | yes | run_locale_audit | 14.3% | 92.9% | 100.0% | 22.7 | 5.62s |
-| hunspell | yes | HunspellChecker | 7.1% | 80.8% | 33.3% | 73.1 | 9.11s |
-| cspell | yes | /home/vadim/.nvm/versions/node/v24.12.0/bin/npx --yes cspell | 2.9% | 97.3% | 0.0% | 436.4 | 6.55s |
-| vale | yes | /home/vadim/projects/fairhelm-2026/tools/lexaudit/tmp/bin/vale | 10.5% | 84.9% | 0.0% | 50.2 | 3.34s |
-| languagetool | yes | language_tool_python | 12.9% | 63.0% | 0.0% | 31.8 | 50.05s |
+| lexaudit (strict: calque + invented + likely) | yes | run_locale_audit | 70.6% | 92.9% | 100.0% | 0.2 | 5.55s |
+| lexaudit (full: all anomalies incl. weak suspects) | yes | run_locale_audit | 20.2% | 92.9% | 100.0% | 10.3 | 5.55s |
+| hunspell | skipped (skipped via --lexaudit-only) | — | N/A | N/A | N/A | N/A | N/A |
+| cspell | skipped (skipped via --lexaudit-only) | — | N/A | N/A | N/A | N/A | N/A |
+| vale | skipped (skipped via --lexaudit-only) | — | N/A | N/A | N/A | N/A | N/A |
+| languagetool | skipped (skipped via --lexaudit-only) | — | N/A | N/A | N/A | N/A | N/A |
 
 ## How to read this honestly
 

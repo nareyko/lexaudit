@@ -5,6 +5,10 @@ from __future__ import annotations
 import regex  # type: ignore[import-untyped]
 
 from lexaudit.core.types import ClassifiedWord
+from lexaudit.detectors.compound import (
+    CROSS_LOCALE_TECH_LOANS,
+    DEVELOPER_DOCS_TECH_PARTS,
+)
 
 CYRILLIC = regex.compile(r"^[\p{Cyrillic}'\u2019-]+$", regex.VERSION1)
 LATIN = regex.compile(r"^[\p{Latin}'\u2019-]+$", regex.VERSION1)
@@ -84,6 +88,15 @@ def _mark_foreign(word: ClassifiedWord, base_reason: str, locale: str) -> Classi
     return word
 
 
+# German-specific letters that should not be treated as invented coinage in
+# non-German/Swedish target locales (certificate glosses in ES/PL/RU/UK tables).
+_DE_ORTHOGRAPHY = frozenset("äöüßÄÖÜ")
+
+
+def has_de_orthography(token: str) -> bool:
+    return any(ch in _DE_ORTHOGRAPHY for ch in token)
+
+
 def make_foreign_detector(
     locale: str,
     other_locale_words: dict[str, set[str]] | None = None,
@@ -94,6 +107,13 @@ def make_foreign_detector(
         if word.status != "suspect":
             return None
         n = word.normalized
+        surface = word.surface or n
+        # Known developer-doc identifiers stay out of the foreign bucket (Clean FPR).
+        if n.casefold() in DEVELOPER_DOCS_TECH_PARTS or n.casefold() in CROSS_LOCALE_TECH_LOANS:
+            return None
+        # German orthography inside a non-de/sv page → foreign gloss, not inventeds.
+        if locale not in {"de", "sv"} and (has_de_orthography(n) or has_de_orthography(surface)):
+            return _mark_foreign(word, "de-orthography", locale)
         if locale in CYRILLIC_LOCALES and LATIN.match(n):
             # Latin token in Cyrillic locale
             for loc, vocab in others.items():

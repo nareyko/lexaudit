@@ -461,20 +461,68 @@ def _strip_coinage_suffix(word: str, locale: str) -> tuple[str, str]:
     return n, ""
 
 
+def _fold_es_accents(text: str) -> str:
+    """Fold Spanish graphic accents so catabáticos ≈ catabaticos for stem checks."""
+    table = str.maketrans("áéíóúüñÁÉÍÓÚÜÑ", "aeiouunAEIOUUN")
+    return text.translate(table)
+
+
 def _known_stem(part: str, lm: CharNgramLM, *, min_len: int = 3) -> bool:
     p = "".join(ch for ch in part.casefold() if ch.isalpha())
     if len(p) < min_len:
         return False
-    if p in lm:
+    candidates = {p, _fold_es_accents(p)}
+    if any(c in lm for c in candidates):
         return True
-    # Mild morphological peel for Latin stems.
-    for tail in ("ing", "ed", "er", "ers", "ly", "al", "ic", "ous", "ive", "tion", "sion"):
-        if len(p) > len(tail) + 2 and p.endswith(tail) and p[: -len(tail)] in lm:
-            return True
+    # Mild morphological peel for Latin stems (+ Spanish plural / -ico).
+    latin_tails = (
+        "ing",
+        "ed",
+        "er",
+        "ers",
+        "ly",
+        "al",
+        "ic",
+        "icos",
+        "icas",
+        "ico",
+        "ica",
+        "ous",
+        "ive",
+        "tion",
+        "sion",
+        "os",
+        "as",
+        "es",
+    )
+    for cand in list(candidates):
+        for tail in latin_tails:
+            if len(cand) > len(tail) + 2 and cand.endswith(tail):
+                stem = cand[: -len(tail)]
+                if stem in lm or _fold_es_accents(stem) in lm:
+                    return True
     for tail in ("ый", "ой", "ий", "ая", "ое", "ые", "ов", "ам", "ах", "ий", "ій", "ої", "их"):
         if len(p) > len(tail) + 2 and p.endswith(tail) and p[: -len(tail)] in lm:
             return True
     return False
+
+
+# Productive DE/SV noun-forming suffixes: ordinary (often compound) nouns, not coinage mash.
+_PRODUCTIVE_NOUN_SUFFIXES: dict[str, frozenset[str]] = {
+    "de": frozenset({"ung", "heit", "keit"}),
+    "sv": frozenset({"ning", "het"}),
+}
+
+# Diacritics that mark German (and closely Swedish) orthography in non-DE/SV locales.
+_FOREIGN_DE_DIACRITICS = frozenset("äöüßÄÖÜ")
+
+
+def has_foreign_de_diacritics(token: str, locale: str) -> bool:
+    """True when token carries German-specific letters outside de/sv target locales."""
+    loc = locale.casefold()
+    if loc in {"de", "sv"}:
+        return False
+    return any(ch in _FOREIGN_DE_DIACRITICS for ch in token)
 
 
 def _glue_splits(word: str, lm: CharNgramLM, *, min_part: int = 4) -> list[tuple[str, str]]:
@@ -498,8 +546,17 @@ def _looks_affix_mash(word: str, locale: str, lm: CharNgramLM) -> bool:
         return False
     if len(stem) < 3:
         return False
-    # Suffix on a glued stem (dock+walk+ish) or on a long OOV stem.
+    loc = locale.casefold()
     splits = _glue_splits(stem, lm, min_part=3)
+    # Productive DE/SV -ung/-ning/-heit/-keit nouns (Werftrechnung, …): only treat as
+    # mash when the stripped stem is itself a clear root+root glue. Do not flag
+    # ordinary compounds / long OOV technical nouns solely for the noun suffix.
+    if suf in _PRODUCTIVE_NOUN_SUFFIXES.get(loc, frozenset()):
+        if not splits:
+            return False
+        # Require a surprising join so Werft|rechn-style dictionary compounds pass.
+        return any(lm.join_boundary_surprise(left, right) >= 1.2 for left, right in splits[:6])
+    # Suffix on a glued stem (dock+walk+ish) or on a long OOV stem.
     if splits:
         return True
     # Long foreign stem + coinage suffix (surveyness-like / Stegmanöver+ig).
@@ -510,18 +567,18 @@ def _looks_affix_mash(word: str, locale: str, lm: CharNgramLM) -> bool:
     # loan stem) as invented — those are often editorial domain adjectives.
     marked = {
         "en": {"ish", "ness", "like", "ify", "ization"},
-        "de": {"ig", "heit", "keit", "mässig", "mäßig"},
+        "de": {"ig", "mässig", "mäßig"},
         "es": {"ezca", "alezca", "ismo", "izar"},
         "pl": {"owaty", "owski"},
         "ru": {"ность", "ость"},
         "sv": {"ig", "aktig", "mässig"},
         "uk": {"ність", "ість"},
     }
-    if suf in marked.get(locale.casefold(), set()) and len(stem) >= 3 and stem not in lm:
+    if suf in marked.get(loc, set()) and len(stem) >= 3 and stem not in lm:
         # Require the stem itself to look multi-morphemic or fairly long.
         if len(stem) >= 5 or _glue_splits(stem, lm, min_part=3):
             return True
-        if locale in {"pl", "es"} and len(word) >= 8:
+        if loc in {"pl", "es"} and len(word) >= 8:
             return True
     return False
 
@@ -535,7 +592,20 @@ def _looks_calque_glue(word: str, locale: str, lm: CharNgramLM) -> bool:
     # do not promote ordinary X+Y dictionary compounds to invented.
     if locale in {"de", "sv"}:
         return False
+    # Spanish stressed plurals / -ico adjectives (catabáticos) are productive morphology,
+    # not calque glue — fold accents and refuse glue when a peeled stem looks native.
+    if locale == "es":
+        folded = _fold_es_accents(pure)
+        if _known_stem(folded, lm, min_len=6) or _known_stem(
+            folded[:-2] if folded.endswith(("os", "as", "es")) else folded, lm, min_len=6
+        ):
+            return False
+        # Also refuse when the whole token is natively plausible under accent fold.
+        if lm.mean_log_prob(folded) > -11.5:
+            return False
     splits = _glue_splits(pure, lm, min_part=4)
+    if not splits and locale == "es":
+        splits = _glue_splits(_fold_es_accents(pure), lm, min_part=4)
     if not splits:
         # Cyrillic locales: also accept split where both sides score as native-ish.
         if locale in {"ru", "uk"} and len(pure) >= 11:
@@ -572,11 +642,13 @@ def score_neologism(
     model = lm or _locale_lm(locale.casefold())
     zipf = zipf_frequency(n, locale)
     catalog = _is_catalog_code(n)
+    foreign_dia = has_foreign_de_diacritics(token, locale) or has_foreign_de_diacritics(n, locale)
     native = model.mean_log_prob(n)
     affix = _looks_affix_mash(n, locale, model)
     glue = _looks_calque_glue(n, locale, model)
     invented = False
-    if not catalog and zipf < 1.5 and len(n) >= 7:
+    # Foreign orthography (e.g. Ausbildungstörn in ES/PL tables) is not a neologism.
+    if not catalog and not foreign_dia and zipf < 1.5 and len(n) >= 7:
         if affix or glue:
             invented = True
         elif native < -12.8 and len(n) >= 11 and zipf < 0.5:
@@ -585,6 +657,7 @@ def score_neologism(
     return {
         "zipf": zipf,
         "catalog_code": catalog,
+        "foreign_diacritics": foreign_dia,
         "native_logprob": native,
         "affix_mash": affix,
         "calque_glue": glue,

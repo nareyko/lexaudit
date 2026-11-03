@@ -31,55 +31,59 @@ We compare three pipeline configurations across all 7 languages (3 defective pag
 - Ablation B - Allowlists + Morphology + Compound Splitting (`--mode raw`): removes brand/acronym/compound noise, but still ranks pages by raw unweighted suspect count.
 - Ablation C - Full `lexaudit` (`--mode weighted`): adds `rules/calques/*.yaml` (including `override_ok`), context-scoped foreign weights, and hapax down-weighting (`0.1` for single-occurrence unknown tokens).
 
+Per locale there are exactly **3 defective** and **3 clean** pages. Macro-averaged full `lexaudit` currently reports `Precision@2` = **100.0%**, `Recall@2` = **66.7%** (two of three bad pages in the top two), `Precision@3` / `Recall@3` = **81.0%**, `MAP` = **0.938**. Known-rule calque recall is **100.0%** (26/26); unseen singleton neologisms without rules remain **0.0%** (0/7) until V4; combined planted-problem recall is the honest fraction **78.8%** (26/33). Clean-page FPR is **47.1** unique FP words / 1000 tokens.
+
 ### Macro-Averaged Summary Across All 7 Languages
 
-| Configuration | `Precision@2` | `Precision@3` | `MAP` (Mean Average Precision) | Known-Rule Calque Recall | Open-Set Calque Recall (including unseen) | Total CPU Time (42 pages) |
-|---|---:|---:|---:|---:|---:|---:|
-| A. Naive Hunspell (`raw`) | 0.0% | 23.8% | 0.389 | 0.0% (0/26) | 0.0% (0/33) | 0.54 s |
-| B. Dictionaries + Morph/Compound (`raw`) | 7.1% | 23.8% | 0.421 | 0.0% (0/26) | 0.0% (0/33) | 0.62 s |
-| C. Full `lexaudit` (`weighted`) | 100.0% | 66.7% | 0.838 | 100.0% (26/26) | 77.9% (26/33) | 0.66 s |
+| Configuration | `Precision@2` | `Precision@3` | `Recall@2` | `Recall@3` | `MAP` (Mean Average Precision) | Known-Rule Calque Recall | Unseen Neologism Recall | Combined Calque Recall | Clean-Page FP / 1000 tokens | Total CPU Time (42 pages) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| A. Naive Hunspell (`raw`) | 0.0% | 23.8% | 0.0% | 23.8% | 0.389 | 0.0% (0/26) | 0.0% (0/7) | 0.0% (0/33) | 81.2 | 0.59 s |
+| B. Dictionaries + Morph/Compound (`raw`) | 7.1% | 23.8% | 4.8% | 23.8% | 0.421 | 0.0% (0/26) | 0.0% (0/7) | 0.0% (0/33) | 47.1 | 0.66 s |
+| C. Full `lexaudit` (`weighted`) | 100.0% | 81.0% | 66.7% | 81.0% | 0.938 | 100.0% (26/26) | 0.0% (0/7) | 78.8% (26/33) | 47.1 | 0.83 s |
 
 ### Per-Language Breakdown (Ablation C vs. Ablation A)
 
-| Locale | Language | Ablation A `P@3` | `lexaudit` `P@2` | `lexaudit` `P@3` | Ablation A `MAP` | `lexaudit` `MAP` | Open-Set Calque Recall |
-|---|---|---:|---:|---:|---:|---:|---:|
-| **`en`** | English | 33.3% (1/3) | 100.0% (2/2) | **66.7% (2/3)** | 0.244 | **0.833** | **75.0% (3/4)** |
-| **`de`** | German | 33.3% (1/3) | 100.0% (2/2) | **66.7% (2/3)** | 0.411 | **0.833** | **66.7% (2/3)** |
-| **`es`** | Spanish | 33.3% (1/3) | 100.0% (2/2) | **66.7% (2/3)** | 0.411 | **0.833** | **80.0% (4/5)** |
-| **`pl`** | Polish | 33.3% (1/3) | 100.0% (2/2) | **66.7% (2/3)** | 0.478 | **0.867** | **80.0% (4/5)** |
-| **`ru`** | Russian | 0.0% (0/3) | 100.0% (2/2) | **66.7% (2/3)** | 0.383 | **0.833** | **83.3% (5/6)** |
-| **`sv`** | Swedish | 33.3% (1/3) | 100.0% (2/2) | **66.7% (2/3)** | 0.411 | **0.833** | **80.0% (4/5)** |
-| **`uk`** | Ukrainian | 0.0% (0/3) | 100.0% (2/2) | **66.7% (2/3)** | 0.383 | **0.833** | **80.0% (4/5)** |
+| Locale | Language | Ablation A `P@3` | `lexaudit` `P@2` | `lexaudit` `P@3` | `lexaudit` `R@2` | `lexaudit` `R@3` | Ablation A `MAP` | `lexaudit` `MAP` | Known Recall | Unseen Recall | Combined Recall |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| **`en`** | English | 33.3% (1/3) | 100.0% (2/2) | **100.0% (3/3)** | 66.7% | 100.0% | 0.244 | **1.000** | 100.0% (3/3) | 0.0% (0/1) | 75.0% (3/4) |
+| **`de`** | German | 33.3% (1/3) | 100.0% (2/2) | **100.0% (3/3)** | 66.7% | 100.0% | 0.411 | **1.000** | 100.0% (2/2) | 0.0% (0/1) | 66.7% (2/3) |
+| **`es`** | Spanish | 33.3% (1/3) | 100.0% (2/2) | **66.7% (2/3)** | 66.7% | 66.7% | 0.411 | **0.867** | 100.0% (4/4) | 0.0% (0/1) | 80.0% (4/5) |
+| **`pl`** | Polish | 33.3% (1/3) | 100.0% (2/2) | **66.7% (2/3)** | 66.7% | 66.7% | 0.478 | **0.867** | 100.0% (4/4) | 0.0% (0/1) | 80.0% (4/5) |
+| **`ru`** | Russian | 0.0% (0/3) | 100.0% (2/2) | **100.0% (3/3)** | 66.7% | 100.0% | 0.383 | **1.000** | 100.0% (5/5) | 0.0% (0/1) | 83.3% (5/6) |
+| **`sv`** | Swedish | 33.3% (1/3) | 100.0% (2/2) | **66.7% (2/3)** | 66.7% | 66.7% | 0.411 | **0.917** | 100.0% (4/4) | 0.0% (0/1) | 80.0% (4/5) |
+| **`uk`** | Ukrainian | 0.0% (0/3) | 100.0% (2/2) | **66.7% (2/3)** | 66.7% | 66.7% | 0.383 | **0.917** | 100.0% (4/4) | 0.0% (0/1) | 80.0% (4/5) |
 
 ---
 
-## 3. Error Analysis & Honest Limitations (Why `P@3 = 66.7%` and `MAP = 0.838`)
+## 3. Error Analysis & Honest Limitations (Why `P@3 = 81.0%` and `MAP = 0.938`)
 
-Examining the exact English ranking output explains both the strength and the boundary of deterministic lexical auditing:
+English currently ranks all three defective pages in the top three (so EN `P@3 = 100%`), because page `06` also carries a phrase-level calque that lifts its weighted score. Macro-averaged `P@3 = 81.0%` comes from locales such as `es` / `pl` / `sv` / `uk`, where a clean jargon page still outranks the singleton unseen neologism:
 
 ```markdown
 | Rank | Ground Truth | Score | Unique Suspects | Page | Top Flagged Tokens |
 |---:|---|---:|---:|---|---|
 | #1 | DEFECT (page 04) | 12.0 | 2 | en-04-defect-known-calques.md | orientir, surveyness |
-| #2 | DEFECT (page 05) |  6.0 | 1 | en-05-defect-false-friend.md | denseness |
-| #3 | CLEAN  (page 03) |  1.6 | 2 | en-03-clean-unseen-jargon.md | vinylester, haulout |
-| #4 | CLEAN  (page 01) |  0.4 | 4 | en-01-clean-navigation-brands.md | mnvdelta, plkgamma, qwpbeta, zxqalpha |
-| #5 | CLEAN  (page 02) |  0.4 | 4 | en-02-clean-battery-specs.md | dfkappa, jkltheta, rtkepsilon, vbkzeta |
-| #6 | DEFECT (page 06) |  0.1 | 1 | en-06-defect-unseen-neologism.md | dockwalkish |
+| #2 | DEFECT (page 06) |  9.5 | 2 | en-06-defect-unseen-neologism.md | dockwalkish, into_your_own_hands |
+| #3 | DEFECT (page 05) |  6.0 | 1 | en-05-defect-false-friend.md | denseness |
+| #4 | CLEAN  (page 03) |  1.6 | 2 | en-03-clean-unseen-jargon.md | vinylester, haulout |
+| #5 | CLEAN  (page 01) |  0.4 | 4 | en-01-clean-navigation-brands.md | mnvdelta, plkgamma, qwpbeta, zxqalpha |
+| #6 | CLEAN  (page 02) |  0.4 | 4 | en-02-clean-battery-specs.md | dfkappa, jkltheta, rtkepsilon, vbkzeta |
 ```
 
-1. Why Precision@2 = 100.0%: Pages `04` and `05` contain curated calques (`orientir`, `surveyness`) and the false friend `denseness` (`override_ok: true`). Weighted scoring (`8.0` for `calque`, `6.0` for needle match) lifts them to `#1` and `#2` across all 7 languages.
-2. Why Precision@3 = 66.7% (false positive on page `03` vs. false negative on page `06`):
-   - On clean page `03`, specialist terms not yet in `proper-names.yaml` (`vinylester`, `Epoxidgrundierung`, `винилэфирной`) appear multiple times (`count >= 2`), earning a `suspect` score of `1.5 - 1.8`.
-   - On defective page `06`, the planted coinage `dockwalkish` (`Stegmanöverig`, `пирсовыйосмотр`) is an unseen single-occurrence token (`count = 1`) not yet in `rules/calques/*.yaml`. Because `lexaudit` down-weights unknown singletons to `0.1` to suppress catalogue-code noise (pages `01` and `02`), an unseen singleton neologism also receives `0.1`.
-   - Multi-word phrase calques made of valid dictionary words cannot be detected by token-level rules alone.
+1. Why Precision@2 = 100.0% and Recall@2 = 66.7%: With exactly three defective pages, two top slots can hold at most two of them. Known calques / false friends (`orientir`, `surveyness`, `denseness` with `override_ok: true`) take those slots in every locale.
+2. Why macro Precision@3 / Recall@3 = 81.0% (not 100%):
+   - On clean page `03` in several locales, specialist terms not yet in `proper-names.yaml` (`viniléster`, `epoxiprimer`, `вінілефірної`) appear multiple times (`count >= 2`), earning a `suspect` score around `1.5–3.5`.
+   - On defective page `06`, the planted coinage (`pantanalezca`, `kejowaty`, `bryggcheckig`, `причальноогляд`) is an unseen singleton (`count = 1`) labeled only `suspect`, not `calque`/`invented`. Hapax down-weighting (`0.1`) plus missing V4 neologism signals keep it below repeated clean jargon unless a phrase calque also fires (as in EN/DE/RU).
+   - Token-level known-rule recall is **100% (26/26)**; unseen neologism recall stays **0% (0/7)** until V4; combined planted-problem recall is the honest **78.8% (26/33)**.
 3. How teams close the remaining gap in production:
-   - Step 1: Add recurring valid domain terms from page `03` (`vinylester`, `haulout`) to `dicts/proper-names.yaml` (drops page `03` score to `0.0`).
-   - Step 2: Run optional `lexaudit label --tiers likely,weak` (LLM triage) or promote recurring editorial mistakes into `rules/calques/<locale>.yaml`.
+   - Step 1: Add recurring valid domain terms from page `03` to `dicts/proper-names.yaml` (drops page `03` score to `0.0`).
+   - Step 2: Run optional `lexaudit label --tiers likely,weak` (LLM triage) or promote recurring editorial mistakes / neologisms into `rules/calques/<locale>.yaml` (V3/V4).
 
 ## 4. Reproduce the Study Locally
 
 ```bash
 uv run lexaudit audit --config examples/synthetic-demo/lexaudit.config.yaml
-uv run pytest tests/test_synthetic_benchmark.py
+uv run python scripts/reproduce_benchmark_table.py --write-docs
+uv run python scripts/reproduce_benchmark_table.py --check
+uv run pytest tests/test_synthetic_benchmark.py tests/test_benchmark_docs_sync.py
 ```

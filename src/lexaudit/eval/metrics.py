@@ -90,18 +90,156 @@ def compute_metrics(
     }
 
 
+def _path_in_gold(path: str, gold: set[str]) -> bool:
+    if path in gold:
+        return True
+    return any(g in path or path in g for g in gold)
+
+
+def page_precision_at_k(
+    ranked: Sequence[PageSuspectRank],
+    bad_set: Sequence[str],
+    k: int,
+) -> dict[str, Any]:
+    """
+    Page Precision@K = |{top-K ∩ bad}| / K.
+
+    ``bad_set`` holds gold defective page paths or path substrings (slugs).
+    """
+    gold = {p for p in bad_set}
+    top = [r.path for r in ranked[:k]]
+    hits = sum(1 for p in top if _path_in_gold(p, gold))
+    precision = hits / k if k else 0.0
+    return {"k": k, "hits": hits, "precision": precision, "top": top}
+
+
+def page_recall_at_k(
+    ranked: Sequence[PageSuspectRank],
+    bad_set: Sequence[str],
+    k: int,
+) -> dict[str, Any]:
+    """
+    Page Recall@K = |{top-K ∩ bad}| / |bad|.
+
+    With exactly 3 defective pages and K=2, perfect ranking yields R@2 = 2/3.
+    """
+    gold = {p for p in bad_set}
+    n_bad = len(gold)
+    top = [r.path for r in ranked[:k]]
+    hits = sum(1 for p in top if _path_in_gold(p, gold))
+    recall = hits / n_bad if n_bad else 0.0
+    return {"k": k, "hits": hits, "n_bad": n_bad, "recall": recall, "top": top}
+
+
 def page_at_k(
     ranked: Sequence[PageSuspectRank],
     gold_pages: Sequence[str],
     *,
     k: int = 10,
 ) -> dict[str, Any]:
-    """Precision@K for page ranking: fraction of top-K paths in the gold set."""
-    gold = {p for p in gold_pages}
-    top = [r.path for r in ranked[:k]]
-    hits = sum(1 for p in top if p in gold or any(g in p or p in g for g in gold))
-    precision = hits / k if k else 0.0
-    return {"k": k, "hits": hits, "precision": precision, "top": top}
+    """Backward-compatible alias for :func:`page_precision_at_k`."""
+    return page_precision_at_k(ranked, gold_pages, k)
+
+
+def word_precision_recall(
+    words: Sequence[ClassifiedWord],
+    gold_known: Sequence[str],
+    gold_unseen: Sequence[str],
+    *,
+    locale: str = "en",
+    hit_statuses: frozenset[str] = NEEDLE_HIT_STATUSES,
+) -> dict[str, Any]:
+    """
+    Word-level precision/recall split into known rules vs unseen neologisms.
+
+    A gold token counts as a hit when any matching classified word has a status
+    in ``hit_statuses`` (default: calque/invented). Precision uses unique
+    predicted anomaly norms that match any gold token as TP, else FP.
+    """
+    known = list(gold_known)
+    unseen = list(gold_unseen)
+    combined = [*known, *unseen]
+
+    def _hits(needles: Sequence[str]) -> tuple[int, int]:
+        evaluated = 0
+        hits = 0
+        for needle in needles:
+            matching = [w for w in words if needle_matches_norm(w.normalized, needle, locale)]
+            if not matching:
+                continue
+            evaluated += 1
+            if any(w.status in hit_statuses for w in matching):
+                hits += 1
+        return hits, evaluated
+
+    known_hits, known_eval = _hits(known)
+    unseen_hits, unseen_eval = _hits(unseen)
+    comb_hits, comb_eval = _hits(combined)
+
+    gold_norms: set[str] = set()
+    for needle in combined:
+        for w in words:
+            if needle_matches_norm(w.normalized, needle, locale):
+                gold_norms.add(w.normalized)
+
+    pred_pos = [w for w in words if pred_is_anomaly(w.status)]
+    tp = sum(
+        1
+        for w in pred_pos
+        if w.normalized in gold_norms
+        or any(needle_matches_norm(w.normalized, n, locale) for n in combined)
+    )
+    fp = len(pred_pos) - tp
+    precision = tp / (tp + fp) if (tp + fp) else 0.0
+
+    def _recall(hits: int, evaluated: int) -> float:
+        return hits / evaluated if evaluated else 0.0
+
+    return {
+        "known_recall": _recall(known_hits, known_eval),
+        "known_hits": known_hits,
+        "known_evaluated": known_eval,
+        "unseen_recall": _recall(unseen_hits, unseen_eval),
+        "unseen_hits": unseen_hits,
+        "unseen_evaluated": unseen_eval,
+        "combined_recall": _recall(comb_hits, comb_eval),
+        "combined_hits": comb_hits,
+        "combined_evaluated": comb_eval,
+        "word_precision": precision,
+        "word_tp": tp,
+        "word_fp": fp,
+    }
+
+
+def clean_page_fpr(
+    words: Sequence[ClassifiedWord],
+    *,
+    clean_page_slugs: Sequence[str],
+    clean_pages_total_tokens: int,
+) -> dict[str, Any]:
+    """
+    False-positive rate on clean pages.
+
+    Counts unique anomaly words whose samples fall on clean pages, then reports
+    FP per 1000 tokens and the share of unique flagged norms among clean tokens.
+    """
+    clean = {s for s in clean_page_slugs}
+    fp_words: set[str] = set()
+    for w in words:
+        if not pred_is_anomaly(w.status):
+            continue
+        if any(_path_in_gold(s.path, clean) for s in w.samples):
+            fp_words.add(w.normalized)
+    n_fp = len(fp_words)
+    per_1k = (n_fp / clean_pages_total_tokens * 1000.0) if clean_pages_total_tokens else 0.0
+    unique_rate = n_fp / clean_pages_total_tokens if clean_pages_total_tokens else 0.0
+    return {
+        "fp_unique_words": n_fp,
+        "fp_words": sorted(fp_words),
+        "clean_pages_total_tokens": clean_pages_total_tokens,
+        "fp_per_1000_tokens": per_1k,
+        "unique_word_fpr": unique_rate,
+    }
 
 
 def needle_recall(

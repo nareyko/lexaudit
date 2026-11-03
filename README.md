@@ -89,17 +89,20 @@ We built a 42-page test set in all 7 languages: 21 clean technical pages and 21 
 
 ![Benchmark results](docs/images/synthetic-benchmark.svg)
 
-| Setup | Bad page in top 2 | Bad page in top 3 | MAP (0 to 1, higher is better) | Known problems found | Brand new problems found | Time |
-|---|---:|---:|---:|---:|---:|---:|
-| A. Plain spellchecker | 0.0% | 23.8% | 0.389 | 0 of 26 | 0 of 33 | 0.54 s |
-| B. Plus your word lists | 7.1% | 23.8% | 0.421 | 0 of 26 | 0 of 33 | 0.62 s |
-| C. Full lexaudit | 100.0% | 66.7% | 0.838 | 26 of 26 | 26 of 33 | 0.66 s |
+| Setup | Bad page in top 2 | Bad page in top 3 | Recall@2 | Recall@3 | MAP (0 to 1, higher is better) | Known problems found | Brand-new neologisms found | Combined planted problems | Clean-page FP / 1k tokens | Time |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| A. Plain spellchecker | 0.0% | 23.8% | 0.0% | 23.8% | 0.389 | 0.0% (0/26) | 0.0% (0/7) | 0.0% (0/33) | 81.2 | 0.59 s |
+| B. Plus your word lists | 7.1% | 23.8% | 4.8% | 23.8% | 0.421 | 0.0% (0/26) | 0.0% (0/7) | 0.0% (0/33) | 47.1 | 0.66 s |
+| C. Full lexaudit | 100.0% | 81.0% | 66.7% | 81.0% | 0.938 | 100.0% (26/26) | 0.0% (0/7) | 78.8% (26/33) | 47.1 | 0.83 s |
 
 What this means:
 
 - Pages with known problems come first in every language. The plain spellchecker puts clean pages first.
-- About 78% of all planted problems are found, including words the rules never saw. About 22% are missed.
+- Known-rule problems: **100.0%** (26/26). Unseen single-occurrence neologisms (no calque rule yet; until V4): **0.0%** (0/7). Combined planted problems (honest fraction): **78.8%** (26/33).
+- With exactly 3 defective pages per locale, `Recall@2` is **66.7%** when the top-2 slots are both bad (`Precision@2` = **100.0%**). `Precision@3` / `Recall@3` are **81.0%** when a clean jargon page still outranks one defective page.
+- Clean-page false positives: **47.1** unique flagged words per 1000 tokens (36 unique FP / 764 tokens).
 - Weak spot: a clean page with a repeated new technical term can outrank a page with a single new invented word. Adding the term to your word list, or using the optional `label` step, fixes this.
+
 
 ---
 

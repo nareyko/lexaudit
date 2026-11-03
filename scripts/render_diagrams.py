@@ -264,7 +264,7 @@ BENCHMARK_SVG = """<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="
   <text x="84" y="296" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#8b3a4a">MAP (Ranking Quality): 0.389</text>
   <text x="84" y="326" font-family="DejaVu Sans,sans-serif" font-size="15" fill="#1b2a4a">- Top-2 Precision (P@2): 0.0%</text>
   <text x="84" y="354" font-family="DejaVu Sans,sans-serif" font-size="15" fill="#1b2a4a">- Top-3 Precision (P@3): 23.8%</text>
-  <text x="84" y="382" font-family="DejaVu Sans,sans-serif" font-size="15" fill="#1b2a4a">- Calque Recall: 0.0% (0 / 33)</text>
+  <text x="84" y="382" font-family="DejaVu Sans,sans-serif" font-size="15" fill="#1b2a4a">- Combined Recall: 0.0% (0 / 33)</text>
 
   <text x="64" y="444" font-family="DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#8b3a4a">Why it fails editors:</text>
   <text x="64" y="470" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Flags every brand (Garmin, Victron) and</text>
@@ -285,7 +285,7 @@ BENCHMARK_SVG = """<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="
   <text x="496" y="296" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#3a5a8c">MAP (Ranking Quality): 0.421</text>
   <text x="496" y="326" font-family="DejaVu Sans,sans-serif" font-size="15" fill="#1b2a4a">- Top-2 Precision (P@2): 7.1%</text>
   <text x="496" y="354" font-family="DejaVu Sans,sans-serif" font-size="15" fill="#1b2a4a">- Top-3 Precision (P@3): 23.8%</text>
-  <text x="496" y="382" font-family="DejaVu Sans,sans-serif" font-size="15" fill="#1b2a4a">- Calque Recall: 0.0% (0 / 33)</text>
+  <text x="496" y="382" font-family="DejaVu Sans,sans-serif" font-size="15" fill="#1b2a4a">- Combined Recall: 0.0% (0 / 33)</text>
 
   <text x="476" y="444" font-family="DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#3a5a8c">Why raw counts are still not enough:</text>
   <text x="476" y="470" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Eliminates ~50% of false alarms on brands</text>
@@ -303,21 +303,21 @@ BENCHMARK_SVG = """<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="
   <text x="888" y="240" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#4a5568">weights + singleton noise floor (0.1)</text>
 
   <rect x="888" y="264" width="328" height="156" rx="8" fill="#eaf6f6" stroke="#0d7377"/>
-  <text x="908" y="294" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#0d7377">MAP: 0.838 (+115% vs Naive)</text>
+  <text x="908" y="294" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#0d7377">MAP: 0.938 (+141% vs Naive)</text>
   <text x="908" y="322" font-family="DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#0d7377">- Top-2 Precision (P@2): 100.0%</text>
-  <text x="908" y="348" font-family="DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#1b2a4a">- Top-3 Precision (P@3): 66.7%</text>
+  <text x="908" y="348" font-family="DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#1b2a4a">- Top-3 Precision (P@3): 81.0%</text>
   <text x="908" y="374" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#1b2a4a">- Known-Rule Recall: 100.0% (26/26)</text>
-  <text x="908" y="398" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#1b2a4a">- Open-Set Recall: 77.9% (26/33)</text>
+  <text x="908" y="398" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#1b2a4a">- Combined Recall: 78.8% (26/33; unseen 0/7)</text>
 
-  <text x="888" y="448" font-family="DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#0d7377">Honest scientific boundary (P@3 = 66.7%):</text>
-  <text x="888" y="474" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Known calques &amp; false friends rank #1 &amp; #2.</text>
-  <text x="888" y="500" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Repeated unseen specialist jargon (score ~1.6)</text>
-  <text x="888" y="522" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">  outranks a single unseen neologism (score 0.1)</text>
-  <text x="888" y="544" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">  until added to dicts or triaged via LLM label.</text>
+  <text x="888" y="448" font-family="DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#0d7377">Honest scientific boundary (P@3 = 81.0%):</text>
+  <text x="888" y="474" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Known calques &amp; false friends rank in top-2.</text>
+  <text x="888" y="500" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Repeated unseen specialist jargon can still</text>
+  <text x="888" y="522" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">  outrank a singleton neologism (unseen 0/7)</text>
+  <text x="888" y="544" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">  until V4 signals / dicts / LLM label triage.</text>
 
   <!-- Footer -->
   <rect x="40" y="626" width="1200" height="60" rx="10" fill="#ffffff" stroke="#c5cdd8" stroke-width="1.5"/>
-  <text x="640" y="662" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#1b2a4a">Total CPU Runtime (42 pages, 7 languages): 0.66 seconds (0 GPU)  |  Reproduce: uv run pytest tests/test_synthetic_benchmark.py</text>
+  <text x="640" y="662" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#1b2a4a">Reproduce: uv run python scripts/reproduce_benchmark_table.py --check  |  pytest tests/test_benchmark_docs_sync.py</text>
 </svg>
 """
 

@@ -8,14 +8,18 @@ from pathlib import Path
 from lexaudit.core.types import ClassifiedWord, PageSuspectRank, VocabSample
 from lexaudit.eval.metrics import (
     ANOMALY,
+    clean_page_fpr,
     clear_regression,
     compute_metrics,
     gold_is_anomaly,
     load_gold_jsonl,
     needle_recall,
     page_at_k,
+    page_precision_at_k,
+    page_recall_at_k,
     pred_is_anomaly,
     render_metrics_md,
+    word_precision_recall,
 )
 
 
@@ -185,6 +189,88 @@ def test_page_at_k() -> None:
     m = page_at_k(ranked, ["gold1", "gold2"], k=2)
     assert m["hits"] == 1
     assert m["precision"] == 0.5
+    assert page_precision_at_k(ranked, ["gold1", "gold2"], 2)["precision"] == 0.5
+    r = page_recall_at_k(ranked, ["gold1", "gold2"], k=2)
+    assert r["hits"] == 1
+    assert r["n_bad"] == 2
+    assert r["recall"] == 0.5
+    r3 = page_recall_at_k(ranked, ["gold1", "gold2"], k=3)
+    assert r3["hits"] == 2
+    assert r3["recall"] == 1.0
+    empty = page_recall_at_k([], [], k=3)
+    assert empty["recall"] == 0.0
+    assert page_precision_at_k([], ["x"], 0)["precision"] == 0.0
+
+
+def test_word_precision_recall_known_unseen_combined() -> None:
+    words = [
+        _cw("orientir", "calque"),
+        _cw("dockwalkish", "suspect"),  # present but not calque/invented → miss for unseen
+        _cw("noiseword", "suspect"),
+        _cw("boat", "ok"),
+    ]
+    m = word_precision_recall(
+        words,
+        gold_known=["orientir"],
+        gold_unseen=["dockwalkish", "absentneo"],
+        locale="en",
+    )
+    assert m["known_recall"] == 1.0
+    assert m["known_hits"] == 1
+    assert m["unseen_recall"] == 0.0  # dockwalkish present but status suspect
+    assert m["unseen_evaluated"] == 1  # absentneo skipped
+    assert m["combined_recall"] == 0.5
+    # Gold-matching anomaly preds count as TP for precision even when status is only
+    # ``suspect`` (unseen recall can stay 0 while precision still credits the match).
+    assert m["word_precision"] == 2 / 3  # orientir+dockwalkish TP; noiseword FP
+    good = word_precision_recall(
+        [_cw("dockwalkish", "invented"), _cw("orientir", "calque")],
+        ["orientir"],
+        ["dockwalkish"],
+    )
+    assert good["unseen_recall"] == 1.0
+    assert good["combined_recall"] == 1.0
+    assert good["word_precision"] == 1.0
+    empty = word_precision_recall([], [], [])
+    assert empty["known_recall"] == 0.0
+    assert empty["word_precision"] == 0.0
+
+
+def test_clean_page_fpr() -> None:
+    words = [
+        ClassifiedWord(
+            normalized="vinylester",
+            surface="vinylester",
+            count=2,
+            status="suspect",
+            samples=[VocabSample("docs/en/en-03-clean-unseen-jargon.md", "body")],
+        ),
+        ClassifiedWord(
+            normalized="orientir",
+            surface="orientir",
+            count=1,
+            status="calque",
+            samples=[VocabSample("docs/en/en-04-defect-known-calques.md", "body")],
+        ),
+        ClassifiedWord(
+            normalized="haulout",
+            surface="haulout",
+            count=1,
+            status="suspect",
+            samples=[VocabSample("docs/en/en-03-clean-unseen-jargon.md", "body")],
+        ),
+    ]
+    m = clean_page_fpr(
+        words,
+        clean_page_slugs=["en-01", "en-02", "en-03"],
+        clean_pages_total_tokens=1000,
+    )
+    assert m["fp_unique_words"] == 2
+    assert set(m["fp_words"]) == {"vinylester", "haulout"}
+    assert m["fp_per_1000_tokens"] == 2.0
+    assert m["unique_word_fpr"] == 0.002
+    zero = clean_page_fpr([], clean_page_slugs=["x"], clean_pages_total_tokens=0)
+    assert zero["fp_per_1000_tokens"] == 0.0
 
 
 def test_needle_recall_gate() -> None:

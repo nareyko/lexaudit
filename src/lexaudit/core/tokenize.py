@@ -91,9 +91,7 @@ def tokenize(raw: str, *, locale: str, min_length: int = 2) -> list[str]:
     return [t["normalized"] for t in hits]
 
 
-def tokenize_with_surface(
-    raw: str, *, locale: str, min_length: int = 2
-) -> list[TokenHit]:
+def tokenize_with_surface(raw: str, *, locale: str, min_length: int = 2) -> list[TokenHit]:
     """Tokenize keeping surface forms and 1-based line/col within ``raw``."""
     nfc = unicodedata.normalize("NFC", raw)
     plain = strip_for_tokenize(nfc)

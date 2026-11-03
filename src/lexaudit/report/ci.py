@@ -126,10 +126,7 @@ def sarif_rule_id(finding: dict[str, Any]) -> str:
     status = _sanitize_rule_part(str(finding.get("status") or "suspect")).casefold()
     locale = _sanitize_rule_part(str(finding.get("locale") or "und")).casefold()
     source = (
-        finding.get("source_id")
-        or finding.get("source_lang")
-        or finding.get("reason")
-        or status
+        finding.get("source_id") or finding.get("source_lang") or finding.get("reason") or status
     )
     source_part = _sanitize_rule_part(str(source)).casefold()
     return f"{status}.{locale}.{source_part}"

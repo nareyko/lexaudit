@@ -239,8 +239,7 @@ def _audit_one_locale(
             [
                 f
                 for f in findings
-                if not f.get("suppressed")
-                and (f.get("status") in fail_set if check else True)
+                if not f.get("suppressed") and (f.get("status") in fail_set if check else True)
             ]
         )
     append_step_summary(pages, loc)

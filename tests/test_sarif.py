@@ -14,9 +14,7 @@ SCHEMA = Path(__file__).parent / "fixtures" / "sarif-2.1.0-minimal.schema.json"
 
 def test_sarif_rule_id_hierarchical() -> None:
     assert (
-        sarif_rule_id(
-            {"status": "calque", "locale": "uk", "source_id": "ru-origin", "word": "x"}
-        )
+        sarif_rule_id({"status": "calque", "locale": "uk", "source_id": "ru-origin", "word": "x"})
         == "calque.uk.ru-origin"
     )
 

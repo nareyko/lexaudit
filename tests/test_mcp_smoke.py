@@ -23,6 +23,23 @@ def test_mcp_tools_registered_without_network() -> None:
     assert "fetch_dicts" in names
 
 
+def test_list_tool_names_from_manager_and_dict_bag() -> None:
+    from types import SimpleNamespace
+
+    from lexaudit.mcp_server import list_tool_names
+
+    class _Mgr:
+        def list_tools(self) -> list[object]:
+            return [SimpleNamespace(name="audit"), {"name": "explain"}, {"id": "skip"}]
+
+    assert list_tool_names(SimpleNamespace(_tool_manager=_Mgr())) == ["audit", "explain"]
+    assert list_tool_names(SimpleNamespace(_tool_manager=None, _tools={"z": 1, "a": 2})) == [
+        "a",
+        "z",
+    ]
+    assert list_tool_names(SimpleNamespace(_tool_manager=None, tools=None)) == []
+
+
 def test_identical_segment_and_chrome_extras() -> None:
     from lexaudit.detectors.bilingual import (
         detect_pair_leftovers,

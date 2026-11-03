@@ -1,6 +1,6 @@
 [project]
 name = "lexaudit"
-version = "0.3.1"
+version = "0.4.0"
 description = "Locale vocabulary audit: inventeds, calques, foreign slips; page ranking for rewrite agents"
 readme = "README.md"
 license = "MIT"

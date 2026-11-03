@@ -164,14 +164,15 @@ Test layers: unit and integration tests (branch coverage 80% or more), the 7-lan
 
 Pictures in `docs/images` are generated from code: run `python scripts/render_diagrams.py` (needs Inkscape and Pillow). Never edit the JPG files by hand.
 
-## License (dual)
+## License
 
-| How you use it | License |
+| What | License |
 |---|---|
-| CLI, library, YAML rules, packs (local, CI, embed) | **[MIT](LICENSE)** |
-| Hosted multi-tenant SaaS over the network to third parties | **[AGPL-3.0-or-later](LICENSE-AGPL-HOSTED.md)** |
+| **PyPI / this repo’s code** (CLI, library, YAML rules, packs) | **[MIT](LICENSE)** — use in products and private SaaS is fine under MIT |
+| **Intended future hosted multi-tenant network service** (not shipped here) | Policy text: [AGPL-3.0-or-later](LICENSE-AGPL-HOSTED.md) — **not** a second license on the MIT wheel |
+| Benchmark corpora & fetched spelling dictionaries | [LICENSE-THIRD-PARTY.md](LICENSE-THIRD-PARTY.md) + upstream `*.license.txt` |
 
-Full wording: [docs/licensing.md](docs/licensing.md). Dictionaries from `fetch-dicts` keep their upstream licenses.
+Full wording: [docs/licensing.md](docs/licensing.md). Adding rules: [docs/contributing-rules.md](docs/contributing-rules.md).
 
 ## Origin and author
 

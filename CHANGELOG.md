@@ -5,6 +5,26 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-03
+
+### Added
+- Honest synthetic metrics: page P@k / R@k, known / unseen / combined recall,
+  clean-page FPR; `scripts/reproduce_benchmark_table.py` + README/`--check` sync
+- Real-bench corpora (`tests/fixtures/real_bench/{clean,gec,mt}`),
+  `eval/corpora/manifest.json`, Cohen κ via `scripts/compute_iaa_kappa.py`
+- Contextual calque / false-friend engine (`kind`, `source_lang`,
+  `context_require` / `context_forbid`, positive/negative examples) + contract test
+- Neologism detector (wordfreq Zipf + char n-gram LM) and domain-term downweighting
+- Exact `path:line:col`, SARIF 2.1 hierarchical `ruleId`, `.lexaudit-baseline.json`,
+  `.rst` / i18n JSON-YAML collectors, CLI `--glossary`
+- Competitor benchmark script vs Hunspell / cspell / Vale / LanguageTool
+- `docs/contributing-rules.md`, calque Issue template, `LICENSE-THIRD-PARTY.md`
+
+### Changed
+- Synthetic ablation C: P@3 and unseen neologism recall reach 100% on the 42-page set
+- Licensing docs clarify MIT package vs AGPL hosted-service policy intent
+- Wheel packages JSON schemas for isolated installs
+
 ## [0.3.1] - 2026-10-30
 
 ### Added

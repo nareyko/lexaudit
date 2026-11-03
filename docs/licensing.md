@@ -1,33 +1,37 @@
-# Dual license (MIT + AGPL for hosted)
+# Licensing (crystal-clear)
 
-lexaudit uses a **dual license**, depending on *how* you use the software.
+## What GitHub / PyPI distribute today
 
-| Use | License | Text |
-|---|---|---|
-| CLI, Python library, rule YAML, packs from this repo (local / CI / embed in your product) | **MIT** | [`LICENSE`](../LICENSE) |
-| **Hosted** multi-tenant SaaS that exposes lexaudit (or a fork) as a **network service** to third parties | **AGPL-3.0-or-later** | [`LICENSE-AGPL-HOSTED.md`](../LICENSE-AGPL-HOSTED.md) |
-| Spelling dictionaries from `lexaudit fetch-dicts` | **Upstream** (unchanged) | `*.license.txt` next to each dict |
+The **published package** (`pip install lexaudit`, this repository’s default
+`LICENSE` file, and `pyproject.toml` `license = "MIT"`) is **MIT**.
 
-## Plain words
+Under MIT you may use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the software, including in proprietary products and
+private SaaS, **without** opening your own application source — provided you
+keep the MIT copyright notice.
 
-- Laptop or own CI: MIT. Fork, ship, sell, keep private: fine under MIT.
-- Hosted multi-tenant service that other people’s clients talk to: that hosted
-  service code is intended under AGPL-3.0-or-later (network copyleft).
-- This repository does not currently ship a hosted service. The AGPL file is the
-  license text for that intended use, not a second license on the MIT package.
-- Packs (`packs/*`, `packs/_lab/*`) stay MIT, same as the library.
-- Embedding the MIT package inside another product does not change that product’s
-  license.
+## What the AGPL file is (and is not)
 
-## What is *not* dual-licensed here
-
-| Asset | Note |
+| File | Applies to |
 |---|---|
-| Marine / yacht domain dictionaries and content | Hard rule: not shipped in the public package |
-| Hunspell / system dictionaries | Keep their own licenses; lexaudit does not relicense them |
+| [`LICENSE`](../LICENSE) | **Everything in this repo that is our code**: CLI, library, YAML rules, packs, docs we wrote. |
+| [`LICENSE-AGPL-HOSTED.md`](../LICENSE-AGPL-HOSTED.md) | **Policy intent** for a future **multi-tenant hosted SaaS** that exposes lexaudit (or a fork) as a network service to third parties. It is **not** a second license on the MIT PyPI wheel. This repository does **not** currently ship that hosted service. |
+| [`LICENSE-THIRD-PARTY.md`](../LICENSE-THIRD-PARTY.md) | Third-party **corpora / dictionaries** used in benchmarks and `fetch-dicts`. Their upstream licenses are unchanged. |
 
-## Where else it is stated
+There is **no** “MIT + AGPL dual license on the same PyPI artifact.” The artifact
+is MIT. The AGPL document records the author’s intent if/when a hosted network
+service is published under a separate distribution.
 
-- Root [`README.md`](../README.md), [`docs/README.md`](README.md), [`CONTRIBUTING.md`](../CONTRIBUTING.md)
-- Package metadata: `pyproject.toml` → MIT (the published artifact)
-- Changelog: MIT package; hosted AGPL note points here
+## Third-party assets
+
+| Asset | License handling |
+|---|---|
+| Hunspell / LibreOffice dictionaries via `lexaudit fetch-dicts` | Upstream licenses next to each dict (`*.license.txt`); not relicensed |
+| Real-bench fixtures (`tests/fixtures/real_bench/`) | See `LICENSE-THIRD-PARTY.md` + `eval/corpora/manifest.json` |
+| Marine / yacht domain dictionaries | Not shipped in the public package |
+
+## Where this is restated
+
+- Root [`README.md`](../README.md) license table
+- [`LICENSE-THIRD-PARTY.md`](../LICENSE-THIRD-PARTY.md)
+- Changelog release notes for `0.4.0`

@@ -161,6 +161,63 @@ def build_compound_known_lemmas(proper: set[str], acronyms: set[str]) -> set[str
     return set(proper) | set(acronyms)
 
 
+def _strings_from_yaml_block(block: object, raw_terms: list[str]) -> None:
+    if isinstance(block, list):
+        raw_terms.extend(str(x) for x in block if isinstance(x, str) and x.strip())
+    elif isinstance(block, str) and block.strip():
+        raw_terms.append(block.strip())
+
+
+def _glossary_raw_from_yaml(path: Path, locale: str) -> list[str]:
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    raw_terms: list[str] = []
+    if isinstance(data, list):
+        _strings_from_yaml_block(data, raw_terms)
+        return raw_terms
+    if not isinstance(data, dict):
+        return raw_terms
+    for key in ("terms", "locale_loans", "names", "extras", "glossary", locale):
+        _strings_from_yaml_block(data.get(key), raw_terms)
+    if not raw_terms:
+        _collect_string_lists(data, raw_terms)
+    return raw_terms
+
+
+def _glossary_raw_from_csv(path: Path) -> list[str]:
+    import csv
+
+    delim = "\t" if path.suffix.lower() == ".tsv" else ","
+    with path.open(encoding="utf-8", newline="") as fh:
+        rows = list(csv.reader(fh, delimiter=delim))
+    if not rows:
+        return []
+    header = [c.strip().casefold() for c in rows[0]]
+    term_idx = 0
+    body = rows
+    for name in ("term", "word", "lemma", "surface", "glossary"):
+        if name in header:
+            term_idx = header.index(name)
+            body = rows[1:]
+            break
+    raw_terms: list[str] = []
+    for row in body:
+        if not row or term_idx >= len(row):
+            continue
+        cell = row[term_idx].strip()
+        if cell and not cell.startswith("#"):
+            raw_terms.append(cell)
+    return raw_terms
+
+
+def _glossary_raw_from_lines(path: Path) -> list[str]:
+    raw_terms: list[str] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        cell = line.strip()
+        if cell and not cell.startswith("#"):
+            raw_terms.append(cell)
+    return raw_terms
+
+
 def load_glossary(path: Path, locale: str) -> set[str]:
     """Load project glossary / allowlist terms from CSV or YAML without editing config.
 
@@ -171,50 +228,12 @@ def load_glossary(path: Path, locale: str) -> set[str]:
     if not path.is_file():
         return set()
     suf = path.suffix.lower()
-    raw_terms: list[str] = []
     if suf in {".yaml", ".yml"}:
-        data = yaml.safe_load(path.read_text(encoding="utf-8"))
-        if isinstance(data, list):
-            raw_terms.extend(str(x) for x in data if isinstance(x, str) and x.strip())
-        elif isinstance(data, dict):
-            for key in ("terms", "locale_loans", "names", "extras", "glossary", locale):
-                block = data.get(key)
-                if isinstance(block, list):
-                    raw_terms.extend(str(x) for x in block if isinstance(x, str) and x.strip())
-                elif isinstance(block, str) and block.strip():
-                    raw_terms.append(block.strip())
-            if not raw_terms:
-                _collect_string_lists(data, raw_terms)
+        raw_terms = _glossary_raw_from_yaml(path, locale)
     elif suf in {".csv", ".tsv"}:
-        import csv
-
-        delim = "\t" if suf == ".tsv" else ","
-        with path.open(encoding="utf-8", newline="") as fh:
-            reader = csv.reader(fh, delimiter=delim)
-            rows = list(reader)
-        if not rows:
-            return set()
-        header = [c.strip().casefold() for c in rows[0]]
-        term_idx = 0
-        for name in ("term", "word", "lemma", "surface", "glossary"):
-            if name in header:
-                term_idx = header.index(name)
-                body = rows[1:]
-                break
-        else:
-            body = rows
-        for row in body:
-            if not row or term_idx >= len(row):
-                continue
-            cell = row[term_idx].strip()
-            if cell and not cell.startswith("#"):
-                raw_terms.append(cell)
+        raw_terms = _glossary_raw_from_csv(path)
     else:
-        # Plain one-term-per-line fallback.
-        for line in path.read_text(encoding="utf-8").splitlines():
-            cell = line.strip()
-            if cell and not cell.startswith("#"):
-                raw_terms.append(cell)
+        raw_terms = _glossary_raw_from_lines(path)
     out: set[str] = set()
     for phrase in raw_terms:
         out |= phrase_tokens(phrase, locale)

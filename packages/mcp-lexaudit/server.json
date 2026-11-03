@@ -6,12 +6,12 @@
     "url": "https://github.com/nareyko/lexaudit",
     "source": "github"
   },
-  "version": "0.3.1",
+  "version": "0.4.0",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "lexaudit",
-      "version": "0.3.1",
+      "version": "0.4.0",
       "packageArguments": [],
       "environmentVariables": [],
       "transport": {

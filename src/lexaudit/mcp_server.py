@@ -75,20 +75,23 @@ def build_mcp() -> Any:
     return mcp
 
 
+def _tool_name(entry: Any) -> str | None:
+    name = getattr(entry, "name", None)
+    if name:
+        return str(name)
+    if isinstance(entry, dict) and entry.get("name"):
+        return str(entry["name"])
+    return None
+
+
 def list_tool_names(mcp: Any | None = None) -> list[str]:
     """Return registered tool names for unit smoke (no LLM / no network)."""
     app = mcp if mcp is not None else build_mcp()
-    tools = getattr(app, "_tool_manager", None)
-    if tools is not None and hasattr(tools, "list_tools"):
-        listed = tools.list_tools()
-        names = []
-        for t in listed:
-            name = getattr(t, "name", None) or (t.get("name") if isinstance(t, dict) else None)
-            if name:
-                names.append(str(name))
+    manager = getattr(app, "_tool_manager", None)
+    if manager is not None and hasattr(manager, "list_tools"):
+        names = [n for n in (_tool_name(t) for t in manager.list_tools()) if n]
         if names:
             return sorted(names)
-    # FastMCP variants expose tools differently across versions.
     for attr in ("_tools", "tools"):
         bag = getattr(app, attr, None)
         if isinstance(bag, dict):

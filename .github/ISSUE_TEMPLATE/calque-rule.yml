@@ -1,0 +1,65 @@
+name: Calque / false-friend rule
+description: Propose a new or improved lexical rule for rules/calques/
+title: "[calque] "
+labels: ["rules", "calque"]
+body:
+  - type: dropdown
+    id: locale
+    attributes:
+      label: Locale
+      options: [en, de, es, pl, ru, sv, uk]
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options: [calque, false_friend]
+    validations:
+      required: true
+  - type: input
+    id: pattern
+    attributes:
+      label: Pattern (token, glob, or phrase)
+      placeholder: "приймати участь"
+    validations:
+      required: true
+  - type: input
+    id: source_lang
+    attributes:
+      label: Source language of the loan
+      placeholder: "en"
+    validations:
+      required: true
+  - type: input
+    id: hint
+    attributes:
+      label: Suggested rewrite (hint)
+    validations:
+      required: true
+  - type: textarea
+    id: positive
+    attributes:
+      label: Positive example sentence(s) you wrote yourself
+      description: Must trigger the rule. Do not paste copyrighted book text.
+    validations:
+      required: true
+  - type: textarea
+    id: negative
+    attributes:
+      label: Negative example sentence(s)
+      description: Must NOT trigger (legitimate sense / different context).
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context require / forbid (optional)
+      placeholder: |
+        context_require: [...]
+        context_forbid: [...]
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes / sources
+      description: Wiktionary etymology links are OK; do not paste large dumps.

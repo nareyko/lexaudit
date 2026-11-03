@@ -1,6 +1,5 @@
 version: 1
 rules:
-  # Editorial calque & false-friend needles (Polish)
   - pattern: "orientir*"
     locale: pl
     match: glob
@@ -8,6 +7,12 @@ rules:
     hint: "wartosc orientacyjna / punkt odniesienia - nie orientir"
     severity: confirmed
     source: "curated-calque-pack-v1"
+    source_lang: ru
+    kind: calque
+    positive_examples:
+      - "Przyjmij orientir ceny przed ofertą."
+    negative_examples:
+      - "Przyjmij wartość orientacyjną ceny przed ofertą."
   - pattern: "*-orientir"
     locale: pl
     match: glob
@@ -15,6 +20,8 @@ rules:
     hint: "wartosc orientacyjna"
     severity: confirmed
     source: "curated-calque-pack-v1"
+    source_lang: ru
+    kind: calque
   - pattern: "denseness"
     locale: pl
     reason: "template-calque-denseness"
@@ -22,12 +29,16 @@ rules:
     severity: confirmed
     source: "curated-calque-pack-v1"
     override_ok: true
+    source_lang: en
+    kind: calque
   - pattern: "surveyness"
     locale: pl
     reason: "invented-calque"
     hint: "inspekcja przedzakupowa / przeglad jachtu"
     severity: confirmed
     source: "curated-calque-pack-v1"
+    source_lang: en
+    kind: calque
   - pattern: "przedzakupow*"
     locale: pl
     match: glob
@@ -35,6 +46,8 @@ rules:
     hint: "inspekcja przed zakupem / przeglad przed zakupem"
     severity: likely
     source: "curated-calque-pack-v1"
+    source_lang: en
+    kind: calque
   - pattern: "czarterowalnosc*"
     locale: pl
     match: glob
@@ -42,3 +55,221 @@ rules:
     hint: "przydatnosc do czarteru"
     severity: likely
     source: "curated-calque-pack-v1"
+    source_lang: en
+    kind: calque
+
+  - pattern: ewentualnie
+    locale: pl
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-ewentualnie"
+    hint: "opcjonalnie / ewentualnie OK; nie 'eventually' → ostatecznie / w końcu"
+    severity: confirmed
+    source: "v3-false-friends"
+    override_ok: true
+    context_require: [skończymy]
+    context_forbid: [dodać, wybrać, opcja]
+    positive_examples:
+      - "Ewentualnie skończymy remont kadłuba dopiero za rok."
+    negative_examples:
+      - "Możemy ewentualnie dodać drugi silnik pomocniczy."
+
+  - pattern: aktualnie
+    locale: pl
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-aktualnie"
+    hint: "obecnie OK; nie ang. 'actually' → właściwie / tak naprawdę"
+    severity: confirmed
+    source: "v3-false-friends"
+    override_ok: true
+    context_require: [uważam]
+    context_forbid: [pracuję, kosztuje, trwa]
+    positive_examples:
+      - "Aktualnie uważam, że oferta jest zawyżona."
+    negative_examples:
+      - "Aktualnie pracuję nad checklistą przed zakupem."
+
+  - pattern: "robi sens"
+    locale: pl
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-make-sense"
+    hint: "mieć sens — kalka z makes sense"
+    severity: confirmed
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Ta poprawka nie robi sens dla kupującego."
+    negative_examples:
+      - "Ta poprawka nie ma sensu dla kupującego."
+
+  - pattern: "wziąć decyzję o"
+    locale: pl
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-make-decision"
+    hint: "zdecydować — kalka"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Musimy wziąć decyzję o wymianie żagli."
+    negative_examples:
+      - "Musimy zdecydować o wymianie żagli."
+
+  - pattern: "w niedalekiej przyszłości"
+    locale: pl
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-near-future"
+    hint: "wkrótce — kalka z in the near future"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Opublikujemy poradnik w niedalekiej przyszłości."
+    negative_examples:
+      - "Opublikujemy poradnik wkrótce."
+
+  - pattern: "absolutnie"
+    locale: pl
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-absolutnie-padding"
+    hint: "unikaj pustego 'absolutnie' jako kalki EN absolutely w UI"
+    severity: weak
+    source: "v3-false-friends"
+    override_ok: true
+    context_require: [pewny]
+    context_forbid: [zero, zakaz]
+    positive_examples:
+      - "Jestem absolutnie pewny tej wyceny bez pomiarów."
+    negative_examples:
+      - "Absolutny zakaz wejścia do maszynowni bez zgody."
+
+  - pattern: "kontrolować"
+    locale: pl
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-kontrolowac"
+    hint: "sprawdzać / nadzorować — control≠kontrolować w każdym kontekście"
+    severity: weak
+    source: "v3-false-friends"
+    override_ok: true
+    context_require: [emocje]
+    context_forbid: [jakość, dokument]
+    positive_examples:
+      - "Trudno kontrolować emocje przy negocjacji ceny."
+    negative_examples:
+      - "Kontrolujemy jakość spawania według dokumentu."
+
+  - pattern: "aplikować na"
+    locale: pl
+    match: phrase
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-aplikowac"
+    hint: "ubiegać się o — apply for ≠ aplikować na"
+    severity: confirmed
+    source: "v3-false-friends"
+    positive_examples:
+      - "Chcę aplikować na stanowisko skippera."
+    negative_examples:
+      - "Chcę ubiegać się o stanowisko skippera."
+
+  - pattern: "czytać książkę w bibliotece sklepowej"
+    locale: pl
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-library-bookstore"
+    hint: "rozróżnij bibliotekę i księgarnię"
+    severity: weak
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Czytać książkę w bibliotece sklepowej to zły skrót myślowy."
+    negative_examples:
+      - "Kupiłem książkę w księgarni portowej."
+
+  - pattern: "save'ować"
+    locale: pl
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-save"
+    hint: "zapisać"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Pamiętaj save'ować raport przed zamknięciem."
+    negative_examples:
+      - "Pamiętaj zapisać raport przed zamknięciem."
+
+  - pattern: "forwardować"
+    locale: pl
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-forward"
+    hint: "przekazać / prześlij dalej"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Mogę forwardować maila do surveyora."
+    negative_examples:
+      - "Mogę przekazać maila do surveyora."
+
+  - pattern: "na bazie"
+    locale: pl
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-on-the-basis"
+    hint: "na podstawie — kalka z on the basis of"
+    severity: weak
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Wycenę ustalono na bazie starych zdjęć."
+    negative_examples:
+      - "Wycenę ustalono na podstawie starych zdjęć."
+
+  - pattern: "blueprint*"
+    locale: pl
+    match: glob
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-blueprint"
+    hint: "plan / schemat"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Dołącz blueprint układu kabin."
+    negative_examples:
+      - "Dołącz plan układu kabin."
+
+  - pattern: "make sense"
+    locale: pl
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-make-sense-hybrid"
+    hint: "mieć sens — surowy angielski w polskim zdaniu"
+    severity: confirmed
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Ta poprawka nie make sense w ogóle."
+    negative_examples:
+      - "Ta poprawka nie ma sensu w ogóle."
+
+  - pattern: "wziąć sprawy w swoje ręce"
+    locale: pl
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-own-hands"
+    hint: "przejąć stery / wziąć odpowiedzialność — sprawdź kalkę"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Czas wziąć sprawy w swoje ręce przy negocjacji."
+    negative_examples:
+      - "Czas przejąć stery przy negocjacji."

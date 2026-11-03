@@ -54,14 +54,12 @@ def test_tokenize_filters() -> None:
 
 def test_tokenize_with_surface() -> None:
     got = tokenize_with_surface("Boat 99 x Keel", locale="en", min_length=2)
-    assert got == [
-        {"normalized": "boat", "surface": "Boat"},
-        {"normalized": "keel", "surface": "Keel"},
-    ]
-    assert tokenize_with_surface("abc ab", locale="en", min_length=3) == [
-        {"normalized": "abc", "surface": "abc"}
-    ]
-    assert tokenize_with_surface("ab", locale="en") == [{"normalized": "ab", "surface": "ab"}]
+    assert [(t["normalized"], t["surface"]) for t in got] == [("boat", "Boat"), ("keel", "Keel")]
+    assert got[0]["start_col"] == 1 and got[0]["end_col"] == 5
+    short = tokenize_with_surface("abc ab", locale="en", min_length=3)
+    assert [(t["normalized"], t["surface"]) for t in short] == [("abc", "abc")]
+    ab = tokenize_with_surface("ab", locale="en")
+    assert [(t["normalized"], t["surface"]) for t in ab] == [("ab", "ab")]
 
 
 @pytest.mark.parametrize(

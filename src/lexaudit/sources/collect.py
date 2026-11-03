@@ -181,22 +181,48 @@ def _markdown_chunks(path: Path, rel: str, source: str) -> list[TextChunk]:
         return []
     lines = raw.splitlines()
     title_lines: list[str] = []
+    title_line_no: int | None = None
     body_lines: list[str] = []
+    body_first_line: int | None = None
     found_h1 = False
-    for line in lines:
+    for idx, line in enumerate(lines, start=1):
         stripped = line.strip()
         if not found_h1 and stripped.startswith("# ") and not stripped.startswith("##"):
             title_lines.append(stripped[2:].strip())
+            title_line_no = idx
             found_h1 = True
         else:
+            if body_first_line is None:
+                body_first_line = idx
             body_lines.append(line)
     out: list[TextChunk] = []
     title_text = "\n".join(title_lines).strip()
-    body_text = "\n".join(body_lines).strip()
+    raw_body = "\n".join(body_lines)
+    # Preserve leading content for offsets; only drop fully empty bodies.
+    body_text = raw_body.strip("\n")
     if title_text:
-        out.append(TextChunk(path=rel, scope="title", text=title_text, source=source))
-    if body_text:
-        out.append(TextChunk(path=rel, scope="body", text=body_text, source=source))
+        out.append(
+            TextChunk(
+                path=rel,
+                scope="title",
+                text=title_text,
+                source=source,
+                line_base=title_line_no or 1,
+            )
+        )
+    if body_text.strip():
+        # Adjust line_base for leading blank lines removed by strip("\n").
+        leading_nl = len(raw_body) - len(raw_body.lstrip("\n"))
+        base = (body_first_line or 1) + leading_nl
+        out.append(
+            TextChunk(
+                path=rel,
+                scope="body",
+                text=body_text,
+                source=source,
+                line_base=base,
+            )
+        )
     return out
 
 
@@ -241,7 +267,7 @@ def collect_files(
             # Directory walks skip .json (explicit file targets still load JSON).
             paths_iter = _walk_files(
                 resolved_target,
-                (".md", ".markdown", ".html", ".htm", ".po", ".xliff", ".xlf"),
+                (".md", ".markdown", ".html", ".htm", ".po", ".xliff", ".xlf", ".rst"),
             )
             dir_walk = True
         for path in paths_iter:
@@ -265,13 +291,14 @@ def collect_files(
                 from lexaudit.sources.formats import collect_xliff_file
 
                 chunks.extend(collect_xliff_file(path, rel))
-            elif suf == ".json" and not dir_walk:
-                try:
-                    data = json.loads(path.read_text(encoding="utf-8"))
-                except (OSError, json.JSONDecodeError):
-                    continue
-                for scope, text in _iter_json_strings(data):
-                    chunks.append(TextChunk(path=rel, scope=scope, text=text, source="files"))
+            elif suf == ".rst":
+                from lexaudit.sources.formats import collect_rst_file
+
+                chunks.extend(collect_rst_file(path, rel, source="files"))
+            elif suf in {".json", ".yaml", ".yml"} and not dir_walk:
+                from lexaudit.sources.formats import collect_i18n_file
+
+                chunks.extend(collect_i18n_file(path, rel, source="files"))
     return chunks
 
 

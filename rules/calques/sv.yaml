@@ -1,6 +1,5 @@
 version: 1
 rules:
-  # Editorial calque & false-friend needles (Swedish)
   - pattern: "orientir*"
     locale: sv
     match: glob
@@ -8,6 +7,12 @@ rules:
     hint: "riktvarde / tumregel - inte orientir"
     severity: confirmed
     source: "curated-calque-pack-v1"
+    source_lang: ru
+    kind: calque
+    positive_examples:
+      - "Använd ett orientir för priset före bud."
+    negative_examples:
+      - "Använd ett riktvärde för priset före bud."
   - pattern: "*-orientir"
     locale: sv
     match: glob
@@ -15,6 +20,8 @@ rules:
     hint: "riktvarde / tumregel"
     severity: confirmed
     source: "curated-calque-pack-v1"
+    source_lang: ru
+    kind: calque
   - pattern: "denseness"
     locale: sv
     reason: "template-calque-denseness"
@@ -22,12 +29,16 @@ rules:
     severity: confirmed
     source: "curated-calque-pack-v1"
     override_ok: true
+    source_lang: en
+    kind: calque
   - pattern: "surveyness"
     locale: sv
     reason: "invented-calque"
     hint: "besiktning fore kop"
     severity: confirmed
     source: "curated-calque-pack-v1"
+    source_lang: en
+    kind: calque
   - pattern: "bluewaterig*"
     locale: sv
     match: glob
@@ -35,6 +46,8 @@ rules:
     hint: "oceangaende / langfards-"
     severity: likely
     source: "curated-calque-pack-v1"
+    source_lang: en
+    kind: calque
   - pattern: "charterbarhet*"
     locale: sv
     match: glob
@@ -42,3 +55,219 @@ rules:
     hint: "lamplighet for charter"
     severity: likely
     source: "curated-calque-pack-v1"
+    source_lang: en
+    kind: calque
+
+  - pattern: eventuellt
+    locale: sv
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-eventuellt"
+    hint: "möjligen OK; inte eng. 'eventually' → så småningom / till slut"
+    severity: confirmed
+    source: "v3-false-friends"
+    override_ok: true
+    context_require: [senare]
+    context_forbid: [lägga, reserv, kan]
+    positive_examples:
+      - "Eventuellt blir besiktningen klar senare i höst."
+    negative_examples:
+      - "Vi kan eventuellt lägga till en reservmotor."
+
+  - pattern: "gör sense"
+    locale: sv
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-make-sense"
+    hint: "vara vettigt / ge mening — kalk av makes sense"
+    severity: confirmed
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Den förklaringen gör sense för köparen."
+    negative_examples:
+      - "Den förklaringen är vettig för köparen."
+
+  - pattern: "ta ett beslut om"
+    locale: sv
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-make-decision"
+    hint: "bestämma — utfyllnadskalk"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Vi måste ta ett beslut om mastbytet."
+    negative_examples:
+      - "Vi måste bestämma om mastbytet."
+
+  - pattern: "i en nära framtid"
+    locale: sv
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-near-future"
+    hint: "snart — kalk av in the near future"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Vi publicerar guiden i en nära framtid."
+    negative_examples:
+      - "Vi publicerar guiden snart."
+
+  - pattern: "aktuellt"
+    locale: sv
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-aktuellt"
+    hint: "aktuellt ≠ actually; använd egentligen / faktiskt"
+    severity: likely
+    source: "v3-false-friends"
+    override_ok: true
+    context_require: [tycker]
+    context_forbid: [pris, version, nyhet]
+    positive_examples:
+      - "Aktuellt tycker jag att offerten är för hög."
+    negative_examples:
+      - "Det aktuella priset står i nyhetsbrevet."
+
+  - pattern: "genomföra att"
+    locale: sv
+    match: phrase
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-genomfora-realize"
+    hint: "inse att — realize≠genomföra"
+    severity: confirmed
+    source: "v3-false-friends"
+    positive_examples:
+      - "Jag kunde genomföra att skrovet hade osmosis."
+    negative_examples:
+      - "Jag kunde inse att skrovet hade osmosis."
+
+  - pattern: "ansöka för"
+    locale: sv
+    match: phrase
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-ansoka-for"
+    hint: "ansöka om — apply for ≠ ansöka för"
+    severity: confirmed
+    source: "v3-false-friends"
+    positive_examples:
+      - "Jag ska ansöka för skipperjobbet."
+    negative_examples:
+      - "Jag ska ansöka om skipperjobbet."
+
+  - pattern: "biblioteket"
+    locale: sv
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-bibliotek-bookstore"
+    hint: "bibliotek ≠ bookstore; bokhandel"
+    severity: weak
+    source: "v3-false-friends"
+    override_ok: true
+    context_require: [köpa]
+    context_forbid: [låna, studera]
+    positive_examples:
+      - "Jag ska köpa handboken på biblioteket."
+    negative_examples:
+      - "Jag ska låna handboken på biblioteket."
+
+  - pattern: "sava"
+    locale: sv
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-save"
+    hint: "spara"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Glöm inte att sava rapporten före stängning."
+    negative_examples:
+      - "Glöm inte att spara rapporten före stängning."
+
+  - pattern: "forwarda"
+    locale: sv
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-forward"
+    hint: "vidarebefordra"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Kan du forwarda mejlet till besiktningsmannen?"
+    negative_examples:
+      - "Kan du vidarebefordra mejlet till besiktningsmannen?"
+
+  - pattern: "på basen av"
+    locale: sv
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-on-the-basis"
+    hint: "på grundval av / utifrån"
+    severity: weak
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Priset sattes på basen av gamla foton."
+    negative_examples:
+      - "Priset sattes utifrån gamla foton."
+
+  - pattern: "blueprint*"
+    locale: sv
+    match: glob
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-blueprint"
+    hint: "ritning / plan"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Bifoga blueprint för interiören."
+    negative_examples:
+      - "Bifoga ritningen för interiören."
+
+  - pattern: "ta saken i egna händer"
+    locale: sv
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-own-hands"
+    hint: "ta kommandot / ta ansvar — kontrollera kalken"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Dags att ta saken i egna händer i förhandlingen."
+    negative_examples:
+      - "Dags att ta kommandot i förhandlingen."
+
+  - pattern: "introducera en ändring"
+    locale: sv
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-introduce-change"
+    hint: "göra / införa en ändring"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Vi ska introducera en ändring i checklistan."
+    negative_examples:
+      - "Vi ska införa en ändring i checklistan."
+
+  - pattern: "sensitiv information"
+    locale: sv
+    match: phrase
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-sensitiv"
+    hint: "känslig information — sensitive≠sensitiv i alla register"
+    severity: likely
+    source: "v3-false-friends"
+    positive_examples:
+      - "Publicera inte sensitiv information om ägaren."
+    negative_examples:
+      - "Publicera inte känslig information om ägaren."

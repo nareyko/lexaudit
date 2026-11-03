@@ -111,7 +111,13 @@ def run_locale_audit(
     occ_map: dict[str, VocabOccurrence] = {}
     for chunk in chunks:
         tokens = tokenize_with_surface(chunk.text, locale=locale, min_length=cfg.min_length)
-        add_tokens(occ_map, tokens, path=chunk.path, scope=chunk.scope)
+        add_tokens(
+            occ_map,
+            tokens,
+            path=chunk.path,
+            scope=chunk.scope,
+            line_base=chunk.line_base,
+        )
 
     proper, acronyms, templates = build_allowlist(
         locale=locale,
@@ -120,6 +126,11 @@ def run_locale_audit(
         allowlist_path=cfg.allowlist_path,
         packs_root=cfg.packs_root or (cfg.repo_root / "infra/corpus-ci/pending-model-packs"),
     )
+    if cfg.glossary_paths:
+        from lexaudit.dictpacks.loader import load_glossary
+
+        for glossary_path in cfg.glossary_paths:
+            proper |= load_glossary(glossary_path, locale)
     compound_seed = build_compound_known_lemmas(proper, acronyms)
     checker = resolve_checker(locale, cfg.hunspell)
 

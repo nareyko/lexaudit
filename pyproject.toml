@@ -101,10 +101,13 @@ select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
 [tool.ruff.lint.per-file-ignores]
 "scripts/render_diagrams.py" = ["E501", "RUF001"]
 "scripts/reproduce_benchmark_table.py" = ["E501"]
+"scripts/mine_calques_wiktionary.py" = ["E501", "RUF001"]
 "src/lexaudit/mcp_server.py" = ["E501"]
 "lab/**" = ["E501", "RUF001"]
 # Cyrillic fixtures in bilingual MCP smoke (format collapses to one line).
 "tests/test_mcp_smoke.py" = ["RUF001"]
+"tests/test_calque_examples_contract.py" = ["RUF001"]
+"tests/test_calque_context.py" = ["RUF001"]
 
 [tool.ruff.format]
 quote-style = "double"

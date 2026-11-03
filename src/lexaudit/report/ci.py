@@ -73,31 +73,79 @@ def excerpt_around(text: str, needle: str, *, width: int = 200) -> str:
     return snippet[: width + 5]
 
 
-def locate_in_file(repo_root: Path | None, path: str, surface: str) -> tuple[str, int | None]:
-    """Return (excerpt, 1-based line) for the first hit of ``surface`` in the file."""
+def locate_in_file(
+    repo_root: Path | None, path: str, surface: str
+) -> tuple[str, int | None, int | None, int | None]:
+    """Return (excerpt, 1-based line, start_col, end_col) for the first hit of ``surface``."""
     if not path:
-        return "", None
+        return "", None, None, None
     candidate = Path(path)
     if not candidate.is_file() and repo_root is not None:
         candidate = repo_root / path
     if not candidate.is_file():
-        return "", None
+        return "", None, None, None
     try:
         text = candidate.read_text(encoding="utf-8", errors="replace")
     except OSError:
-        return "", None
+        return "", None, None, None
     excerpt = excerpt_around(text, surface)
     line: int | None = None
+    start_col: int | None = None
+    end_col: int | None = None
     key = surface.casefold()
     for i, raw in enumerate(text.splitlines(), start=1):
-        if key and key in raw.casefold():
+        pos = raw.casefold().find(key) if key else -1
+        if pos >= 0:
             line = i
+            start_col = pos + 1
+            end_col = pos + len(surface) + 1
             break
-    return excerpt, line
+    return excerpt, line, start_col, end_col
 
 
 def load_excerpt(repo_root: Path | None, path: str, surface: str) -> str:
     return locate_in_file(repo_root, path, surface)[0]
+
+
+def format_location(path: str, line: int | None, start_col: int | None = None) -> str:
+    """Format ``path:line:col`` (omit missing trailing parts)."""
+    if line is None:
+        return path or "unknown"
+    if start_col is None:
+        return f"{path}:{line}"
+    return f"{path}:{line}:{start_col}"
+
+
+def _sanitize_rule_part(value: str) -> str:
+    cleaned = re.sub(r"[^a-zA-Z0-9_.-]+", "-", value.strip())
+    return cleaned.strip("-._") or "unknown"
+
+
+def sarif_rule_id(finding: dict[str, Any]) -> str:
+    """Hierarchical rule id: ``calque.<locale>.<source_lang_or_id>``."""
+    status = _sanitize_rule_part(str(finding.get("status") or "suspect")).casefold()
+    locale = _sanitize_rule_part(str(finding.get("locale") or "und")).casefold()
+    source = (
+        finding.get("source_id")
+        or finding.get("source_lang")
+        or finding.get("reason")
+        or status
+    )
+    source_part = _sanitize_rule_part(str(source)).casefold()
+    return f"{status}.{locale}.{source_part}"
+
+
+def sarif_message(finding: dict[str, Any]) -> str:
+    """Message with «span» → «hint» when a hint is present."""
+    span = str(finding.get("word") or finding.get("normalized") or "")
+    hint = str(finding.get("hint") or "").strip()
+    status = str(finding.get("status") or "suspect")
+    if hint:
+        return f"«{span}» → «{hint}»"
+    excerpt = str(finding.get("excerpt") or finding.get("reason") or "")
+    if excerpt:
+        return f"{span} ({status}): {excerpt}"
+    return f"{span} ({status})"
 
 
 def build_findings(
@@ -119,22 +167,28 @@ def build_findings(
         for sample in samples:
             path = sample.path
             scope = sample.scope
-            excerpt, found_line = locate_in_file(repo_root, path, w.surface)
+            excerpt, found_line, found_sc, found_ec = locate_in_file(repo_root, path, w.surface)
             line = sample.line if sample.line is not None else found_line
+            start_col = sample.start_col if sample.start_col is not None else found_sc
+            end_col = sample.end_col if sample.end_col is not None else found_ec
             rows.append(
                 {
                     "locale": locale,
                     "path": path,
                     "scope": scope,
                     "line": line,
+                    "start_col": start_col,
+                    "end_col": end_col,
                     "word": w.surface,
                     "normalized": w.normalized,
                     "status": w.status,
                     "tier": w.tier,
                     "reason": w.reason,
-                    "hint": "",
+                    "hint": w.hint,
+                    "source_id": w.source_id,
                     "count": w.count,
                     "excerpt": excerpt,
+                    "suppressed": False,
                 }
             )
     return rows
@@ -149,40 +203,49 @@ def build_sarif(
     rules: dict[str, dict[str, Any]] = {}
     results: list[dict[str, Any]] = []
     for f in findings:
-        rule_id = str(f.get("status") or "suspect")
+        if f.get("suppressed"):
+            continue
+        rule_id = sarif_rule_id(f)
+        status = str(f.get("status") or "suspect")
         if rule_id not in rules:
             rules[rule_id] = {
                 "id": rule_id,
-                "shortDescription": {"text": f"lexaudit status: {rule_id}"},
+                "shortDescription": {"text": f"lexaudit status: {status}"},
                 "fullDescription": {
                     "text": "Flagged vocabulary issue (calque, invented word, or related anomaly)."
                 },
                 "defaultConfiguration": {
-                    "level": "error" if rule_id in FAIL_STATUSES else "warning"
+                    "level": "error" if status in FAIL_STATUSES else "warning"
                 },
             }
-        level = "error" if rule_id in FAIL_STATUSES else "warning"
+        level = "error" if status in FAIL_STATUSES else "warning"
+        region: dict[str, Any] = {}
+        if f.get("line") is not None:
+            region["startLine"] = int(f["line"])
+        if f.get("start_col") is not None:
+            region["startColumn"] = int(f["start_col"])
+        if f.get("end_col") is not None:
+            region["endColumn"] = int(f["end_col"])
         loc: dict[str, Any] = {
             "physicalLocation": {
                 "artifactLocation": {"uri": str(f.get("path") or "unknown")},
             }
         }
-        if f.get("line") is not None:
-            loc["physicalLocation"]["region"] = {"startLine": int(f["line"])}
-        msg = f.get("excerpt") or f.get("reason") or f.get("word") or rule_id
+        if region:
+            loc["physicalLocation"]["region"] = region
         results.append(
             {
                 "ruleId": rule_id,
                 "level": level,
-                "message": {
-                    "text": f"{f.get('word')} ({rule_id}): {msg}",
-                },
+                "message": {"text": sarif_message(f)},
                 "locations": [loc],
                 "properties": {
                     "normalized": f.get("normalized"),
                     "tier": f.get("tier"),
                     "reason": f.get("reason"),
+                    "hint": f.get("hint"),
                     "locale": f.get("locale"),
+                    "source_id": f.get("source_id"),
                 },
             }
         )
@@ -207,12 +270,16 @@ def build_sarif(
 
 def emit_github_annotations(findings: list[dict[str, Any]]) -> None:
     for f in findings:
+        if f.get("suppressed"):
+            continue
         path = str(f.get("path") or "unknown")
         line = f.get("line")
+        col = f.get("start_col")
         level = "error" if f.get("status") in FAIL_STATUSES else "warning"
-        msg = f"{f.get('word')} ({f.get('status')}): {f.get('reason') or f.get('excerpt') or ''}"
-        msg = msg.replace("\n", " ").replace("%", "%25")
-        if line is not None:
+        msg = sarif_message(f).replace("\n", " ").replace("%", "%25")
+        if line is not None and col is not None:
+            print(f"::{level} file={path},line={int(line)},col={int(col)}::{msg}")
+        elif line is not None:
             print(f"::{level} file={path},line={int(line)}::{msg}")
         else:
             print(f"::{level} file={path}::{msg}")

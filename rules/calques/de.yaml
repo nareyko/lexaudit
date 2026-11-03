@@ -3,12 +3,20 @@ rules:
   # Editorial calque & false-friend needles (2026-10-29)
   - pattern: "Orientir"
     locale: de
+    kind: calque
+    source_lang: ru
     reason: "loan-calque-orientir"
     hint: "Faustregel / Richtwert - nicht Orientir"
     severity: confirmed
     source: "editorial-calque-bank"
+    positive_examples:
+      - "Nimm einen Orientir von zwanzig Tausend vor dem Gebot."
+    negative_examples:
+      - "Nimm einen Richtwert von zwanzig Tausend vor dem Gebot."
   - pattern: "orientir"
     locale: de
+    kind: calque
+    source_lang: ru
     reason: "loan-calque-orientir"
     hint: "Faustregel / Richtwert"
     severity: confirmed
@@ -159,4 +167,151 @@ rules:
     hint: "offensichtlich — filler calque"
     severity: likely
     source: "phrase-calque-bank"
+
+  # --- V3 expansions ---
+  - pattern: "realisier*"
+    locale: de
+    match: glob
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-realisieren"
+    hint: "umsetzen/durchführen OK; nicht EN 'realize/understand' → merken/bewusst werden"
+    severity: confirmed
+    source: "v3-false-friends"
+    override_ok: true
+    context_require: [dass]
+    context_forbid: [Projekt, Plan, Umbau, Feature]
+    positive_examples:
+      - "Plötzlich realisierte er, dass der Kurs falsch lag."
+    negative_examples:
+      - "Wir realisieren das Projekt bis Freitag."
+
+  - pattern: "keinen Sinn"
+    locale: de
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-sinn-machen"
+    hint: "nicht sinnvoll — calque of make sense / doesn't make sense"
+    severity: confirmed
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Diese Erklärung macht keinen Sinn für den Käufer."
+    negative_examples:
+      - "Diese Erklärung ist für den Käufer nicht sinnvoll."
+
+  - pattern: "in naher Zukunft"
+    locale: de
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-near-future-v3"
+    hint: "bald — padded calque"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Wir veröffentlichen den Guide in naher Zukunft."
+    negative_examples:
+      - "Wir veröffentlichen den Guide bald."
+
+  - pattern: eventuell
+    locale: de
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-eventuell-eventually"
+    hint: "möglicherweise OK; nicht EN eventually → schließlich"
+    severity: likely
+    source: "v3-false-friends"
+    override_ok: true
+    context_require: [später]
+    context_forbid: [Option, Zusatz]
+    positive_examples:
+      - "Die Besichtigung wird eventuell später im Herbst fertig."
+    negative_examples:
+      - "Wir können optional einen Zusatzmotor wählen."
+
+  - pattern: "aktuell denke"
+    locale: de
+    match: phrase
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-aktuell-actually"
+    hint: "eigentlich / tatsächlich — aktuell≠actually"
+    severity: confirmed
+    source: "v3-false-friends"
+    positive_examples:
+      - "Aktuell denke ich, dass das Angebot zu hoch ist."
+    negative_examples:
+      - "Der aktuelle Preis steht in der Liste."
+
+  - pattern: Bibliothek
+    locale: de
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-bibliothek-bookstore"
+    hint: "Bibliothek≠bookstore; Buchhandlung"
+    severity: weak
+    source: "v3-false-friends"
+    override_ok: true
+    context_require: [kaufen]
+    context_forbid: [leihen, studieren, Universität]
+    positive_examples:
+      - "Ich will das Handbuch in der Bibliothek kaufen."
+    negative_examples:
+      - "Ich will das Handbuch in der Bibliothek leihen."
+
+  - pattern: "bewerben für"
+    locale: de
+    match: phrase
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-bewerben-fuer"
+    hint: "sich bewerben um — apply for≠bewerben für"
+    severity: confirmed
+    source: "v3-false-friends"
+    positive_examples:
+      - "Ich will mich bewerben für die Skipperstelle."
+    negative_examples:
+      - "Ich will mich um die Skipperstelle bewerben."
+
+  - pattern: "saven"
+    locale: de
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-save"
+    hint: "speichern"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Bitte saven Sie den Bericht vor dem Schließen."
+    negative_examples:
+      - "Bitte speichern Sie den Bericht vor dem Schließen."
+
+  - pattern: "forwarden"
+    locale: de
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-forward"
+    hint: "weiterleiten"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Kannst du die Mail an den Gutachter forwarden?"
+    negative_examples:
+      - "Kannst du die Mail an den Gutachter weiterleiten?"
+
+  - pattern: "auf der Basis von"
+    locale: de
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-on-the-basis"
+    hint: "anhand / auf Grundlage — calque padding"
+    severity: weak
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Der Preis wurde auf der Basis von alten Fotos gesetzt."
+    negative_examples:
+      - "Der Preis wurde anhand alter Fotos gesetzt."
+
 

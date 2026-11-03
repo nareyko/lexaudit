@@ -1,12 +1,16 @@
-"""Additional corpus formats: HTML, gettext PO, XLIFF, MkDocs, Docusaurus, VitePress."""
+"""Additional corpus formats: HTML, gettext PO, XLIFF, RST, i18n JSON/YAML, MkDocs, …"""
 
 from __future__ import annotations
 
+import json
 import re
 from collections.abc import Iterator
 from html.parser import HTMLParser
 from pathlib import Path
+from typing import Any
 from xml.etree import ElementTree as ET
+
+import yaml
 
 from lexaudit.core.types import TextChunk
 
@@ -109,6 +113,7 @@ def collect_po_file(path: Path, rel: str, source: str = "gettext") -> list[TextC
         if not m:
             i += 1
             continue
+        start_line = i + 1
         parts = [m.group(2)]
         i += 1
         while i < len(lines):
@@ -119,8 +124,89 @@ def collect_po_file(path: Path, rel: str, source: str = "gettext") -> list[TextC
             i += 1
         text = _unescape_po("".join(parts)).strip()
         if text:
-            chunks.append(TextChunk(path=rel, scope=f"msgstr[{idx}]", text=text, source=source))
+            chunks.append(
+                TextChunk(
+                    path=rel,
+                    scope=f"msgstr[{idx}]",
+                    text=text,
+                    source=source,
+                    line_base=start_line,
+                )
+            )
             idx += 1
+    return chunks
+
+
+_RST_DIRECTIVE_RE = re.compile(
+    r"^\.\.\s+\S+::.*$(?:\n[ \t]+.*$|\n\s*$)*",
+    re.MULTILINE,
+)
+_RST_ROLE_RE = re.compile(r":[a-zA-Z0-9_-]+:`([^`]+)`")
+_RST_LITERAL_RE = re.compile(r"``[^`]+``")
+_RST_TARGET_RE = re.compile(r"^\.\.\s+_[^\n]+:.*$", re.MULTILINE)
+_RST_FOOTNOTE_RE = re.compile(r"^\.\.\s+\[[^\]]+\]\s+.*$", re.MULTILINE)
+
+
+def rst_to_text(raw: str) -> str:
+    """Strip reStructuredText directives, roles, and inline literals (length-stable blanks)."""
+
+    def _blank(match: re.Match[str]) -> str:
+        return "".join("\n" if ch == "\n" else " " for ch in match.group(0))
+
+    s = raw
+    s = _RST_DIRECTIVE_RE.sub(_blank, s)
+    s = _RST_TARGET_RE.sub(_blank, s)
+    s = _RST_FOOTNOTE_RE.sub(_blank, s)
+    s = _RST_LITERAL_RE.sub(_blank, s)
+    s = _RST_ROLE_RE.sub(lambda m: m.group(1), s)
+    return s
+
+
+def collect_rst_file(path: Path, rel: str, source: str = "rst") -> list[TextChunk]:
+    try:
+        raw = path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return []
+    text = rst_to_text(raw).strip()
+    if not text:
+        return []
+    return [TextChunk(path=rel, scope="body", text=text, source=source, line_base=1)]
+
+
+def _iter_leaf_strings(node: Any, prefix: str = "") -> Iterator[tuple[str, str]]:
+    """Yield (key.path, leaf_string) from nested JSON/YAML structures."""
+    if isinstance(node, str):
+        if node.strip():
+            yield prefix or "value", node
+    elif isinstance(node, list):
+        for i, item in enumerate(node):
+            next_prefix = f"{prefix}[{i}]" if prefix else f"[{i}]"
+            yield from _iter_leaf_strings(item, next_prefix)
+    elif isinstance(node, dict):
+        for key, val in sorted(node.items(), key=lambda kv: str(kv[0])):
+            next_prefix = f"{prefix}.{key}" if prefix else str(key)
+            yield from _iter_leaf_strings(val, next_prefix)
+
+
+def collect_i18n_file(path: Path, rel: str, source: str = "i18n") -> list[TextChunk]:
+    """Extract leaf strings from flat or nested i18n JSON/YAML; scope = key path."""
+    try:
+        raw = path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return []
+    suf = path.suffix.lower()
+    try:
+        if suf == ".json":
+            data = json.loads(raw)
+        elif suf in {".yaml", ".yml"}:
+            data = yaml.safe_load(raw)
+        else:
+            return []
+    except (OSError, json.JSONDecodeError, yaml.YAMLError):
+        return []
+    chunks: list[TextChunk] = []
+    for scope, text in _iter_leaf_strings(data):
+        chunks.append(TextChunk(path=rel, scope=scope, text=text, source=source, line_base=1))
     return chunks
 
 

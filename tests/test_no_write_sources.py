@@ -12,6 +12,7 @@ ALLOWED_WRITE_FILES = {
     "report/write.py",
     "report/diff.py",  # baseline diff output only
     "report/ci.py",  # SARIF + GitHub step summary only
+    "report/baseline.py",  # .lexaudit-baseline.json suppressions only
     "report/curated_queue.py",  # curated rewrite queue markdown
     "curated/queue.py",  # curated queue JSON/markdown (I2)
     "llm/client.py",  # disk cache only

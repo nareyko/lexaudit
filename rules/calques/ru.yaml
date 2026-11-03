@@ -248,3 +248,167 @@ rules:
     hint: "решить — calque padding of make a decision about"
     severity: likely
     source: "phrase-calque-bank"
+
+  # --- V3 expansions ---
+  - pattern: "делает смысл"
+    locale: ru
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-delaet-smysl"
+    hint: "имеет смысл — калька с EN makes sense"
+    severity: confirmed
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Это объяснение не делает смысл для покупателя."
+    negative_examples:
+      - "Это объяснение не имеет смысла для покупателя."
+
+  - pattern: "делать смысл"
+    locale: ru
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-delat-smysl"
+    hint: "иметь смысл — калька с EN make sense"
+    severity: confirmed
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Такая правка не будет делать смысл в отчёте."
+    negative_examples:
+      - "Такая правка не будет иметь смысла в отчёте."
+
+  - pattern: "на базе"
+    locale: ru
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-na-baze"
+    hint: "на основе / исходя из — калька on the basis / на базе"
+    severity: weak
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Цену поставили на базе старых фото из объявления."
+    negative_examples:
+      - "Цену поставили на основе старых фото из объявления."
+
+  - pattern: "во внимание факт"
+    locale: ru
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-take-into-attention"
+    hint: "учтите / заметьте — калька take into attention/account"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Примите во внимание факт осмоса на корпусе."
+    negative_examples:
+      - "Учтите осмос на корпусе."
+
+  - pattern: "библиотеке купить"
+    locale: ru
+    match: phrase
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-biblioteka-bookstore"
+    hint: "в книжном / в магазине — library≠bookstore"
+    severity: weak
+    source: "v3-false-friends"
+    positive_examples:
+      - "Я хочу в библиотеке купить справочник по оснастке."
+    negative_examples:
+      - "Я хочу в книжном купить справочник по оснастке."
+
+  - pattern: "аплай*"
+    locale: ru
+    match: glob
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-apply"
+    hint: "подать заявку / откликнуться"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Хочу аплайнуть на вакансию шкипера."
+    negative_examples:
+      - "Хочу подать заявку на вакансию шкипера."
+
+  - pattern: "сейвить"
+    locale: ru
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-save"
+    hint: "сохранить"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Не забудь сейвить отчёт перед закрытием."
+    negative_examples:
+      - "Не забудь сохранить отчёт перед закрытием."
+
+  - pattern: "форварднуть"
+    locale: ru
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-forward"
+    hint: "переслать"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Можешь форварднуть письмо сюрвейеру?"
+    negative_examples:
+      - "Можешь переслать письмо сюрвейеру?"
+
+  - pattern: "ивенчуально"
+    locale: ru
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-eventually"
+    hint: "в итоге / со временем"
+    severity: confirmed
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Ивенчуально мы закончим ремонт к осени."
+    negative_examples:
+      - "В итоге мы закончим ремонт к осени."
+
+  - pattern: "акчуали"
+    locale: ru
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-actually"
+    hint: "на самом деле / собственно"
+    severity: confirmed
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Акчуали оферта завышена без сюрвея."
+    negative_examples:
+      - "На самом деле оферта завышена без сюрвея."
+
+  - pattern: "реалайзить"
+    locale: ru
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-realize"
+    hint: "осознать / понять"
+    severity: confirmed
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Я смог реалайзить что на корпусе осмос."
+    negative_examples:
+      - "Я смог осознать что на корпусе осмос."
+
+  - pattern: "зависит от того насколько"
+    locale: ru
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-depends-how-much"
+    hint: "зависит от того, насколько — проверьте канцелярит"
+    severity: weak
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Цена зависит от того насколько свежий антифоулинг."
+    negative_examples:
+      - "Цена зависит от свежести антифоулинга."

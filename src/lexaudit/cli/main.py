@@ -81,6 +81,26 @@ def ping() -> None:
     default=None,
     help="Also write a SARIF file to this path (merged locales)",
 )
+@click.option(
+    "--baseline",
+    "baseline_path",
+    type=click.Path(path_type=Path),
+    default=None,
+    help="Suppress known findings from .lexaudit-baseline.json during --check",
+)
+@click.option(
+    "--write-baseline",
+    type=click.Path(path_type=Path),
+    default=None,
+    help="Write current findings as .lexaudit-baseline.json (locale,path,normalized,status)",
+)
+@click.option(
+    "--glossary",
+    "glossary_paths",
+    type=click.Path(exists=True, path_type=Path),
+    multiple=True,
+    help="Merge project glossary/allowlist (CSV or YAML) without editing config",
+)
 def audit_cmd(
     config_path: Path | None,
     target_paths: tuple[Path, ...],
@@ -93,8 +113,18 @@ def audit_cmd(
     html: bool,
     no_fetch_dicts: bool,
     sarif_file: Path | None,
+    baseline_path: Path | None,
+    write_baseline: Path | None,
+    glossary_paths: tuple[Path, ...],
 ) -> None:
     """Run vocabulary audit and write reports (never modifies sources)."""
+    from lexaudit.report.baseline import (
+        apply_baseline_to_findings,
+        load_baseline,
+    )
+    from lexaudit.report.baseline import (
+        write_baseline as dump_baseline,
+    )
     from lexaudit.report.ci import parse_fail_on
 
     try:
@@ -104,8 +134,11 @@ def audit_cmd(
     if target_paths:
         cfg.sources = ["files"]
         cfg.files_paths = tuple(p.resolve() for p in target_paths)
+    if glossary_paths:
+        cfg.glossary_paths = tuple(p.resolve() for p in glossary_paths)
     locales = [x.strip() for x in locale.split(",")] if locale else list(cfg.locales)
     fail_set = parse_fail_on("calque,invented" if check and fail_on is None else fail_on)
+    baseline_keys = load_baseline(baseline_path) if baseline_path is not None else set()
     if not no_fetch_dicts:
         _ensure_locale_dicts(locales, cfg)
     stamp = freeze_at or "1970-01-01T00:00:00Z"
@@ -123,10 +156,16 @@ def audit_cmd(
             fail_set=fail_set,
             github_annotations=github_annotations,
             text_stdout=(out_format == "text"),
+            baseline_keys=baseline_keys,
         )
         all_findings.extend(findings)
         last_paths = paths
         any_fail = any_fail or failed
+    if baseline_keys:
+        all_findings = apply_baseline_to_findings(all_findings, baseline_keys)
+    if write_baseline is not None:
+        dump_baseline(write_baseline, [f for f in all_findings if not f.get("suppressed")])
+        click.echo(f"wrote baseline -> {write_baseline}", err=True)
     _emit_machine_output(out_format, all_findings, sarif_file, last_paths)
     if check and any_fail:
         raise SystemExit(1)
@@ -158,12 +197,15 @@ def _audit_one_locale(
     fail_set: frozenset[str],
     github_annotations: bool,
     text_stdout: bool,
+    baseline_keys: set[tuple[str, str, str, str]] | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Path], bool]:
+    from lexaudit.report.baseline import apply_baseline_to_findings, filter_unsuppressed_words
     from lexaudit.report.ci import (
         append_step_summary,
         build_findings,
         emit_github_annotations,
         failing_words,
+        format_location,
     )
 
     stats: dict[str, int] = {}
@@ -186,10 +228,20 @@ def _audit_one_locale(
         write_sarif_file=want_sarif,
     )
     findings = build_findings(words, locale=loc, repo_root=cfg.repo_root)
-    bad = failing_words(words, fail_on=fail_set, needles=cfg.needles) if check else []
+    if baseline_keys:
+        findings = apply_baseline_to_findings(findings, baseline_keys)
+    check_words = words
+    if check and baseline_keys:
+        check_words = filter_unsuppressed_words(words, locale=loc, baseline=baseline_keys)
+    bad = failing_words(check_words, fail_on=fail_set, needles=cfg.needles) if check else []
     if github_annotations:
         emit_github_annotations(
-            [f for f in findings if f.get("status") in fail_set] if check else findings
+            [
+                f
+                for f in findings
+                if not f.get("suppressed")
+                and (f.get("status") in fail_set if check else True)
+            ]
         )
     append_step_summary(pages, loc)
     if text_stdout:
@@ -197,6 +249,20 @@ def _audit_one_locale(
             f"{loc}: words={len(words)} texts={len(pages)} "
             f"findings={len(findings)} -> {paths['report']}"
         )
+        printed = 0
+        for f in findings:
+            if f.get("status") not in fail_set:
+                continue
+            loc_s = format_location(
+                str(f.get("path") or ""),
+                f.get("line") if isinstance(f.get("line"), int) else None,
+                f.get("start_col") if isinstance(f.get("start_col"), int) else None,
+            )
+            flag = " [suppressed]" if f.get("suppressed") else ""
+            click.echo(f"  {loc_s}: {f.get('word')} ({f.get('status')}){flag}")
+            printed += 1
+            if printed >= 50:
+                break
         if check and bad:
             click.echo(f"{loc}: CHECK FAIL ({len(bad)} words)", err=True)
     return findings, paths, bool(bad)

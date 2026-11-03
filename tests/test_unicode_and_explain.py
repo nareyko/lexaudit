@@ -27,7 +27,9 @@ def test_unicode_nfd_normalized_to_nfc_before_tokenize() -> None:
     assert unicodedata.is_normalized("NFC", de_tokens[0])
 
     surf = tokenize_with_surface(de_nfd, locale="de")
-    assert surf == [{"normalized": "törn", "surface": "Törn"}]
+    assert len(surf) == 1
+    assert surf[0]["normalized"] == "törn"
+    assert surf[0]["surface"] == "Törn"
     assert casefold(de_nfd, "de") == "törn"
 
 

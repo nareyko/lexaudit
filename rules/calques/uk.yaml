@@ -1,6 +1,5 @@
 version: 1
 rules:
-  # Editorial calque & false-friend needles (Ukrainian)
   - pattern: "орієнтирн*"
     locale: uk
     match: glob
@@ -8,6 +7,8 @@ rules:
     hint: "орієнтовний показник / практичне правило"
     severity: confirmed
     source: "curated-calque-pack-v1"
+    source_lang: ru
+    kind: calque
   - pattern: "orientir*"
     locale: uk
     match: glob
@@ -15,6 +16,12 @@ rules:
     hint: "орієнтовна цифра / правило"
     severity: confirmed
     source: "curated-calque-pack-v1"
+    source_lang: ru
+    kind: calque
+    positive_examples:
+      - "Візьми orientir ціни перед офертою."
+    negative_examples:
+      - "Візьми орієнтовну цифру ціни перед офертою."
   - pattern: "denseness"
     locale: uk
     reason: "template-calque-denseness"
@@ -22,6 +29,8 @@ rules:
     severity: confirmed
     source: "curated-calque-pack-v1"
     override_ok: true
+    source_lang: en
+    kind: calque
   - pattern: "передпокупочн*"
     locale: uk
     match: glob
@@ -29,6 +38,8 @@ rules:
     hint: "огляд перед купівлею / сюрвей перед купівлею"
     severity: confirmed
     source: "curated-calque-pack-v1"
+    source_lang: en
+    kind: calque
   - pattern: "чекліст*"
     locale: uk
     match: glob
@@ -36,6 +47,8 @@ rules:
     hint: "контрольний список / перелік перевірки"
     severity: likely
     source: "curated-calque-pack-v1"
+    source_lang: en
+    kind: calque
   - pattern: "блувотер*"
     locale: uk
     match: glob
@@ -43,3 +56,231 @@ rules:
     hint: "океанський перехід / далеке плавання"
     severity: confirmed
     source: "curated-calque-pack-v1"
+    source_lang: en
+    kind: calque
+
+  - pattern: "приймати участь"
+    locale: uk
+    match: phrase
+    kind: calque
+    source_lang: ru
+    reason: "phrase-calque-pryymaty-uchast"
+    hint: "брати участь — калька з рос. приймати/принимать участь"
+    severity: confirmed
+    source: "v3-uk-ru-calques"
+    positive_examples:
+      - "Він хоче приймати участь у огляді яхти."
+    negative_examples:
+      - "Він хоче брати участь у огляді яхти."
+
+  - pattern: "в залежності від"
+    locale: uk
+    match: phrase
+    kind: calque
+    source_lang: ru
+    reason: "phrase-calque-v-zalezhnosti"
+    hint: "залежно від — калька з рос. в зависимости от"
+    severity: confirmed
+    source: "v3-uk-ru-calques"
+    positive_examples:
+      - "Ціна змінюється в залежності від сезону."
+    negative_examples:
+      - "Ціна змінюється залежно від сезону."
+
+  - pattern: "на протязі"
+    locale: uk
+    match: phrase
+    kind: calque
+    source_lang: ru
+    reason: "phrase-calque-na-protyazi"
+    hint: "протягом — калька з рос. на протяжении"
+    severity: confirmed
+    source: "v3-uk-ru-calques"
+    positive_examples:
+      - "На протязі тижня ми перевіримо корпус."
+    negative_examples:
+      - "Протягом тижня ми перевіримо корпус."
+
+  - pattern: "приймати міри"
+    locale: uk
+    match: phrase
+    kind: calque
+    source_lang: ru
+    reason: "phrase-calque-pryymaty-miry"
+    hint: "вживати заходів — калька з рос. принимать меры"
+    severity: confirmed
+    source: "v3-uk-ru-calques"
+    positive_examples:
+      - "Треба приймати міри проти осмосу."
+    negative_examples:
+      - "Треба вживати заходів проти осмосу."
+
+  - pattern: "рахую що"
+    locale: uk
+    match: phrase
+    kind: calque
+    source_lang: ru
+    reason: "phrase-calque-rakhuvaty"
+    hint: "вважаю що — калька з рос. считать что"
+    severity: likely
+    source: "v3-uk-ru-calques"
+    positive_examples:
+      - "Я рахую що ціна завищена без сюрвею."
+    negative_examples:
+      - "Я вважаю що ціна завищена без сюрвею."
+
+  - pattern: "являється"
+    locale: uk
+    kind: calque
+    source_lang: ru
+    reason: "loan-calque-yavlyatysia"
+    hint: "бути / є — канцеляритна калька з рос. являться"
+    severity: likely
+    source: "v3-uk-ru-calques"
+    override_ok: true
+    context_require: [рішенням]
+    context_forbid: [привид]
+    positive_examples:
+      - "Це являється рішенням брокера, не сюрвеєра."
+    negative_examples:
+      - "Це є рішенням брокера, не сюрвеєра."
+
+  - pattern: "робить сенс"
+    locale: uk
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-make-sense"
+    hint: "мати сенс — калька з makes sense"
+    severity: confirmed
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Це пояснення не робить сенс для покупця."
+    negative_examples:
+      - "Це пояснення не має сенсу для покупця."
+
+  - pattern: "в ближайшому майбутньому"
+    locale: uk
+    match: phrase
+    kind: calque
+    source_lang: ru
+    reason: "phrase-calque-near-future"
+    hint: "незабаром — калька"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Опублікуємо гід в ближайшому майбутньому."
+    negative_examples:
+      - "Опублікуємо гід незабаром."
+
+  - pattern: "прийняти рішення про"
+    locale: uk
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-make-decision"
+    hint: "вирішити — зайва калька"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Мусимо прийняти рішення про заміну щогли."
+    negative_examples:
+      - "Мусимо вирішити питання заміни щогли."
+
+  - pattern: "увагу на те"
+    locale: uk
+    match: phrase
+    kind: calque
+    source_lang: ru
+    reason: "phrase-calque-pay-attention"
+    hint: "зважте — калька-канцелярит «звернути увагу на те»"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Зверніть увагу на те що осмос вже є."
+    negative_examples:
+      - "Зважте що осмос вже є."
+
+  - pattern: "сейл*"
+    locale: uk
+    match: glob
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-sale"
+    hint: "розпродаж / акція"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Брокер оголосив сейл на старі корпуси."
+    negative_examples:
+      - "Брокер оголосив розпродаж на старі корпуси."
+
+  - pattern: "апгрейд*"
+    locale: uk
+    match: glob
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-upgrade"
+    hint: "оновлення / модернізація"
+    severity: weak
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Після апгрейду електроніки яхта готова."
+    negative_examples:
+      - "Після оновлення електроніки яхта готова."
+
+  - pattern: "фідбек*"
+    locale: uk
+    match: glob
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-feedback"
+    hint: "відгук / зворотний зв'язок"
+    severity: weak
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Надішліть фідбек після огляду."
+    negative_examples:
+      - "Надішліть відгук після огляду."
+
+  - pattern: "чек-ліст*"
+    locale: uk
+    match: glob
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-checklist-hyphen"
+    hint: "контрольний список"
+    severity: weak
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Додайте пункти до чек-ліста перед морем."
+    negative_examples:
+      - "Додайте пункти до контрольного списку перед морем."
+
+  - pattern: "взяти в свої руки"
+    locale: uk
+    match: phrase
+    kind: calque
+    source_lang: ru
+    reason: "phrase-calque-own-hands"
+    hint: "очолити / взяти керування — перевірте кальку"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Час взяти в свої руки переговори з брокером."
+    negative_examples:
+      - "Час очолити переговори з брокером."
+
+  - pattern: "по мірі"
+    locale: uk
+    match: phrase
+    kind: calque
+    source_lang: ru
+    reason: "phrase-calque-po-miri"
+    hint: "у міру / зі зростанням — калька з рос. по мере"
+    severity: likely
+    source: "v3-uk-ru-calques"
+    positive_examples:
+      - "По мірі росту бюджету додамо огляд."
+    negative_examples:
+      - "У міру росту бюджету додамо огляд."

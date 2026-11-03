@@ -66,6 +66,8 @@ class LexauditConfig:
     rank_mode: str = "weighted"
     rank_weights: RankWeights = field(default_factory=lambda: DEFAULT_RANK_WEIGHTS)
     needles: list[str] = field(default_factory=list)
+    # Extra glossary/allowlist paths from CLI ``--glossary`` (CSV/YAML), not config file.
+    glossary_paths: tuple[Path, ...] = ()
     raw: dict[str, Any] = field(default_factory=dict)
 
     def config_hash(self) -> str:

@@ -111,7 +111,10 @@
             "properties": {
               "path": { "type": "string" },
               "scope": { "type": "string" },
-              "excerpt": { "type": "string" }
+              "excerpt": { "type": "string" },
+              "line": { "type": ["integer", "null"] },
+              "start_col": { "type": ["integer", "null"] },
+              "end_col": { "type": ["integer", "null"] }
             }
           }
         },
@@ -124,7 +127,9 @@
             "properties": {
               "path": { "type": "string" },
               "scope": { "type": "string" },
-              "line": { "type": ["integer", "null"] }
+              "line": { "type": ["integer", "null"] },
+              "start_col": { "type": ["integer", "null"] },
+              "end_col": { "type": ["integer", "null"] }
             }
           }
         }

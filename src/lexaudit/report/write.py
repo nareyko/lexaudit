@@ -59,12 +59,30 @@ def build_report_doc(
                 "detectors": sorted(w.detectors),
                 "count": w.count,
                 "samples": [
-                    {"path": s.path, "scope": s.scope}
-                    for s in sorted(w.samples, key=lambda s: (s.path, s.scope))
+                    {
+                        "path": s.path,
+                        "scope": s.scope,
+                        **({"line": s.line} if s.line is not None else {}),
+                        **({"start_col": s.start_col} if s.start_col is not None else {}),
+                        **({"end_col": s.end_col} if s.end_col is not None else {}),
+                    }
+                    for s in sorted(
+                        w.samples,
+                        key=lambda s: (s.path, s.scope, s.line or 0, s.start_col or 0),
+                    )
                 ],
                 "occurrences": [
-                    {"path": s.path, "scope": s.scope, "line": None}
-                    for s in sorted(w.samples, key=lambda s: (s.path, s.scope))
+                    {
+                        "path": s.path,
+                        "scope": s.scope,
+                        "line": s.line,
+                        "start_col": s.start_col,
+                        "end_col": s.end_col,
+                    }
+                    for s in sorted(
+                        w.samples,
+                        key=lambda s: (s.path, s.scope, s.line or 0, s.start_col or 0),
+                    )
                 ],
             }
         )

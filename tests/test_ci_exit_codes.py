@@ -56,20 +56,26 @@ def test_sarif_schema_subset() -> None:
         {
             "path": "docs/a.md",
             "line": 3,
+            "start_col": 2,
+            "end_col": 10,
             "word": "orientir",
             "status": "calque",
             "reason": "loan",
+            "hint": "ballpark",
+            "source_id": "ru-origin",
             "excerpt": "…orientir…",
             "locale": "en",
         }
     ]
     doc = build_sarif(findings)
     assert doc["version"] == "2.1.0"
-    assert doc["runs"][0]["results"][0]["ruleId"] == "calque"
+    assert doc["runs"][0]["results"][0]["ruleId"] == "calque.en.ru-origin"
     assert doc["runs"][0]["results"][0]["level"] == "error"
-    assert (
-        doc["runs"][0]["results"][0]["locations"][0]["physicalLocation"]["region"]["startLine"] == 3
-    )
+    assert doc["runs"][0]["results"][0]["message"]["text"] == "«orientir» → «ballpark»"
+    region = doc["runs"][0]["results"][0]["locations"][0]["physicalLocation"]["region"]
+    assert region["startLine"] == 3
+    assert region["startColumn"] == 2
+    assert region["endColumn"] == 10
 
 
 def test_build_findings_excerpt(tmp_path: Path) -> None:

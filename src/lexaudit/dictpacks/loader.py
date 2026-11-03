@@ -159,3 +159,63 @@ def build_compound_known_lemmas(proper: set[str], acronyms: set[str]) -> set[str
     (domain glue terms live in proper-names.yaml).
     """
     return set(proper) | set(acronyms)
+
+
+def load_glossary(path: Path, locale: str) -> set[str]:
+    """Load project glossary / allowlist terms from CSV or YAML without editing config.
+
+    CSV: header ``term`` / ``word`` / ``lemma`` preferred; otherwise first column.
+    YAML: list of strings, or mapping with ``terms`` / ``locale_loans`` / ``names`` /
+    ``extras`` / locale keys.
+    """
+    if not path.is_file():
+        return set()
+    suf = path.suffix.lower()
+    raw_terms: list[str] = []
+    if suf in {".yaml", ".yml"}:
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        if isinstance(data, list):
+            raw_terms.extend(str(x) for x in data if isinstance(x, str) and x.strip())
+        elif isinstance(data, dict):
+            for key in ("terms", "locale_loans", "names", "extras", "glossary", locale):
+                block = data.get(key)
+                if isinstance(block, list):
+                    raw_terms.extend(str(x) for x in block if isinstance(x, str) and x.strip())
+                elif isinstance(block, str) and block.strip():
+                    raw_terms.append(block.strip())
+            if not raw_terms:
+                _collect_string_lists(data, raw_terms)
+    elif suf in {".csv", ".tsv"}:
+        import csv
+
+        delim = "\t" if suf == ".tsv" else ","
+        with path.open(encoding="utf-8", newline="") as fh:
+            reader = csv.reader(fh, delimiter=delim)
+            rows = list(reader)
+        if not rows:
+            return set()
+        header = [c.strip().casefold() for c in rows[0]]
+        term_idx = 0
+        for name in ("term", "word", "lemma", "surface", "glossary"):
+            if name in header:
+                term_idx = header.index(name)
+                body = rows[1:]
+                break
+        else:
+            body = rows
+        for row in body:
+            if not row or term_idx >= len(row):
+                continue
+            cell = row[term_idx].strip()
+            if cell and not cell.startswith("#"):
+                raw_terms.append(cell)
+    else:
+        # Plain one-term-per-line fallback.
+        for line in path.read_text(encoding="utf-8").splitlines():
+            cell = line.strip()
+            if cell and not cell.startswith("#"):
+                raw_terms.append(cell)
+    out: set[str] = set()
+    for phrase in raw_terms:
+        out |= phrase_tokens(phrase, locale)
+    return out

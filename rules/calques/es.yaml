@@ -1,6 +1,6 @@
 version: 1
 rules:
-  # Editorial calque & false-friend needles (Spanish)
+  # --- legacy synthetic / pack needles (kept for benchmark recall) ---
   - pattern: "orientir*"
     locale: es
     match: glob
@@ -8,6 +8,12 @@ rules:
     hint: "valor orientativo / regla practica - no orientir"
     severity: confirmed
     source: "curated-calque-pack-v1"
+    source_lang: ru
+    kind: calque
+    positive_examples:
+      - "Usa un orientir de precio antes de ofertar."
+    negative_examples:
+      - "Usa un valor orientativo de precio antes de ofertar."
   - pattern: "*-orientir"
     locale: es
     match: glob
@@ -15,6 +21,8 @@ rules:
     hint: "valor orientativo / cifra de referencia"
     severity: confirmed
     source: "curated-calque-pack-v1"
+    source_lang: ru
+    kind: calque
   - pattern: "denseness"
     locale: es
     reason: "template-calque-denseness"
@@ -22,12 +30,16 @@ rules:
     severity: confirmed
     source: "curated-calque-pack-v1"
     override_ok: true
+    source_lang: en
+    kind: calque
   - pattern: "surveyness"
     locale: es
     reason: "invented-calque"
     hint: "inspeccion precompra / peritaje"
     severity: confirmed
     source: "curated-calque-pack-v1"
+    source_lang: en
+    kind: calque
   - pattern: "checklista*"
     locale: es
     match: glob
@@ -35,9 +47,261 @@ rules:
     hint: "lista de verificacion / lista de control"
     severity: likely
     source: "curated-calque-pack-v1"
+    source_lang: en
+    kind: calque
   - pattern: "charterabilidad"
     locale: es
     reason: "invented-calque"
     hint: "aptitud para el charter / alquiler"
     severity: likely
     source: "curated-calque-pack-v1"
+    source_lang: en
+    kind: calque
+
+  # --- V3 false friends / phrase calques (require examples) ---
+  - pattern: actualmente
+    locale: es
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-actualmente"
+    hint: "si quieres decir 'actually' → en realidad / de hecho; actualmente = nowadays/currently"
+    severity: confirmed
+    source: "v3-false-friends"
+    override_ok: true
+    context_require: [acuerdo]
+    context_forbid: [trabajo, años, precio, vivo]
+    positive_examples:
+      - "Actualmente no estoy de acuerdo con esa cifra del anuncio."
+    negative_examples:
+      - "Actualmente trabajo en un astillero cerca del puerto."
+      - "El precio actualmente es más bajo que hace dos años."
+
+  - pattern: librería
+    locale: es
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-libreria"
+    hint: "bookstore OK; for 'library' use biblioteca"
+    severity: confirmed
+    source: "v3-false-friends"
+    override_ok: true
+    context_require: [estudiar]
+    context_forbid: [comprar, tienda, vender]
+    positive_examples:
+      - "Pasé la tarde en la librería para estudiar en silencio."
+    negative_examples:
+      - "Compré el manual técnico en la librería del centro."
+      - "La tienda librería cierra a las ocho."
+
+  - pattern: "hace sentido"
+    locale: es
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-make-sense"
+    hint: "tener sentido — calco de makes sense"
+    severity: confirmed
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Esa explicación no hace sentido para el comprador."
+    negative_examples:
+      - "Esa explicación no tiene sentido para el comprador."
+
+  - pattern: "tomar una decisión sobre"
+    locale: es
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-make-decision"
+    hint: "decidir — calco acolchado"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Debemos tomar una decisión sobre el motor auxiliar."
+    negative_examples:
+      - "Debemos decidir el motor auxiliar esta semana."
+
+  - pattern: "en el futuro cercano"
+    locale: es
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-near-future"
+    hint: "pronto — calco de in the near future"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Publicaremos la guía en el futuro cercano."
+    negative_examples:
+      - "Publicaremos la guía pronto."
+
+  - pattern: "introducir un cambio"
+    locale: es
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-introduce-change"
+    hint: "hacer / aplicar un cambio — calco de introduce a change"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Vamos a introducir un cambio en la checklist."
+    negative_examples:
+      - "Vamos a aplicar un cambio en la lista de control."
+
+  - pattern: "soportar el navegador"
+    locale: es
+    match: phrase
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-soportar"
+    hint: "compatible con / admite — 'soportar' ≠ support (software)"
+    severity: likely
+    source: "v3-false-friends"
+    context_require: [navegador]
+    positive_examples:
+      - "La app debe soportar el navegador móvil antiguo."
+    negative_examples:
+      - "La app es compatible con el navegador móvil antiguo."
+
+  - pattern: "aplicar para"
+    locale: es
+    match: phrase
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-aplicar"
+    hint: "solicitar / presentarse a — apply for ≠ aplicar para"
+    severity: confirmed
+    source: "v3-false-friends"
+    positive_examples:
+      - "Voy a aplicar para el puesto de patrón."
+    negative_examples:
+      - "Voy a solicitar el puesto de patrón."
+
+  - pattern: "carrera"
+    locale: es
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-carrera-degree"
+    hint: "en contexto universitario EN 'career' suele ser trayectoria profesional; carrera = degree/race"
+    severity: weak
+    source: "v3-false-friends"
+    override_ok: true
+    context_require: [profesional]
+    context_forbid: [universidad, estudios, kilómetros]
+    positive_examples:
+      - "Quiere construir una carrera profesional en brokerage."
+    negative_examples:
+      - "Estudia una carrera en la universidad de náutica."
+
+  - pattern: "éxito"
+    locale: es
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-exito-exit"
+    hint: "éxito ≠ exit; salida / salir"
+    severity: weak
+    source: "v3-false-friends"
+    override_ok: true
+    context_require: [puerta]
+    context_forbid: [logro, campaña, ventas]
+    positive_examples:
+      - "La señal de éxito está junto a la puerta de emergencia."
+    negative_examples:
+      - "El éxito de la campaña de ventas fue claro."
+
+  - pattern: "realizar que"
+    locale: es
+    match: phrase
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-realizar"
+    hint: "darse cuenta de que — realize≠realizar"
+    severity: confirmed
+    source: "v3-false-friends"
+    positive_examples:
+      - "Recién pude realizar que el casco tenía osmosis."
+    negative_examples:
+      - "Recién pude darme cuenta de que el casco tenía osmosis."
+
+  - pattern: "información sensible"
+    locale: es
+    match: phrase
+    kind: false_friend
+    source_lang: en
+    reason: "false-friend-sensible"
+    hint: "datos confidenciales — sensible≠sensitive"
+    severity: likely
+    source: "v3-false-friends"
+    positive_examples:
+      - "No publiques información sensible del propietario."
+    negative_examples:
+      - "No publiques datos confidenciales del propietario."
+
+  - pattern: "atender la llamada"
+    locale: es
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-attend-call"
+    hint: "contestar / responder la llamada"
+    severity: weak
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Debes atender la llamada del broker ahora."
+    negative_examples:
+      - "Debes contestar la llamada del broker ahora."
+
+  - pattern: "savear"
+    locale: es
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-save"
+    hint: "guardar — anglicismo verbal"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "No olvides savear el informe antes de cerrar."
+    negative_examples:
+      - "No olvides guardar el informe antes de cerrar."
+
+  - pattern: "forwardar"
+    locale: es
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-forward"
+    hint: "reenviar"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Voy a forwardar el correo al inspector."
+    negative_examples:
+      - "Voy a reenviar el correo al inspector."
+
+  - pattern: "en base a"
+    locale: es
+    match: phrase
+    kind: calque
+    source_lang: en
+    reason: "phrase-calque-en-base-a"
+    hint: "sobre la base de / basándose en — calco discutido"
+    severity: weak
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Decidimos en base a las fotos del anuncio."
+    negative_examples:
+      - "Decidimos basándonos en las fotos del anuncio."
+
+  - pattern: "blueprint*"
+    locale: es
+    match: glob
+    kind: calque
+    source_lang: en
+    reason: "loan-calque-blueprint"
+    hint: "plano / esquema"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Adjunta el blueprint del layout interior."
+    negative_examples:
+      - "Adjunta el plano del layout interior."

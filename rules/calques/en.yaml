@@ -3,16 +3,28 @@ rules:
   # Editorial calque & false-friend needles (2026-10-29)
   - pattern: "orientir"
     locale: en
+    kind: calque
+    source_lang: ru
     reason: "loan-calque-orientir"
     hint: "working rule / ballpark / figures - not orientir"
     severity: confirmed
     source: "editorial-calque-bank"
+    positive_examples:
+      - "Use an orientir of twenty thousand before you bid."
+    negative_examples:
+      - "Use a ballpark figure of twenty thousand before you bid."
   - pattern: "orientirs"
     locale: en
+    kind: calque
+    source_lang: ru
     reason: "loan-calque-orientir"
     hint: "working figures / examples"
     severity: confirmed
     source: "editorial-calque-bank"
+    positive_examples:
+      - "These orientirs help the surveyor plan the day."
+    negative_examples:
+      - "These working figures help the surveyor plan the day."
   - pattern: "*-orientir"
     locale: en
     match: glob
@@ -159,3 +171,142 @@ rules:
     hint: "note that — calque of обратить внимание на то"
     severity: confirmed
     source: "phrase-calque-bank"
+
+  # --- V3 expansions (examples required on new rules) ---
+  - pattern: "make sense to do"
+    locale: en
+    match: phrase
+    kind: calque
+    source_lang: ru
+    reason: "phrase-calque-make-sense-pad"
+    hint: "worth doing / sensible — padded calque phrasing"
+    severity: weak
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "It does not make sense to do a second haul-out this week."
+    negative_examples:
+      - "A second haul-out this week is not worth doing."
+
+  - pattern: "on the base of"
+    locale: en
+    match: phrase
+    kind: calque
+    source_lang: ru
+    reason: "phrase-calque-on-the-base"
+    hint: "on the basis of / based on — calque of на базе"
+    severity: confirmed
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "We priced the yacht on the base of old listing photos."
+    negative_examples:
+      - "We priced the yacht based on old listing photos."
+
+  - pattern: "take into attention"
+    locale: en
+    match: phrase
+    kind: calque
+    source_lang: ru
+    reason: "phrase-calque-take-into-attention"
+    hint: "take into account / note — calque of принять во внимание"
+    severity: confirmed
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "Please take into attention the osmosis marks on the hull."
+    negative_examples:
+      - "Please take into account the osmosis marks on the hull."
+
+  - pattern: "realize the project"
+    locale: en
+    match: phrase
+    kind: false_friend
+    source_lang: de
+    reason: "false-friend-realize-project"
+    hint: "carry out / deliver the project — DE realisieren calque"
+    severity: likely
+    source: "v3-false-friends"
+    positive_examples:
+      - "The yard will realize the project before spring."
+    negative_examples:
+      - "The yard will deliver the project before spring."
+
+  - pattern: "actual price list"
+    locale: en
+    match: phrase
+    kind: false_friend
+    source_lang: es
+    reason: "false-friend-actual-price-list"
+    hint: "current price list — ES precio actual MT padding"
+    severity: weak
+    source: "v3-false-friends"
+    positive_examples:
+      - "Attach the actual price list to the broker email."
+    negative_examples:
+      - "Attach the current price list to the broker email."
+
+  - pattern: "eventual buyer"
+    locale: en
+    match: phrase
+    kind: false_friend
+    source_lang: pl
+    reason: "false-friend-eventual-buyer"
+    hint: "prospective / possible buyer — eventual≠ewentualny sense"
+    severity: likely
+    source: "v3-false-friends"
+    positive_examples:
+      - "Send the survey PDF to the eventual buyer tonight."
+    negative_examples:
+      - "Send the survey PDF to the prospective buyer tonight."
+
+  - pattern: "dependingly on"
+    locale: en
+    match: phrase
+    kind: calque
+    source_lang: uk
+    reason: "phrase-calque-dependingly"
+    hint: "depending on — calque of в залежності від"
+    severity: confirmed
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "The fee changes dependingly on the season."
+    negative_examples:
+      - "The fee changes depending on the season."
+
+  - pattern: "participate taking"
+    locale: en
+    match: phrase
+    kind: calque
+    source_lang: uk
+    reason: "phrase-calque-participate-taking"
+    hint: "take part — calque of приймати участь"
+    severity: likely
+    source: "v3-phrase-bank"
+    positive_examples:
+      - "He wants to participate taking in the survey day."
+    negative_examples:
+      - "He wants to take part in the survey day."
+
+  - pattern: "surveyorness"
+    locale: en
+    kind: calque
+    source_lang: en
+    reason: "invented-calque-surveyorness"
+    hint: "survey craft / survey quality — avoid -ness coinage"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "The report's surveyorness impressed nobody."
+    negative_examples:
+      - "The report's survey craft impressed nobody."
+
+  - pattern: "checklistify"
+    locale: en
+    kind: calque
+    source_lang: en
+    reason: "invented-calque-checklistify"
+    hint: "turn into a checklist / itemize"
+    severity: likely
+    source: "v3-loan-bank"
+    positive_examples:
+      - "Do not checklistify every soft opinion in the survey."
+    negative_examples:
+      - "Do not turn every soft opinion into a checklist item."

@@ -130,7 +130,11 @@ def test_probe_forms_capitalised() -> None:
 
 def test_tokenize_with_surface() -> None:
     tokens = tokenize_with_surface("NorthWind Marine", locale="en")
-    assert tokens[0] == {"normalized": "northwind", "surface": "NorthWind"}
+    assert tokens[0]["normalized"] == "northwind"
+    assert tokens[0]["surface"] == "NorthWind"
+    assert tokens[0]["line"] == 1
+    assert tokens[0]["start_col"] == 1
+    assert tokens[0]["end_col"] == 10
 
 
 def test_rank_pages() -> None:

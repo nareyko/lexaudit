@@ -29,6 +29,8 @@ class VocabSample:
     path: str
     scope: str
     line: int | None = None
+    start_col: int | None = None
+    end_col: int | None = None
 
 
 @dataclass
@@ -49,6 +51,8 @@ class ClassifiedWord:
     tier: Tier | None = None
     reason: str = ""
     detectors: list[str] = field(default_factory=list)
+    hint: str = ""
+    source_id: str = ""
 
 
 @dataclass
@@ -57,6 +61,7 @@ class TextChunk:
     scope: str
     text: str
     source: str
+    line_base: int = 1
 
 
 @dataclass

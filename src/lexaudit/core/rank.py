@@ -225,6 +225,9 @@ def _foreign_weight_for_word(
     return weights.foreign_meta
 
 
+_DOMAIN_TERM_WEIGHT = 0.05
+
+
 def word_rank_weight(
     word: ClassifiedWord,
     *,
@@ -237,6 +240,9 @@ def word_rank_weight(
         return 0.0
     if needles and _word_matches_needles(word.normalized, needles):
         return weights.needle
+    # Recurring / heading unknowns → glossary candidates, near-zero page penalty.
+    if word.reason == "domain-term-candidate" or "domain-term" in word.detectors:
+        return _DOMAIN_TERM_WEIGHT
     if word.status in ("calque", "invented"):
         return weights.calque
     if word.status == "foreign":

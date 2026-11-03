@@ -50,6 +50,7 @@ def test_seven_european_locales_stratified_ablation(tmp_path: Path) -> None:
             allowlist_path=None,
             enable_morph=False,
             enable_compound=False,
+            enable_neologism=False,
             enable_calque=False,
             rank_mode="raw",
             needles=[],
@@ -71,10 +72,9 @@ def test_seven_european_locales_stratified_ablation(tmp_path: Path) -> None:
         nr_known = needle_recall(cfg.needles, words, locale=loc)
         nr_open = needle_recall([*cfg.needles, UNSEEN_NEOLOGISMS[loc]], words, locale=loc)
 
-        # Known rule-covered pages rank at the top, while unseen jargon vs unseen hapax
-        # neologism produces a realistic non-100% P@3 (~0.67) and open-set recall (~0.67-0.83)
+        # After V4: inventeds + domain-term down-weight → P@3 / open-set recall at 100%.
         assert w_p2 == 1.0, f"{loc} P@2={w_p2}"
-        assert 0.60 <= w_p3 <= 1.0, f"{loc} P@3={w_p3} below floor after weighted rank"
+        assert w_p3 == 1.0, f"{loc} P@3={w_p3} expected 1.0 after neologism + domain-term"
         assert w_ap > raw_ap + 0.30, f"{loc} MAP did not improve significantly: {w_ap} vs {raw_ap}"
         assert nr_known["recall"] == 1.0
-        assert 0.65 <= nr_open["recall"] < 1.0
+        assert nr_open["recall"] == 1.0, f"{loc} open-set recall={nr_open['recall']}"

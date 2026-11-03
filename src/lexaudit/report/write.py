@@ -299,6 +299,23 @@ def write_reports(
     ]
     for w in anomalies[:40]:
         md_lines.append(f"| {w.normalized} | {w.count} | {w.status} | {w.tier or ''} |")
+    glossary = [
+        w
+        for w in sorted(words, key=lambda x: (-x.count, x.normalized))
+        if w.reason == "domain-term-candidate" or "domain-term" in w.detectors
+    ]
+    if glossary:
+        md_lines += ["", "## Suggested glossary additions", ""]
+        md_lines += [
+            "Unknown tokens that recur on a page or appear in a title/H1. "
+            "Add them to a project glossary or allowlist instead of treating them as errors.",
+            "",
+            "| word | count | paths |",
+            "|---|---|---|",
+        ]
+        for w in glossary[:40]:
+            path_list = ", ".join(sorted({s.path for s in w.samples})[:4])
+            md_lines.append(f"| {w.normalized} | {w.count} | {path_list} |")
     md_lines.append("")
     summary_path = out_dir / "summary.md"
     summary_path.write_text("\n".join(md_lines), encoding="utf-8")

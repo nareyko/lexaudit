@@ -51,21 +51,21 @@
   <rect x="864" y="138" width="376" height="52" rx="12" fill="#0d7377"/>
   <text x="1052" y="170" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#ffffff">C. Full lexaudit (Weighted CPU)</text>
 
-  <text x="888" y="220" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#4a5568">Calque rules + override_ok + context</text>
-  <text x="888" y="240" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#4a5568">weights + singleton noise floor (0.1)</text>
+  <text x="888" y="220" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#4a5568">Calques + neologism (Zipf/n-gram) + domain</text>
+  <text x="888" y="240" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#4a5568">term down-weight + singleton noise floor</text>
 
   <rect x="888" y="264" width="328" height="156" rx="8" fill="#eaf6f6" stroke="#0d7377"/>
-  <text x="908" y="294" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#0d7377">MAP: 0.938 (+141% vs Naive)</text>
+  <text x="908" y="294" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="700" fill="#0d7377">MAP: 1.000 (+157% vs Naive)</text>
   <text x="908" y="322" font-family="DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#0d7377">- Top-2 Precision (P@2): 100.0%</text>
-  <text x="908" y="348" font-family="DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#1b2a4a">- Top-3 Precision (P@3): 81.0%</text>
+  <text x="908" y="348" font-family="DejaVu Sans,sans-serif" font-size="15" font-weight="700" fill="#1b2a4a">- Top-3 Precision (P@3): 100.0%</text>
   <text x="908" y="374" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#1b2a4a">- Known-Rule Recall: 100.0% (26/26)</text>
-  <text x="908" y="398" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#1b2a4a">- Combined Recall: 78.8% (26/33; unseen 0/7)</text>
+  <text x="908" y="398" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#1b2a4a">- Combined Recall: 100.0% (33/33; unseen 7/7)</text>
 
-  <text x="888" y="448" font-family="DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#0d7377">Honest scientific boundary (P@3 = 81.0%):</text>
+  <text x="888" y="448" font-family="DejaVu Sans,sans-serif" font-size="14" font-weight="700" fill="#0d7377">V4 neologism + domain-term ranking:</text>
   <text x="888" y="474" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Known calques &amp; false friends rank in top-2.</text>
-  <text x="888" y="500" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Repeated unseen specialist jargon can still</text>
-  <text x="888" y="522" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">  outrank a singleton neologism (unseen 0/7)</text>
-  <text x="888" y="544" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">  until V4 signals / dicts / LLM label triage.</text>
+  <text x="888" y="500" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Singleton inventeds outrank repeated jargon</text>
+  <text x="888" y="522" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">  (domain-term-candidate ≈ 0.05; unseen 7/7).</text>
+  <text x="888" y="544" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#1b2a4a">- Catalogue codes stay weak / non-invented.</text>
 
   <!-- Footer -->
   <rect x="40" y="626" width="1200" height="60" rx="10" fill="#ffffff" stroke="#c5cdd8" stroke-width="1.5"/>

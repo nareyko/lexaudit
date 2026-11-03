@@ -48,6 +48,7 @@ class LexauditConfig:
     enable_morph: bool = True
     enable_compound: bool = True
     enable_foreign: bool = True
+    enable_neologism: bool = True
     enable_calque: bool = True
     enable_crosslocale: bool = False
     # When enable_crosslocale: compare suspects against this locale's vocab norms.
@@ -80,6 +81,7 @@ class LexauditConfig:
             "enable_morph": self.enable_morph,
             "enable_compound": self.enable_compound,
             "enable_foreign": self.enable_foreign,
+            "enable_neologism": self.enable_neologism,
             "enable_calque": self.enable_calque,
             "enable_crosslocale": self.enable_crosslocale,
             "crosslocale_reference_locale": self.crosslocale_reference_locale,
@@ -193,6 +195,7 @@ def load_config(path: Path) -> LexauditConfig:
         enable_morph=bool(data.get("enable_morph", True)),
         enable_compound=bool(data.get("enable_compound", True)),
         enable_foreign=bool(data.get("enable_foreign", True)),
+        enable_neologism=bool(data.get("enable_neologism", True)),
         enable_calque=bool(data.get("enable_calque", True)),
         enable_crosslocale=bool(data.get("enable_crosslocale") or False),
         crosslocale_reference_locale=str(data.get("crosslocale_reference_locale") or "en").strip()

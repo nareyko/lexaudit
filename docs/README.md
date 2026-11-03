@@ -36,7 +36,7 @@ Also see root [`README.md`](../README.md), [`examples/lexaudit.config.example.ya
 
 ![Synthetic Benchmark](images/synthetic-benchmark.svg)
 
-On the stratified 42-page benchmark (`en`, `de`, `es`, `pl`, `ru`, `sv`, `uk`), a naive spellchecker ranks clean technical pages ahead of defective ones (`MAP = 0.389`, `Precision@2 = 0.0%`). Full `lexaudit` raises `MAP` to 0.938 (`Precision@2 = 100.0%`, `Precision@3 = 81.0%`, `Known-Rule Recall = 100.0% (26/26)`, `Unseen = 0.0% (0/7)`, `Combined = 78.8% (26/33)`). Reproduce with `scripts/reproduce_benchmark_table.py --check`. See [7-Locale Benchmark](synthetic-benchmark.md) for the full error analysis.
+On the stratified 42-page benchmark (`en`, `de`, `es`, `pl`, `ru`, `sv`, `uk`), a naive spellchecker ranks clean technical pages ahead of defective ones (`MAP = 0.389`, `Precision@2 = 0.0%`). Full `lexaudit` raises `MAP` to 1.000 (`Precision@2 = 100.0%`, `Precision@3 = 100.0%`, `Known-Rule Recall = 100.0% (26/26)`, `Unseen = 100.0% (7/7)`, `Combined = 100.0% (33/33)`). Reproduce with `scripts/reproduce_benchmark_table.py --check`. See [7-Locale Benchmark](synthetic-benchmark.md) for the full error analysis.
 
 ## Auditing Markdown documentation out of the box (no GPU required)
 

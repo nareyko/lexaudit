@@ -397,7 +397,7 @@ def make_calque_detector(locale: str, rules: list[CalqueRule]) -> Any:
             return None
         if word.status == "ok" and not rule.override_ok and word.reason != "pymorphy3":
             return None
-        if word.status not in {"suspect", "ok", "foreign", "unsure", "morph-miss"}:
+        if word.status not in {"suspect", "ok", "foreign", "unsure", "morph-miss", "invented"}:
             return None
         word.status = "calque"
         word.reason = rule.reason

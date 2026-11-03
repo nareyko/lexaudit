@@ -193,7 +193,7 @@
       "p_at_3": 0.23809523809523808,
       "r_at_2": 0.0,
       "r_at_3": 0.23809523809523808,
-      "seconds": 0.5066477319924161,
+      "seconds": 0.4795560180064058,
       "unseen_evaluated": 7,
       "unseen_hits": 0,
       "unseen_recall": 0.0
@@ -391,7 +391,7 @@
       "p_at_3": 0.23809523809523808,
       "r_at_2": 0.047619047619047616,
       "r_at_3": 0.23809523809523808,
-      "seconds": 0.5636825589899672,
+      "seconds": 0.5563985899934778,
       "unseen_evaluated": 7,
       "unseen_hits": 0,
       "unseen_recall": 0.0
@@ -404,8 +404,8 @@
         "unique_word_fpr": 0.04712041884816754
       },
       "combined_evaluated": 33,
-      "combined_hits": 26,
-      "combined_recall": 0.7878787878787878,
+      "combined_hits": 33,
+      "combined_recall": 1.0,
       "known_evaluated": 26,
       "known_hits": 26,
       "known_recall": 1.0,
@@ -425,15 +425,15 @@
           "r_at_3": 1.0,
           "r_at_3_hits": 3,
           "top_paths": [
-            "docs/de/de-04-defect-known-calques.md",
             "docs/de/de-06-defect-unseen-neologism.md",
+            "docs/de/de-04-defect-known-calques.md",
             "docs/de/de-05-defect-english-leak.md",
-            "docs/de/de-03-clean-unseen-jargon.md",
             "docs/de/de-01-clean-compounds-hull.md",
-            "docs/de/de-02-clean-safety-gear.md"
+            "docs/de/de-02-clean-safety-gear.md",
+            "docs/de/de-03-clean-unseen-jargon.md"
           ],
           "unseen_evaluated": 1,
-          "unseen_hits": 0
+          "unseen_hits": 1
         },
         "en": {
           "known_evaluated": 3,
@@ -450,64 +450,64 @@
           "r_at_3": 1.0,
           "r_at_3_hits": 3,
           "top_paths": [
-            "docs/en/en-04-defect-known-calques.md",
             "docs/en/en-06-defect-unseen-neologism.md",
+            "docs/en/en-04-defect-known-calques.md",
             "docs/en/en-05-defect-false-friend.md",
-            "docs/en/en-03-clean-unseen-jargon.md",
             "docs/en/en-01-clean-navigation-brands.md",
-            "docs/en/en-02-clean-battery-specs.md"
+            "docs/en/en-02-clean-battery-specs.md",
+            "docs/en/en-03-clean-unseen-jargon.md"
           ],
           "unseen_evaluated": 1,
-          "unseen_hits": 0
+          "unseen_hits": 1
         },
         "es": {
           "known_evaluated": 4,
           "known_hits": 4,
           "locale": "es",
-          "map": 0.8666666666666667,
+          "map": 1.0,
           "n_bad": 3,
           "p_at_2": 1.0,
           "p_at_2_hits": 2,
-          "p_at_3": 0.6666666666666666,
-          "p_at_3_hits": 2,
+          "p_at_3": 1.0,
+          "p_at_3_hits": 3,
           "r_at_2": 0.6666666666666666,
           "r_at_2_hits": 2,
-          "r_at_3": 0.6666666666666666,
-          "r_at_3_hits": 2,
+          "r_at_3": 1.0,
+          "r_at_3_hits": 3,
           "top_paths": [
             "docs/es/es-04-defect-known-calques.md",
+            "docs/es/es-06-defect-unseen-neologism.md",
             "docs/es/es-05-defect-false-friend.md",
             "docs/es/es-01-clean-navigation-brands.md",
-            "docs/es/es-03-clean-unseen-jargon.md",
-            "docs/es/es-06-defect-unseen-neologism.md",
-            "docs/es/es-02-clean-battery-specs.md"
+            "docs/es/es-02-clean-battery-specs.md",
+            "docs/es/es-03-clean-unseen-jargon.md"
           ],
           "unseen_evaluated": 1,
-          "unseen_hits": 0
+          "unseen_hits": 1
         },
         "pl": {
           "known_evaluated": 4,
           "known_hits": 4,
           "locale": "pl",
-          "map": 0.8666666666666667,
+          "map": 1.0,
           "n_bad": 3,
           "p_at_2": 1.0,
           "p_at_2_hits": 2,
-          "p_at_3": 0.6666666666666666,
-          "p_at_3_hits": 2,
+          "p_at_3": 1.0,
+          "p_at_3_hits": 3,
           "r_at_2": 0.6666666666666666,
           "r_at_2_hits": 2,
-          "r_at_3": 0.6666666666666666,
-          "r_at_3_hits": 2,
+          "r_at_3": 1.0,
+          "r_at_3_hits": 3,
           "top_paths": [
             "docs/pl/pl-04-defect-known-calques.md",
+            "docs/pl/pl-06-defect-unseen-neologism.md",
             "docs/pl/pl-05-defect-false-friend.md",
             "docs/pl/pl-01-clean-navigation-brands.md",
-            "docs/pl/pl-02-clean-battery-specs.md",
-            "docs/pl/pl-06-defect-unseen-neologism.md"
+            "docs/pl/pl-02-clean-battery-specs.md"
           ],
           "unseen_evaluated": 1,
-          "unseen_hits": 0
+          "unseen_hits": 1
         },
         "ru": {
           "known_evaluated": 5,
@@ -525,75 +525,75 @@
           "r_at_3_hits": 3,
           "top_paths": [
             "docs/ru/ru-04-defect-known-calques.md",
-            "docs/ru/ru-05-defect-false-friend.md",
             "docs/ru/ru-06-defect-unseen-neologism.md",
-            "docs/ru/ru-03-clean-unseen-jargon.md",
+            "docs/ru/ru-05-defect-false-friend.md",
             "docs/ru/ru-01-clean-skeg-morphology.md",
-            "docs/ru/ru-02-clean-navigation-acronyms.md"
+            "docs/ru/ru-02-clean-navigation-acronyms.md",
+            "docs/ru/ru-03-clean-unseen-jargon.md"
           ],
           "unseen_evaluated": 1,
-          "unseen_hits": 0
+          "unseen_hits": 1
         },
         "sv": {
           "known_evaluated": 4,
           "known_hits": 4,
           "locale": "sv",
-          "map": 0.9166666666666666,
+          "map": 1.0,
           "n_bad": 3,
           "p_at_2": 1.0,
           "p_at_2_hits": 2,
-          "p_at_3": 0.6666666666666666,
-          "p_at_3_hits": 2,
+          "p_at_3": 1.0,
+          "p_at_3_hits": 3,
           "r_at_2": 0.6666666666666666,
           "r_at_2_hits": 2,
-          "r_at_3": 0.6666666666666666,
-          "r_at_3_hits": 2,
+          "r_at_3": 1.0,
+          "r_at_3_hits": 3,
           "top_paths": [
             "docs/sv/sv-04-defect-known-calques.md",
+            "docs/sv/sv-06-defect-unseen-neologism.md",
             "docs/sv/sv-05-defect-false-friend.md",
             "docs/sv/sv-03-clean-unseen-jargon.md",
-            "docs/sv/sv-06-defect-unseen-neologism.md",
             "docs/sv/sv-02-clean-battery-specs.md",
             "docs/sv/sv-01-clean-compounds-hull.md"
           ],
           "unseen_evaluated": 1,
-          "unseen_hits": 0
+          "unseen_hits": 1
         },
         "uk": {
           "known_evaluated": 4,
           "known_hits": 4,
           "locale": "uk",
-          "map": 0.9166666666666666,
+          "map": 1.0,
           "n_bad": 3,
           "p_at_2": 1.0,
           "p_at_2_hits": 2,
-          "p_at_3": 0.6666666666666666,
-          "p_at_3_hits": 2,
+          "p_at_3": 1.0,
+          "p_at_3_hits": 3,
           "r_at_2": 0.6666666666666666,
           "r_at_2_hits": 2,
-          "r_at_3": 0.6666666666666666,
-          "r_at_3_hits": 2,
+          "r_at_3": 1.0,
+          "r_at_3_hits": 3,
           "top_paths": [
             "docs/uk/uk-04-defect-known-calques.md",
             "docs/uk/uk-05-defect-false-friend.md",
-            "docs/uk/uk-03-clean-unseen-jargon.md",
             "docs/uk/uk-06-defect-unseen-neologism.md",
             "docs/uk/uk-01-clean-skeg-morphology.md",
-            "docs/uk/uk-02-clean-navigation-acronyms.md"
+            "docs/uk/uk-02-clean-navigation-acronyms.md",
+            "docs/uk/uk-03-clean-unseen-jargon.md"
           ],
           "unseen_evaluated": 1,
-          "unseen_hits": 0
+          "unseen_hits": 1
         }
       },
-      "map": 0.9380952380952381,
+      "map": 1.0,
       "p_at_2": 1.0,
-      "p_at_3": 0.8095238095238094,
+      "p_at_3": 1.0,
       "r_at_2": 0.6666666666666666,
-      "r_at_3": 0.8095238095238094,
-      "seconds": 0.7622254330053693,
+      "r_at_3": 1.0,
+      "seconds": 2.9274536760058254,
       "unseen_evaluated": 7,
-      "unseen_hits": 0,
-      "unseen_recall": 0.0
+      "unseen_hits": 7,
+      "unseen_recall": 1.0
     }
   },
   "config": "examples/synthetic-demo/lexaudit.config.yaml",
@@ -623,15 +623,15 @@
       "r_at_3": 1.0,
       "r_at_3_hits": 3,
       "top_paths": [
-        "docs/de/de-04-defect-known-calques.md",
         "docs/de/de-06-defect-unseen-neologism.md",
+        "docs/de/de-04-defect-known-calques.md",
         "docs/de/de-05-defect-english-leak.md",
-        "docs/de/de-03-clean-unseen-jargon.md",
         "docs/de/de-01-clean-compounds-hull.md",
-        "docs/de/de-02-clean-safety-gear.md"
+        "docs/de/de-02-clean-safety-gear.md",
+        "docs/de/de-03-clean-unseen-jargon.md"
       ],
       "unseen_evaluated": 1,
-      "unseen_hits": 0
+      "unseen_hits": 1
     },
     "en": {
       "known_evaluated": 3,
@@ -648,64 +648,64 @@
       "r_at_3": 1.0,
       "r_at_3_hits": 3,
       "top_paths": [
-        "docs/en/en-04-defect-known-calques.md",
         "docs/en/en-06-defect-unseen-neologism.md",
+        "docs/en/en-04-defect-known-calques.md",
         "docs/en/en-05-defect-false-friend.md",
-        "docs/en/en-03-clean-unseen-jargon.md",
         "docs/en/en-01-clean-navigation-brands.md",
-        "docs/en/en-02-clean-battery-specs.md"
+        "docs/en/en-02-clean-battery-specs.md",
+        "docs/en/en-03-clean-unseen-jargon.md"
       ],
       "unseen_evaluated": 1,
-      "unseen_hits": 0
+      "unseen_hits": 1
     },
     "es": {
       "known_evaluated": 4,
       "known_hits": 4,
       "locale": "es",
-      "map": 0.8666666666666667,
+      "map": 1.0,
       "n_bad": 3,
       "p_at_2": 1.0,
       "p_at_2_hits": 2,
-      "p_at_3": 0.6666666666666666,
-      "p_at_3_hits": 2,
+      "p_at_3": 1.0,
+      "p_at_3_hits": 3,
       "r_at_2": 0.6666666666666666,
       "r_at_2_hits": 2,
-      "r_at_3": 0.6666666666666666,
-      "r_at_3_hits": 2,
+      "r_at_3": 1.0,
+      "r_at_3_hits": 3,
       "top_paths": [
         "docs/es/es-04-defect-known-calques.md",
+        "docs/es/es-06-defect-unseen-neologism.md",
         "docs/es/es-05-defect-false-friend.md",
         "docs/es/es-01-clean-navigation-brands.md",
-        "docs/es/es-03-clean-unseen-jargon.md",
-        "docs/es/es-06-defect-unseen-neologism.md",
-        "docs/es/es-02-clean-battery-specs.md"
+        "docs/es/es-02-clean-battery-specs.md",
+        "docs/es/es-03-clean-unseen-jargon.md"
       ],
       "unseen_evaluated": 1,
-      "unseen_hits": 0
+      "unseen_hits": 1
     },
     "pl": {
       "known_evaluated": 4,
       "known_hits": 4,
       "locale": "pl",
-      "map": 0.8666666666666667,
+      "map": 1.0,
       "n_bad": 3,
       "p_at_2": 1.0,
       "p_at_2_hits": 2,
-      "p_at_3": 0.6666666666666666,
-      "p_at_3_hits": 2,
+      "p_at_3": 1.0,
+      "p_at_3_hits": 3,
       "r_at_2": 0.6666666666666666,
       "r_at_2_hits": 2,
-      "r_at_3": 0.6666666666666666,
-      "r_at_3_hits": 2,
+      "r_at_3": 1.0,
+      "r_at_3_hits": 3,
       "top_paths": [
         "docs/pl/pl-04-defect-known-calques.md",
+        "docs/pl/pl-06-defect-unseen-neologism.md",
         "docs/pl/pl-05-defect-false-friend.md",
         "docs/pl/pl-01-clean-navigation-brands.md",
-        "docs/pl/pl-02-clean-battery-specs.md",
-        "docs/pl/pl-06-defect-unseen-neologism.md"
+        "docs/pl/pl-02-clean-battery-specs.md"
       ],
       "unseen_evaluated": 1,
-      "unseen_hits": 0
+      "unseen_hits": 1
     },
     "ru": {
       "known_evaluated": 5,
@@ -723,64 +723,64 @@
       "r_at_3_hits": 3,
       "top_paths": [
         "docs/ru/ru-04-defect-known-calques.md",
-        "docs/ru/ru-05-defect-false-friend.md",
         "docs/ru/ru-06-defect-unseen-neologism.md",
-        "docs/ru/ru-03-clean-unseen-jargon.md",
+        "docs/ru/ru-05-defect-false-friend.md",
         "docs/ru/ru-01-clean-skeg-morphology.md",
-        "docs/ru/ru-02-clean-navigation-acronyms.md"
+        "docs/ru/ru-02-clean-navigation-acronyms.md",
+        "docs/ru/ru-03-clean-unseen-jargon.md"
       ],
       "unseen_evaluated": 1,
-      "unseen_hits": 0
+      "unseen_hits": 1
     },
     "sv": {
       "known_evaluated": 4,
       "known_hits": 4,
       "locale": "sv",
-      "map": 0.9166666666666666,
+      "map": 1.0,
       "n_bad": 3,
       "p_at_2": 1.0,
       "p_at_2_hits": 2,
-      "p_at_3": 0.6666666666666666,
-      "p_at_3_hits": 2,
+      "p_at_3": 1.0,
+      "p_at_3_hits": 3,
       "r_at_2": 0.6666666666666666,
       "r_at_2_hits": 2,
-      "r_at_3": 0.6666666666666666,
-      "r_at_3_hits": 2,
+      "r_at_3": 1.0,
+      "r_at_3_hits": 3,
       "top_paths": [
         "docs/sv/sv-04-defect-known-calques.md",
+        "docs/sv/sv-06-defect-unseen-neologism.md",
         "docs/sv/sv-05-defect-false-friend.md",
         "docs/sv/sv-03-clean-unseen-jargon.md",
-        "docs/sv/sv-06-defect-unseen-neologism.md",
         "docs/sv/sv-02-clean-battery-specs.md",
         "docs/sv/sv-01-clean-compounds-hull.md"
       ],
       "unseen_evaluated": 1,
-      "unseen_hits": 0
+      "unseen_hits": 1
     },
     "uk": {
       "known_evaluated": 4,
       "known_hits": 4,
       "locale": "uk",
-      "map": 0.9166666666666666,
+      "map": 1.0,
       "n_bad": 3,
       "p_at_2": 1.0,
       "p_at_2_hits": 2,
-      "p_at_3": 0.6666666666666666,
-      "p_at_3_hits": 2,
+      "p_at_3": 1.0,
+      "p_at_3_hits": 3,
       "r_at_2": 0.6666666666666666,
       "r_at_2_hits": 2,
-      "r_at_3": 0.6666666666666666,
-      "r_at_3_hits": 2,
+      "r_at_3": 1.0,
+      "r_at_3_hits": 3,
       "top_paths": [
         "docs/uk/uk-04-defect-known-calques.md",
         "docs/uk/uk-05-defect-false-friend.md",
-        "docs/uk/uk-03-clean-unseen-jargon.md",
         "docs/uk/uk-06-defect-unseen-neologism.md",
         "docs/uk/uk-01-clean-skeg-morphology.md",
-        "docs/uk/uk-02-clean-navigation-acronyms.md"
+        "docs/uk/uk-02-clean-navigation-acronyms.md",
+        "docs/uk/uk-03-clean-unseen-jargon.md"
       ],
       "unseen_evaluated": 1,
-      "unseen_hits": 0
+      "unseen_hits": 1
     }
   },
   "unseen_neologisms": {

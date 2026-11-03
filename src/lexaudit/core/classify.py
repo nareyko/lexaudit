@@ -2,10 +2,26 @@
 
 from __future__ import annotations
 
+from collections import Counter
 from collections.abc import Callable
 from typing import Protocol
 
 from lexaudit.core.types import ClassifiedWord, Tier, VocabOccurrence, VocabStatus
+
+_HEADING_SCOPES = frozenset(
+    {
+        "title",
+        "h1",
+        "h2",
+        "h3",
+        "heading",
+        "excerpt",
+        "metadescription",
+        "meta",
+    }
+)
+
+DOMAIN_TERM_REASON = "domain-term-candidate"
 
 
 class DictChecker(Protocol):
@@ -39,6 +55,50 @@ def assign_tier(status: VocabStatus, *, detectors: list[str], count: int) -> Tie
     if "crosslocale" in detectors:
         return "likely"
     return "weak"
+
+
+def _scope_is_heading(scope: str) -> bool:
+    s = scope.casefold()
+    if s in _HEADING_SCOPES:
+        return True
+    return s.startswith("heading") or s.startswith("h1") or s.startswith("title")
+
+
+def max_path_count(word: ClassifiedWord) -> int:
+    """Best-effort per-page occurrence count from samples (+ global count fallback)."""
+    if not word.samples:
+        return word.count
+    counts = Counter(s.path for s in word.samples)
+    peak = max(counts.values()) if counts else 0
+    # When all samples share one path, trust global count (samples are capped).
+    if len(counts) == 1:
+        return max(peak, word.count)
+    return max(peak, 1)
+
+
+def is_domain_term_candidate(word: ClassifiedWord) -> bool:
+    """Unknown token repeated on a page or appearing in title/H1 scope."""
+    if word.status in {"ok", "proper", "acronym", "template", "calque"}:
+        return False
+    if any(_scope_is_heading(s.scope) for s in word.samples):
+        return True
+    return max_path_count(word) >= 2
+
+
+def apply_domain_term_candidates(words: list[ClassifiedWord]) -> list[ClassifiedWord]:
+    """Tag recurring / heading unknowns as glossary candidates; demote false inventeds."""
+    for word in words:
+        if not is_domain_term_candidate(word):
+            continue
+        # Repeated technical terms should not stay as invented coinages.
+        if word.status == "invented" and "neologism" in word.detectors:
+            word.status = "suspect"
+            word.tier = "weak"
+        word.reason = DOMAIN_TERM_REASON
+        word.detectors = sorted({*word.detectors, "domain-term"})
+        if word.tier is None and word.status not in {"ok", "proper", "acronym", "template"}:
+            word.tier = "weak"
+    return words
 
 
 def classify_occurrences(
@@ -112,10 +172,10 @@ def classify_occurrences(
                 if updated is None:
                     continue
                 word = updated
-                # Cleared or confirmed calque/invented → stop.
-                # foreign / morph-miss / unsure → keep going so later calque
-                # can still override (e.g. RU denseness latin → foreign → calque).
-                if word.status in {"ok", "calque", "invented", "template", "proper", "acronym"}:
+                # Cleared or confirmed calque → stop.
+                # invented stays open so a later calque rule can still win.
+                # foreign / morph-miss / unsure → keep going for the same reason.
+                if word.status in {"ok", "calque", "template", "proper", "acronym"}:
                     break
         if word.status == "ok":
             # Calque override (e.g. EN denseness): post-detectors that return None
@@ -125,8 +185,8 @@ def classify_occurrences(
                 if updated is not None and updated.status != "ok":
                     word = updated
                     break
-        elif word.status == "foreign":
-            # Final calque pass when foreign won earlier in the same post list.
+        elif word.status in {"foreign", "invented"}:
+            # Final calque pass when foreign/neologism won earlier in the same post list.
             for det in post:
                 updated = det(word)
                 if updated is not None and updated.status == "calque":
@@ -136,5 +196,6 @@ def classify_occurrences(
         word.tier = assign_tier(word.status, detectors=word.detectors, count=word.count)
         classified.append(word)
 
+    apply_domain_term_candidates(classified)
     classified.sort(key=lambda w: (-w.count, w.normalized))
     return classified

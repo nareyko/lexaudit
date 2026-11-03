@@ -113,6 +113,7 @@ def _ablation_config(cfg: LexauditConfig, name: str, out_dir: Path) -> LexauditC
             allowlist_path=None,
             enable_morph=False,
             enable_compound=False,
+            enable_neologism=False,
             enable_calque=False,
             rank_mode="raw",
             needles=[],
@@ -121,6 +122,7 @@ def _ablation_config(cfg: LexauditConfig, name: str, out_dir: Path) -> LexauditC
         return replace(
             cfg,
             output_dir=out_dir,
+            enable_neologism=False,
             enable_calque=False,
             rank_mode="raw",
             needles=[],
@@ -383,7 +385,7 @@ def render_readme_bullets(metrics: dict[str, Any]) -> str:
             "- Pages with known problems come first in every language. The plain spellchecker puts clean pages first.",
             f"- Known-rule problems: **{fmt_pct(c['known_recall'])}** "
             f"({fmt_fraction(c['known_hits'], c['known_evaluated'])}). "
-            f"Unseen single-occurrence neologisms (no calque rule yet; until V4): "
+            f"Unseen single-occurrence neologisms (Zipf + char n-gram / affix-glue): "
             f"**{fmt_pct(c['unseen_recall'])}** "
             f"({fmt_fraction(c['unseen_hits'], c['unseen_evaluated'])}). "
             f"Combined planted problems (honest fraction): **{fmt_pct(c['combined_recall'])}** "
@@ -391,12 +393,14 @@ def render_readme_bullets(metrics: dict[str, Any]) -> str:
             f"- With exactly 3 defective pages per locale, `Recall@2` is "
             f"**{fmt_pct(c['r_at_2'])}** when the top-2 slots are both bad (`Precision@2` = "
             f"**{fmt_pct(c['p_at_2'])}**). `Precision@3` / `Recall@3` are "
-            f"**{fmt_pct(c['p_at_3'])}** when a clean jargon page still outranks one defective page.",
+            f"**{fmt_pct(c['p_at_3'])}** (singleton inventeds outrank repeated domain jargon).",
             f"- Clean-page false positives: **{c['clean_page_fpr']['fp_per_1000_tokens']:.1f}** "
             f"unique flagged words per 1000 tokens "
             f"({c['clean_page_fpr']['fp_unique_words']} unique FP / "
             f"{c['clean_page_fpr']['clean_pages_total_tokens']} tokens).",
-            "- Weak spot: a clean page with a repeated new technical term can outrank a page with a single new invented word. Adding the term to your word list, or using the optional `label` step, fixes this.",
+            "- Domain terms that recur on a page (or sit in H1/title) are tagged "
+            "`domain-term-candidate`, nearly zero-weighted in ranking, and listed under "
+            "Suggested glossary additions.",
         ]
     )
 
@@ -458,9 +462,9 @@ def write_docs(metrics: dict[str, Any]) -> None:
         f"`MAP` = **{fmt_map(c['map'])}**. "
         f"Known-rule calque recall is **{fmt_pct(c['known_recall'])}** "
         f"({fmt_fraction(c['known_hits'], c['known_evaluated'])}); "
-        f"unseen singleton neologisms without rules remain "
+        f"unseen singleton neologisms are "
         f"**{fmt_pct(c['unseen_recall'])}** "
-        f"({fmt_fraction(c['unseen_hits'], c['unseen_evaluated'])}) until V4; "
+        f"({fmt_fraction(c['unseen_hits'], c['unseen_evaluated'])}); "
         f"combined planted-problem recall is the honest fraction "
         f"**{fmt_pct(c['combined_recall'])}** "
         f"({fmt_fraction(c['combined_hits'], c['combined_evaluated'])}). "

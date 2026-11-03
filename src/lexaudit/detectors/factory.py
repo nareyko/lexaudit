@@ -15,6 +15,7 @@ from lexaudit.detectors.compound import make_compound_detector
 from lexaudit.detectors.english_leak import make_english_leak_detector
 from lexaudit.detectors.foreign import make_foreign_detector
 from lexaudit.detectors.morph import make_morph_detector
+from lexaudit.detectors.neologism import make_neologism_detector
 
 
 def build_post_detectors(
@@ -22,7 +23,12 @@ def build_post_detectors(
     locale: str,
     compound_known: set[str],
 ) -> tuple[list[DetectorFn], dict[str, int]]:
-    """Return detector chain and zeroed stats keys for report.json."""
+    """Return detector chain and zeroed stats keys for report.json.
+
+    Order: morph → compound → foreign/leak → neologism → calque.
+    Calque runs last so rule hits still win over invented promotions
+    (classify allows calque to override ``invented``).
+    """
     dets: list[DetectorFn] = []
     stats: dict[str, int] = {}
     if cfg.enable_morph:
@@ -36,6 +42,9 @@ def build_post_detectors(
         stats["foreign"] = 0
         dets.append(cast(DetectorFn, make_english_leak_detector(locale)))
         stats["english_leak"] = 0
+    if cfg.enable_neologism:
+        dets.append(make_neologism_detector(locale, hunspell=cfg.hunspell))
+        stats["neologism"] = 0
     if cfg.enable_calque:
         rules_dir = cfg.calque_rules_dir or default_calque_rules_dir()
         if rules_dir is not None:

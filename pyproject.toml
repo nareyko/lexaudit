@@ -36,6 +36,7 @@ dependencies = [
   "pymorphy3-dicts-uk>=2.4",
   "click>=8.1",
   "spylls>=0.1.7",
+  "wordfreq>=3.0",
 ]
 
 [project.optional-dependencies]
@@ -109,6 +110,8 @@ select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
 "tests/test_mcp_smoke.py" = ["RUF001"]
 "tests/test_calque_examples_contract.py" = ["RUF001"]
 "tests/test_calque_context.py" = ["RUF001"]
+"tests/test_neologism_generator.py" = ["RUF001"]
+"src/lexaudit/detectors/neologism.py" = ["RUF001"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -141,5 +144,5 @@ dev = [
 ]
 
 [[tool.mypy.overrides]]
-module = ["spylls.*", "mcp.*"]
+module = ["spylls.*", "mcp.*", "wordfreq.*"]
 ignore_missing_imports = true

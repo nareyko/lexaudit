@@ -62,9 +62,17 @@ tmp/clean-wild/
 tmp/metrics/
 tmp/*.json
 
-# Internal evaluation reports, gold sets, and parity notes (kept local, not in public git tree)
-eval/
-gold/
+# Internal evaluation reports / private gold (kept local). Tracked public slices below.
+eval/*
+!eval/baseline-v0.3.json
+!eval/synthetic-benchmark-metrics.json
+!eval/competitor-benchmark.json
+!eval/corpora/
+!eval/corpora/**
+!eval/real-benchmark.md
+gold/*
+!gold/real_bench/
+!gold/real_bench/**
 FINAL.md
 parity.md
 scripts/accept_label_suggests.py

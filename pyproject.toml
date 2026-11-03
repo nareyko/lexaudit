@@ -73,6 +73,7 @@ build-backend = "hatchling.build"
 packages = ["src/lexaudit"]
 
 [tool.hatch.build.targets.wheel.force-include]
+"schema" = "lexaudit/schema"
 "rules/calques" = "lexaudit/rules/calques"
 "packs/core-calques-v1" = "lexaudit/packs_data/core-calques-v1"
 "packs/saas-ui-v0" = "lexaudit/packs_data/saas-ui-v0"

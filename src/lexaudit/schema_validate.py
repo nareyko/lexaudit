@@ -9,12 +9,25 @@ from typing import Any
 
 from jsonschema import Draft202012Validator
 
-_SCHEMA_DIR = Path(__file__).resolve().parents[2] / "schema"
+
+def _schema_dir() -> Path:
+    """Resolve schema dir for editable checkout and installed wheel."""
+    module_file = Path(__file__).resolve()
+    here = module_file.parent
+    candidates = (
+        here / "schema",  # packaged beside this module (wheel)
+        module_file.parents[2] / "schema",  # repo root: src/lexaudit/*.py → ../..
+    )
+    for candidate in candidates:
+        if (candidate / "report-v1.schema.json").is_file():
+            return candidate
+    msg = "lexaudit schema files not found (report-v1.schema.json)"
+    raise FileNotFoundError(msg)
 
 
 @lru_cache(maxsize=4)
 def _load_validator(name: str) -> Draft202012Validator:
-    path = _SCHEMA_DIR / name
+    path = _schema_dir() / name
     schema = json.loads(path.read_text(encoding="utf-8"))
     return Draft202012Validator(schema)
 

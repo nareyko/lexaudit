@@ -2,7 +2,7 @@
   "name": "vscode-lexaudit",
   "displayName": "lexaudit",
   "description": "Locale vocabulary audit: calques, inventeds, foreign slips. Local CLI only, no cloud. Origin: FairHelm (fairhelm.com).",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "publisher": "nareyko",
   "license": "MIT",
   "engines": {

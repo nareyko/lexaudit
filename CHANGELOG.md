@@ -5,6 +5,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+## [0.4.3] - 2026-11-06
+
+### Changed
+- Project URLs and author line point at Arviser Sp. z o.o. Open Proof (`arviser.com`)
+
 ## [0.4.2] - 2026-11-03
 
 ### Added

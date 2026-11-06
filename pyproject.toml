@@ -58,9 +58,11 @@ mcp = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/nareyko/lexaudit"
+Homepage = "https://arviser.com/#open-proof"
+Repository = "https://github.com/nareyko/lexaudit"
 Issues = "https://github.com/nareyko/lexaudit/issues"
-Documentation = "https://github.com/nareyko/lexaudit/tree/main/docs"
+Documentation = "https://arviser.com/services/eval-ci-harness"
+Source = "https://github.com/nareyko/lexaudit/tree/main/docs"
 
 [project.scripts]
 lexaudit = "lexaudit.cli.main:main"

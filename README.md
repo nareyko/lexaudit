@@ -13,12 +13,12 @@ lexaudit reads your files, ignores the harmless things, and gives you a short ra
 It only reports. It never changes your texts.
 
 Unknown terms? See the [glossary](docs/glossary.md).  
-0.3.0 prep / publish path: [docs/p1-INDEX.md](docs/p1-INDEX.md).
+0.3.0 prep and publish path: [docs/p1-INDEX.md](docs/p1-INDEX.md).
 
 - Languages: English (`en`), German (`de`), Spanish (`es`), Polish (`pl`), Russian (`ru`), Swedish (`sv`), Ukrainian (`uk`)
 - Hardware: CPU only
-- Author: Vadim Nareyko ([github.com/nareyko](https://github.com/nareyko))
-- License: dual MIT package / AGPL-3.0-or-later hosted SaaS ([details](docs/licensing.md))
+- Author: Vadim Nareyko ([github.com/nareyko](https://github.com/nareyko), Founder at [Arviser Sp. z o.o.](https://arviser.com/#open-proof))
+- License: dual MIT package and AGPL-3.0-or-later hosted SaaS ([details](docs/licensing.md))
 
 ![How lexaudit works](docs/images/overview.svg)
 

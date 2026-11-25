@@ -246,6 +246,18 @@ def collect_md(repo_root: Path, locale: str) -> list[TextChunk]:
                     continue
                 for scope, text in _iter_json_strings(data):
                     chunks.append(TextChunk(path=rel, scope=scope, text=text, source="md"))
+    # Long-form texts kept per locale in one folder: content/guides/<slug>/<kind>.<locale>.md
+    # (one file per kind and locale).
+    for path in _walk_files(frontend / "content" / "guides", (".md",)):
+        if path.stem.endswith(f".{locale}"):
+            chunks.append(
+                TextChunk(
+                    path=_rel(path, repo_root),
+                    scope="markdown",
+                    text=path.read_text(encoding="utf-8"),
+                    source="md",
+                )
+            )
     return chunks
 
 

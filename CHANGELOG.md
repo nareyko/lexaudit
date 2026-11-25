@@ -5,6 +5,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+### Added
+- `collect_md` reads long-form guides kept per locale at `frontend/content/guides/<slug>/<kind>.<locale>.md`
+
 ## [0.4.3] - 2026-11-06
 
 ### Changed
